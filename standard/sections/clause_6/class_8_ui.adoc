@@ -1,0 +1,56 @@
+=== Requirements Class: User Interface
+
+[cols="1,4"]
+|===
+|Requirements class|/req/user-interface
+|Target type|Software system
+|Dependency|/req/core
+|Conformance test|/conf/user-interface
+|===
+
+==== Overview
+
+Provide interactive capabilities for climate scientists, data managers, and operators to visualize, explore, and
+analyze climate observation data and quality control results. The user interface enables efficient human interaction
+with complex climate datasets and supports quality assurance workflows.
+
+==== Justification and Regulatory Basis
+
+WMO-No. 1131 identifies the Graphical User Interface for time-series data exploration as Recommended (Section 7.1),
+supporting "tables and charts, visualization, manage content, integrated search of climate data, and data download."
+
+While WMO-No. 1238 does not mandate specific UI requirements, it emphasizes the need for "climate scientists to review
+and validate climate observations, identify inhomogeneities" and for "data managers to manage station metadata and
+data holdings" (Figure 2), which requires appropriate user interfaces. The requirement for "comprehensive records" and
+"quality control" workflows (3.3.2) implies interactive tools for human oversight.
+
+
+==== Requirements
+
+[[req_ui_visualisation]]
+===== Visualization Capabilities
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/user-interface/visualization
+|Statement a|The system SHALL provide data visualization capabilities including:
+
+* Time series plots for observation values over configurable time ranges
+* Simultaneous display of original and quality-controlled or homogenized values
+* Station location maps with filtering and selection capabilities
+* Ability to export visualizations in common image formats (PNG, SVG, PDF)
+* Interactive exploration of quality control flags and metadata
+|===
+
+===== Tabular data
+
+To follow...
+
+===== Integrated search
+
+To follow ...
+
+===== Data entry / forms
+
+To follow ...

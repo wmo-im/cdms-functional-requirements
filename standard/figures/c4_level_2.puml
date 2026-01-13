@@ -1,0 +1,67 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Container Diagram - Climate Data Management System
+
+Person(climatologist, "Climate Scientist", "Reviews QC results")
+Person(datamanager, "Data Manager", "Manages metadata")
+Person(operator, "System Operator", "Manages configuration")
+Person(dataentry, "Data Entry Operator", "Digitizes historical records")
+
+System_Boundary(cdms, "Climate Data Management System") {
+    Container(userinterface, "User Interface", "Application", "Interactive interface for data review, QC validation, and metadata management")
+    Container(api, "Data API", "API Service", "API for data ingestion, query, and distribution")
+    Container(qcengine, "QC Processing Engine", "Processing Service", "Applies quality control algorithms to climate observations")
+    Container(homogenization, "Homogenization Service", "Processing Service", "Detects and adjusts for inhomogeneities in climate series")
+    Container(metadata, "Metadata Management", "Service", "Manages station metadata, instruments, and data lineage")
+    Container(ingest, "Data Ingestion", "Service", "Processes incoming data from multiple sources and formats")
+    Container(datarescue, "Data Rescue Service", "Service", "Manages digitization workflow, imaging, and keying of historical paper records")
+    ContainerDb(obsdb, "Observation Data Store", "Data Store", "Storage for climate observations")
+    ContainerDb(metadb, "Metadata Repository", "Data Store", "Station metadata, QC rules, and system configuration")
+    Container(filestore, "File Storage", "Storage Service", "Climate data files, reports, datasets, and scanned images")
+}
+
+System_Ext(wis2, "WIS 2.0", "Observation source")
+System_Ext(nationalobs, "National Networks", "Historical data")
+System_Ext(archive, "Long-term Archive", "Preservation storage")
+System_Ext(cds, "Climate Data Store", "Public distribution")
+System_Ext(idms, "Identity Management", "Authentication")
+System_Ext(scanner, "Scanning Equipment", "Document imaging systems")
+
+Rel_L(climatologist, userinterface, "Uses")
+Rel(datamanager, userinterface, "Uses")
+Rel(operator, userinterface, "Uses")
+Rel(dataentry, datarescue, "Keys historical data")
+Rel(userinterface, api, "Calls")
+Rel(userinterface, idms, "Authenticates")
+
+Rel(scanner, datarescue, "Provides scanned images")
+Rel(datarescue, filestore, "Stores scanned images")
+Rel(datarescue, obsdb, "Writes digitized observations")
+Rel(datarescue, metadb, "Records provenance metadata")
+
+Rel(wis2, ingest, "Publishes observations")
+Rel(nationalobs, ingest, "Uploads data")
+Rel(ingest, qcengine, "Sends for processing")
+Rel(datarescue, qcengine, "Sends digitized data for QC")
+
+Rel(qcengine, obsdb, "Reads/writes observations")
+Rel(qcengine, metadb, "Reads QC rules")
+Rel(qcengine, homogenization, "Triggers homogenization")
+
+Rel(homogenization, obsdb, "Reads time series / Writes homogenized data")
+Rel(homogenization, filestore, "Stores reports and datasets")
+Rel(homogenization, metadb, "Records homogenization metadata")
+
+Rel(api, obsdb, "Queries observations")
+Rel(api, metadb, "Queries metadata")
+Rel(api, filestore, "Retrieves datasets")
+
+Rel(metadata, metadb, "Manages metadata")
+
+Rel(api, cds, "Publishes products")
+Rel(homogenization, archive, "Archives datasets")
+
+@enduml

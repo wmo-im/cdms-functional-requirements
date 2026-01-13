@@ -1,0 +1,100 @@
+=== Requirements Class: Homogenisation
+
+[cols="1,4"]
+|===
+|Requirements class|/req/homogenisation
+|Target type|Software system
+|Dependency|/req/core, /req/quality-control
+|Conformance test|/conf/homogenisation
+|===
+
+==== Overview
+
+Detect and correct non-climatic discontinuities in long-term observation series caused by changes in instrumentation,
+observation practices, station location, or surrounding environment, ensuring temporal consistency essential for
+climate trend analysis. Homogenisation is critical for producing reliable climate change assessments.
+
+==== Justification and Regulatory Basis
+
+WMO-No. 1131 classifies Data Homogenisation as Recommended (Section 6.1.3), recognizing that homogenized datasets
+"aim to ensure that the only variability remaining in the time series is that resulting from actual climate variability"
+(4.5.1.3).
+
+WMO-No. 1238 requires that "Entities record any homogenisation or reprocessing carried out on the data as part of the
+provenance metadata" (3.3.2.5). The Guidelines on Homogenisation (WMO-No. 1245) provide detailed methodologies.
+GCOS Monitoring Principle 1 requires assessing "impact of new systems or changes to existing systems," making
+homogenisation essential for maintaining long-term climate records.
+
+==== Requirements
+
+[[rec_homogenisation_bp_detection]]
+===== Break Point Detection
+
+[cols="1,4"]
+|===
+2+^|**Recommendation {counter:rec-id}**
+|Identifier|/rec/homogenisation/detection
+|Statement a| The system SHOULD:
+
+* Implement statistical methods for detecting inhomogeneities.
+* Support:
+** Relative homogenisation using reference series from neighboring stations
+** Absolute homogenisation methods where appropriate
+** Detection of multiple break points in a single series
+** Configurable significance levels for break point detection
+
+|===
+
+[[rec_homogenisation_adjustments]]
+===== Adjustment Calculation
+
+[cols="1,4"]
+|===
+2+^|**Recommendation {counter:rec-id}**
+|Identifier|/rec/homogenisation/adjustment
+|Statement a|
+The system SHOULD calculate adjustments for detected inhomogeneities:
+
+* Compute adjustment factors based on the magnitude of detected breaks
+* Apply adjustments that preserve long-term means and variability characteristics
+* Support different adjustment methods (additive, multiplicative, or hybrid)
+* Validate adjusted series for statistical consistency
+
+|===
+
+[[req_homogenisation_documentations]]
+===== Homogenisation Documentation
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/homogenisation/documentation
+|Statement a|
+The system SHALL document all homogenisation processes applied including:
+
+* Break points detected with dates and statistical confidence levels
+* Adjustment factors applied to each segment
+* Reference series used for relative homogenisation
+* Statistical test results and significance values
+* Comparison of original and homogenized series
+* Metadata about known station changes that correspond to detected breaks
+
+|===
+
+[[req_homogenisation_management]]
+===== Homogenized Data Management
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/homogenisation/data-management
+|Statement a|
+The system SHALL manage homogenized data such that:
+
+* Original (raw) observations are preserved unchanged
+* Homogenized values are stored as derived data with clear lineage
+* Both original and homogenized series are accessible to users
+* Provenance metadata clearly identifies homogenisation processing
+* Homogenisation can be revised or reprocessed without data loss
+
+|===

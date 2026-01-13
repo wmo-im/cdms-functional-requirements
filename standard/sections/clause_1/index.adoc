@@ -1,0 +1,205 @@
+[[_scope]]
+== Scope
+
+=== Introduction
+
+==== Purpose and Relationship to WMO-No. 1131
+
+This document serves as a companion specification to the _Climate Data Management System Specifications_
+(WMO-No. 1131, 2025 Edition), published by the World Meteorological Organization (WMO). WMO-No. 1131 provides a
+foundational framework for Climate Data Management Systems (CDMS), detailing essential components, governance
+principles, and operational guidelines using classifications of "Required," "Recommended," or "Optional."
+
+This specification translates the framework described in WMO-No. 1131 into concrete functional and non-functional
+requirements expressed as testable conformance classes following the OGC Modular Specification approach.
+This specification aims to:
+
+* **Assist Developers and Integrators**: Provide practical, testable requirements and detailed technical considerations
+for the design, development, and integration of robust and compliant CDMS components and systems.
+* **Empower Users and Assessors**: Establish a comprehensive set of conformance criteria and common understanding to
+objectively assess the capabilities and compliance of existing or proposed CDMS implementations against WMO-No. 1131
+specifications.
+* **Enable Interoperability**: Define standardized interfaces, data formats, and protocols to facilitate integration
+between CDMS implementations and external systems within the climate data ecosystem.
+
+==== System Context and Boundaries
+
+xref:c4_level_0[xrefstyle=short] illustrates the architectural landscape and positioning of a Climate Data Management
+System within the broader weather, climate, and other environmental data value chain (hereafter, climate data for
+conciseness). Climate data typically flows from field sensors and observing stations through national Data Collection
+and Processing Systems (DCPS), and subsequently to various downstream applications and services.
+
+**Key downstream systems include:**
+
+- WIS 2.0 nodes for international data exchange
+- Operational meteorological systems (Numerical Weather Prediction, data assimilation)
+- Climate Data Management Systems for quality control, homogenization, and archival
+- Regional Climate Centres for regional climate monitoring and services
+- Long-term preservation archives and public-facing data portals
+
+[[c4_level_0]]
+.System landscape showing the context of Climate Data Management Systems within the data exchange architecture
+[plantuml, c4_level_0, svg]
+----
+include::../../figures/c4_level_0.puml[]
+----
+
+**Scope Boundaries:**
+
+While some operational implementations may integrate multiple components of the data flow—for example, combining DCPS
+and CDMS functionality within a single system—this specification focuses exclusively on the Climate Data Management
+System component and its specific responsibilities.
+
+**The following are explicitly OUT OF SCOPE for this specification:**
+
+- Field observation collection (sensors, data loggers, first-mile infrastructure)
+- Real-time data collection and processing systems (DCPS)
+- Time-critical data exchange via WIS 2.0 for operational meteorology
+- Numerical Weather Prediction and forecasting systems
+- General-purpose meteorological databases not specifically designed for climate data
+- Operational quality control for real-time applications
+
+**The following are IN SCOPE:**
+
+- Quality control procedures specific to climate data requirements with emphasis on long-term consistency
+- Detection and correction of inhomogeneities in climate time series (homogenization)
+- Climate data rescue, including digitization of historical paper records
+- Station metadata management with emphasis on long-term consistency and provenance
+- Archival and preservation of climate datasets with appropriate documentation
+- Publication and distribution of quality-controlled climate data products
+- Integration interfaces with WIS 2.0, national networks, and international archives
+- Data lineage tracking and provenance management
+
+This specification recognizes that CDMS implementations may exist within national meteorological services
+(National Segment) and contribute to regional and international climate services (Regional/International Segments) as
+shown in xref:c4_level_0[xrefstyle=short]. Requirements are designed to support both contexts while maintaining flexibility for local
+operational arrangements.
+
+=== System Architecture
+
+==== System Context (Level 1)
+
+xref:c4_level_1[xrefstyle=short] illustrates the system context for a Climate Data Management System, showing the primary users,
+the CDMS boundary, and its interactions with external systems. The diagram identifies key integration points including:
+
+- **Data sources**: National obsevration networks and WIS 2.0 Global Services (via national WIS2 Node).
+- **Users**: Climate scientists, data managers, and system operators
+- **Downstream systems**: Long-term archives, climate data stores, and climate analysis platforms
+- **Support systems**: Identity management and operations monitoring
+
+While these external systems and their interactions are shown for context, their internal specifications are outside
+the scope of this document. This specification focuses exclusively on the requirements for the CDMS component itself
+and its standardized interfaces with these external systems.
+
+[[c4_level_1]]
+.CDMS system context diagram showing users and external system interfaces
+[plantuml, c4_level_1, svg]
+----
+include::../../figures/c4_level_1.puml[]
+----
+
+
+====
+DB comment: Do we need to add in DCPS / note that the DCPS would sit between national networks / WIS2 nodes and the
+CDMS?.
+====
+
+==== Container Architecture (Level 2)
+
+xref:c4_level_2[xrefstyle=short] provides a high-level view of the major functional components and data stores within
+the Climate Data Management System. This diagram is intentionally technology-agnostic, allowing implementers flexibility in
+architectural and technology choices while conforming to the functional requirements of this specification.
+
+[[c4_level_2]]
+.Container diagram showing major functional components and data stores
+[plantuml, c4_level_2, svg]
+----
+include::../../figures/c4_level_2.puml[]
+----
+
+**Key Containers:**
+
+- **User Interface**: Provides interactive capabilities for climate scientists, data managers, and system operators to
+review quality-controlled data, validate observations, manage station metadata, and configure system parameters.
+This may be implemented as a web application, desktop application, or a combination of both.
+
+- **Data API**: Exposes standardized interfaces for data ingestion from external sources, data query and retrieval by
+users and downstream systems, and publication of climate data products. The API should support international standards
+for climate data exchange including OGC API standards.
+
+- **Data Ingestion**: Processes incoming observations from multiple sources including the national WIS2 Node
+(receiving both national and international data), national observation networks, and historical data submissions.
+Handles multiple data formats and protocols, performing initial validation and normalization.
+
+- **QC Processing Engine**: Applies quality control algorithms to climate observations including range checks,
+temporal consistency checks, spatial consistency checks, and climatological validation. Implements the quality control
+requirements classes defined in this specification.
+
+- **Homogenization Service**: Performs statistical analysis to detect and adjust for non-climatic discontinuities in
+observation time series. Produces both the adjusted observation data and comprehensive documentation of the
+homogenization process including change point detection and adjustment factors.
+
+- **Metadata Management**: Maintains comprehensive station metadata including location information, instrumentation
+history, observing practices, and data lineage. Supports the traceability requirements essential for climate data
+and ensures compliance with international metadata standards.
+
+- **Data Rescue Service**: Manages the digitization workflow for historical climate records, including coordination of
+document imaging, data entry from paper records, and quality assurance of digitized observations. Preserves both the
+scanned images and the keyed data with full provenance information. Digitized observations flow through
+the same QC Processing Engine as contemporary observations to ensure consistent quality standards.
+
+**Data Stores:**
+
+- **Observation Data Store**: Persistent storage for climate observations with their associated quality flags and
+processing history. Implementation may utilize time-series optimized databases, spatial databases, or other suitable
+technologies that support efficient temporal and spatial queries.
+
+- **Metadata Repository**: Stores station metadata, quality control rules and thresholds, system configuration,
+homogenization parameters, and data lineage information. Maintains historical records of all metadata changes to
+support long-term climate analysis.
+
+- **File Storage**: Manages climate-standard file formats (such as NetCDF-CF), quality control reports, homogenization
+analysis outputs, digitized document images, and archived datasets. Supports versioning and long-term preservation requirements.
+
+**External System Integration:**
+
+The system integrates with external systems at well-defined conformance boundaries where standardized
+protocols and data formats apply:
+
+- **WIS 2.0**: International data exchange using MQTT messaging and standardized data formats for both consuming
+international observations and publishing national climate products
+- **National Observation Networks**: Historical and real-time climate data submission via file transfer or API
+- **Long-term Preservation Archives**: Climate dataset archival using standard formats (e.g., NetCDF-CF, GRIB2)
+and protocols (OPeNDAP, OGC APIs)
+- **Climate Data Stores**: Public data discovery and distribution via OGC API - EDR, STAC catalogs, or equivalent standards
+- **Identity Management Systems**: Enterprise authentication and authorization using standard protocols (LDAP, OAuth 2.0, SAML)
+
+This architectural decomposition supports the modular requirements structure of this specification, where
+different containers may be subject to different requirements classes based on their functional responsibilities.
+
+=== Document Structure and Organization
+
+To facilitate clear understanding and practical application, this document is structured into the following key sections:
+
+* **<<functional-requirements,Functional Requirements>>**: Details what a CDMS shall do, providing specific,
+granular requirements for core functionalities such as data ingestion and validation, transformation and storage,
+metadata management, quality control, data rescue, processing, and user interface interactions. These requirements
+operationalize the high-level functional components outlined in WMO-No. 1131.
+
+* **<<non-functional-requirements,Non-Functional Requirements>>**: Defines how well a CDMS shall perform, covering
+essential attributes like performance, scalability, reliability, maintainability, usability, interoperability,
+data governance, and comprehensive security measures. These requirements ensure that a CDMS not only fulfills its
+functional duties but also operates effectively, securely, and sustainably in various environments.
+
+* **<<test-specifications,Test Specifications>>**: Introduces the Abstract Test Suite (ATS), which provides
+high-level, implementation-agnostic test cases directly linked to the functional and non-functional requirements.
+It serves as a blueprint for verifying compliance and assessing the capabilities of CDMS implementations against
+the criteria defined herein and by WMO-No. 1131.
+
+* **<<appendix,Appendix>>**: Provides supplementary information, including a glossary of terms, a list of acronyms
+used throughout the document, references to related standards and specifications, and any other relevant supporting
+material that aids in the understanding and application of these specifications.
+
+Each requirement within the functional and non-functional sections is designed to be clear, measurable, and
+directly applicable, serving as a valuable reference for both system development and compliance assessment
+activities in the context of WMO-No. 1131.

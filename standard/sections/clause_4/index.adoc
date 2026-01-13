@@ -1,0 +1,25 @@
+== Terms and definitions
+
+For the purposes of this document, the terms and definitions given in WMO-No. 1131 and the following apply:
+
+<To Follow>
+
+// **Climate Data Management System (CDMS)**: A system designed for the quality control, homogenization,
+// archival, and distribution of long-term climate observations with emphasis on temporal consistency and data provenance.
+
+// **Homogenization**: The process of detecting and adjusting for non-climatic discontinuities in
+// climate time series caused by changes in instrumentation, observation practices, station location, or surrounding environment.
+
+// **Data Rescue**: The process of recovering historical climate data from non-digital sources (primarily paper records) through
+// digitization, transcription, and quality assurance procedures.
+
+// **Quality Control (QC)**: Systematic procedures to detect and flag erroneous, suspicious, or inconsistent observations
+// to ensure data fitness for climate analysis.
+
+// **Metadata**: Data about data, including information on station location, instrumentation, observation methods,
+// data provenance, and processing history.
+
+// **Data Lineage**: Documentation of the complete history and transformations applied to climate data from initial
+// observation through archival.
+
+//  Additional terms are defined in <<appendix>>.

@@ -1,0 +1,22 @@
+=== Requirements Class: Processing Automation and Scheduling
+
+[cols="1,4"]
+|===
+|Requirements class:|/req/automation
+|Target type:|Software system
+|Dependency:|/req/core
+|Conformance test:|/conf/automation
+|===
+
+==== Overview
+Define requirements for automated execution of routine climate data processing tasks,
+scheduled operations, and workflow orchestration to ensure timely data processing
+without manual intervention.
+
+==== Justification and Regulatory Basis
+WMO-No. 1238 requires timely generation of core climate products (2.2.1) and
+systematic data processing. WMO-No. 1131 emphasizes automated processing workflows.
+
+==== Requirements
+
+to follow ...

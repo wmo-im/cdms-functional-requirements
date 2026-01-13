@@ -1,0 +1,25 @@
+:leq: &#8804;
+
+== Functional Requirements
+
+include::./class_1_core.adoc[]
+
+include::./class_2_quality_control.adoc[]
+
+include::./class_3_data_ingestion.adoc[]
+
+include::./class_4_api.adoc[]
+
+include::./class_5_homogenisation.adoc[]
+
+include::./class_6_data_rescue.adoc[]
+
+include::./class_7_metadata.adoc[]
+
+include::./class_8_ui.adoc[]
+
+include::./class_9_climate_products.adoc[]
+
+include::./class_10_automation.adoc[]
+
+// include::./class_10_dar.adoc[]

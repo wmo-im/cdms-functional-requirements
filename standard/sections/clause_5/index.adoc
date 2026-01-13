@@ -1,0 +1,72 @@
+== Conventions
+
+For the purposes of this document, the conventions described in this clause apply.
+
+=== Identifiers
+
+The normative provisions (Requirements and Conformance Tests) in this module are denoted by URIs which follow a
+hierarchical structure to ensure unique identification and traceability.
+
+The base URI for this specification is:
+`http://spec.wmo.int/spec/[spec-name]/[version]/[module-name]`
+
+All requirements and conformance tests that appear in this document are denoted by **partial URIs** which are relative
+to this base.
+
+The structure for partial URIs is defined as follows:
+
+==== Requirements URIs
+
+Requirements are identified by a URI fragment that includes the Requirements Class name and a unique identifier for
+the specific requirement.
+
+* **Format:** `/req/[requirements-class-name]/[requirement-id]`
+* **Example:** `/req/quality-control/range-check`
+
+==== Recommendation URIs
+
+Recommendations are identified by a URI fragment that includes the Recommendations Class name and a unique identifier for
+the specific requirement.
+
+* **Format:** `/rec/[recommendation-class-name]/[recommendation-id]`
+* **Example:** `/rec/homogenisation/detection`
+
+====
+DB comment: need to check the syntax.
+====
+
+==== Conformance Test URIs
+
+Conformance Tests are identified by a URI fragment that includes the Conformance Class name and a unique identifier for
+the test.
+
+* **Format:** `/conf/[conformance-class-name]/[test-id]`
+* **Example:** `/conf/quality-control/range-check`
+
+=== Use of IETF RFC 2119 Keywords
+
+The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
+"OPTIONAL" in this document are to be interpreted as described in IETF RFC 2119.
+
+The keywords indicate the level of strictness required for compliance with a normative provision:
+
+* **MUST/REQUIRED/SHALL:** These keywords mean that the definition is an **absolute requirement** of the specification.
+* **MUST NOT/SHALL NOT:** These phrases mean that the definition is an **absolute prohibition** of the specification.
+* **SHOULD/RECOMMENDED:** These keywords mean that there may exist valid reasons in particular circumstances to ignore
+a particular item, but the full implications must be understood and carefully weighed before choosing a different course.
+* **SHOULD NOT/NOT RECOMMENDED:** These phrases mean that there may exist valid reasons in particular circumstances
+when the behavior is acceptable or even useful, but the full implications should be understood and the case carefully
+weighed before proceeding.
+* **MAY/OPTIONAL:** These keywords mean that an item is truly optional.
+
+=== Typographical and Notational Conventions
+
+The following typographical conventions are used throughout this document to distinguish different types of content:
+
+* **`Monospace Text`**: Used for source code examples, file names, directory names, machine-readable data structures
+(e.g., JSON keys, XML tags), URIs, and literal text that appears in a program or command line.
+* **_Italics_**: Used for titles of documents, variable placeholders within code or URI templates, and for emphasis.
+* **[Bracketed] Text**: Used for placeholders in this template (e.g., `[spec-name]`, `[module-name]`) that must be
+replaced with specific content during implementation.
+* **[NOTE], [TIP], [IMPORTANT]**: Used to highlight informative text blocks that provide context, advice, or warnings
+that are **not** part of the normative requirements.

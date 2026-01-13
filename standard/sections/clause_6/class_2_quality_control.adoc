@@ -1,0 +1,202 @@
+:leq: &#8804;
+
+=== Requirements Class: Observations Quality Control
+
+[cols="1,4"]
+|===
+|Requirements class|/req/quality-control
+|Target type|Software system
+|Dependency|/req/core
+|Conformance test|/conf/quality-control
+|===
+
+==== Overview
+
+The Observations Quality Control requirements class defines requirements to ensure observation data meets climate
+quality standards through systematic automated checks that detect erroneous, suspicious, or inconsistent values while
+maintaining complete audit trails of all quality control decisions. Quality control is essential for establishing
+trustworthy climate records suitable for long-term trend analysis and climate monitoring.
+
+==== Justification and Regulatory Basis
+
+WMO-No. 1131 classifies Observations Quality Control as Required (Section 5.3), emphasizing that "all data have been
+checked for accuracy, and that a record is maintained of what checks were performed,
+the outcome of the checks and when the checks took place."
+
+WMO-No. 1238 mandates that "Entities apply quality control to all climate datasets under their management and record
+the result of that quality control in the metadata" (3.3.2.1).
+
+[NOTE]
+====
+The  __Guidelines on Surface Station Data Quality Control and Quality Assurance for Climate Applications__
+(WMO-No. 1269) provide specific methodologies referenced in both documents.
+====
+
+==== Requirements
+
+[[req_qc_range_checks]]
+===== Range Checks
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/quality-control/range-checks
+|Statememt a|The system SHALL perform range validation checks, including:
+
+* Gross error limits (physically impossible values)
+* Climatological based range checks
+* Sensor-based range checks (measurements within observable range for sensor)
+* Configurable thresholds per element and station
+|===
+
+[[req_qc_temporal_consistency]]
+===== Temporal Consistency Checks
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/quality-control/temporal-checks
+|Statement a|The system SHALL perform temporal consistency checks, including:
+
+* Flatline checks - detection of repeated identical values
+* Rate of change checks - validation of temporal gradients
+* Spike checks - detection of anomalous rapid changes followed by rapid reversals
+* Internal consistency - validation of relationships between related elements (e.g., T~min~ {leq} T~avg~ {leq} T~max~)
+|===
+
+[[req_qc_spatial_consistency]]
+===== Spatial Consistency Checks
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/quality-control/spatial-checks
+|Statement a|The system SHALL perform spatial consistency checks including:
+
+* Comparison with neighbouring stations
+* Spatial regression tests
+* Buddy checks using configurable distance and elevation thresholds
+|===
+
+[[req_qc_internal_consistency]]
+===== Internal Consistency Checks
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/quality-control/internal-consistency
+|Statement a|The system SHALL perform internal consistency checks to validate physical relationships between simultaneously observed elements as specified in WMO-No. 1269.
+|===
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/quality-control/temperature-relationships
+|Statement a|The following checks SHALL be applied
+
+* Wet-bulb temperature (T~w~) SHALL be less than or equal to dry-bulb temperature (T~d~): T~w~ {leq} T~d~
+* Dew-point temperature (T~dp~) SHALL be less than or equal to dry-bulb temperature: T~dp~ {leq} T~d~
+* Dew-point temperature SHALL be less than or equal to wet-bulb temperature: T~dp~ {leq} T~w~
+* Minimum temperature (T~min~) SHALL be less than or equal to maximum temperature (T~max~): T~min~ {leq} T~max~
+* Mean temperature SHALL fall within or near the range bounded by T~min~ and T~max~
+|===
+
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/quality-control/humidity-relationships
+|Statement a|The following checks SHALL be applied
+
+* When relative humidity equals 100%, dry-bulb, wet-bulb, and dew-point temperatures SHALL be equal within measurement uncertainty
+* Relative humidity SHALL be between 0% and 100% inclusive
+* Vapour pressure SHALL not exceed saturation vapour pressure at the observed temperature
+|===
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/quality-control/pressure-relationships
+|Statement a|The following checks SHALL be applied
+
+* Station-level pressure and mean sea-level pressure SHALL be consistent given station elevation
+* Pressure tendency SHALL be consistent with consecutive pressure observations
+|===
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/quality-control/precipitation-relationships
+|Statement a|The following checks SHALL be applied
+
+* When precipitation amount is greater than zero, present weather codes SHALL indicate precipitation occurrence
+* Precipitation type (rain, snow, mixed) SHALL be consistent with observed temperature
+* Snow depth changes SHALL be consistent with reported snowfall and temperature
+|===
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/quality-control/wind-relationships
+|Statement a|The following checks SHALL be applied
+
+* Wind gust speed SHALL be greater than or equal to mean wind speed
+* Maximum wind speed SHALL be greater than or equal to mean wind speed for the period
+|===
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/quality-control/sunshine-relationships
+|Statement a|The following checks SHALL be applied
+
+* Sunshine duration SHALL not exceed the astronomically possible duration for the date and location
+* Global radiation SHALL not exceed the extraterrestrial radiation for the date and location
+* Diffuse radiation SHALL not exceed global radiation
+* When sunshine duration is zero, direct solar radiation SHALL be zero or near-zero
+|===
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/quality-control/cloud-relationships
+|Statement a|The following checks SHALL be applied
+
+* When visibility is reported as very low (e.g., fog conditions), present weather codes SHALL be consistent
+* Cloud base height observations SHALL be consistent with reported cloud types and amounts
+|===
+
+
+[[req_qc_flag_management]]
+===== Quality Flag Management
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/quality-control/flags
+|Statement a|
+The system SHALL maintain quality flags and:
+
+* Support multiple quality control levels (automatic, manual, final)
+* Preserve quality control history and audit trail
+* Allow manual override with justification
+* Record which specific quality control check(s) triggered each flag and the reason for failure
+
+|===
+
+[[req_qc_configuration]]
+===== Quality Control Configuration Management
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/quality-control/configuration
+|Statement a|
+The system SHALL support configuration of quality control parameters, including:
+
+* Station-specific and element-specific thresholds
+* Seasonal variation of thresholds where climatologically appropriate
+* Enabling/disabling of individual checks per station or element
+* Version control of quality control rule configurations with effective dates
+
+|===

@@ -1,0 +1,138 @@
+=== Requirements Class: Security
+
+[cols="1,4"]
+|===
+|Requirements class|/req/security
+|Target type|Software system
+|Dependency|/req/core
+|Conformance test|/conf/security
+|===
+
+==== Overview
+
+Protect climate data assets, ensure appropriate access controls, maintain confidentiality where required, and
+provide comprehensive audit trails of security-relevant events. Security safeguards the integrity and trustworthiness
+of the climate record while enabling appropriate access for legitimate users.
+
+==== Justification and Regulatory Basis
+
+WMO-No. 1131 requires "controlled access to data and systems" as a Required governance component (Section 3.2.1.1),
+specifying that "staff who have write access to data stored within a database only be able to change data under
+software control" with comprehensive audit trails. The specification mandates "each successful change to observations
+data be audited to ensure that the change, the details of the operator who made the change and the time of the change
+have all been recorded" (Section 3.2.1.1).
+
+WMO-No. 1238 requires "Members shall ensure Entities implement rigorous authorization processes for modification or
+deletion of data or metadata" (3.4.4.1) and mandates "regularly review systems for the physical- and cyber-security of
+the climate record" (3.4.4.2).
+
+==== Requirements
+
+===== Authentication
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/security/authentication
+|Statement a|The system SHALL implement authentication mechanisms that:
+
+* Support integration with enterprise identity management systems (LDAP, Active Directory, OAuth 2.0, SAML 2.0)
+* Enforce strong password policies (minimum length, complexity, expiration) for local accounts
+* Support multi-factor authentication (MFA) for administrative accounts
+* Implement account lockout after configurable number of failed login attempts
+* Maintain secure session management with automatic timeout after inactivity
+|===
+
+===== Authorization and Access Control
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/security/authorization
+|Statement a|The system SHALL implement role-based access control (RBAC) with:
+
+* Separation of privileges for read-only users, data entry operators, quality control analysts, and system administrators
+* Station-level or network-level data access restrictions where operationally required
+* Support for data access policies that restrict access to embargoed or sensitive data
+* Principle of least privilege - users granted minimum permissions necessary for their role
+* Ability to temporarily elevate privileges with approval workflow for exceptional circumstances
+|===
+
+===== Data Encryption
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/security/encryption
+|Statement a|The system SHALL implement encryption for:
+
+* All data in transit using TLS 1.2 or higher for HTTPS connections
+* All API communications using TLS 1.2 or higher
+* Sensitive data at rest including user credentials, API keys, and personal information
+* Database connections using encrypted channels
+* Backup files stored on external media or cloud storage
+|===
+
+===== Audit Logging
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/security/audit-logging
+|Statement a|The system SHALL:
+|A a|maintain comprehensive audit logs recording:
+
+* All user authentication attempts (successful and failed)
+* All data modifications (create, update, delete) with user identification
+* All administrative operations (configuration changes, user management, permission changes)
+* All quality control flag overrides with justification
+* All data export operations including user, timestamp, and data selection criteria
+* All API access patterns including endpoint, user, timestamp, and response status
+|B a|Audit logs SHALL:
+
+* Be tamper-evident or stored in write-once media
+* Be retained for minimum 7 years
+* Be searchable and exportable for security incident investigation
+* Include sufficient detail to reconstruct the sequence of events
+|===
+
+===== Vulnerability Management
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/security/vulnerability-management
+|A a|The system SHALL support security maintenance through:
+
+* Regular security updates to address known vulnerabilities
+* Documented process for applying security patches
+* Vulnerability scanning capability or support for external security assessment tools
+* Security advisories for known issues affecting the deployment
+|===
+
+===== Data Privacy
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/security/data-privacy
+|A a|The system SHALL protect personal information by:
+
+* Minimizing collection and storage of personally identifiable information (PII)
+* Providing mechanisms to redact or anonymize personal information where required by data protection regulations
+* Supporting data subject access requests (GDPR right to access)
+* Supporting data deletion requests where legally required and operationally feasible
+* Documenting data retention policies and automated deletion of expired personal data
+|===
+
+===== Provenance Security
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/security/provenance-security
+|A a|The system SHALL protect provenance records through:
+
+* Cryptographic timestamps or equivalent mechanisms to prevent backdating
+* Tamper-evident storage for provenance audit trails
+|===

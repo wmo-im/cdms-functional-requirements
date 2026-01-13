@@ -1,0 +1,70 @@
+=== Requirements Class: Interoperability
+
+[cols="1,4"]
+|===
+|Requirements class|/req/interoperability
+|Target type|Software system
+|Dependency|/req/core, /req/data-api
+|Conformance test|/conf/interoperability
+|===
+
+==== Overview
+
+Ensure the system can exchange data and integrate with external systems using industry-standard protocols, formats,
+and conventions. Interoperability enables climate data to flow seamlessly between national systems, regional centers,
+international archives, and the WIS 2.0 infrastructure.
+
+==== Justification and Regulatory Basis
+
+WMO-No. 1131 emphasizes that "open spatial standards are a mechanism that is being increasingly adopted by many
+organizations and industry sectors around the world" (Section 8.1) and that these standards are "expected to become an
+increasingly important mechanism for distributing data in future years." The specification notes that standardized
+delivery "will ensure that data are represented in a form that facilitates data interoperability and are accessible
+to a wide range of end users from disparate industries" (Section 3.1.4.1).
+
+WMO-No. 1238 requires "Members shall ensure that Entities encode data, and associated metadata, intended for
+international exchange following the standards specified in the Manual on Codes (WMO-No. 306), the Manual on the WMO
+Information System (WMO-No. 1060)" (3.2.2.1). The framework principle mandating registration in "the WIS Global
+Discovery Catalogue" (1.1.1(4)) requires standards-based interoperability.
+
+==== Requirements
+
+===== Standards Compliance
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/interoperability/standards
+|A a|The system SHALL comply with relevant international standards:
+
+* WMO WIGOS Metadata Standard for station metadata
+* WMO Manual on Codes (WMO-No. 306) for BUFR and code form support
+* CF Conventions for NetCDF climate data files
+* ISO 19115 for geographic metadata where applicable
+* OGC standards (API - Features, API - EDR, or SensorThings API) for data access APIs
+|===
+
+
+
+===== API Interoperability
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/interoperability/api
+|A a|The system API SHALL support interoperability through:
+
+* Content negotiation using standard HTTP Accept headers
+* Standard HTTP status codes with appropriate semantics
+* CORS (Cross-Origin Resource Sharing) support for web-based clients
+* OpenAPI (Swagger) specification or equivalent machine-readable API description
+* Hypermedia links (HATEOAS) for resource discovery where applicable
+|===
+
+
+
+
+
+
+
+

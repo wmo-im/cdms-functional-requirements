@@ -1,0 +1,108 @@
+=== Requirements Class: Reliability and Availability
+
+[cols="1,4"]
+|===
+|Requirements class|/req/reliability
+|Target type|Software system
+|Dependency|/req/core
+|Conformance test|/conf/reliability
+|===
+
+==== Overview
+
+Ensure the system operates dependably with minimal unplanned downtime, maintains data integrity under all conditions,
+and recovers gracefully from failures. Reliability is essential for climate data, which serves as an irreplaceable
+scientific resource requiring protection for future generations.
+
+==== Justification and Regulatory Basis
+
+WMO-No. 1131 states that "the most important stakeholders for climate data are future generations, and the reason to
+implement and manage CDMSs now is to protect the integrity of climate data for their future use" (Section 2.3).
+The specification's core theme is to "ensure that the data are securely and transparently managed" (Section 2.3).
+
+WMO-No. 1238 mandates that "Members shall ensure that Entities develop and maintain a business continuity plan to
+mitigate risks associated with disruption of operations" (3.4.1.1) and requires "routine backup, and procedures for
+timely restoration of their databases" (3.4.1.2). The requirement to "retain their original and irreproducible climate
+records, and associated metadata, permanently" (3.4.1.4) establishes reliability as a foundational requirement.
+
+==== Requirements
+
+===== System Availability
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/reliability/availability
+|Statement a|The system SHALL provide:
+
+* Minimum 99.5% uptime for data query and retrieval operations (excluding scheduled maintenance)
+* Minimum 99.0% uptime for data ingestion operations
+* Scheduled maintenance windows clearly communicated minimum 7 days in advance
+* Maximum of 4 hours per month for scheduled maintenance downtime
+|===
+
+[NOTE]
+====
+Availability is calculated as: (Total time - Downtime) / Total time × 100%, measured monthly. Uptime excludes scheduled maintenance windows but includes all unplanned outages.
+====
+
+===== Data Integrity
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/reliability/data-integrity
+|Statement a|The system SHALL ensure data integrity through:
+
+* ACID-compliant transactions for all data create, update, and delete operations
+* Referential integrity constraints preventing orphaned observations (observations without valid station references)
+* Checksums or cryptographic hash verification for file-based data transfers
+* Write-ahead logging or equivalent mechanisms to prevent data loss during system failures
+* Periodic integrity checks to detect and report data corruption
+|===
+
+===== Backup and Recovery
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/reliability/backup-recovery
+|Statement a|The system SHALL implement backup and recovery capabilities with:
+
+* Automated daily incremental backups of all observation and metadata
+* Automated weekly full backups retained for minimum 3 months
+* Point-in-time recovery capability to restore system state to any point within the last 30 days
+* Recovery Time Objective (RTO) of 4 hours for complete system restoration
+* Recovery Point Objective (RPO) of 1 hour maximum data loss
+|===
+
+
+===== Fault Tolerance
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/reliability/fault-tolerance
+|Statement a|The system SHALL handle failures gracefully by:
+
+* Continuing to serve read requests when write operations are unavailable
+* Queuing ingestion requests during temporary processing unavailability
+* Providing meaningful error messages rather than generic failures
+* Logging all error conditions with sufficient detail for diagnosis
+* Automatically retrying failed operations with exponential backoff
+|===
+
+===== Data Validation on Retrieval
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/reliability/retrieval-validation
+|Statement a|The system SHALL validate data consistency when retrieving stored data:
+
+* Verify checksums for file-based retrievals
+* Detect and report any data corruption to system administrators
+* Provide alternative access to backup copies when primary data is corrupted
+* Maintain audit logs of data integrity violations
+|===
+

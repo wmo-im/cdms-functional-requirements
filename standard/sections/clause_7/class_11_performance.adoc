@@ -1,0 +1,31 @@
+=== Requirements Class: Performance and Scalability
+
+[cols="1,4"]
+|===
+|Requirements class|/req/performance
+|Target type|Software system
+|Dependency|/req/core
+|Conformance test|/conf/performance
+|===
+
+==== Overview
+
+Ensure the system can handle operational data volumes, concurrent users, and query loads efficiently while maintaining
+acceptable response times and supporting future growth. Performance requirements ensure the CDMS remains viable as
+data volumes increase and user communities expand over decades of operation.
+
+==== Justification and Regulatory Basis
+
+WMO-No. 1131 emphasizes that CDMSs must handle "big data" characterized by "large volumes of data in a variety of
+formats that present challenges for effective data management" (Section 4.1). The specification notes systems must
+manage "observation datasets spanning minimum 100 years of historical data" with scalability for "considerable amounts
+of derived data" (Section 4.5).
+
+WMO-No. 1238 requires systems support "duplicate repositories for the duration of their retention periods" (3.4.2.2)
+and handle data from multiple Earth system domains (1.1.2), implying substantial performance requirements.
+The framework principle of ensuring "adequate uniformity and standardization" (Introduction, para 5e) requires
+consistent performance across implementations.
+
+==== Requirements
+
+To follow ...

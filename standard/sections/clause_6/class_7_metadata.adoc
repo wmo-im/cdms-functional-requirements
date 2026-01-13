@@ -1,0 +1,133 @@
+=== Requirements Class: Metadata Management
+
+[cols="1,4"]
+|===
+|Requirements class|/req/metadata-management
+|Target type|Software system
+|Dependency|/req/core
+|Conformance test|/conf/metadata-management
+|===
+
+==== Overview
+
+Maintain detailed, version-controlled station and sensor metadata that supports climate data interpretation,
+quality control, and homogenization through complete documentation of station history and observing conditions.
+Comprehensive metadata is essential for establishing data provenance and assessing fitness-for-purpose.
+
+==== Justification and Regulatory Basis
+
+WMO-No. 1131 classifies Climate Metadata management as Required (Section 4.3 and 5.5), encompassing
+"observations metadata, discovery metadata, and data provenance metadata."
+
+WMO-No. 1238 mandates compliance with "WIGOS Metadata Standard" (3.3.1.3) and requires "Members shall ensure that
+Entities follow the provisions for the collection, management and publication of observational metadata as specified in
+the Manual on the WMO Integrated Global Observing System (WMO-No. 1160)" (2.1.2.3). The framework principle requiring
+"comprehensive records of all modifications and processing" (3.3.1.1) depends on robust metadata management.
+
+==== Requirements
+
+[[req_metadata_wigos_compliance]]
+===== WIGOS Metadata Compliance
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/metadata-management/wigos
+|Statement a|The system SHALL support metadata fields as specified in WIGOS Metadata Standard (WMO-No. 1195), including:
+
+* Station identification (WIGOS Station Identifier, national identifiers, historical identifiers)
+* Station name, description, and alternative names
+* Geographic location (latitude, longitude, elevation, datum reference)
+* Administrative information (operating organization, country, region)
+* Station classification (WMO station type, network affiliations, programme participation)
+* Sensor and instrument inventory with make, model, serial number, and calibration status
+* Measurement configuration (observed elements, measurement height/depth, sampling interval)
+* Siting environment description and exposure classification
+* Operating schedule and reporting practices
+* Responsible party and contact information
+|===
+
+[[req_metadata_history]]
+===== Station History Documentation
+
+[cols="1,4"]
+|===
+2+^|Requirement {counter:req-id}
+|Identifier|/req/metadata-management/history
+|Statement a|The system SHALL:
+|A a|maintain a complete station history, including:
+
+* Station relocations with old and new coordinates
+* Instrument changes with make, model, and installation dates
+* Changes to observation practices or measurement heights
+* Changes to surrounding environment affecting exposure
+* Periods of station closure or data gaps
+* Network affiliation changes
+
+|B a|for each entry in the station history include:
+
+* Effective date and time of the change
+* Description of the change
+* Reason for the change where known
+* Responsible party documenting the change
+* Supporting documentation references
+|===
+
+[[req_metadata_dar]]
+===== Discovery Metadata
+
+To follow ...
+
+[[req_metadata_export]]
+===== Metadata Standards Export
+
+[cols="1,4"]
+|===
+2+^|Requirement {counter:req-id}
+|Identifier|/req/metadata-management/export
+|Statement a|The system SHALL support export of metadata in standard formats including:
+
+* WIGOS Metadata Representation (WMDR)
+* ISO 19115 geographic metadata
+* WMO Core Metadata Profile v2
+* Station metadata exchange formats used by regional or global programs
+|===
+
+[[req_metadata_quality]]
+===== Metadata Quality Validation
+
+[cols="1,4"]
+|===
+2+^|Requirement {counter:req-id}
+|Identifier|/req/metadata-management/validation
+|Statement a|The system SHALL
+|A a|validate metadata for:
+
+* Required field completeness per WIGOS standards
+* Coordinate system validity and range checks
+* Temporal consistency (effective dates do not overlap)
+* Referential integrity (stations referenced by observations exist)
+* Controlled vocabulary compliance for classification fields
+
+|B a|generate validation reports identifying:
+
+* Missing required metadata
+* Metadata quality issues or inconsistencies
+* Recommendations for metadata improvement
+|===
+
+[[req_metadata_citation]]
+===== Citation and Attribution
+
+[cols="1,4"]
+|===
+2+^|Requirement {counter:req-id}
+|Identifier|/req/metadata-management/citation
+|Statement a|The system SHALL support proper data citation by:
+
+* Generating unique persistent identifiers (DOIs or equivalents) for datasets
+* Providing recommended citation text for datasets
+* Recording data usage and access patterns for impact assessment
+* Supporting dataset versioning with clear version identifiers
+* Maintaining links between derived products and source datasets
+|===

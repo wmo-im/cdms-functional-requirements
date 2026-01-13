@@ -1,0 +1,463 @@
+=== Requirements Class: Data Discovery and Access
+
+[cols="1,4"]
+|===
+|Requirements class|/req/data-discovery
+|Target type|Software system
+|Dependency|/req/core, /req/metadata-management, /req/data-api
+|Conformance test|/conf/data-discovery
+|===
+
+==== Overview
+
+The Data Discovery and Access requirements class defines capabilities for enabling
+users to search, discover, and access climate datasets through standardized catalogue
+services. This includes maintaining discovery metadata catalogues compliant with WMO
+Information System standards, supporting spatial and temporal queries, and providing
+mechanisms for data access registration (DAR) and citation. Discovery capabilities are
+essential for making climate data findable and accessible to diverse user communities.
+
+==== Justification and Regulatory Basis
+
+WMO-No. 1131 Section 8.2 identifies Data Discovery as a Required component, including
+discovery metadata catalogue (8.2.1.1), observations metadata catalogue (8.2.1.2), and
+data provenance metadata catalogue (8.2.1.3). Section 7.1.4 further requires "integrated
+search of climate data" including search of discovery metadata (7.1.4.3, Required) and
+data provenance metadata (7.1.4.4, Required). WMO-No. 1238 mandates that "data, and
+associated metadata, are registered in the WMO Information System Global Discovery
+Catalogue" (3.2.1.1c) and requires "Members shall ensure that Entities describe data
+with metadata, in conformance with the WIS metadata standard" (3.2.1.1b). The framework
+principle that datasets shall be made "findable by potential users" (3.2.1.1) requires
+robust discovery and cataloguing capabilities.
+
+==== Requirements
+
+[[req_data-discovery_catalogue-service]]
+===== Discovery Metadata Catalogue Service
+
+[cols="1,4"]
+|===
+2+^|*Requirement {counter:req-id}*
+|Identifier|/req/data-discovery/catalogue-service
+|Statement|The system SHALL provide a discovery metadata catalogue service
+|A|The system SHALL implement a metadata catalogue service that:
+
+* Stores discovery metadata records for all datasets intended for sharing
+* Supports the WMO Core Metadata Profile version 2 (WCMP2)
+* Implements OGC API - Records or equivalent standard for catalogue access
+* Enables programmatic query and retrieval of metadata records
+* Supports both human-readable and machine-readable metadata formats
+
+|B|The catalogue service SHALL support queries by:
+
+* Spatial extent (bounding box, point, polygon)
+* Temporal extent (time range, start date, end date)
+* Keywords and free-text search
+* Dataset type and theme
+* Organization and data provider
+* Data quality indicators
+* Access constraints and licensing
+
+|C|Catalogue records SHALL include WIS Discovery Metadata core elements:
+
+* Dataset identification (title, unique identifier, abstract)
+* Spatial and temporal extent
+* Data provider and contact information
+* Access information (URLs, protocols, formats)
+* Data quality and lineage summary
+* Keywords and classification
+* Access and use constraints
+* Update frequency and maintenance status
+|===
+
+NOTE: WMO Core Metadata Profile version 2 (WCMP2) is defined in the Manual on the WMO
+Information System (WMO-No. 1060), Volume II. WCMP2 builds on OGC API - Records and
+includes climate-specific extensions.
+
+[[req_data-discovery_wis-registration]]
+===== WIS Global Discovery Catalogue Registration
+
+[cols="1,4"]
+|===
+2+^|*Requirement {counter:req-id}*
+|Identifier|/req/data-discovery/wis-registration
+|Statement|The system SHALL support registration in WIS Global Discovery Catalogue
+|A|The system SHALL enable datasets to be registered in the WIS Global Discovery
+Catalogue by:
+
+* Generating WCMP2-compliant metadata records
+* Publishing metadata to WIS 2.0 via associated WIS National Centre or DCPC
+* Assigning globally unique persistent identifiers to datasets
+* Maintaining synchronization between local and global catalogues
+
+|B|For datasets designated as core or recommended data under the WMO Unified Data
+Policy, the system SHALL:
+
+* Clearly indicate data policy classification in metadata
+* Specify access methods and protocols for international exchange
+* Document any temporal embargoes or access restrictions
+* Provide data availability status
+
+|C|WIS registration SHALL include:
+
+* Initial publication of new dataset metadata
+* Updates when dataset characteristics change significantly
+* Notification when datasets are deprecated or retired
+* Version management for dataset metadata records
+|===
+
+[[req_data-discovery_observations-catalogue]]
+===== Observations Metadata Catalogue
+
+[cols="1,4"]
+|===
+2+^|*Requirement {counter:req-id}*
+|Identifier|/req/data-discovery/observations-catalogue
+|Statement|The system SHALL provide an observations metadata catalogue
+|A|The system SHALL maintain a searchable catalogue of observations metadata including:
+
+* Station metadata (location, instrumentation, operating periods)
+* Sensor metadata (make, model, calibration, exposure)
+* Variable metadata (observed elements, measurement methods, units)
+* Network affiliations and programme participation
+* Data quality indicators and classifications
+
+|B|The observations metadata catalogue SHALL support queries by:
+
+* Station identifier (WIGOS Station Identifier, national ID, legacy ID)
+* Geographic location (bounding box, proximity search)
+* Observed variable capability
+* Network affiliation or programme
+* Operational status and period of record
+* Data quality classifications (siting class, measurement quality)
+* Metadata temporal validity (state at specified date)
+
+|C|Observations metadata SHALL be:
+
+* WIGOS Metadata Standard (WMO-No. 1192) compliant
+* Version-controlled with full history tracking
+* Exportable in WIGOS Metadata Representation (WMDR) format
+* Linked to corresponding observation data records
+* Synchronized with OSCAR/Surface where applicable
+|===
+
+[[req_data-discovery_provenance-catalogue]]
+===== Data Provenance Metadata Catalogue
+
+[cols="1,4"]
+|===
+2+^|*Requirement {counter:req-id}*
+|Identifier|/req/data-discovery/provenance-catalogue
+|Statement|The system SHALL provide a data provenance metadata catalogue
+|A|The system SHALL maintain a searchable catalogue of data provenance information
+enabling queries for:
+
+* Complete processing history for any observation or dataset
+* All transformations applied from source to current state
+* Quality control procedures applied and results
+* Homogenization adjustments made
+* Derivation lineage (source observations to derived products)
+* Audit trail by operator, time period, or processing type
+
+|B|Provenance metadata SHALL be:
+
+* Structured according to W3C PROV-O or compatible standard
+* Linked to corresponding data records via unique identifiers
+* Immutable after creation (append-only)
+* Exportable in machine-readable formats (JSON-LD, RDF/XML)
+* Queryable via standardized interfaces
+
+|C|The provenance catalogue SHALL support traceability queries including:
+
+* "What processing was applied to station X variable Y in period Z?"
+* "Which observations were used to generate derived product P?"
+* "What version of algorithm A was used to process dataset D?"
+* "Who modified observation O and when and why?"
+* "What was the state of dataset D on date T?" (point-in-time reconstruction)
+|===
+
+[[req_data-discovery_integrated-search]]
+===== Integrated Cross-Catalogue Search
+
+[cols="1,4"]
+|===
+2+^|*Requirement {counter:req-id}*
+|Identifier|/req/data-discovery/integrated-search
+|Statement|The system SHALL support integrated search across metadata types
+|A|The system SHALL provide unified search capabilities that query across:
+
+* Discovery metadata (dataset-level information)
+* Observations metadata (station and sensor details)
+* Data provenance metadata (processing history)
+* Observation data values themselves
+
+|B|Integrated search SHALL enable queries such as:
+
+* "Find all datasets containing temperature observations from stations in region R
+with siting classification ≥2, data completeness >80%, covering period 1991-2020"
+* "Identify homogenized temperature datasets with documented break point adjustments
+derived from stations at elevation >1000m"
+* "Locate daily precipitation observations with quality flags indicating
+'passed all checks' from GCOS Surface Network stations"
+
+|C|Search results SHALL include:
+
+* Matching datasets with discovery metadata
+* Relevant stations with observations metadata
+* Data quality and completeness summaries
+* Access methods and download options
+* Citation information and usage constraints
+* Links to detailed metadata records and provenance documentation
+
+|D|The integrated search interface SHALL support:
+
+* Interactive map-based spatial selection
+* Timeline-based temporal selection
+* Faceted filtering by multiple criteria
+* Saved search queries for repeated use
+* Result export in multiple formats (JSON, CSV, HTML)
+|===
+
+[[req_data-discovery_dar]]
+===== Data Access Registration (DAR)
+
+[cols="1,4"]
+|===
+2+^|*Requirement {counter:req-id}*
+|Identifier|/req/data-discovery/dar
+|Recommendation|The system SHOULD support data access registration mechanisms
+|A|For datasets with access restrictions or requiring usage tracking, the system
+SHOULD implement data access registration enabling:
+
+* User registration and profile management
+* Request submission for restricted datasets
+* Approval workflow for data access requests
+* Terms and conditions acknowledgment
+* Usage purpose documentation
+
+|B|The DAR system SHOULD support:
+
+* Configurable approval workflows (automatic, manual review, tiered approval)
+* Time-limited access grants with expiration dates
+* Access revocation capabilities
+* Integration with authentication and authorization systems
+* Usage tracking and reporting
+
+|C|DAR records SHOULD capture:
+
+* User identification and contact information
+* Requested datasets and access scope (temporal/spatial)
+* Intended use and research purpose
+* Approval status and decision rationale
+* Access grant period and conditions
+* Actual data access patterns (downloads, queries)
+
+|D|The system SHOULD generate reports on:
+
+* Access request volumes and approval rates
+* Dataset usage patterns and user demographics
+* Compliance with access conditions
+* Citation and acknowledgment tracking
+|===
+
+NOTE: Data Access Registration is particularly relevant for datasets that are not freely
+accessible under the WMO Unified Data Policy core data provisions, or where tracking
+usage is important for demonstrating impact and value of climate data services.
+
+[[req_data-discovery_citation]]
+===== Dataset Citation and Attribution
+
+[cols="1,4"]
+|===
+2+^|*Requirement {counter:req-id}*
+|Identifier|/req/data-discovery/citation
+|Statement|The system SHALL support proper dataset citation
+|A|The system SHALL generate citation information for each dataset including:
+
+* Persistent identifier (DOI or equivalent)
+* Dataset title and version
+* Data producer/provider organization
+* Publication or release date
+* Access date (for time-stamped citations)
+* Recommended citation text following scholarly conventions
+
+|B|Citation information SHALL be:
+
+* Included in discovery metadata records
+* Displayed prominently in user interfaces
+* Exportable in standard formats (BibTeX, RIS, EndNote)
+* Version-specific (citations reference exact dataset version)
+* Persistently resolvable (identifiers remain valid long-term)
+
+|C|The system SHALL track dataset usage indicators including:
+
+* Download counts by dataset and time period
+* Citation counts (where trackable through DOI systems)
+* Geographic distribution of users
+* Access patterns by dataset type
+* Usage in publications and assessments (where reported)
+
+|D|Attribution requirements SHALL be clearly documented including:
+
+* Required attribution text
+* Logo or institutional credit requirements
+* Co-authorship expectations (if applicable)
+* Acknowledgment language for publications
+* Embargo or prior consultation requirements
+|===
+
+[[req_data-discovery_landing-pages]]
+===== Dataset Landing Pages
+
+[cols="1,4"]
+|===
+2+^|*Requirement {counter:req-id}*
+|Identifier|/req/data-discovery/landing-pages
+|Recommendation|The system SHOULD provide human-readable dataset landing pages
+|A|For each dataset, the system SHOULD provide a landing page including:
+
+* Dataset overview and description
+* Key metadata (spatial/temporal extent, variables, provider)
+* Data quality summary and known limitations
+* Access methods and download options
+* Documentation and user guides
+* Citation information
+* Contact information for support
+* Related datasets and resources
+* Version history and change log
+
+|B|Landing pages SHOULD include visualizations such as:
+
+* Preview maps showing spatial coverage
+* Sample time series or data plots
+* Thumbnails or representative images
+* Station location maps
+* Data availability calendars
+
+|C|Landing pages SHOULD be:
+
+* Accessible via persistent URLs
+* Indexed by search engines
+* Printable for offline reference
+* Translatable to multiple languages where appropriate
+* Compliant with accessibility standards (WCAG 2.1)
+
+|D|Landing pages SHOULD provide direct access to:
+
+* Interactive data exploration tools
+* Quick download options for common formats
+* API endpoint documentation
+* Metadata record download (XML, JSON)
+* User guides and example code
+|===
+
+[[req_data-discovery_notifications]]
+===== Dataset Change Notifications
+
+[cols="1,4"]
+|===
+2+^|*Requirement {counter:req-id}*
+|Identifier|/req/data-discovery/notifications
+|Recommendation|The system SHOULD notify users of dataset changes
+|A|The system SHOULD provide notification mechanisms for:
+
+* New dataset releases
+* Dataset version updates
+* Quality control corrections affecting archived data
+* Metadata updates
+* Dataset deprecation or retirement
+* Access policy changes
+
+|B|Notification delivery methods SHOULD include:
+
+* Email alerts to registered users
+* RSS/Atom feeds for dataset collections
+* Webhook callbacks for programmatic integration
+* In-application notifications
+* Integration with WIS 2.0 notification services
+
+|C|Users SHOULD be able to subscribe to notifications by:
+
+* Specific datasets of interest
+* Geographic regions
+* Variable or theme categories
+* Organization or programme
+* Dataset quality thresholds
+
+|D|Notifications SHOULD include:
+
+* Clear description of changes
+* Impact assessment (e.g., "affects analyses for period 2010-2015")
+* Links to updated metadata and documentation
+* Guidance on re-downloading or reprocessing if needed
+* Contact information for questions
+|===
+
+[[req_data-discovery_api-documentation]]
+===== Discovery API Documentation
+
+[cols="1,4"]
+|===
+2+^|*Requirement {counter:req-id}*
+|Identifier|/req/data-discovery/api-documentation
+|Statement|The system SHALL provide comprehensive API documentation
+|A|Discovery and catalogue APIs SHALL be documented including:
+
+* Complete endpoint reference with parameters
+* Request and response examples
+* Authentication and authorization requirements
+* Query syntax and filtering capabilities
+* Pagination and result limiting
+* Error responses and status codes
+* Rate limiting policies
+
+|B|API documentation SHALL be:
+
+* Machine-readable (OpenAPI/Swagger specification)
+* Human-readable (HTML documentation)
+* Interactive (try-it-now functionality)
+* Versioned alongside API versions
+* Regularly updated to reflect API changes
+
+|C|Documentation SHOULD include:
+
+* Quickstart guides and tutorials
+* Common use case examples
+* Code samples in multiple languages (Python, R, JavaScript)
+* Client library information (if available)
+* Support contact information
+* FAQ and troubleshooting guide
+|===
+
+[[req_data-discovery_interoperability]]
+===== Catalogue Interoperability
+
+[cols="1,4"]
+|===
+2+^|*Requirement {counter:req-id}*
+|Identifier|/req/data-discovery/interoperability
+|Recommendation|Catalogue services SHOULD support federated search
+|A|The system SHOULD enable interoperability with external catalogues through:
+
+* OGC Catalogue Service for the Web (CSW) protocol support
+* OGC API - Records implementation
+* STAC (SpatioTemporal Asset Catalog) API support
+* OpenSearch interface for discovery
+* OAI-PMH (Open Archives Initiative Protocol for Metadata Harvesting)
+
+|B|Federated search capabilities SHOULD enable:
+
+* Harvesting of metadata from remote catalogues
+* Serving local metadata to external harvesters
+* Participation in distributed catalogue networks
+* Cross-catalogue query aggregation
+* Result merging and deduplication
+
+|C|Interoperability configurations SHOULD support:
+
+* WIS 2.0 Global Discovery Catalogue integration
+* Regional Climate Centre catalogue networks
+* International data centre connections (NCEI, ECMWF, etc.)
+* Domain-specific catalogue federations
+* Research data repository integration (e.g., DataCite, re3data)
+|===

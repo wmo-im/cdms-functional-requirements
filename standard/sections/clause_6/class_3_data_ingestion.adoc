@@ -1,0 +1,228 @@
+=== Requirements Class: Data Ingestion
+
+[cols="1,4"]
+|===
+|Requirements class|/req/data-ingestion
+|Target type|Software system
+|Dependency|/req/core
+|Conformance test|/conf/data-ingestion
+|===
+
+==== Overview
+
+The Data Ingestion requirements class defines requirements for the reliable ingestion of climate observation data
+from diverse sources and formats, ensuring data quality through validation and normalization while maintaining complete
+provenance of source data characteristics. Data ingestion serves as the entry point for observations into the climate
+record, requiring careful handling to preserve data integrity.
+
+==== Justification and Regulatory Basis
+
+WMO-No. 1131 identifies Data Ingest as a Required capability (Section 5.1.1), stating systems must handle
+"WMO messages, vector, raster array, ASCII and other formats" with "business rules, status logging,
+automated self-recovery and transformation.".
+
+WMO-No. 1238 requires Members ensure "Entities encode data, and associated metadata, intended for international exchange
+following the standards specified in the Manual on Codes (WMO-No. 306)" (3.2.2.1).
+
+==== Requirements
+
+[[req_ingest_automated_collection]]
+===== Automated Data Collection
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-ingestion/automated-collection
+|Statement a|
+|A a|The system SHALL support automated data collection from external sources including:
+
+* **Scheduled polling**: Configurable polling of external data sources at defined intervals (hourly, daily, monthly)
+* **Real-time subscription**: MQTT-based subscription to WIS 2.0 message brokers for international data exchange
+* **File system monitoring**: Automatic detection and ingestion of new files in monitored directories
+* **Protocol support**: FTP, SFTP, HTTP/HTTPS for automated file retrieval
+* **API integration**: RESTful API calls to external observation systems with authentication management
+
+|B a|For each automated collection source, the system SHALL maintain:
+
+* Collection schedule or subscription configuration
+* Connection credentials and authentication parameters (stored securely)
+* Last successful collection timestamp
+* Collection attempt history and status
+* Error logs for failed collection attempts
+
+|C a|The system SHALL implement resilient collection mechanisms:
+
+* Retry logic with configurable retry count and backoff intervals
+* Detection of duplicate data from multiple collection attempts
+* Graceful handling of temporarily unavailable sources
+* Alert generation on persistent collection failures
+* Automatic recovery and resumption after system restart
+
+|===
+
+[NOTE]
+====
+Automated collection sources should be configurable without system restart. The system should support pausing and resuming collection from specific sources for maintenance purposes.
+====
+
+[[req_ingest_collection_monitoring]]
+===== Collection Monitoring
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-ingestion/collection-monitoring
+|Statement a|The system SHALL provide monitoring capabilities for automated data collection:
+
+* Dashboard showing status of all configured collection sources
+* Statistics on collection success/failure rates per source
+* Data volume metrics (records/observations collected per time period)
+* Latency metrics (time between observation and ingestion)
+* Alert generation when expected data does not arrive within defined time windows
+* Collection log export for auditing and troubleshooting
+
+|===
+
+[[req_ingest_acquisition]]
+===== Manual Data Acquisition
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-ingestion/manual-acquisition
+|Statement a|The system SHALL support manual data submission including:
+
+* Web-based file upload interface with drag-and-drop support
+* Batch upload of multiple files
+* Upload of compressed archives (ZIP, TAR.GZ)
+* Manual submission via API with authentication
+* Upload progress indication for large files
+* Validation feedback during or immediately after upload
+* Confirmation of successful ingestion with record counts
+
+|===
+
+[[req_ingest_formats]]
+===== Format Support
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-ingestion/formats
+|Statement a|The system SHALL support the ingestion of climate observation data in the following formats:
+
+* **CSV and delimited text files**: With configurable field mapping, delimiter specification (comma, tab, semicolon, pipe), header row handling, and support for common date/time formats
+* **BUFR (Binary Universal Form for the Representation of meteorological data)**: WMO standard binary format as specified in WMO Manual on Codes (WMO-No. 306), Volume I.2
+* **WMO text-based formats and code forms**: Including FM-12 SYNOP and other code forms as specified in WMO Manual on Codes
+
+|===
+
+[[rec_ingest_formats]]
+[cols="1,4"]
+|===
+2+^|**Recommendation {counter:rec-id}**
+|Identifier|/rec/data-ingestion/formats
+|Statement a|The system SHOULD support the following additional formats:
+
+* **NetCDF** following CF (Climate and Forecast) conventions version 1.6 or later
+* **JSON** for observation data exchange
+* **XML** formats used in national or regional climate networks
+|===
+
+[NOTE]
+====
+Support for additional historical or legacy formats may be required based on data rescue activities and national archive requirements. Implementers should document all supported formats and any format-specific constraints in their conformance documentation.
+====
+
+[[req_ingest_format_validation]]
+===== Format Validation
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-ingestion/validation
+|Statement a|
+|A a|The system SHALL validate ingested data for:
+
+* Format compliance
+* Required field presence (station ID, timestamp, observed element, value)
+* Data type correctness (numeric values, valid date/time formats)
+* Referential integrity (station IDs exist in metadata repository)
+* Value range plausibility (preliminary sanity checks before full QC)
+
+|B a|Validation failures SHALL result in:
+
+* Rejection of the invalid record or file
+* Generation of detailed error reports identifying specific validation failures
+* Logging of validation errors for system monitoring and diagnostics
+|===
+
+[[req_ingest_normalisation]]
+===== Data Normalisation
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-ingestion/normalization
+|Statement a|
+|A a|
+The system SHALL normalize ingested data from all supported formats into a common internal representation that includes:
+
+* Observation value with standardized unit of measure
+* Observation timestamp normalized to UTC
+* Station identifier (preferentially WIGOS Station Identifier)
+* Observed element code using WMO BUFR/GRIB parameter codes or equivalent
+* Source format identifier
+* Ingestion timestamp and processing metadata
+
+|B a|The system SHALL perform unit conversions where necessary, maintaining:
+
+* Original value and unit in provenance metadata
+* Conversion algorithm and factors used
+* Target standard units as specified in WIGOS metadata standards
+
+|===
+
+[[req_ingest_duplicate_detection]]
+===== Duplicate Detection
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-ingestion/duplicate-detection
+|Statement a|
+|A a|
+The system SHALL detect and handle duplicate observations based on:
+
+* Station identifier
+* Sensor identifier (where available)
+* Observation timestamp
+* Observed element
+
+|B a|When duplicates are detected, the system SHALL:
+
+* Flag duplicate records for review
+* Apply configurable duplicate resolution strategies (keep first, keep last, manual review)
+* Log duplicate detection events
+* Preserve information about all duplicate instances in provenance metadata
+
+|===
+
+[[req_ingest_character_set]]
+===== Character Encoding
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-ingestion/character-encoding
+|A a|The system SHALL handle international character sets:
+
+* UTF-8 as default character encoding for all text data
+* Support for legacy encodings (ASCII, ISO-8859-1) during data ingestion
+* Proper handling of diacritics and non-Latin scripts in station names and metadata
+* Character encoding declaration in all text-based exports
+|===
+
+===== Calculation of derived parameters
+
+- To follow

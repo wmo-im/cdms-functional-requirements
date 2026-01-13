@@ -1,0 +1,102 @@
+=== Requirements Class: Data Rescue
+
+[cols="1,4"]
+|===
+|Requirements class|/req/data-rescue
+|Target type|Software system
+|Dependency|/req/core, /req/data-ingestion
+|Conformance test|/conf/data-rescue
+|===
+
+==== Overview
+
+Facilitate the recovery of historical climate observations from non-digital sources, ensuring rescued data is
+integrated into the climate record with complete provenance and appropriate quality control. Data rescue extends
+the temporal coverage of climate records, essential for understanding long-term climate variability and change.
+
+==== Justification and Regulatory Basis
+
+WMO-No. 1131 classifies Data Rescue capabilities as Recommended (Section 5.2), covering "imaging and digitization,
+monitoring, and data entry."
+
+WMO-No. 1238 requires Members ensure "Entities develop a data rescue strategy" including "systematic" preservation
+activities, digitization plans, and resource mobilization (3.5.3.1).
+
+[NOTE]
+====
+The Guidelines on Good Practices for Data Rescue (WMO-No. 1182) emphasizes that data rescue is "the ongoing process of
+identifying and preserving all data, records and climate archives that are at risk of being lost."
+====
+
+==== Requirements
+
+[[rec_data_rescue_imaging]]
+===== Document Imaging Management
+
+[cols="1,4"]
+|===
+2+^|**Recommendation {counter:rec-id}**
+|Identifier|/rec/data-rescue/imaging
+|Statement a|
+The system SHOULD support document imaging workflows including:
+
+* Storage of scanned images with persistent identifiers
+* Association of images with source document metadata (archive, collection, date range)
+* Support for multiple image formats (JPEG, TIFF, PDF)
+* Image quality metadata (resolution, color depth, scan date)
+* Linkage between images and digitized observations
+
+|===
+
+[[rec_data_rescue_interface]]
+===== Data Entry Interface
+
+[cols="1,4"]
+|===
+2+^|**Recommendation {counter:rec-id}**
+|Identifier|/req/data-rescue/data-entry
+|A a|
+The system SHOULD provide a data entry interface for manual keying that:
+
+* Displays source images alongside data entry forms
+* Supports configurable data entry templates based on historical form layouts
+* Provides real-time validation of entered values
+* Tracks data entry operator and timestamp
+* Supports both single-key and double-key entry workflows for quality assurance
+
+|===
+
+[[req_data_rescue_qc]]
+===== Data Rescue Quality Control
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-rescue/quality-control
+|Statement a|The system SHALL apply quality control to rescued data including:
+
+* Comparison between double-key entries to identify transcription errors
+* Range and consistency checks appropriate to historical observation practices
+* Verification against original images when discrepancies are detected
+* Flagging of uncertain or illegible values
+* Documentation of data rescue quality assurance decisions
+
+|===
+
+[[req_data_rescue_provenance]]
+===== Data Rescue Provenance
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-rescue/provenance
+|Statement a|
+The system SHALL record data rescue provenance including:
+
+* Source document identification and archive location
+* Image identifier and scan metadata
+* Data entry operator(s) and keying date(s)
+* Keying method (single-key, double-key, automated OCR)
+* Quality assurance verification status
+* Known limitations or uncertainties in rescued data
+|===

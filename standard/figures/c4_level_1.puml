@@ -1,0 +1,37 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+
+title System Context Diagram - Climate Data Management System
+
+Person(climatologist, "Climate Scientist", "Reviews and validates climate observations, identifies inhomogeneities")
+Person(datamanager, "Data Manager", "Manages station metadata and data holdings")
+Person(operator, "System Operator", "Configures QC parameters and monitors system health")
+
+System(cdms, "Climate Data Management System", "Applies quality control, homogenization, and metadata management to climate observations")
+
+System_Ext(wis2, "WIS 2.0", "Provides climate observations from global networks via message broker")
+System_Ext(nationalobs, "National Observation Networks", "Historical and real-time climate data from national sources")
+System(archive, "National and International Long-term Archive(s)", "Preservation storage for climate datasets")
+System(cds, "Climate Data Store", "Public data discovery and distribution portal")
+System(analysis, "Climate Analysis Platform", "Climate trend analysis and statistical processing")
+System_Ext(idms, "Identity Management", "User authentication and authorization")
+System_Ext(monitoring, "Operations Monitoring", "System health and performance monitoring")
+System(data_rescue, "Data rescue","Imaging and keying of historical records")
+
+Rel_U(cdms, wis2, "Subscribes to observations")
+Rel(nationalobs, cdms, "Submits real-time and historical data")
+Rel(cdms, archive, "Archives QC'd datasets")
+Rel(cdms, cds, "Publishes data products")
+Rel(cdms, analysis, "Provides homogenized series")
+Rel(climatologist, cdms, "Reviews QC results")
+Rel(datamanager, cdms, "Manages station metadata")
+Rel(operator, cdms, "Configures rules")
+Rel_R(cdms, idms, "Authenticates users")
+Rel_L(cdms, monitoring, "Sends metrics & logs")
+Rel_U(cdms, wis2, "Publishes climate data for international exchange")
+Rel_U(data_rescue, cdms, "Submits imaged and keyed data")
+
+
+@enduml

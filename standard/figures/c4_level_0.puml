@@ -1,0 +1,62 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+LAYOUT_LEFT_RIGHT()
+
+title System Landscape - Climate Data Exchange Architecture
+
+' Field Observation Systems (First Mile - Unregulated)
+Boundary(field, "Field Observation Layer") {
+    System_Ext(sensor, "Sensors", "Automated weather and climate sensors")
+    System_Ext(datalogger, "Data Loggers", "Field data collection devices")
+    System_Ext(satellite, "Satellite Systems", "Remote sensing data sources")
+    System_Ext(external, "External Providers", "Third-party data providers")
+}
+
+' National Processing Infrastructure
+Boundary(national, "National Segment") {
+    System_Ext(dcps, "Data Collection and Processing System", "Real-time data processing and quality control")
+    System(cdms, "Climate Data Management System", "Quality control, homogenization, and long-term climate data management")
+    System_Ext(ops, "Operational Systems", "NWP, data assimilation, forecasting, and nowcasting services")
+}
+
+' International Exchange Layer (WMO Regulated)
+Boundary(international, "International Segment - WIS 2.0") {
+    System_Ext(wis2node, "WIS2 Node", "National broker for international data exchange")
+    System_Ext(wis2global, "WIS2 Global Services", "Global data discovery and access broker network")
+}
+
+' Field to National
+Rel(sensor, datalogger, "Transmits measurements")
+Rel(datalogger, dcps, "Sends observations")
+Rel(satellite, dcps, "Provides remote sensing")
+Rel(external, dcps, "Submits data")
+
+' National Processing
+Rel(dcps, cdms, "Sends observations for climate processing")
+Rel(dcps, ops, "Sends observations for operational use")
+
+' National to International
+Rel(dcps, wis2node, "Publishes real-time observations", "MQTT")
+Rel(cdms, wis2node, "Publishes climate products", "MQTT")
+Rel(ops, wis2node, "Publishes operational products", "MQTT")
+
+' International Exchange
+Rel(wis2node, wis2global, "Publishes to global broker", "MQTT")
+Rel(wis2global, cdms, "Provides international observations", "MQTT subscription")
+Rel(wis2global, ops, "Provides international data", "MQTT subscription")
+
+note right of field
+  **First Mile Interface**
+  Unregulated national systems
+  Various formats and protocols
+end note
+
+note right of international
+  **WMO Regulated Interface**
+  Standardized WIS2 protocols
+  International data exchange
+end note
+
+@enduml

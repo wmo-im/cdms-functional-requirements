@@ -1,0 +1,24 @@
+== Conformance
+
+This specification defines the following conformance classes that align with the major functional
+containers shown in xref:c4_level_2[xrefstyle=short]:
+
+- **Core Data Management** (Required): Basic observation storage, retrieval, and metadata management capabilities
+- **Quality Control** (Required): Climate-specific QC procedures including range, temporal, spatial, and climatological checks
+- **Data Ingestion** (Required): Multi-format data import, validation, and normalization
+- **Data API** (Required): Standards-based data query, retrieval, and distribution interfaces
+- **Homogenization** (Recommended): Statistical detection and adjustment of inhomogeneities in climate time series
+- **Data Rescue** (Optional): Digitization workflow for historical paper records including imaging and data entry
+- **Metadata Management** (Required): Comprehensive station metadata with full history and provenance tracking
+
+Each conformance class is described in detail in subsequent sections, with corresponding test specifications
+provided in <<test-specifications>>.
+
+[NOTE]
+====
+The classification of conformance classes as Requirement, Recommendation and Permission aligns with the
+Required, Recommended and Optional classifications respectively from WMO-No. 1131.
+Required classes must be implemented for a system to be considered
+conformant. Recommended classes should be implemented where operationally feasible. Optional classes
+may be implemented based on specific organizational needs.
+====

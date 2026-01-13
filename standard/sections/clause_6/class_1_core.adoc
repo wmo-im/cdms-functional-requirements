@@ -1,0 +1,208 @@
+=== Requirements Class: Core
+
+[cols="1,4"]
+|===
+|Requirements class|/req/core
+|Target type|Software system
+|Dependency|None
+|Conformance test|/conf/core
+|===
+
+==== Overview
+The Core requirements class defines the requirements for basic observation storage, retrieval, and metadata management
+capabilities. This provides the foundational data management capabilities for a Climate Data Management System and
+support for long-term climate data stewardship.
+
+==== Justification and Regulatory Basis
+WMO-No. 1131 identifies Core Data Management as a Required component across all CDMS implementations.
+
+The Manual on High-quality Global Data Management Framework for Climate (WMO-No. 1238) requires Members to
+"ensure that Entities establish and document data management capabilities and practices for their climate data"
+(3.1.1). The framework's principles mandate "preservation and management of all data and metadata that are used for,
+or may potentially be useful for, climate studies" (1.1.1(3)). Core capabilities support the FAIR data principles
+requiring data to be Findable, Accessible, Interoperable and Reusable (3.2).
+
+==== Requirements
+
+[[req_core_data_model]]
+===== Observation Data Model
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/core/data-model
+|Statement a|The system SHALL implement a data model capable of storing environmental data from across the Earth system domains
+and disciplines. The data model SHALL include:
+
+* Station and sensor metadata
+* Observed element/variable
+* Observation value/result and associated units
+* Quality flag status
+* Observation timestamp, including time zone support
+* Geographic location of the observation
+* Provenance metadata
+|===
+
+[NOTE]
+====
+A draft data model <link to wccdm-obs>
+====
+
+===== Reference data
+
+- To follow
+
+[[req_core_storage]]
+===== Observation Storage
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/core/observation-storage
+|Statement a|The system SHALL provide persistent storage for observation records.
+|===
+
+[[req_core_obs_retrieval]]
+===== Observation Retrieval
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/core/observation-retrieval
+|Statement a|The system SHALL support retrieval of observations filtered by:
+
+* Station identifier or group of stations
+* Geographic bounding box or polygon
+* Time period (start and end timestamps)
+* Observed element/variable
+* Quality control status
+|===
+
+[[req_core_metadata_storage]]
+===== Station and Sensor Metadata Storage
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/core/metadata-storage
+|Statement a|The system SHALL provide persistent storage for station and sensor metadata as specified in
+/req/metadata-management/wigos.
+|===
+
+[[req_core_metadata_retrieval]]
+===== Station and Sensor Metadata Retrieval
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/core/metadata-retrieval
+|Statement a|The system SHALL support retrieval of station and sensor metadata filtered by:
+
+* Station identifier (WIGOS Station Identifier, national identifier, or legacy identifier)
+* Geographic extent (bounding box, polygon, or proximity search)
+* Administrative boundaries (country, region, organization)
+* Station classification or network affiliation
+* Observed element capability
+* Operational status (active, historical, planned)
+* Temporal validity (metadata state at a specified point in time)
+|===
+
+[[req_core_metadata_versioning]]
+===== Station and Sensor Metadata Versioning
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/core/metadata-versioning
+|Statement a|
+The system SHALL maintain temporal versioning of all station and sensor metadata such that:
+
+* All changes to metadata are recorded with effective date and time
+* Historical states of metadata can be reconstructed for any point in time
+* The system can return metadata valid at the time of any given observation
+* Metadata changes do not overwrite or destroy previous versions
+
+|===
+
+[[req_core_prov_storage]]
+===== Provenance Metadata Storage
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/core/provenance-storage
+|Statement a|
+The system SHALL store provenance metadata for all observation data documenting the complete data lineage including:
+
+* Original data source identification (network, station, transmission method)
+* Acquisition timestamp (when data entered the system)
+* Ingestion processing details (format conversion, unit normalization, coordinate transformation)
+* Quality control processing history (quality control procedures applied, flags assigned, timestamps)
+* Manual interventions (edits, corrections, deletions with operator identification and justification)
+* Derived data lineage (source observations, algorithms, parameters used in derivation)
+* Homogenization adjustments (break points detected, adjustment factors applied, reference series used)
+* Data rescue provenance (source document reference, image identifier, keying method, verification status)
+
+|===
+
+[[req_core_prov_retrieval]]
+===== Provenance Metadata Retrieval
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/core/provenance-retrieval
+|Statement a|The system SHALL support retrieval of provenance metadata including:
+
+* Complete processing history for any observation or set of observations
+* Identification of all transformations applied to data from acquisition to current state
+* Audit trail queries by operator, time period, or processing type
+* Traceability from derived products back to original source observations
+* Export of provenance information in machine-readable format (e.g., W3C PROV-O, ISO 19115 lineage)
+|===
+
+[[req_core_prov_immutability]]
+===== Provenance Metadata Immutability
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/core/provenance-immutability
+|Statement a|
+The system SHALL ensure provenance records are immutable such that:
+
+* Provenance entries cannot be modified or deleted after creation
+* Original (raw) observation values are preserved even when corrections are applied
+* A complete audit trail exists for all data modifications
+|===
+
+[[req_core_batch_processing]]
+===== Batch-processing
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/core/batch-processing
+|Statement a|The system SHALL support batch operations for efficiency:
+
+* Bulk station metadata updates via file upload
+* Batch quality control flag modifications with justification
+* Bulk data export for multiple stations and time ranges
+* Progress indicators for long-running operations
+* Ability to cancel or pause long-running batch operations
+|===
+
+// [[req_core_time_zones]]
+// ===== Time Zone Handling
+
+// [cols="1,4"]
+// |===
+// 2+^|**Requirement {counter:req-id}**
+// |Identifier|/req/core/timezone
+// |Statement a|The system SHALL handle time zones consistently:
+
+// * Store all timestamps internally in UTC
+// * Accept input timestamps with time zone specifications (ISO 8601 format)
+// * Convert local time observations to UTC using documented station time zone metadata
+// * Support display of timestamps in local time zones when requested
+// * Handle daylight saving time transitions correctly
+// |===

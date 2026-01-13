@@ -1,0 +1,151 @@
+=== Requirements Class: Data API
+
+[cols="1,4"]
+|===
+|Requirements class|/req/data-api
+|Target type|Software system
+|Dependency|/req/core
+|Conformance test|/conf/data-api
+|===
+
+==== Overview
+
+Provide standardized programmatic access to climate observation data and metadata, enabling interoperability with
+external systems and supporting diverse user communities through well-documented APIs. Standard APIs facilitate
+integration with WIS 2.0, Regional Climate Centres, and international archives.
+
+==== Justification and Regulatory Basis
+
+WMO-No. 1131 classifies Climate Data Delivery Services as Required (Chapter 8), emphasizing "open spatial standards"
+and "WMO formats" for data exchange.
+
+WMO-No. 1238 requires that "data, and associated metadata, are registered in the WMO Information System Global
+Discovery Catalogue" (3.2.1.1c) and that systems support "API interoperability" using standards like OGC API family
+(Features, Records, Environmental Data Retreival, Processes). The framework principle that "datasets designated to be
+exchanged internationally through the WMO Information System" (1.1.1(4)) requires standardized API access.
+
+==== Requirements
+
+[[req_api_restful]]
+===== RESTful API
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-api/rest
+|Statement a|
+The system SHALL provide a RESTful API that:
+
+* Uses HTTP/HTTPS protocols
+* Implements standard HTTP methods (GET, POST, PUT, DELETE) where appropriate
+* Returns data in standard formats (JSON, XML, CSV, NetCDF)
+* Provides comprehensive API documentation
+* Supports content negotiation based on Accept headers
+
+|===
+
+[[req_api_standards]]
+===== Standards Compliance
+
+[cols="1,4"]
+|===
+2+^|Recommendation {counter:rec-id}
+|Identifier|/rec/data-api/standards
+|A a|The system SHOULD implement one or more of the following standard APIs:
+
+* OGC API - Environmental Data Retrieval (EDR)
+* OGC API - Features
+* OGC SensorThings API
+|===
+
+[NOTE]
+====
+Implementation of standardized APIs enhances interoperability with the broader climate and meteorological data ecosystem.
+The choice of which standards to implement should be based on user community needs and integration requirements.
+====
+
+[[req_api_capabilities]]
+===== Query Capabilities
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-api/query
+|Statement a|
+The system SHALL support API queries with the following parameters:
+
+* Spatial extent (bounding box, point, polygon)
+* Temporal extent (time range, specific timestamp)
+* Station identifiers (single or multiple)
+* Observed elements/variables
+* Quality control status
+* Data aggregation options (raw, hourly, daily, monthly means)
+
+|===
+
+[[req_api_auth]]
+===== Authentication and Authorization
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-api/auth
+|Statement|Authentication and authorization SHALL comply with /req/security/authentication and /req/security/authorization
+|===
+
+[[req_api_versioning]]
+===== API Versioning
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-api/versioning
+|Statement a|
+The system SHALL implement API versioning to:
+
+* Maintain backward compatibility with existing clients
+* Clearly indicate API version in endpoints or headers
+* Provide migration guidance for deprecated API versions
+* Support multiple API versions concurrently during transition periods
+
+|===
+
+[[req_api_integration]]
+===== Integration Interfaces
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-api/integration
+|Statement a|The system SHALL provide integration mechanisms for:
+
+* WIS 2.0 message broker subscription and publication
+* Webhook notifications for data availability or quality control events
+* File-based integration using watched directories or object storage
+* Database-level integration using standard connection protocols (ODBC, JDBC)
+* Message queue integration for asynchronous processing
+|===
+
+[[req_api_format_interoperability]]
+===== Data Format Interoperability
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-api/data-formats
+|Statement a|
+|A a|The system SHALL export data in interoperable formats:
+
+* NetCDF following CF conventions for gridded data and discrete sampling geometries.
+* CSV with RFC 4180 compliance and documented column definitions
+* JSON following consistent schema conventions
+* GeoJSON for observations with spatial context
+* BUFR for exchange with WMO systems
+|B a|Each export format SHALL include:
+
+* Comprehensive metadata describing the data structure
+* Units of measure for all variables
+* Quality flag definitions and values
+* Temporal reference system (UTC or clearly specified)
+* Spatial reference system (coordinate system, datum)
+|===

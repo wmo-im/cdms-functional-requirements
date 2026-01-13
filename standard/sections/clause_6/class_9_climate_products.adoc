@@ -1,0 +1,12 @@
+=== Requirements Class: Climate Products
+
+[cols="1,4"]
+|===
+|Requirements class|/req/climate-products
+|Target type|Software system
+|Dependency|
+|Conformance test|/conf/climate-products
+|===
+
+- Climate products
+- Climate indices

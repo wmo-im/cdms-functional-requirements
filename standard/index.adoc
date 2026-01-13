@@ -1,0 +1,54 @@
+:title: Climate Data Management System (CDMS) Functional and Non-functional Requirements
+:titletext: {title}
+:version: 0.1.0
+:date: {docdate}
+:copyright: Copyright © 2025 World Meteorological Organization (WMO)
+:doctype: book
+:encoding: utf-8
+:lang: en
+:toc:
+:toc-placement!:
+:toclevels: 3
+:sectanchors:
+:sectnumlevels: 4
+:pdf-page-mode: outline
+
+= {title}
+
+<<<
+[cols = "<",frame = "none",grid = "none"]
+|===
+|{set:cellbgcolor:#FFFFFF}
+|[big]*World Meteorological Organization*
+|Date: {date}
+|Version: {version}
+|Document status: DRAFT
+|Document location: https://wmo-im.github.io/et-im/guides/wmo-cdms-requirements-DRAFT.html
+|WMO publication location: TBD
+|Expert Team on Information Management
+|Standing Committee on Information Management and Technology (SC-IMT)footnote:[https://community.wmo.int/governance/commission-membership/commission-observation-infrastructures-and-information-systems-infcom/commission-infrastructure-officers/infcom-management-group/standing-committee-information-management-and-technology-sc-imt]
+|Commission for Observation, Infrastructure and Information Systems (INFCOM)footnote:[https://community.wmo.int/governance/commission-membership/infcom]
+|{copyright}
+|===
+
+<<<
+toc::[]
+<<<
+
+include::sections/clause_0/index.adoc[]
+
+:sectnums:
+
+include::sections/clause_1/index.adoc[]
+
+include::sections/clause_2/index.adoc[]
+
+include::sections/clause_3/index.adoc[]
+
+include::sections/clause_4/index.adoc[]
+
+include::sections/clause_5/index.adoc[]
+
+include::sections/clause_6/index.adoc[]
+
+include::sections/clause_7/index.adoc[]

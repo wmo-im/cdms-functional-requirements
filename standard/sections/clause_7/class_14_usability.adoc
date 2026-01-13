@@ -1,0 +1,76 @@
+=== Requirements Class: Usability
+
+[cols="1,4"]
+|===
+|Requirements class|/req/usability
+|Target type|Software system
+|Dependency|/req/core
+|Conformance test|/conf/usability
+|===
+
+==== Overview
+
+Ensure the system is accessible, intuitive, and efficient for climate scientists, data managers, and operators
+with varying levels of technical expertise. Usability directly impacts the effectiveness of quality control,
+data validation, and metadata management workflows that depend on expert human judgment.
+
+==== Justification and Regulatory Basis
+
+WMO-No. 1131 emphasizes that CDMSs must support diverse user roles including "climate scientists, data managers,
+system operators and data entry operators" (Figure 2 and Figure 3). The specification notes that while "most NMHSs
+would not manage infrastructure and software required to support" certain advanced components, systems must still be "
+flexible enough to accommodate national climate monitoring products and other national indices" (Section 4.4.2.3).
+
+WMO-No. 1238 recognizes the need for "climate scientists to review and validate climate observations, identify
+inhomogeneities" (Figure 2), which requires effective user interfaces. The Competencies requirements (3.6) acknowledge
+that staff need appropriate training, implying systems should support learnable, efficient workflows.
+
+==== Requirements
+
+===== User Interface Design
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/usability/ui-design
+|A a|The system user interface SHALL:
+
+* Provide consistent navigation patterns across all functions
+* Use clear, unambiguous labels and terminology aligned with climate science conventions
+* Provide contextual help and documentation accessible from relevant screens
+* Support keyboard navigation for efficiency
+* Indicate required fields and validation requirements clearly before submission
+* Provide meaningful error messages with guidance on corrective actions
+|===
+
+===== Accessibility
+
+[cols="1,4"]
+|===
+2+^|**Recommendation {counter:rec-id}**
+|Identifier|/rec/usability/accessibility
+|A a|The system user interface SHOULD conform to:
+
+* Web Content Accessibility Guidelines (WCAG) 2.1 Level AA where applicable
+* Support for screen readers and assistive technologies
+* Sufficient color contrast for visual accessibility
+* Text scaling without loss of functionality
+* Keyboard-only operation for all critical functions
+|===
+
+
+===== User Feedback and Notifications
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/usability/notifications
+|A a|The system SHALL provide notifications for:
+
+* Completion of long-running operations (ingestion, QC processing, homogenization)
+* Critical quality control failures requiring manual review
+* System maintenance schedules
+* Data embargo or access restriction changes
+* Configurable notification delivery methods (email, in-application alerts)
+|===
+

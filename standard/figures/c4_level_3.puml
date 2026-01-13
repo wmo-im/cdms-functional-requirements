@@ -1,0 +1,83 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Component Diagram - Climate Data Management System (Level 3)
+
+System_Boundary(cdms, "Climate Data Management System") {
+    Component(webapp, "Climate Data Portal", "Web Application", "Web UI for data review, QC validation, and metadata management")
+    Component(api, "Data API Gateway", "API Service", "REST API for data ingestion, query, and distribution")
+    Component(qcengine, "QC Processing Engine", "Processing Service", "Applies quality control algorithms to climate observations")
+    Component(homogenization, "Homogenization Service", "Statistical Processing Service", "Detects and adjusts for inhomogeneities in climate series")
+    Component(metadata, "Metadata Management Service", "API Service", "Manages station metadata, instruments, and data lineage")
+    Component(ingest, "Data Ingestion Service", "Integration Service", "Processes incoming data from multiple sources and formats")
+
+    Component(auth, "Authentication Module", "Security Component", "Handles user authentication and authorization")
+    Component(query, "Query Engine", "Data Access Component", "Optimized query processing for climate time series")
+    Component(export, "Data Export Service", "Data Transformation Service", "Generates climate data products in multiple formats")
+    Component(scheduler, "Job Scheduler", "Workflow Component", "Schedules periodic QC and homogenization tasks")
+    Component(notifier, "Notification Service", "Messaging Component", "Sends alerts and reports to users")
+    Component(audit, "Audit Logger", "Logging Component", "Tracks all data modifications and user actions")
+
+    ComponentDb(obsdb, "Climate Observation DB", "Time-Series Database", "Time-series storage for observations with spatial capabilities")
+    ComponentDb(metadb, "Metadata Repository", "Relational Database", "Station metadata and system configuration")
+    ComponentDb(archivedb, "Archive Index DB", "Relational Database", "Dataset index and data lineage tracking")
+    ComponentQueue(queue, "Message Broker", "Message Queue", "Asynchronous job processing and event distribution")
+    Component(cache, "Cache Layer", "In-Memory Cache", "Performance optimization for frequent queries")
+    Component(objectstore, "Object Storage", "File Storage", "Climate standard file formats and reports")
+}
+
+System_Ext(wis2, "WIS 2.0", "Global observation network")
+System_Ext(nationalobs, "National Networks", "National data sources")
+System_Ext(archive, "Long-term Archive", "Climate data preservation")
+System_Ext(cds, "Climate Data Store", "Public distribution portal")
+System_Ext(idms, "Identity Management", "Enterprise authentication")
+
+Person(climatologist, "Climate Scientist")
+Person(datamanager, "Data Manager")
+
+Rel(climatologist, webapp, "Uses", "HTTPS")
+Rel(datamanager, webapp, "Uses", "HTTPS")
+Rel(webapp, auth, "Authenticates", "Token-based")
+Rel(auth, idms, "Validates credentials", "Standard protocol")
+
+Rel(webapp, api, "API calls", "JSON/HTTPS")
+Rel(api, query, "Query data", "Internal call")
+Rel(api, export, "Export data", "Internal call")
+Rel(api, metadata, "Manage metadata", "REST")
+
+Rel(wis2, ingest, "Publishes observations", "Message protocol")
+Rel(nationalobs, ingest, "Uploads data", "HTTPS")
+Rel(ingest, queue, "Queues jobs", "Message protocol")
+
+Rel(queue, qcengine, "Triggers QC", "Message protocol")
+Rel(queue, homogenization, "Triggers homogenization", "Message protocol")
+Rel(scheduler, queue, "Schedules tasks", "Message protocol")
+
+Rel(qcengine, obsdb, "Read/write observations", "SQL")
+Rel(qcengine, metadb, "Read QC rules", "SQL")
+Rel(qcengine, cache, "Cache access", "Cache protocol")
+Rel(qcengine, notifier, "Send alerts", "Internal call")
+Rel(qcengine, audit, "Log changes", "Internal call")
+
+Rel(homogenization, obsdb, "Read time series", "SQL")
+Rel(homogenization, objectstore, "Store results", "Object storage API")
+Rel(homogenization, audit, "Log processing", "Internal call")
+
+Rel(query, obsdb, "Query data", "SQL")
+Rel(query, cache, "Cache results", "Cache protocol")
+Rel(export, obsdb, "Retrieve data", "SQL")
+Rel(export, objectstore, "Store products", "Object storage API")
+
+Rel(metadata, metadb, "Manage metadata", "SQL")
+Rel(metadata, archivedb, "Track lineage", "SQL")
+Rel(metadata, audit, "Log changes", "Internal call")
+
+Rel(api, cds, "Publish products", "Standard API")
+Rel(homogenization, archive, "Archive datasets", "Standard protocol")
+
+Rel(audit, metadb, "Store audit logs", "SQL")
+Rel(notifier, climatologist, "Send alerts", "Email/SMS")
+
+@enduml

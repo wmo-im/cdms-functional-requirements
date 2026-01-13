@@ -1,0 +1,116 @@
+=== Requirements Class: Data Governance
+
+[cols="1,4"]
+|===
+|Requirements class|/req/data-governance
+|Target type|Software system
+|Dependency|/req/core
+|Conformance test|/conf/data-governance
+|===
+
+==== Overview
+
+Ensure proper stewardship of climate data through lifecycle management, quality documentation, access policies,
+and compliance with organizational and regulatory requirements. Data governance provides the policy framework and
+accountability structures necessary for long-term climate data stewardship.
+
+
+==== Justification and Regulatory Basis
+
+WMO-No. 1131 dedicates Chapter 3 entirely to "CDMS Governance," stating that "one of the steps often overlooked when
+implementing a CDMS is to ensure that the NMHS has established a solid governance framework to protect the integrity of
+the climate record" involving "Policies" and "Governance processes." The specification defines data governance as
+Required (Section 3.2.1), including "controlled access to data and systems," "approval process for new data types,"
+"approval process to change data," and "IT change approvals.".
+
+WMO-No. 1238 requires "Members should ensure that Entities implement and maintain a governance mechanism to oversee the
+various governance elements, coordinated by a governance body" (3.5.1.1) and mandates policies covering commitments,
+sustainability, intellectual property, and data delivery (Section 3.1 of WMO-No. 1131). The framework emphasizes that
+"data stewardship assigns to an entity rights and responsibilities for acquiring and managing climate data and
+information" (Definitions), requiring formalized governance structures.
+
+==== Requirements
+
+===== Data Lifecycle Management
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-governance/lifecycle
+|Statement a|The system SHALL support data lifecycle management with:
+
+* Configurable data retention policies per dataset type or network
+* Automated archival of historical data to long-term storage
+* Data deletion workflows with approval requirements for permanent deletion
+* Tombstone records for deleted data maintaining metadata about what was deleted and why
+* Migration paths for data format updates or schema changes
+|===
+
+===== Data Quality Metadata
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-governance/quality-metadata
+|Statement a|The system SHALL maintain data quality metadata including:
+
+* Completeness metrics (percentage of expected observations received)
+* Timeliness metrics (delay between observation time and system receipt)
+* Quality control statistics (pass/fail rates per check type)
+* Manual intervention frequency and types
+* Homogenization status and adjustment statistics
+* Overall fitness-for-purpose assessments
+
+|B a|Quality metadata SHALL be:
+
+* Queryable alongside observation data
+* Exportable in machine-readable formats
+* Updated automatically as data quality changes
+|===
+
+
+===== Data Access Policies
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-governance/access-policies
+|Statement a|The system SHALL enforce data access policies including:
+
+* Public/restricted/confidential data classification
+* Embargo periods for recently collected data where required
+* License and attribution requirements for data usage
+* Data sharing agreements and restrictions per network or organization
+* Automated enforcement of access restrictions based on user roles
+|===
+
+
+===== Regulatory Compliance
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-governance/compliance
+|Statement a|The system SHALL support compliance with relevant regulations:
+
+- What goes here?
+- Is this needed?
+
+|===
+
+
+===== Data Stewardship Roles
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-governance/stewardship
+|Statement a|The system SHALL define and support data stewardship roles including:
+
+* Data custodian responsibilities for dataset maintenance
+* Data quality manager authority for quality control decisions
+* Data access coordinator for managing access requests and policies
+* System administrator separation from data stewardship roles
+* Clear escalation paths for data governance issues
+|===
+

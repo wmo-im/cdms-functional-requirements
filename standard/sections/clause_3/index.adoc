@@ -1,0 +1,15 @@
+== References
+
+The following documents are referred to in this specification:
+
+//- WMO-No. 1131 (2025 Edition): Climate Data Management System Specifications
+//- ISO 19156:2023: Geographic information — Observations, Measurements and Samples
+//- OGC 17-069r4: OGC API - Features - Part 1: Core
+//- OGC 19-086r6: OGC API - Environmental Data Retrieval Standard
+//- WMO Technical Regulations, Volume I - General Meteorological Standards and Recommended Practices
+//- WMO-No. 8: Guide to Instruments and Methods of Observation
+//- CF Conventions: Climate and Forecast Metadata Conventions
+
+
+
+<To follow>

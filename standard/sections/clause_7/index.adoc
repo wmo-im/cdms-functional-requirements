@@ -1,0 +1,17 @@
+== Non-functional Requirements
+
+This section defines the quality attributes and constraints that specify how well the Climate Data Management System performs its functions. These requirements address system characteristics essential for operational deployment, long-term sustainability, and user satisfaction.
+
+include::class_11_performance.adoc[]
+
+include::class_12_reliability.adoc[]
+
+include::class_13_security.adoc[]
+
+include::class_14_usability.adoc[]
+
+include::class_15_maintainability.adoc[]
+
+include::class_16_interoperability.adoc[]
+
+include::class_17_data_governance.adoc[]

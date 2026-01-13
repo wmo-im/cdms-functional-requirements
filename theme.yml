@@ -1,0 +1,29 @@
+extends: default
+
+# --- Page Break Control ---
+
+# For section headings (like your '== Document Layout and Sections' which is an H2)
+h2:
+  # 'auto' is the default behavior. It attempts to avoid breaks but will allow if necessary.
+  # 'avoid' makes a stronger attempt to avoid a page break before the heading.
+  # 'always' forces a page break before the heading (which you might be experiencing implicitly).
+  page_break_before: auto # Ensure it's not set to 'always' if you want to avoid new pages for H2s.
+
+h3:
+  page_break_before: auto
+
+# General heading settings (applies to h1, h2, h3, etc. unless overridden)
+heading:
+  # Minimum number of lines of content to keep with a heading on the same page.
+  # This helps prevent a heading from being stranded at the bottom of a page alone.
+  keep_with_next_lines: 5 # You can increase this if you want more content to stick
+
+# Prevent specific block types from breaking inside themselves
+# Useful for tables, literal blocks (code), etc.
+table:
+  page_break_inside: avoid
+listing_block:
+  page_break_inside: avoid
+
+base:
+  font-family: Helvetica
