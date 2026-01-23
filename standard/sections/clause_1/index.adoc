@@ -3,7 +3,7 @@
 
 === Introduction
 
-==== Purpose and Relationship to WMO-No. 1131
+==== Purpose & Relationship to WMO-No #1131
 
 This document serves as a companion specification to the _Climate Data Management System Specifications_
 (WMO-No. 1131, 2025 Edition), published by the World Meteorological Organization (WMO). WMO-No. 1131 provides a
@@ -29,7 +29,7 @@ System within the broader weather, climate, and other environmental data value c
 conciseness). Climate data typically flows from field sensors and observing stations through national Data Collection
 and Processing Systems (DCPS), and subsequently to various downstream applications and services.
 
-**Key downstream systems include:**
+**Key downstream systems include**
 
 - WIS 2.0 nodes for international data exchange
 - Operational meteorological systems (Numerical Weather Prediction, data assimilation)
