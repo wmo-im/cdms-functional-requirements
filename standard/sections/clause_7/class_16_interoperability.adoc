@@ -39,7 +39,8 @@ Discovery Catalogue" (1.1.1(4)) requires standards-based interoperability.
 * WMO WIGOS Metadata Standard for station metadata
 * WMO Manual on Codes (WMO-No. 306) for BUFR and code form support
 * CF Conventions for NetCDF climate data files
-* OGC standards (API - Features, API - EDR, or SensorThings API) for data access APIs
+* OGC standards (API - Features, API - EDR, API - Records, or SensorThings API) for
+  data access and discovery APIs
 |===
 
 

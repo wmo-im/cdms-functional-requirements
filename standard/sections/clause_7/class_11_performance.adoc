@@ -27,4 +27,52 @@ consistent performance across implementations.
 
 ==== Requirements
 
-To follow ...
+===== Query Response Performance
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/performance/response-time
+|Statement a|The system SHALL:
+
+* Define and document response time targets for common query operations, including
+  single-station data retrieval, multi-station spatial queries, and metadata lookups
+* Monitor query response times against defined targets
+* Remain responsive under expected concurrent user load without degradation of
+  correctness or data integrity
+|===
+
+[NOTE]
+====
+Response time targets should be defined by implementers based on expected user community
+size, data volumes, and infrastructure. Targets should be documented in system
+specifications and reviewed as data volumes and user communities grow. Users should be
+informed of long-running queries through progress indication rather than silent waits.
+====
+
+===== Data Volume Capacity
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/performance/capacity
+|Statement a|The system SHALL:
+
+* Support storage and retrieval of observational records spanning multiple decades of
+  historical data across all managed station networks
+* Accommodate growth in data volume over the operational lifetime of the system without
+  requiring re-architecture of core data storage
+* Complete ingestion of observations from all configured sources within defined latency
+  targets appropriate to the data delivery schedule of each source
+|===
+
+===== Scalability
+
+[cols="1,4"]
+|===
+2+^|**Recommendation {counter:rec-id}**
+|Identifier|/rec/performance/scalability
+|Statement a|The system SHOULD be designed to support scaling of processing and storage
+capacity to accommodate increasing data volumes and user loads as national observing
+networks grow.
+|===

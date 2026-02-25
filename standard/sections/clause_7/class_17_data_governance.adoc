@@ -67,6 +67,15 @@ information" (Definitions), requiring formalized governance structures.
 * Updated automatically as data quality changes
 |===
 
+[NOTE]
+====
+Fitness-for-purpose refers to an assessment of whether a dataset meets the quality
+requirements of a particular application. For example, a dataset with frequent short
+gaps may be suitable for climatological trend analysis but unsuitable for computing
+climate normals. Fitness-for-purpose assessments summarise quality metrics (completeness,
+temporal continuity, QC flag distribution) in terms of suitability for defined use cases,
+supporting informed data selection by users. See also /req/metadata-management/data-quality.
+====
 
 ===== Data Access Policies
 
@@ -84,20 +93,6 @@ information" (Definitions), requiring formalized governance structures.
 |===
 
 
-===== Regulatory Compliance
-
-[cols="1,4"]
-|===
-2+^|**Requirement {counter:req-id}**
-|Identifier|/req/data-governance/compliance
-|Statement a|The system SHALL support compliance with relevant regulations:
-
-- What goes here?
-- Is this needed?
-
-|===
-
-
 ===== Data Stewardship Roles
 
 [cols="1,4"]
@@ -112,4 +107,14 @@ information" (Definitions), requiring formalized governance structures.
 * System administrator separation from data stewardship roles
 * Clear escalation paths for data governance issues
 |===
+
+[NOTE]
+====
+Data stewardship roles define the organisational responsibilities for data management
+and are distinct from the technical access control roles defined in /req/security/authorization.
+In practice, stewardship roles map to RBAC roles: for example, the data quality manager
+role is associated with permissions to override quality control flags and approve
+homogenisation adjustments. The RBAC configuration in the security class provides the
+technical enforcement of the responsibilities defined here.
+====
 
