@@ -5,7 +5,6 @@
 |Requirements class|/req/security
 |Target type|Software system
 |Dependency|/req/core
-|Conformance test|/conf/security
 |===
 
 ==== Overview

@@ -5,7 +5,6 @@
 |Requirements class|/req/climate-products
 |Target type|Software system
 |Dependency|/req/core, /req/quality-control
-|Conformance test|/conf/climate-products
 |===
 
 ==== Overview

@@ -5,7 +5,6 @@
 |Requirements class|/req/data-ingestion
 |Target type|Software system
 |Dependency|/req/core
-|Conformance test|/conf/data-ingestion
 |===
 
 ==== Overview

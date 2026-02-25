@@ -5,7 +5,6 @@
 |Requirements class|/req/homogenisation
 |Target type|Software system
 |Dependency|/req/core, /req/quality-control
-|Conformance test|/conf/homogenisation
 |===
 
 ==== Overview

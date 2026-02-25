@@ -5,7 +5,6 @@
 |Requirements class|/req/data-rescue
 |Target type|Software system
 |Dependency|/req/core, /req/data-ingestion
-|Conformance test|/conf/data-rescue
 |===
 
 ==== Overview

@@ -17,8 +17,6 @@ of a Climate Data Management System:
 - **Climate Products** (Recommended): Production and publication of standard climate products and indices
 - **Processing Automation** (Recommended): Scheduled and automated execution of routine data processing workflows
 
-Each conformance class is described in detail in subsequent sections, with corresponding test specifications
-provided in <<test-specifications>>.
 
 [NOTE]
 ====

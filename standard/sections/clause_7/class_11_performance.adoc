@@ -5,7 +5,6 @@
 |Requirements class|/req/performance
 |Target type|Software system
 |Dependency|/req/core
-|Conformance test|/conf/performance
 |===
 
 ==== Overview

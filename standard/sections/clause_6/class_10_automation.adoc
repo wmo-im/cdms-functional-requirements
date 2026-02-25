@@ -5,7 +5,6 @@
 |Requirements class|/req/automation
 |Target type|Software system
 |Dependency|/req/core
-|Conformance test|/conf/automation
 |===
 
 ==== Overview

@@ -5,7 +5,6 @@
 |Requirements class|/req/interoperability
 |Target type|Software system
 |Dependency|/req/core, /req/data-api
-|Conformance test|/conf/interoperability
 |===
 
 ==== Overview

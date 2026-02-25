@@ -5,7 +5,6 @@
 |Requirements class|/req/user-interface
 |Target type|Software system
 |Dependency|/req/core
-|Conformance test|/conf/user-interface
 |===
 
 ==== Overview

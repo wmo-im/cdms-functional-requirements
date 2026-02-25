@@ -5,7 +5,6 @@
 |Requirements class|/req/data-api
 |Target type|Software system
 |Dependency|/req/core, /req/security
-|Conformance test|/conf/data-api
 |===
 
 ==== Overview

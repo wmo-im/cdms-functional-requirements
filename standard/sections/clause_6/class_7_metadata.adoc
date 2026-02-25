@@ -5,7 +5,6 @@
 |Requirements class|/req/metadata-management
 |Target type|Software system
 |Dependency|/req/core, /req/security
-|Conformance test|/conf/metadata-management
 |===
 
 ==== Overview

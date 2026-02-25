@@ -14,7 +14,7 @@ This specification translates the framework described in WMO-No. 1131 into concr
 requirements. The functional and non-functional requirements form a subset of the full specification
 defined in WMO-No. 1131, focussing on those elements essential for the management of observational data from stations,
 including the management of the station, sensor and provenance metadata. The functional requirements are expressed as
-testable conformance classes following the OGC Modular Specification approach.
+requirements classes following the OGC Modular Specification approach.
 
 This specification aims to:
 
@@ -199,11 +199,6 @@ operationalize the high-level functional components outlined in WMO-No. 1131.
 essential attributes like performance, scalability, reliability, maintainability, usability, interoperability,
 data governance, and comprehensive security measures. These requirements ensure that a CDMS not only fulfills its
 functional duties but also operates effectively, securely, and sustainably in various environments.
-
-* **<<test-specifications,Test Specifications>>**: Introduces the Abstract Test Suite (ATS), which provides
-high-level, implementation-agnostic test cases directly linked to the functional and non-functional requirements.
-It serves as a blueprint for verifying compliance and assessing the capabilities of CDMS implementations against
-the criteria defined herein and by WMO-No. 1131.
 
 * **<<appendix,Appendix>>**: Provides supplementary information, including a glossary of terms, a list of acronyms
 used throughout the document, references to related standards and specifications, and any other relevant supporting
