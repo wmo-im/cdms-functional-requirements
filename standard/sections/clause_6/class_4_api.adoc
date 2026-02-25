@@ -4,7 +4,7 @@
 |===
 |Requirements class|/req/data-api
 |Target type|Software system
-|Dependency|/req/core
+|Dependency|/req/core, /req/security
 |Conformance test|/conf/data-api
 |===
 
@@ -44,6 +44,13 @@ The system SHALL provide a RESTful API that:
 
 |===
 
+[NOTE]
+====
+Implementations should document the intended access scope of the API (e.g., internal/LAN access only,
+or publicly accessible). Publicly accessible APIs should apply appropriate authentication and rate
+limiting in accordance with /req/data-api/auth.
+====
+
 [[req_api_standards]]
 ===== Standards Compliance
 
@@ -79,9 +86,17 @@ The system SHALL support API queries with the following parameters:
 * Station identifiers (single or multiple)
 * Observed elements/variables
 * Quality control status
-* Data aggregation options (raw, hourly, daily, monthly means)
+* Aggregation level (raw observations, or pre-computed official statistics where available)
 
 |===
+
+[NOTE]
+====
+On-demand statistical aggregation by the API (e.g., computing daily means from raw observations at
+query time) is not recommended. Rigorous statistics require careful handling of data gaps, quality
+flags, and defined computation periods. Pre-computed official statistics should be stored as standard
+derived observations and served through the same query interface.
+====
 
 [[req_api_auth]]
 ===== Authentication and Authorization
@@ -122,7 +137,6 @@ The system SHALL implement API versioning to:
 * WIS 2.0 message broker subscription and publication
 * Webhook notifications for data availability or quality control events
 * File-based integration using watched directories or object storage
-* Database-level integration using standard connection protocols (ODBC, JDBC)
 * Message queue integration for asynchronous processing
 |===
 
@@ -136,16 +150,23 @@ The system SHALL implement API versioning to:
 |Statement a|
 |A a|The system SHALL export data in interoperable formats:
 
-* NetCDF following CF conventions for gridded data and discrete sampling geometries.
+* NetCDF following CF (Climate and Forecast) conventions for station (point) data using discrete sampling geometries
 * CSV with RFC 4180 compliance and documented column definitions
 * JSON following consistent schema conventions
 * GeoJSON for observations with spatial context
-* BUFR for exchange with WMO systems
-|B a|Each export format SHALL include:
+* BUFR for exchange with WMO systems, including CLIMAT and DAYCLI message types for monthly and daily summary data
+|B a|Each export format SHALL be accompanied by documentation including:
 
-* Comprehensive metadata describing the data structure
+* Description of the data structure and schema
 * Units of measure for all variables
 * Quality flag definitions and values
 * Temporal reference system (UTC or clearly specified)
 * Spatial reference system (coordinate system, datum)
 |===
+
+[NOTE]
+====
+For high-frequency or real-time data feeds, including full format documentation with every export
+response may be impractical. In such cases, it is sufficient to make the format definition and schema
+documentation available via a persistent, well-known endpoint referenced in the API documentation.
+====

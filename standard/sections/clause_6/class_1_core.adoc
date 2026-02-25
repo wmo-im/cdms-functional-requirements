@@ -11,7 +11,7 @@
 ==== Overview
 The Core requirements class defines the requirements for basic observation storage, retrieval, and metadata management
 capabilities. This provides the foundational data management capabilities for a Climate Data Management System and
-support for long-term climate data stewardship.
+support for long-term data stewardship.
 
 ==== Justification and Regulatory Basis
 WMO-No. 1131 identifies Core Data Management as a Required component across all CDMS implementations.
@@ -30,8 +30,8 @@ requiring data to be Findable, Accessible, Interoperable and Reusable (3.2).
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/core/data-model
-|Statement a|The system SHALL implement a data model capable of storing environmental data from across the Earth system domains
-and disciplines. The data model SHALL include:
+|Statement a|The system SHALL implement a data model capable of storing in-situ point observations from across the Earth
+system domains and disciplines. The data model SHALL include:
 
 * Station and sensor metadata
 * Observed element/variable
@@ -45,6 +45,25 @@ and disciplines. The data model SHALL include:
 [NOTE]
 ====
 A draft data model <link to wccdm-obs>
+====
+
+[NOTE]
+====
+The definition of an observed element requires careful consideration of all dimensions that distinguish
+one measurement from another, including: measurement type (e.g. temperature, pressure), sensor height or
+depth, aggregation duration, statistical function (instantaneous, mean, maximum, minimum), and unit of
+measure. Systems should ensure that element definitions are sufficiently granular to avoid accidental
+overwriting of observations from different sensors or measurement configurations. Source data provenance
+(e.g. transmission format or network) should be recorded separately rather than embedded in the element
+definition.
+====
+
+[NOTE]
+====
+This specification focuses primarily on fixed-position stations. Observations from mobile platforms
+(ships, buoys, radiosondes, aircraft) may be ingested and archived, but specific requirements for
+real-time tracking or operational processing of mobile platforms are outside the scope of this
+specification.
 ====
 
 ===== Reference data
@@ -87,6 +106,14 @@ A draft data model <link to wccdm-obs>
 |Statement a|The system SHALL provide persistent storage for station and sensor metadata as specified in
 /req/metadata-management/wigos.
 |===
+
+[NOTE]
+====
+The WIGOS Metadata Standard provides the core schema for station and sensor metadata. Implementations
+SHOULD support extensibility mechanisms (such as additional key-value attributes) to accommodate
+national identifiers, legacy identifiers from predecessor networks, and other metadata fields not
+covered by the WIGOS standard.
+====
 
 [[req_core_metadata_retrieval]]
 ===== Station and Sensor Metadata Retrieval
@@ -139,7 +166,7 @@ The system SHALL store provenance metadata for all observation data documenting 
 * Quality control processing history (quality control procedures applied, flags assigned, timestamps)
 * Manual interventions (edits, corrections, deletions with operator identification and justification)
 * Derived data lineage (source observations, algorithms, parameters used in derivation)
-* Homogenization adjustments (break points detected, adjustment factors applied, reference series used)
+* Homogenisation adjustments (break points detected, adjustment factors applied, reference series used)
 * Data rescue provenance (source document reference, image identifier, keying method, verification status)
 
 |===

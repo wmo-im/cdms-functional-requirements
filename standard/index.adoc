@@ -52,3 +52,5 @@ include::sections/clause_5/index.adoc[]
 include::sections/clause_6/index.adoc[]
 
 include::sections/clause_7/index.adoc[]
+
+include::sections/annex_a/index.adoc[]

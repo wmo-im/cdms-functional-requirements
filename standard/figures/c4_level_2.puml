@@ -13,20 +13,21 @@ Person(dataentry, "Data Entry Operator", "Digitizes historical records")
 System_Boundary(cdms, "Climate Data Management System") {
     Container(userinterface, "User Interface", "Application", "Interactive interface for data review, QC validation, and metadata management")
     Container(api, "Data API", "API Service", "API for data ingestion, query, and distribution")
-    Container(qcengine, "QC Processing Engine", "Processing Service", "Applies quality control algorithms to climate observations")
-    Container(homogenization, "Homogenization Service", "Processing Service", "Detects and adjusts for inhomogeneities in climate series")
+    Container(processing, "Data Processing Engine", "Processing Service", \
+        "Applies quality control algorithms and homogenisation adjustments to climate observations")
     Container(metadata, "Metadata Management", "Service", "Manages station metadata, instruments, and data lineage")
     Container(ingest, "Data Ingestion", "Service", "Processes incoming data from multiple sources and formats")
     Container(datarescue, "Data Rescue Service", "Service", "Manages digitization workflow, imaging, and keying of historical paper records")
-    ContainerDb(obsdb, "Observation Data Store", "Data Store", "Storage for climate observations")
-    ContainerDb(metadb, "Metadata Repository", "Data Store", "Station metadata, QC rules, and system configuration")
+    ContainerDb(datastore, "Data Store", "Database", "Climate observations, station metadata, QC rules, and system configuration")
     Container(filestore, "File Storage", "Storage Service", "Climate data files, reports, datasets, and scanned images")
+    Container(archive, "Archive and Backup", "Service", "Backs-up and archives data and metadata stores")
+    Container(catalogue, "Data Catalogue", "Service", "Discovery and distribution of climate datasets, observations, and metadata")
 }
 
-System_Ext(wis2, "WIS 2.0", "Observation source")
-System_Ext(nationalobs, "National Networks", "Historical data")
-System_Ext(archive, "Long-term Archive", "Preservation storage")
-System_Ext(cds, "Climate Data Store", "Public distribution")
+System_Ext(wis2, "WIS 2.0", "Internationally exchanged / external data sources")
+System_Ext(dcps, "Data Collection and Processing System", "National real-time / non-real-time data sources")
+System_Ext(extArchive, "Long-term Archive", "Preservation storage")
+System_Ext(downstream, "Downstream Services", "External consumers of climate data and metadata, incl. WIS2.0")
 System_Ext(idms, "Identity Management", "Authentication")
 System_Ext(scanner, "Scanning Equipment", "Document imaging systems")
 
@@ -37,31 +38,41 @@ Rel(dataentry, datarescue, "Keys historical data")
 Rel(userinterface, api, "Calls")
 Rel(userinterface, idms, "Authenticates")
 
+
 Rel(scanner, datarescue, "Provides scanned images")
 Rel(datarescue, filestore, "Stores scanned images")
-Rel(datarescue, obsdb, "Writes digitized observations")
-Rel(datarescue, metadb, "Records provenance metadata")
+Rel_R(datarescue, ingest, "Submits digitized observations for ingestion")
+Rel(datarescue, datastore, "Records provenance metadata")
 
-Rel(wis2, ingest, "Publishes observations")
-Rel(nationalobs, ingest, "Uploads data")
-Rel(ingest, qcengine, "Sends for processing")
-Rel(datarescue, qcengine, "Sends digitized data for QC")
+BiRel(wis2, ingest, "Subscribes to and downloads data")
+BiRel(dcps, ingest, "Uploads / fetches data")
+Rel(ingest, processing, "Sends for processing")
 
-Rel(qcengine, obsdb, "Reads/writes observations")
-Rel(qcengine, metadb, "Reads QC rules")
-Rel(qcengine, homogenization, "Triggers homogenization")
 
-Rel(homogenization, obsdb, "Reads time series / Writes homogenized data")
-Rel(homogenization, filestore, "Stores reports and datasets")
-Rel(homogenization, metadb, "Records homogenization metadata")
+Rel(userinterface, processing, "Triggers homogenization")
+BiRel_R(metadata, processing,  "Fetches / uses metadata. Updates metadata")
+BiRel_L(metadata, ingest,  "Fetches / uses metadata. Updates metadata")
 
-Rel(api, obsdb, "Queries observations")
-Rel(api, metadb, "Queries metadata")
+BiRel(processing, datastore, "Reads/writes observations, QC rules, and processing metadata")
+Rel(processing, filestore, "Stores reports and datasets")
+
+Rel(api, datastore, "Queries observations and metadata")
+Rel(api, idms, "Authenticates")
 Rel(api, filestore, "Retrieves datasets")
 
-Rel(metadata, metadb, "Manages metadata")
+Rel(ingest, filestore, "Stores raw / original data")
 
-Rel(api, cds, "Publishes products")
-Rel(homogenization, archive, "Archives datasets")
+Rel(metadata, datastore, "Manages metadata")
+
+
+Rel_D(datastore, archive, "Archives data")
+Rel_D(filestore, archive, "Archives files")
+Rel_D(archive, extArchive, "External backup and archive")
+Rel_D(catalogue, downstream, "Publishes discovery metadata and datasets")
+Rel_D(api, downstream, "Serves data and products")
+
+
+Rel(api, catalogue, "Searches discovery records")
+Rel_L(catalogue, datastore, "Stores and queries discovery metadata")
 
 @enduml

@@ -10,9 +10,9 @@
 
 ==== Overview
 
-Facilitate the recovery of historical climate observations from non-digital sources, ensuring rescued data is
-integrated into the climate record with complete provenance and appropriate quality control. Data rescue extends
-the temporal coverage of climate records, essential for understanding long-term climate variability and change.
+Facilitate the recovery of historical observations from non-digital sources, ensuring rescued data is
+integrated into the observational record with complete provenance and appropriate quality control. Data rescue
+extends the temporal coverage of observational records, essential for understanding long-term variability and change.
 
 ==== Justification and Regulatory Basis
 
@@ -48,13 +48,21 @@ The system SHOULD support document imaging workflows including:
 
 |===
 
+[NOTE]
+====
+Automated Optical Character Recognition (OCR) of historical documents is outside the scope of this
+specification. The data entry workflows described here are based on manual keying by operators, with
+source images displayed alongside data entry forms to support transcription. OCR tools may be used as
+a supplementary aid at the implementer's discretion.
+====
+
 [[rec_data_rescue_interface]]
 ===== Data Entry Interface
 
 [cols="1,4"]
 |===
 2+^|**Recommendation {counter:rec-id}**
-|Identifier|/req/data-rescue/data-entry
+|Identifier|/rec/data-rescue/data-entry
 |A a|
 The system SHOULD provide a data entry interface for manual keying that:
 
@@ -82,6 +90,13 @@ The system SHOULD provide a data entry interface for manual keying that:
 * Documentation of data rescue quality assurance decisions
 
 |===
+
+[NOTE]
+====
+Once digitized observations have passed data rescue quality assurance, they SHALL be submitted for
+ingestion through the same processing pipeline as contemporary observations, including the full suite
+of quality control checks defined in /req/quality-control.
+====
 
 [[req_data_rescue_provenance]]
 ===== Data Rescue Provenance

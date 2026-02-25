@@ -11,16 +11,22 @@ foundational framework for Climate Data Management Systems (CDMS), detailing ess
 principles, and operational guidelines using classifications of "Required," "Recommended," or "Optional."
 
 This specification translates the framework described in WMO-No. 1131 into concrete functional and non-functional
-requirements expressed as testable conformance classes following the OGC Modular Specification approach.
+requirements. The functional and non-functional requirements form a subset of the full specification
+defined in WMO-No. 1131, focussing on those elements essential for the management of observational data from stations,
+including the management of the station, sensor and provenance metadata. The functional requirements are expressed as
+testable conformance classes following the OGC Modular Specification approach.
+
 This specification aims to:
 
 * **Assist Developers and Integrators**: Provide practical, testable requirements and detailed technical considerations
 for the design, development, and integration of robust and compliant CDMS components and systems.
 * **Empower Users and Assessors**: Establish a comprehensive set of conformance criteria and common understanding to
-objectively assess the capabilities and compliance of existing or proposed CDMS implementations against WMO-No. 1131
-specifications.
+objectively assess the capabilities and compliance of existing, or proposed, CDMS implementations with the essential
+functionalities described in WMO-No. 1131.
 * **Enable Interoperability**: Define standardized interfaces, data formats, and protocols to facilitate integration
 between CDMS implementations and external systems within the climate data ecosystem.
+
+This specification is __not intended__ as a list of requirements that WMO Members SHALL or SHOULD follow.
 
 ==== System Context and Boundaries
 
@@ -66,7 +72,7 @@ System component and its specific responsibilities.
 - Climate data rescue, including digitization of historical paper records
 - Station metadata management with emphasis on long-term consistency and provenance
 - Archival and preservation of climate datasets with appropriate documentation
-- Publication and distribution of quality-controlled climate data products
+- Production, publication and distribution of quality-controlled climate data products
 - Integration interfaces with WIS 2.0, national networks, and international archives
 - Data lineage tracking and provenance management
 
@@ -82,7 +88,7 @@ operational arrangements.
 xref:c4_level_1[xrefstyle=short] illustrates the system context for a Climate Data Management System, showing the primary users,
 the CDMS boundary, and its interactions with external systems. The diagram identifies key integration points including:
 
-- **Data sources**: National obsevration networks and WIS 2.0 Global Services (via national WIS2 Node).
+- **Data sources**: The national Data Collection and Processing System (DCPS), and WIS 2.0 Global Services (via national WIS2 Node).
 - **Users**: Climate scientists, data managers, and system operators
 - **Downstream systems**: Long-term archives, climate data stores, and climate analysis platforms
 - **Support systems**: Identity management and operations monitoring
@@ -97,12 +103,6 @@ and its standardized interfaces with these external systems.
 ----
 include::../../figures/c4_level_1.puml[]
 ----
-
-
-====
-DB comment: Do we need to add in DCPS / note that the DCPS would sit between national networks / WIS2 nodes and the
-CDMS?.
-====
 
 ==== Container Architecture (Level 2)
 
@@ -120,46 +120,50 @@ include::../../figures/c4_level_2.puml[]
 **Key Containers:**
 
 - **User Interface**: Provides interactive capabilities for climate scientists, data managers, and system operators to
-review quality-controlled data, validate observations, manage station metadata, and configure system parameters.
-This may be implemented as a web application, desktop application, or a combination of both.
+review quality-controlled data, validate observations, manage station metadata, configure system parameters, and
+monitor system operations. This may be implemented as a web application, desktop application, or a combination of both.
 
 - **Data API**: Exposes standardized interfaces for data ingestion from external sources, data query and retrieval by
 users and downstream systems, and publication of climate data products. The API should support international standards
 for climate data exchange including OGC API standards.
 
-- **Data Ingestion**: Processes incoming observations from multiple sources including the national WIS2 Node
-(receiving both national and international data), national observation networks, and historical data submissions.
-Handles multiple data formats and protocols, performing initial validation and normalization.
+- **Data Ingestion**: Processes incoming observations from the national DCPS (national real-time and non-real-time
+data) and from WIS 2.0 (international observations), as well as digitized historical observations submitted by the
+Data Rescue Service. Handles multiple data formats and protocols, performing initial validation and normalization.
 
-- **QC Processing Engine**: Applies quality control algorithms to climate observations including range checks,
-temporal consistency checks, spatial consistency checks, and climatological validation. Implements the quality control
-requirements classes defined in this specification.
+- **Data Processing Engine**: Applies quality control algorithms to climate observations including range checks,
+  temporal consistency checks, spatial consistency checks, and climatological validation. Also performs statistical
+  analysis to detect and adjust for non-climatic discontinuities in observation time series (homogenization),
+  producing both adjusted data and comprehensive documentation of the process.
 
-- **Homogenization Service**: Performs statistical analysis to detect and adjust for non-climatic discontinuities in
-observation time series. Produces both the adjusted observation data and comprehensive documentation of the
-homogenization process including change point detection and adjustment factors.
-
-- **Metadata Management**: Maintains comprehensive station metadata including location information, instrumentation
-history, observing practices, and data lineage. Supports the traceability requirements essential for climate data
-and ensures compliance with international metadata standards.
+- **Metadata Management**: Maintains comprehensive station and element metadata including location information,
+  instrumentation history, observing practices, element definitions (units, codes, and controlled vocabularies), and
+  data lineage. Supports both data ingestion validation and quality control processing, and ensures compliance with
+  international metadata standards.
 
 - **Data Rescue Service**: Manages the digitization workflow for historical climate records, including coordination of
-document imaging, data entry from paper records, and quality assurance of digitized observations. Preserves both the
-scanned images and the keyed data with full provenance information. Digitized observations flow through
-the same QC Processing Engine as contemporary observations to ensure consistent quality standards.
+  document imaging, data entry from paper records, and quality assurance of digitized observations. Preserves both the
+  scanned images and the keyed data with full provenance information. Digitized observations flow through
+  the same Data Processing Engine as contemporary observations to ensure consistent quality standards.
+
+- **Data Catalogue**: Maintains persistent discovery metadata records describing available datasets,
+  observations, and metadata holdings. Supports search and discovery via the Data API and publishes
+  discovery metadata to downstream services.
+
+- **Archive and Backup**: Manages scheduled backup and archival of the Data Store and File Storage contents.
+  Submits datasets to external long-term preservation archives and maintains backup copies to support
+  disaster recovery.
 
 **Data Stores:**
 
-- **Observation Data Store**: Persistent storage for climate observations with their associated quality flags and
-processing history. Implementation may utilize time-series optimized databases, spatial databases, or other suitable
-technologies that support efficient temporal and spatial queries.
-
-- **Metadata Repository**: Stores station metadata, quality control rules and thresholds, system configuration,
-homogenization parameters, and data lineage information. Maintains historical records of all metadata changes to
-support long-term climate analysis.
+- **Data Store**: Persistent storage for climate observations with their associated quality flags and
+  processing history, station and element metadata (including units, codes, and controlled vocabularies),
+  quality control rules and thresholds, system configuration, homogenization parameters, and data lineage
+  information. Maintains historical records of all metadata changes to support long-term climate analysis.
 
 - **File Storage**: Manages climate-standard file formats (such as NetCDF-CF), quality control reports, homogenization
-analysis outputs, digitized document images, and archived datasets. Supports versioning and long-term preservation requirements.
+  analysis outputs, digitized document images, and archived datasets. Supports versioning and long-term preservation
+  requirements.
 
 **External System Integration:**
 
@@ -167,12 +171,17 @@ The system integrates with external systems at well-defined conformance boundari
 protocols and data formats apply:
 
 - **WIS 2.0**: International data exchange using MQTT messaging and standardized data formats for both consuming
-international observations and publishing national climate products
-- **National Observation Networks**: Historical and real-time climate data submission via file transfer or API
-- **Long-term Preservation Archives**: Climate dataset archival using standard formats (e.g., NetCDF-CF, GRIB2)
-and protocols (OPeNDAP, OGC APIs)
-- **Climate Data Stores**: Public data discovery and distribution via OGC API - EDR, STAC catalogs, or equivalent standards
-- **Identity Management Systems**: Enterprise authentication and authorization using standard protocols (LDAP, OAuth 2.0, SAML)
+  international observations and publishing national climate products.
+
+- **National Data Collection and Processing System**: Real-time and non-real-time data sources and processing, including
+  connection to data loggers, sensors and other external data sources.
+
+- **Long-term Preservation Archives**: Climate dataset archival using standard formats.
+
+- **Downstream Services**: External consumers of climate data and metadata, including climate data stores,
+  analysis platforms, and WIS 2.0 nodes, accessed via the Data API and Data Catalogue.
+
+- **Identity Management Systems**: Enterprise authentication and authorization using standard protocols (LDAP, OAuth 2.0, SAML).
 
 This architectural decomposition supports the modular requirements structure of this specification, where
 different containers may be subject to different requirements classes based on their functional responsibilities.

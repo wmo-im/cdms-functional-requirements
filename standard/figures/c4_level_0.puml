@@ -10,7 +10,6 @@ title System Landscape - Climate Data Exchange Architecture
 Boundary(field, "Field Observation Layer") {
     System_Ext(sensor, "Sensors", "Automated weather and climate sensors")
     System_Ext(datalogger, "Data Loggers", "Field data collection devices")
-    System_Ext(satellite, "Satellite Systems", "Remote sensing data sources")
     System_Ext(external, "External Providers", "Third-party data providers")
 }
 
@@ -30,7 +29,6 @@ Boundary(international, "International Segment - WIS 2.0") {
 ' Field to National
 Rel(sensor, datalogger, "Transmits measurements")
 Rel(datalogger, dcps, "Sends observations")
-Rel(satellite, dcps, "Provides remote sensing")
 Rel(external, dcps, "Submits data")
 
 ' National Processing

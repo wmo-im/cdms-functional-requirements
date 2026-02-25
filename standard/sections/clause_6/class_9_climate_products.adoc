@@ -4,9 +4,101 @@
 |===
 |Requirements class|/req/climate-products
 |Target type|Software system
-|Dependency|
+|Dependency|/req/core, /req/quality-control
 |Conformance test|/conf/climate-products
 |===
 
-- Climate products
-- Climate indices
+==== Overview
+
+Support the computation and management of standard derived products from quality-controlled observation
+series, including summary statistics, climate normals, and climate indices. Derived products must be clearly
+distinguished from raw observations with full documentation of their derivation and data lineage.
+
+==== Justification and Regulatory Basis
+
+WMO-No. 1131 classifies Climate Products as Recommended (Section 6.1), covering the computation of
+summary statistics, climate normals, and indices from quality-controlled observational records.
+
+WMO-No. 1238 requires that Members ensure the production of standard climate products and that these are
+made available through appropriate services. The computation of WMO Climate Normals is governed by the
+WMO Guidelines on the Calculation of Climate Normals (WMO-No. 1203), which prescribes standard 30-year
+averaging periods. Climate normals and indices support national and international reporting obligations,
+including contributions to the Global Climate Observing System (GCOS).
+
+==== Requirements
+
+[[req_climate_products_statistics]]
+===== Summary Statistics
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/climate-products/statistics
+|A a|The system SHALL support computation and storage of standard summary statistics from
+quality-controlled observations, including:
+
+* Daily summary values: minimum, maximum, mean, and accumulated totals for each observed element
+* Monthly and annual aggregations of daily summary values
+* Configurable aggregation periods and functions
+
+|B a|All computed statistics SHALL be stored as derived observations that:
+
+* Reference the source observations used in their computation
+* Record the computation method, the quality flag thresholds applied, and the proportion of valid source data used
+* Are clearly distinguished from raw observations in all data access interfaces
+|===
+
+[NOTE]
+====
+Rigorous statistical aggregation requires careful handling of data gaps, quality flags, and defined
+computation periods (which may not align with calendar day boundaries). Statistics computed from series
+with significant data gaps should be flagged accordingly. Implementations should apply documented
+minimum data completeness thresholds before producing summary values.
+====
+
+[[req_climate_products_normals]]
+===== Climate Normals
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/climate-products/normals
+|Statement a|The system SHALL support computation and storage of climate normals in accordance with
+WMO guidelines (WMO-No. 1203), including:
+
+* Standard 30-year averaging periods as defined by WMO
+* Monthly and annual normals for each observed element
+* Recording of the reference period for each set of normals
+* Ability to compute and store normals for multiple reference periods simultaneously
+|===
+
+[[rec_climate_products_indices]]
+===== Climate Indices
+
+[cols="1,4"]
+|===
+2+^|**Recommendation {counter:rec-id}**
+|Identifier|/rec/climate-products/indices
+|Statement a|The system SHOULD support computation of standard climate indices, including:
+
+* Temperature and precipitation extremes indices as defined by the Expert Team on Climate Change
+  Detection and Indices (ETCCDI)
+* Standardised Precipitation Index (SPI) and related drought indices
+* User-configurable index definitions to accommodate national or regional requirements
+|===
+
+[[req_climate_products_management]]
+===== Product Management
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/climate-products/management
+|Statement a|The system SHALL manage derived products such that:
+
+* Products are versioned, with earlier versions retained and accessible
+* Recomputation following correction of source observations generates a new version without
+  overwriting prior versions
+* Product metadata records the source data period, computation date, and quality constraints applied
+* Products are accessible through the data API defined in /req/data-api
+|===

@@ -2,21 +2,87 @@
 
 [cols="1,4"]
 |===
-|Requirements class:|/req/automation
-|Target type:|Software system
-|Dependency:|/req/core
-|Conformance test:|/conf/automation
+|Requirements class|/req/automation
+|Target type|Software system
+|Dependency|/req/core
+|Conformance test|/conf/automation
 |===
 
 ==== Overview
-Define requirements for automated execution of routine climate data processing tasks,
-scheduled operations, and workflow orchestration to ensure timely data processing
-without manual intervention.
+
+Support the scheduled and automated execution of routine data processing workflows, enabling timely and
+consistent processing without continuous manual intervention. Automation covers quality control processing,
+statistical product computation, data publication, and system maintenance tasks.
 
 ==== Justification and Regulatory Basis
-WMO-No. 1238 requires timely generation of core climate products (2.2.1) and
-systematic data processing. WMO-No. 1131 emphasizes automated processing workflows.
+
+WMO-No. 1131 classifies Processing Automation as Recommended, emphasizing that routine data processing
+should be performed systematically and consistently without requiring manual intervention for each cycle.
+
+WMO-No. 1238 requires timely generation of climate products and systematic data processing (2.2.1). The
+framework principle requiring "comprehensive records of all modifications and processing" (3.3.1.1) implies
+that automated processing must be fully logged and auditable.
 
 ==== Requirements
 
-to follow ...
+[[req_automation_scheduling]]
+===== Scheduled Processing
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/automation/scheduling
+|Statement a|The system SHALL support scheduling of routine processing tasks, including:
+
+* Time-based scheduling (hourly, daily, monthly, annual, or user-defined intervals)
+* Event-triggered execution (e.g., automatic quality control following data ingestion)
+* Configurable processing scope per schedule (station, element, and time period)
+* Ability to enable and disable schedules without modifying their configuration
+|===
+
+[[req_automation_workflows]]
+===== Processing Workflows
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/automation/workflows
+|Statement a|The system SHALL support definition of multi-step processing workflows that:
+
+* Chain dependent processing steps in a defined sequence
+  (e.g., quality control → summary statistics → publication)
+* Halt downstream steps and notify operators when an upstream step fails
+* Allow manual re-execution of failed or incomplete workflow steps
+* Support parallel execution of independent processing tasks where applicable
+|===
+
+[[req_automation_monitoring]]
+===== Processing Monitoring and Alerting
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/automation/monitoring
+|Statement a|The system SHALL provide monitoring and alerting for automated processing, including:
+
+* Status visibility of running, completed, and failed tasks
+* Configurable alerts (email or equivalent notification) when tasks fail or exceed expected duration
+* Summary view of processing status across all scheduled tasks
+* Ability for operators to cancel or manually re-trigger processing tasks
+|===
+
+[[req_automation_audit]]
+===== Processing Audit Log
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/automation/audit
+|Statement a|The system SHALL maintain an audit log of all automated processing executions, recording:
+
+* Task identifier, type, and configuration at the time of execution
+* Start time, end time, and completion status
+* Input data scope: stations, elements, and time period processed
+* Count of records processed, updated, flagged, or rejected
+* Any errors or warnings generated during processing
+|===
