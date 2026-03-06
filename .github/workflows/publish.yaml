@@ -16,10 +16,10 @@ jobs:
     steps:
       - name: Install dependencies
         run: |
-          sudo apk add graphviz \
-          && sudo apk add pandoc \
-          && sudo apk add nodejs npm \
-          && sudo npm install -g asciidoc-link-check
+          apk add graphviz \
+          && apk add pandoc \
+          && apk add nodejs npm \
+          && npm install -g asciidoc-link-check
       - name: Checkout main
         uses: actions/checkout@v6.0.2
       - name: Build
