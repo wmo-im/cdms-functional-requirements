@@ -25,13 +25,16 @@ jobs:
         uses: actions/checkout@v6.0.2
       - name: Build
         run: |
-          mkdir -p /tmp/build/static \
+          set -o pipefail \
+          && mkdir -p /tmp/build/static \
           && cd standard \
           && asciidoctor --trace -r asciidoctor-diagram -a stylesheet=static/wmo-asciidoc.css -o /tmp/build/${FILE_BASENAME}.html index.adoc \
           && asciidoctor --trace -r asciidoctor-diagram -r asciidoctor-pdf -a pdf-theme=static/theme.yml --trace -b pdf -o /tmp/build/${FILE_BASENAME}.pdf index.adoc \
           && asciidoctor --trace -r asciidoctor-diagram --backend docbook --out-file - index.adoc | pandoc --from docbook --to docx --reference-doc static/custom-reference.docx --number-sections --toc --output /tmp/build/${FILE_BASENAME}.docx \
           && cp static/wmo-asciidoc.css /tmp/build/static/ \
           && cp static/wmo-logo-en.png /tmp/build/static/
+      - name: verify build
+        run: ls -la /tmp/build/ && ls -la /tmp/build/static/ 
       - name: Check out pages branch
         uses: actions/checkout@v6.0.2
         with:
