@@ -12,15 +12,13 @@ jobs:
   build-and-publish:
     name: Build and publish
     runs-on: ubuntu-latest
-    container: asciidoctor/docker-asciidoctor:latest
     steps:
       - name: Install dependencies
         run: |
-          apk add graphviz \
-          && apk add pandoc \
-          && apk add librsvg \
-          && apk add nodejs npm \
-          && npm install -g asciidoc-link-check
+          sudo apt-get update -y \
+          && sudo apt-get install -y graphviz pandoc librsvg2-bin \
+          && sudo gem install asciidoctor asciidoctor-pdf asciidoctor-diagram \
+          && sudo npm install -g asciidoc-link-check
       - name: Checkout main
         uses: actions/checkout@v6.0.2
       - name: Build
