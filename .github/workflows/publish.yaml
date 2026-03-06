@@ -1,0 +1,45 @@
+name: publish
+
+on:
+  release:
+    types: [published]
+
+env:
+  FILE_BASENAME: cdms-functional-requirements-DRAFT
+
+jobs:
+  build-and-publish:
+    name: Build and publish
+    runs-on: ubuntu-latest
+    container: asciidoctor/docker-asciidoctor:latest
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apk add graphviz \
+          && sudo apk add pandoc \
+          && sudo apk add nodejs npm \
+          && sudo npm install -g asciidoc-link-check
+      - name: Checkout main
+        uses: actions/checkout@v6.0.2
+      - name: Build
+        run: |
+          mkdir -p /tmp/build/static \
+          && cd standard \
+          && asciidoctor --trace -r asciidoctor-diagram -a stylesheet=static/wmo-asciidoc.css -o /tmp/build/${FILE_BASENAME}.html index.adoc \
+          && asciidoctor --trace -r asciidoctor-diagram -r asciidoctor-pdf -a pdf-theme=static/theme.yml --trace -b pdf -o /tmp/build/${FILE_BASENAME}.pdf index.adoc \
+          && asciidoctor --trace -r asciidoctor-diagram --backend docbook --out-file - index.adoc | pandoc --from docbook --to docx --reference-doc static/custom-reference.docx --number-sections --toc --output /tmp/build/${FILE_BASENAME}.docx \
+          && cp static/wmo-asciidoc.css /tmp/build/static/ \
+          && cp static/wmo-logo-en.png /tmp/build/static/
+      - name: Check out pages branch
+        uses: actions/checkout@v6.0.2
+        with:
+          ref: gh-pages
+      - name: Copy files
+        run: |
+          git config --global user.email "dberry@wmo.int" \
+          && git config --global user.name "David I. Berry" \
+          && rm -rf compiled/* \
+          && mv /tmp/build/* compiled/ \
+          && git add . \
+          && git commit -m "Update ${FILE_BASENAME} files" \
+          && git push
