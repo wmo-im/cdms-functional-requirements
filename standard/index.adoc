@@ -1,6 +1,6 @@
 :title: Climate Data Management System (CDMS) Functional and Non-functional Requirements
 :titletext: {title}
-:version: 0.1.0
+:version: @@VERSION@@
 :date: {docdate}
 :copyright: Copyright © 2025 World Meteorological Organization (WMO)
 :doctype: book
