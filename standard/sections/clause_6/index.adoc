@@ -21,5 +21,3 @@ include::./class_8_ui.adoc[]
 include::./class_9_climate_products.adoc[]
 
 include::./class_10_automation.adoc[]
-
-// include::./class_10_dar.adoc[]

@@ -4,13 +4,13 @@ For the purposes of this document, the conventions described in this clause appl
 
 === Identifiers
 
-The normative provisions (Requirements and Conformance Tests) in this module are denoted by URIs which follow a
+The normative provisions in this module are denoted by URIs which follow a
 hierarchical structure to ensure unique identification and traceability.
 
 The base URI for this specification is:
 `http://spec.wmo.int/spec/[spec-name]/[version]/[module-name]`
 
-All requirements and conformance tests that appear in this document are denoted by **partial URIs** which are relative
+All requirements that appear in this document are denoted by **partial URIs** which are relative
 to this base.
 
 The structure for partial URIs is defined as follows:
@@ -34,14 +34,6 @@ the specific requirement.
 ====
 DB comment: need to check the syntax.
 ====
-
-==== Conformance Test URIs
-
-Conformance Tests are identified by a URI fragment that includes the Conformance Class name and a unique identifier for
-the test.
-
-* **Format:** `/conf/[conformance-class-name]/[test-id]`
-* **Example:** `/conf/quality-control/range-check`
 
 === Use of IETF RFC 2119 Keywords
 

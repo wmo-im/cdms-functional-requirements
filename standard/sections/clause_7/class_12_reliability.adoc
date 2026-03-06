@@ -5,7 +5,6 @@
 |Requirements class|/req/reliability
 |Target type|Software system
 |Dependency|/req/core
-|Conformance test|/conf/reliability
 |===
 
 ==== Overview
@@ -33,17 +32,23 @@ records, and associated metadata, permanently" (3.4.1.4) establishes reliability
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/reliability/availability
-|Statement a|The system SHALL provide:
+|Statement a|The system SHALL:
 
-* Minimum 99.5% uptime for data query and retrieval operations (excluding scheduled maintenance)
-* Minimum 99.0% uptime for data ingestion operations
-* Scheduled maintenance windows clearly communicated minimum 7 days in advance
-* Maximum of 4 hours per month for scheduled maintenance downtime
+* Define and publish availability targets for data retrieval and ingestion services
+* Monitor system availability and report against defined targets
+* Communicate scheduled maintenance windows to users in advance
+* Minimise scheduled maintenance downtime through rolling update or equivalent procedures
+* Notify administrators promptly of unplanned outages with sufficient detail for diagnosis
 |===
 
 [NOTE]
 ====
-Availability is calculated as: (Total time - Downtime) / Total time × 100%, measured monthly. Uptime excludes scheduled maintenance windows but includes all unplanned outages.
+Retrieval availability is typically held to a higher target than ingestion availability,
+since brief ingestion interruptions are often recoverable (source data can be buffered
+and re-submitted) while retrieval unavailability directly affects users. Implementers
+should set targets appropriate to their national operational context and infrastructure.
+Note that availability targets govern day-to-day operations; disaster recovery objectives
+(RTO/RPO) are addressed separately in /req/reliability/backup-recovery.
 ====
 
 ===== Data Integrity
@@ -61,20 +66,59 @@ Availability is calculated as: (Total time - Downtime) / Total time × 100%, mea
 * Periodic integrity checks to detect and report data corruption
 |===
 
+[NOTE]
+====
+Write-ahead logging (WAL) is a standard database durability mechanism in which changes
+are written to a transaction log before being applied to the main data store. In the
+event of a system crash, the log enables recovery to a consistent state. The specific
+mechanism is implementation-dependent; the requirement is that the system can recover
+to a consistent state following an unplanned failure.
+
+Periodic integrity checks refer to automated verification that stored data matches
+expected checksums or hash values, detecting silent corruption caused by storage
+media failures or software defects. Results should be logged and administrators
+alerted on any detected inconsistency.
+
+Referential integrity should be enforced as a system invariant. However, implementations
+receiving data from operational feeds (e.g., GTS, WIS 2.0) may encounter observations
+for stations not yet registered in the metadata repository. In such cases, implementations
+may auto-create a minimal station record pending metadata completion, rather than
+rejecting the observation. This exception should be logged and flagged for follow-up.
+See also /req/data-ingestion/validation.
+====
+
 ===== Backup and Recovery
 
 [cols="1,4"]
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/reliability/backup-recovery
-|Statement a|The system SHALL implement backup and recovery capabilities with:
+|Statement a|The system SHALL implement backup and recovery capabilities:
 
-* Automated daily incremental backups of all observation and metadata
-* Automated weekly full backups retained for minimum 3 months
-* Point-in-time recovery capability to restore system state to any point within the last 30 days
-* Recovery Time Objective (RTO) of 4 hours for complete system restoration
-* Recovery Point Objective (RPO) of 1 hour maximum data loss
+* Automated regular backups of all observation data, metadata, and system configuration
+* Defined and documented Recovery Time Objective (RTO) and Recovery Point Objective (RPO)
+  appropriate to the operational context
+* Point-in-time recovery capability to restore the system to a known-good prior state
+* Documented and regularly tested recovery procedures
+* Verification of backup integrity through periodic restore testing
 |===
+
+[NOTE]
+====
+RTO defines the maximum acceptable time to restore operations following a failure.
+RPO defines the maximum acceptable data loss measured in time. Implementers should
+define targets appropriate to their national context — for a national CDMS, a pragmatic
+RPO will often be longer than for a real-time operational system, since historical
+observation data is typically re-ingestible from source systems. The critical concern
+is protecting processed outputs (QC flags, homogenisation adjustments) that may not
+be reproducible without significant effort.
+
+Backup storage volumes grow with retention period. Implementers should balance
+retention requirements against available storage, using incremental backup strategies
+and compression to manage costs. WMO-No. 1238 requires permanent retention of original
+and irreproducible climate records (3.4.1.4); backup policies should reflect this for
+long-term archival.
+====
 
 
 ===== Fault Tolerance
@@ -105,4 +149,39 @@ Availability is calculated as: (Total time - Downtime) / Total time × 100%, mea
 * Provide alternative access to backup copies when primary data is corrupted
 * Maintain audit logs of data integrity violations
 |===
+
+[NOTE]
+====
+Corruption detection relies on comparing stored checksums or hash values against
+values recomputed at retrieval time. Alternative access to backup copies implies
+that backup data is accessible independently of the primary data store; this may
+be achieved through a secondary system, off-site backup, or disaster recovery
+capability (see /rec/reliability/disaster-recovery).
+====
+
+[[rec_reliability_disaster_recovery]]
+===== Disaster Recovery
+
+[cols="1,4"]
+|===
+2+^|**Recommendation {counter:rec-id}**
+|Identifier|/rec/reliability/disaster-recovery
+|Statement a|The system SHOULD support disaster recovery capability including:
+
+* A secondary system or equivalent standby capable of assuming operations following
+  catastrophic failure of the primary system
+* Documented switchover procedures, including manual activation steps and validation
+  checks to confirm data integrity following switchover
+* Replication or backup transfer to a geographically separate location
+* Regular testing of disaster recovery procedures to verify recoverability
+|===
+
+[NOTE]
+====
+A disaster recovery capability (sometimes termed a cold standby or Disaster Recovery
+Centre) provides resilience against catastrophic failure of the primary infrastructure
+(fire, flood, hardware failure). It is distinct from high-availability clustering, which
+addresses routine failures within the primary site. Switchover procedures should be
+documented in system maintenance documentation as required by /req/maintainability/documentation.
+====
 

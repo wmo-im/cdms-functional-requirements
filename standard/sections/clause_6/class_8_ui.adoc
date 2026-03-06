@@ -5,14 +5,13 @@
 |Requirements class|/req/user-interface
 |Target type|Software system
 |Dependency|/req/core
-|Conformance test|/conf/user-interface
 |===
 
 ==== Overview
 
-Provide interactive capabilities for climate scientists, data managers, and operators to visualize, explore, and
-analyze climate observation data and quality control results. The user interface enables efficient human interaction
-with complex climate datasets and supports quality assurance workflows.
+Provide interactive capabilities for scientists, data managers, and operators to visualize, explore, and
+analyze observational data and quality control results. The user interface enables efficient human interaction
+with complex observational datasets and supports quality assurance workflows.
 
 ==== Justification and Regulatory Basis
 
@@ -37,20 +36,61 @@ data holdings" (Figure 2), which requires appropriate user interfaces. The requi
 |Statement a|The system SHALL provide data visualization capabilities including:
 
 * Time series plots for observation values over configurable time ranges
-* Simultaneous display of original and quality-controlled or homogenized values
+* Simultaneous display of original and quality-controlled or homogenised values
 * Station location maps with filtering and selection capabilities
 * Ability to export visualizations in common image formats (PNG, SVG, PDF)
 * Interactive exploration of quality control flags and metadata
 |===
 
-===== Tabular data
+[[req_ui_tabular]]
+===== Tabular Data Display
 
-To follow...
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/user-interface/tabular
+|Statement a|The system SHALL provide tabular data display capabilities including:
 
-===== Integrated search
+* Display of observations in tabular format with configurable columns (timestamp, station, element, value, unit, quality flag)
+* Sorting and filtering by any displayed column
+* Pagination for large result sets
+* Simultaneous display of data from multiple stations or elements for comparison
+* Export of displayed tabular data in CSV or equivalent flat-file format
+|===
 
-To follow ...
+[[req_ui_search]]
+===== Integrated Search
 
-===== Data entry / forms
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/user-interface/search
+|Statement a|The system SHALL provide an integrated search interface that:
 
-To follow ...
+* Supports filtering by station identifier, station name, geographic area, element, time period, and quality control status
+* Presents search results with sufficient context (station name, location, data coverage) to identify relevant records
+* Enables navigation from search results to detailed observation views and station metadata
+* Supports download of search results
+|===
+
+[[req_ui_data_entry]]
+===== Data Entry and Forms
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/user-interface/data-entry
+|Statement a|The system SHALL provide form-based interfaces supporting:
+
+* Manual entry or correction of observation values with real-time validation
+* Creation and editing of station and sensor metadata records
+* Review and resolution of quality control flags and alerts
+* Assignment of quality control decisions with operator identification recorded in the audit trail
+|===
+
+[NOTE]
+====
+Data entry forms in the context of this requirements class support operational workflows such as metadata
+management, manual observation correction, and QC decision recording. Data entry workflows for historical
+data rescue (keying from scanned documents) are specified separately in /req/data-rescue.
+====

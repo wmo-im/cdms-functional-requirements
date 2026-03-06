@@ -5,7 +5,6 @@
 |Requirements class|/req/interoperability
 |Target type|Software system
 |Dependency|/req/core, /req/data-api
-|Conformance test|/conf/interoperability
 |===
 
 ==== Overview
@@ -40,8 +39,8 @@ Discovery Catalogue" (1.1.1(4)) requires standards-based interoperability.
 * WMO WIGOS Metadata Standard for station metadata
 * WMO Manual on Codes (WMO-No. 306) for BUFR and code form support
 * CF Conventions for NetCDF climate data files
-* ISO 19115 for geographic metadata where applicable
-* OGC standards (API - Features, API - EDR, or SensorThings API) for data access APIs
+* OGC standards (API - Features, API - EDR, API - Records, or SensorThings API) for
+  data access and discovery APIs
 |===
 
 
@@ -58,7 +57,6 @@ Discovery Catalogue" (1.1.1(4)) requires standards-based interoperability.
 * Standard HTTP status codes with appropriate semantics
 * CORS (Cross-Origin Resource Sharing) support for web-based clients
 * OpenAPI (Swagger) specification or equivalent machine-readable API description
-* Hypermedia links (HATEOAS) for resource discovery where applicable
 |===
 
 

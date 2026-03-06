@@ -5,7 +5,6 @@
 |Requirements class|/req/maintainability
 |Target type|Software system
 |Dependency|/req/core
-|Conformance test|/conf/maintainability
 |===
 
 ==== Overview
@@ -68,10 +67,11 @@ documentation of "data management processes, including details of roles and resp
 |A a|The system SHALL expose health monitoring endpoints providing:
 
 * Overall system health status (healthy, degraded, unhealthy)
-* Component-level health status (database, message queue, external integrations)
+* Component-level health status for all major system components
 * Key performance indicators (query response times, ingestion rates, error rates)
 * Resource utilization metrics (CPU, memory, disk, network)
-* Integration with standard monitoring tools (Prometheus, Grafana, Nagios, or equivalents)
+* Integration with standard monitoring protocols or tools used within the deployment
+  environment
 |===
 
 ===== API Backward Compatibility
@@ -83,7 +83,8 @@ documentation of "data management processes, including details of roles and resp
 |A a|The system SHALL maintain API stability through:
 
 * Semantic versioning of API endpoints
-* Support for deprecated API versions for minimum 24 months after deprecation announcement
+* A defined and published deprecation policy specifying the support period for deprecated
+  API versions
 * Clear deprecation notices in API documentation and response headers
 * Migration guides for breaking changes
 * Ability to run multiple API versions concurrently during transition periods
@@ -118,6 +119,7 @@ documentation of "data management processes, including details of roles and resp
 * API reference documentation with request/response examples
 * Troubleshooting guides for common issues
 * Backup and recovery procedures
+* Disaster recovery and system switchover procedures
 * Security hardening guidelines
 |===
 

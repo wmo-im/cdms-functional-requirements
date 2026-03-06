@@ -5,7 +5,6 @@
 |Requirements class|/req/security
 |Target type|Software system
 |Dependency|/req/core
-|Conformance test|/conf/security
 |===
 
 ==== Overview
@@ -36,12 +35,21 @@ the climate record" (3.4.4.2).
 |Identifier|/req/security/authentication
 |Statement a|The system SHALL implement authentication mechanisms that:
 
-* Support integration with enterprise identity management systems (LDAP, Active Directory, OAuth 2.0, SAML 2.0)
-* Enforce strong password policies (minimum length, complexity, expiration) for local accounts
-* Support multi-factor authentication (MFA) for administrative accounts
-* Implement account lockout after configurable number of failed login attempts
+* Support integration with institutional or enterprise identity management systems
+  using standard authentication protocols
+* Enforce strong credential policies for locally managed accounts
+* Support multi-factor authentication (MFA) for administrative and privileged accounts
+* Implement account lockout after repeated failed authentication attempts
 * Maintain secure session management with automatic timeout after inactivity
 |===
+
+[NOTE]
+====
+Standard authentication protocols include OpenID Connect, OAuth 2.0, SAML 2.0, and LDAP,
+among others. The choice of protocol should reflect the identity management infrastructure
+in use within the deploying organisation. OpenID Connect is widely adopted and provides
+a standards-based federated identity layer suitable for both web and API access.
+====
 
 ===== Authorization and Access Control
 
@@ -49,14 +57,25 @@ the climate record" (3.4.4.2).
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/security/authorization
-|Statement a|The system SHALL implement role-based access control (RBAC) with:
+|Statement a|The system SHALL implement role-based access control (RBAC) that:
 
-* Separation of privileges for read-only users, data entry operators, quality control analysts, and system administrators
-* Station-level or network-level data access restrictions where operationally required
-* Support for data access policies that restrict access to embargoed or sensitive data
-* Principle of least privilege - users granted minimum permissions necessary for their role
-* Ability to temporarily elevate privileges with approval workflow for exceptional circumstances
+* Separates privileges across user roles including at minimum: read-only users, data
+  entry operators, quality control analysts, and system administrators
+* Is configurable to restrict data access at station or network level
+* Enforces data access policies for embargoed or sensitive datasets
+* Applies the principle of least privilege: users are granted the minimum permissions
+  necessary for their role
+* Allows system administrators to define and manage custom roles and their associated
+  permissions
 |===
+
+[NOTE]
+====
+Role definitions and their associated permissions should be configurable by system
+administrators without requiring code changes or system restart. Access restrictions
+at station or network level are important for national systems where data from certain
+networks may be subject to bilateral sharing agreements or national security constraints.
+====
 
 ===== Data Encryption
 
@@ -66,11 +85,9 @@ the climate record" (3.4.4.2).
 |Identifier|/req/security/encryption
 |Statement a|The system SHALL implement encryption for:
 
-* All data in transit using TLS 1.2 or higher for HTTPS connections
-* All API communications using TLS 1.2 or higher
+* All data in transit using current industry-standard transport security protocols
 * Sensitive data at rest including user credentials, API keys, and personal information
-* Database connections using encrypted channels
-* Backup files stored on external media or cloud storage
+* Backup files stored on external or off-site media
 |===
 
 ===== Audit Logging
@@ -83,15 +100,14 @@ the climate record" (3.4.4.2).
 |A a|maintain comprehensive audit logs recording:
 
 * All user authentication attempts (successful and failed)
-* All data modifications (create, update, delete) with user identification
+* All data and metadata modifications (create, update, delete) with user identification
 * All administrative operations (configuration changes, user management, permission changes)
 * All quality control flag overrides with justification
 * All data export operations including user, timestamp, and data selection criteria
-* All API access patterns including endpoint, user, timestamp, and response status
 |B a|Audit logs SHALL:
 
 * Be tamper-evident or stored in write-once media
-* Be retained for minimum 7 years
+* Be retained in accordance with the organisation's data retention policy
 * Be searchable and exportable for security incident investigation
 * Include sufficient detail to reconstruct the sequence of events
 |===
@@ -118,12 +134,22 @@ the climate record" (3.4.4.2).
 |Identifier|/req/security/data-privacy
 |A a|The system SHALL protect personal information by:
 
-* Minimizing collection and storage of personally identifiable information (PII)
-* Providing mechanisms to redact or anonymize personal information where required by data protection regulations
-* Supporting data subject access requests (GDPR right to access)
-* Supporting data deletion requests where legally required and operationally feasible
-* Documenting data retention policies and automated deletion of expired personal data
+* Minimising collection and storage of personally identifiable information (PII) to
+  what is operationally necessary
+* Providing mechanisms to redact or anonymise personal information where required
+* Supporting compliance with applicable data protection regulations as determined by
+  the deploying organisation
+* Documenting data retention policies for any personal data held by the system
 |===
+
+[NOTE]
+====
+The applicable data protection regulations will vary by jurisdiction. Implementers
+should assess which regulations apply to their deployment (e.g., national privacy laws,
+regional frameworks) and configure the system accordingly. The primary personal data
+held by a CDMS is typically contact information for station operators and data
+submitters rather than observation data itself.
+====
 
 ===== Provenance Security
 
