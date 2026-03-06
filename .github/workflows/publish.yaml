@@ -18,6 +18,7 @@ jobs:
         run: |
           apk add graphviz \
           && apk add pandoc \
+          && apk add librsvg \
           && apk add nodejs npm \
           && npm install -g asciidoc-link-check
       - name: Checkout main
