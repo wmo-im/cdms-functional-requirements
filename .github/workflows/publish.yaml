@@ -16,8 +16,8 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update -y \
-          && sudo apt-get install -y graphviz pandoc librsvg2-bin \
-          && sudo gem install asciidoctor asciidoctor-pdf asciidoctor-diagram \
+          && sudo apt-get install -y graphviz pandoc librsvg2-bin default-jre \
+          && sudo gem install asciidoctor asciidoctor-pdf asciidoctor-diagram asciidoctor-diagram-plantuml \
           && sudo npm install -g asciidoc-link-check
       - name: Checkout main
         uses: actions/checkout@v6.0.2
@@ -41,6 +41,7 @@ jobs:
         run: |
           git config --global user.email "dberry@wmo.int" \
           && git config --global user.name "David I. Berry" \
+          && ls -althF . \
           && rm -rf compiled/* \
           && mv /tmp/build/* compiled/ \
           && git add . \
