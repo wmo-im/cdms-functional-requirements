@@ -38,7 +38,7 @@ and Processing Systems (DCPS), and subsequently to various downstream applicatio
 **Key downstream systems include:**
 
 - WIS 2.0 nodes for international data exchange
-- Operational meteorological systems (Numerical Weather Prediction, data assimilation)
+- Operational meteorological systems (Numerical Weather Prediction, data assimilation, forecasting systems)
 - Climate Data Management Systems for quality control, homogenization, and archival
 - Regional Climate Centres for regional climate monitoring and services
 - Long-term preservation archives and public-facing data portals
