@@ -16,11 +16,11 @@ accountability structures necessary for long-term climate data stewardship.
 
 ==== Justification and Regulatory Basis
 
-WMO-No. 1131 dedicates Chapter 3 entirely to "CDMS Governance," stating that "one of the steps often overlooked when
+WMO-No. 1131 dedicates Chapter 3 entirely to "CDMS Governance", stating that "one of the steps often overlooked when
 implementing a CDMS is to ensure that the NMHS has established a solid governance framework to protect the integrity of
-the climate record" involving "Policies" and "Governance processes." The specification defines data governance as
-Required (Section 3.2.1), including "controlled access to data and systems," "approval process for new data types,"
-"approval process to change data," and "IT change approvals.".
+the climate record" involving "Policies" and "Governance processes". The specification defines data governance as
+Required (Section 3.2.1), including "controlled access to data and systems", "approval process for new data types",
+"approval process to change data", and "IT change approvals".
 
 WMO-No. 1238 requires "Members should ensure that Entities implement and maintain a governance mechanism to oversee the
 various governance elements, coordinated by a governance body" (3.5.1.1) and mandates policies covering commitments,

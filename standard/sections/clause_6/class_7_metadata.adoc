@@ -65,7 +65,8 @@ for Climate and Forecast Metadata.
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/metadata-management/wigos
-|Statement a|The system SHALL support metadata fields as specified in WIGOS Metadata Standard (WMO-No. 1192), including:
+|Statement a|
+|A a|The system SHALL support metadata fields as specified in WIGOS Metadata Standard (WMO-No. 1192), including:
 
 * Station identification (WIGOS Station Identifier, national identifiers, historical identifiers)
 * Station name, description, and alternative names
@@ -77,16 +78,11 @@ for Climate and Forecast Metadata.
 * Siting environment description and exposure classification
 * Operating schedule and reporting practices
 * Responsible party and contact information
-|===
 
-[NOTE]
-====
-The WIGOS Metadata Standard provides the core schema for station and sensor metadata. In practice,
-implementations often require additional metadata fields not covered by the WIGOS standard, such as
-national station identifiers, legacy identifiers from predecessor networks, runway numbers, or other
-site-specific attributes. Implementations SHOULD support extensibility mechanisms (e.g., additional
-key-value attributes) to accommodate these requirements without compromising WIGOS compliance.
-====
+|B a|The system SHALL support extensibility mechanisms to store metadata fields not covered by the
+WIGOS Metadata Standard, including national identifiers, legacy identifiers from predecessor
+networks, and other organisation-specific metadata attributes.
+|===
 
 [[req_metadata_history]]
 ===== Station History Documentation

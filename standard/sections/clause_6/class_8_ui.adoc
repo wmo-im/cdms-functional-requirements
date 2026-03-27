@@ -9,7 +9,7 @@
 
 ==== Overview
 
-Provide interactive capabilities for scientists, data managers, and operators to visualize, explore, and
+Provide interactive capabilities for scientists, data managers, and users to visualize, explore, and
 analyze observational data and quality control results. The user interface enables efficient human interaction
 with complex observational datasets and supports quality assurance workflows.
 

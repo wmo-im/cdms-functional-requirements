@@ -119,17 +119,15 @@ Automated collection sources should be configurable without system restart. The 
 |Statement a|The system SHALL support the ingestion of observational data in the following formats:
 
 * **CSV and delimited text files**: With configurable field mapping, delimiter specification (comma, tab, semicolon, pipe), header row handling, and support for common date/time formats
-* **BUFR (Binary Universal Form for the Representation of meteorological data)**: WMO standard binary format as specified in WMO Manual on Codes (WMO-No. 306), Volume I.2
-* **WMO text-based formats and code forms**: Including FM-12 SYNOP and other code forms as specified in WMO Manual on Codes
+* **BUFR**: WMO standard binary format (WMO-No. 306, Volume I.2), supporting ingestion of hourly observations, daily summaries (including DAYCLI report types), and monthly summaries
+* **WMO text-based formats and code forms**: Including FM-12 SYNOP and FM-71 CLIMAT, and other code forms as specified in WMO Manual on Codes (WMO-No. 306, Volume I.1)
 
 |===
 
 [NOTE]
 ====
-Implementations should document which BUFR message types and WMO code forms are supported. At minimum,
-support for FM-12 SYNOP, CLIMAT, and DAYCLI message types is recommended for ingestion of
-observational and monthly summary data. The Manual on Codes (WMO-No. 306) defines the complete set of
-applicable message types.
+Implementations should document which BUFR report types and WMO code forms are supported.
+The Manual on Codes (WMO-No. 306) defines the complete set of applicable report types and code forms.
 ====
 
 [[rec_ingest_formats]]
