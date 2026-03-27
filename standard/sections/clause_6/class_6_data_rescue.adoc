@@ -10,7 +10,7 @@
 ==== Overview
 
 Facilitate the recovery of historical observations from non-digital sources, ensuring rescued data is
-integrated into the observational record with complete provenance and appropriate quality control. Data rescue
+integrated into the observational records with complete provenance and appropriate quality control. Data rescue
 extends the temporal coverage of observational records, essential for understanding long-term variability and change.
 
 ==== Justification and Regulatory Basis

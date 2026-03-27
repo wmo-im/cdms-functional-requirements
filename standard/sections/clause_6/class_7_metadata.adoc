@@ -243,7 +243,6 @@ those standards are not freely available and are not normative dependencies of t
 * Summarise completeness by station, element, and time period
 * Identify temporal gaps and periods of reduced data availability
 * Report the distribution of quality control flag statuses across the dataset
-* Support GCOS reporting requirements for data availability and quality
 |===
 
 [NOTE]
@@ -252,6 +251,11 @@ Dataset-level quality reporting is distinct from per-observation quality flags m
 /req/quality-control. Quality flags on individual observations provide the source data for computing
 dataset-level quality metrics. These aggregated metrics support fitness-for-purpose assessment and
 inform users about the suitability of a dataset for specific applications.
+
+Dataset quality metrics may be derived automatically from per-observation quality control results,
+or entered manually by data managers to document known issues or provide additional context.
+Dataset quality reporting (Statement B) covers the generation and export of reports drawing on
+both sources.
 
 The structure and terminology used here (completeness, temporal quality, thematic accuracy,
 conformance result) are informed by ISO 19157 (Data Quality), which is referenced informatively.
@@ -323,6 +327,13 @@ is WMO-No. 1238 data policy requirements and the WCMP2 `wmo:dataPolicy` property
   or CF standard names
 * Station metadata exchange formats used by regional or global programmes
 |===
+
+[NOTE]
+====
+A simplified second version of the WIGOS Metadata Representation (WMDR) is under development.
+Implementations should monitor progress and plan for compatibility with the updated version
+when published.
+====
 
 [[req_metadata_quality]]
 ===== Metadata Quality Validation

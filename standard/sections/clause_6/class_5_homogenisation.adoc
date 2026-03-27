@@ -33,6 +33,10 @@ These requirements apply to all observable elements where sufficient station den
 exist to support homogenisation. While temperature is the most commonly homogenised element, the
 requirements apply equally to precipitation, pressure, wind, and other elements where applicable.
 
+Homogenisation methods are most reliably applied to monthly data. Application to daily or sub-daily
+data is possible but introduces greater uncertainty; implementations should document the temporal
+resolution to which homogenisation has been applied.
+
 Implementations may satisfy these requirements either by integrating homogenisation algorithms
 directly within the CDMS, or by providing well-defined interfaces for data exchange with specialist
 third-party homogenisation tools, provided that the documentation and data management requirements
