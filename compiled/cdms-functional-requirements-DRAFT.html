@@ -80,7 +80,7 @@ body {
 <div id="header">
 <h1>Climate Data Management System (CDMS) Functional and Non-functional Requirements</h1>
 <div class="details">
-<span id="revnumber">version v0.2.0</span>
+<span id="revnumber">version v0.3.0</span>
 </div>
 </div>
 <div id="content">
@@ -99,10 +99,10 @@ body {
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">World Meteorological Organization</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2026-03-06</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2026-03-30</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: v0.2.0</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: v0.3.0</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document status: DRAFT</p></td>
@@ -303,17 +303,23 @@ body {
 <div class="sect3">
 <h4 id="_purpose_and_relationship_to_wmo_no_1131"><a class="anchor" href="#_purpose_and_relationship_to_wmo_no_1131"></a>1.1.1. Purpose and Relationship to WMO-No. 1131</h4>
 <div class="paragraph">
-<p>This document serves as a companion specification to the <em>Climate Data Management System Specifications</em>
-(WMO-No. 1131, 2025 Edition), published by the World Meteorological Organization (WMO). WMO-No. 1131 provides a
-foundational framework for Climate Data Management Systems (CDMS), detailing essential components, governance
-principles, and operational guidelines using classifications of "Required," "Recommended," or "Optional."</p>
+<p>This document defines the minimal functional and non-functional requirements to support Members in establishing
+climate data management systems or assessing the compliance of existing systems with the <em>Climate Data Management
+System Specifications</em> (WMO-No. 1131, 2025 Edition).</p>
 </div>
 <div class="paragraph">
-<p>This specification translates the framework described in WMO-No. 1131 into concrete functional and non-functional
-requirements. The functional and non-functional requirements form a subset of the full specification
-defined in WMO-No. 1131, focussing on those elements essential for the management of observational data from stations,
-including the management of the station, sensor and provenance metadata. The functional requirements are expressed as
-requirements classes following the OGC Modular Specification approach.</p>
+<p>WMO-No. 1131 provides a comprehensive framework for Climate Data Management Systems (CDMS), describing key
+components, governance principles, and operational practices using the classifications "Required", "Recommended",
+and "Optional". However, Members may require more concrete technical requirements to support implementation.</p>
+</div>
+<div class="paragraph">
+<p>This document translates the framework outlined in WMO-No. 1131 into a set of concrete functional and non-functional
+requirements. These requirements represent a subset of the full specifications in WMO-No. 1131 and serve as a
+practical and technical specification, focusing on capabilities essential for managing observational data from
+stations, including station, sensor, and provenance metadata.</p>
+</div>
+<div class="paragraph">
+<p>The functional requirements are expressed as requirements classes following the OGC Modular Specification approach.</p>
 </div>
 <div class="paragraph">
 <p>This specification aims to:</p>
@@ -356,7 +362,7 @@ and Processing Systems (DCPS), and subsequently to various downstream applicatio
 <p>WIS 2.0 nodes for international data exchange</p>
 </li>
 <li>
-<p>Operational meteorological systems (Numerical Weather Prediction, data assimilation)</p>
+<p>Operational meteorological systems (Numerical Weather Prediction, data assimilation, forecasting systems)</p>
 </li>
 <li>
 <p>Climate Data Management Systems for quality control, homogenization, and archival</p>
@@ -461,7 +467,7 @@ the CDMS boundary, and its interactions with external systems. The diagram ident
 <p><strong>Data sources</strong>: The national Data Collection and Processing System (DCPS), and WIS 2.0 Global Services (via national WIS2 Node).</p>
 </li>
 <li>
-<p><strong>Users</strong>: Climate scientists, data managers, and system operators</p>
+<p><strong>Users</strong>: Climate scientists, data managers, and system administrators</p>
 </li>
 <li>
 <p><strong>Downstream systems</strong>: Long-term archives, climate data stores, and climate analysis platforms</p>
@@ -478,7 +484,7 @@ and its standardized interfaces with these external systems.</p>
 </div>
 <div id="c4_level_1" class="imageblock">
 <div class="content">
-<img src="c4_level_1.svg" alt="c4 level 1" width="978" height="880">
+<img src="c4_level_1.svg" alt="c4 level 1" width="1221" height="838">
 </div>
 <div class="title">Figure 2. CDMS system context diagram showing users and external system interfaces</div>
 </div>
@@ -492,7 +498,7 @@ architectural and technology choices while conforming to the functional requirem
 </div>
 <div id="c4_level_2" class="imageblock">
 <div class="content">
-<img src="c4_level_2.svg" alt="c4 level 2" width="2008" height="1472">
+<img src="c4_level_2.svg" alt="c4 level 2" width="2008" height="1476">
 </div>
 <div class="title">Figure 3. Container diagram showing major functional components and data stores</div>
 </div>
@@ -502,7 +508,7 @@ architectural and technology choices while conforming to the functional requirem
 <div class="ulist">
 <ul>
 <li>
-<p><strong>User Interface</strong>: Provides interactive capabilities for climate scientists, data managers, and system operators to
+<p><strong>User Interface</strong>: Provides interactive capabilities for climate scientists, data managers, and system administrators to
 review quality-controlled data, validate observations, manage station metadata, configure system parameters, and
 monitor system operations. This may be implemented as a web application, desktop application, or a combination of both.</p>
 </li>
@@ -667,7 +673,7 @@ conformance classes depend.</p>
 complete station history, discovery metadata, and metadata quality validation</p>
 </li>
 <li>
-<p><strong>User Interface</strong> (Recommended): Interactive visualization, data review, and quality control validation capabilities</p>
+<p><strong>User Interface</strong> (Required): Interactive visualization, data review, and quality control validation capabilities</p>
 </li>
 <li>
 <p><strong>Climate Products</strong> (Recommended): Production and publication of standard climate products and indices</p>
@@ -879,7 +885,9 @@ support for long-term data stewardship.</p>
 <div class="sect3">
 <h4 id="_justification_and_regulatory_basis"><a class="anchor" href="#_justification_and_regulatory_basis"></a>6.1.2. Justification and Regulatory Basis</h4>
 <div class="paragraph">
-<p>WMO-No. 1131 identifies Core Data Management as a Required component across all CDMS implementations.</p>
+<p>WMO-No. 1131 identifies Core Data Management as a Required component across all CDMS implementations.
+WMO-No. 1131 further requires support for observations from across all Earth system domains, necessitating
+that a CDMS handle data from both fixed-position stations and mobile platforms.</p>
 </div>
 <div class="paragraph">
 <p>The Manual on High-quality Global Data Management Framework for Climate (WMO-No. 1238) requires Members to
@@ -930,7 +938,7 @@ system domains and disciplines. The data model SHALL include:</p>
 <p>Observation timestamp, including time zone support</p>
 </li>
 <li>
-<p>Geographic location of the observation</p>
+<p>Geographic location of the observation (derived from station metadata for fixed stations; stored per-observation for mobile platforms)</p>
 </li>
 <li>
 <p>Provenance metadata</p>
@@ -982,10 +990,10 @@ definition.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>This specification focuses primarily on fixed-position stations. Observations from mobile platforms
-(ships, buoys, radiosondes, aircraft) may be ingested and archived, but specific requirements for
-real-time tracking or operational processing of mobile platforms are outside the scope of this
-specification.</p>
+<p>Support for observations from across the Earth system domains is a core requirement of this specification.
+This includes both fixed-position stations and mobile platforms (ships, buoys, radiosondes, aircraft).
+For fixed stations, geographic location is derived from station metadata. For mobile platforms, geographic
+location must be stored with each individual observation.</p>
 </div>
 </td>
 </tr>
@@ -1086,30 +1094,25 @@ specification.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Statement</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p>The system SHALL provide persistent storage for station and sensor metadata as specified in
 /req/metadata-management/wigos.</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The system SHALL support extensibility mechanisms to store metadata fields not covered by
+the WIGOS Metadata Standard, including national identifiers, legacy identifiers from predecessor
+networks, and other organisation-specific metadata attributes.</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>The WIGOS Metadata Standard provides the core schema for station and sensor metadata. Implementations
-SHOULD support extensibility mechanisms (such as additional key-value attributes) to accommodate
-national identifiers, legacy identifiers from predecessor networks, and other metadata fields not
-covered by the WIGOS standard.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
 </div>
 <div class="sect4">
 <h5 id="req_core_metadata_retrieval"><a class="anchor" href="#req_core_metadata_retrieval"></a>6.1.3.6. Station and Sensor Metadata Retrieval</h5>
@@ -1532,6 +1535,23 @@ observational data.</p>
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Thresholds may be either fixed values (e.g. absolute physical limits) or dynamically derived (e.g. based on
+climatological statistics such as percentiles). Implementations should ensure that simple fixed-threshold
+configurations remain straightforward to set up, with advanced options such as seasonally varying or
+statistically derived thresholds available but not required for basic operation.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect4">
 <h5 id="req_qc_execution"><a class="anchor" href="#req_qc_execution"></a>6.2.3.3. Quality Control Execution</h5>
@@ -1559,7 +1579,7 @@ observational data.</p>
 <p>Automatically upon data ingestion</p>
 </li>
 <li>
-<p>On demand by an authorized user</p>
+<p>On demand by an authorized user, including reprocessing of previously checked observations</p>
 </li>
 <li>
 <p>As a scheduled or batch process, including reprocessing of previously checked observations</p>
@@ -1670,13 +1690,12 @@ observational data.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Comparison with neighbouring stations</p>
+<p>Comparison with neighbouring observations using configurable selection criteria, including
+maximum distance, elevation difference, station type, covariability between stations,
+and predefined station lists</p>
 </li>
 <li>
 <p>Spatial regression tests</p>
-</li>
-<li>
-<p>Buddy checks using configurable distance and elevation thresholds</p>
 </li>
 </ul>
 </div></div></td>
@@ -2040,10 +2059,10 @@ following the standards specified in the Manual on Codes (WMO-No. 306)" (3.2.2.1
 <p><strong>CSV and delimited text files</strong>: With configurable field mapping, delimiter specification (comma, tab, semicolon, pipe), header row handling, and support for common date/time formats</p>
 </li>
 <li>
-<p><strong>BUFR (Binary Universal Form for the Representation of meteorological data)</strong>: WMO standard binary format as specified in WMO Manual on Codes (WMO-No. 306), Volume I.2</p>
+<p><strong>BUFR</strong>: WMO standard binary format (WMO-No. 306, Volume I.2), supporting ingestion of hourly observations, daily summaries (including DAYCLI report types), and monthly summaries</p>
 </li>
 <li>
-<p><strong>WMO text-based formats and code forms</strong>: Including FM-12 SYNOP and other code forms as specified in WMO Manual on Codes</p>
+<p><strong>WMO text-based formats and code forms</strong>: Including FM-12 SYNOP and FM-71 CLIMAT, and other code forms as specified in WMO Manual on Codes (WMO-No. 306, Volume I.1)</p>
 </li>
 </ul>
 </div></div></td>
@@ -2058,10 +2077,8 @@ following the standards specified in the Manual on Codes (WMO-No. 306)" (3.2.2.1
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Implementations should document which BUFR message types and WMO code forms are supported. At minimum,
-support for FM-12 SYNOP, CLIMAT, and DAYCLI message types is recommended for ingestion of
-observational and monthly summary data. The Manual on Codes (WMO-No. 306) defines the complete set of
-applicable message types.</p>
+<p>Implementations should document which BUFR report types and WMO code forms are supported.
+The Manual on Codes (WMO-No. 306) defines the complete set of applicable report types and code forms.</p>
 </div>
 </td>
 </tr>
@@ -2547,6 +2564,22 @@ limiting in accordance with /req/data-api/auth.</p>
 </tr>
 </table>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Implementations are encouraged to provide API documentation in OpenAPI (formerly Swagger) format,
+which enables interactive documentation and client code generation. OpenAPI specifications should be
+made available at a well-known endpoint (e.g. /api or /openapi.json).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect4">
 <h5 id="req_api_standards"><a class="anchor" href="#req_api_standards"></a>6.4.3.2. Standards Compliance</h5>
@@ -2896,7 +2929,7 @@ and change.</p>
 <div class="paragraph">
 <p>WMO-No. 1238 requires that "Entities record any homogenisation or reprocessing carried out on the data as part of the
 provenance metadata" (3.3.2.5). The Guidelines on Homogenisation (WMO-No. 1245) provide detailed methodologies.
-GCOS Monitoring Principle 1 requires assessing "impact of new systems or changes to existing systems," making
+GCOS Monitoring Principle 1 requires assessing "impact of new systems or changes to existing systems", making
 homogenisation essential for maintaining long-term climate records.</p>
 </div>
 </div>
@@ -2913,6 +2946,11 @@ homogenisation essential for maintaining long-term climate records.</p>
 <p>These requirements apply to all observable elements where sufficient station density and record length
 exist to support homogenisation. While temperature is the most commonly homogenised element, the
 requirements apply equally to precipitation, pressure, wind, and other elements where applicable.</p>
+</div>
+<div class="paragraph">
+<p>Homogenisation methods are most reliably applied to monthly data. Application to daily or sub-daily
+data is possible but introduces greater uncertainty; implementations should document the temporal
+resolution to which homogenisation has been applied.</p>
 </div>
 <div class="paragraph">
 <p>Implementations may satisfy these requirements either by integrating homogenisation algorithms
@@ -3131,7 +3169,7 @@ of this class are met.</p>
 <h4 id="_overview_6"><a class="anchor" href="#_overview_6"></a>6.6.1. Overview</h4>
 <div class="paragraph">
 <p>Facilitate the recovery of historical observations from non-digital sources, ensuring rescued data is
-integrated into the observational record with complete provenance and appropriate quality control. Data rescue
+integrated into the observational records with complete provenance and appropriate quality control. Data rescue
 extends the temporal coverage of observational records, essential for understanding long-term variability and change.</p>
 </div>
 </div>
@@ -3472,6 +3510,10 @@ for Climate and Forecast Metadata.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Statement</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p>The system SHALL support metadata fields as specified in WIGOS Metadata Standard (WMO-No. 1192), including:</p>
 </div>
@@ -3510,26 +3552,16 @@ for Climate and Forecast Metadata.</p>
 </ul>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The system SHALL support extensibility mechanisms to store metadata fields not covered by the
+WIGOS Metadata Standard, including national identifiers, legacy identifiers from predecessor
+networks, and other organisation-specific metadata attributes.</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>The WIGOS Metadata Standard provides the core schema for station and sensor metadata. In practice,
-implementations often require additional metadata fields not covered by the WIGOS standard, such as
-national station identifiers, legacy identifiers from predecessor networks, runway numbers, or other
-site-specific attributes. Implementations SHOULD support extensibility mechanisms (e.g., additional
-key-value attributes) to accommodate these requirements without compromising WIGOS compliance.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
 </div>
 <div class="sect4">
 <h5 id="req_metadata_history"><a class="anchor" href="#req_metadata_history"></a>6.7.3.2. Station History Documentation</h5>
@@ -3903,9 +3935,6 @@ drawing on quality control results from /req/quality-control</p>
 <li>
 <p>Report the distribution of quality control flag statuses across the dataset</p>
 </li>
-<li>
-<p>Support GCOS reporting requirements for data availability and quality</p>
-</li>
 </ul>
 </div></div></td>
 </tr>
@@ -3923,6 +3952,12 @@ drawing on quality control results from /req/quality-control</p>
 /req/quality-control. Quality flags on individual observations provide the source data for computing
 dataset-level quality metrics. These aggregated metrics support fitness-for-purpose assessment and
 inform users about the suitability of a dataset for specific applications.</p>
+</div>
+<div class="paragraph">
+<p>Dataset quality metrics may be derived automatically from per-observation quality control results,
+or entered manually by data managers to document known issues or provide additional context.
+Dataset quality reporting (Statement B) covers the generation and export of reports drawing on
+both sources.</p>
 </div>
 <div class="paragraph">
 <p>The structure and terminology used here (completeness, temporal quality, thematic accuracy,
@@ -4092,6 +4127,22 @@ or CF standard names</p>
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>A simplified second version of the WIGOS Metadata Representation (WMDR) is under development.
+Implementations should monitor progress and plan for compatibility with the updated version
+when published.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect4">
 <h5 id="req_metadata_quality"><a class="anchor" href="#req_metadata_quality"></a>6.7.3.9. Metadata Quality Validation</h5>
@@ -4231,7 +4282,7 @@ or CF standard names</p>
 <div class="sect3">
 <h4 id="_overview_8"><a class="anchor" href="#_overview_8"></a>6.8.1. Overview</h4>
 <div class="paragraph">
-<p>Provide interactive capabilities for scientists, data managers, and operators to visualize, explore, and
+<p>Provide interactive capabilities for scientists, data managers, and users to visualize, explore, and
 analyze observational data and quality control results. The user interface enables efficient human interaction
 with complex observational datasets and supports quality assurance workflows.</p>
 </div>
@@ -5931,8 +5982,8 @@ data validation, and metadata management workflows that depend on expert human j
 <div class="sect3">
 <h4 id="_justification_and_regulatory_basis_14"><a class="anchor" href="#_justification_and_regulatory_basis_14"></a>7.4.2. Justification and Regulatory Basis</h4>
 <div class="paragraph">
-<p>WMO-No. 1131 emphasizes that CDMSs must support diverse user roles including "climate scientists, data managers,
-system operators and data entry operators" (Figure 2 and Figure 3). The specification notes that while "most NMHSs
+<p>WMO-No. 1131 emphasizes that CDMSs must support diverse user roles including, <em>inter alia</em>, "climate scientists, data managers,
+system administrators, and data entry operators" (Figure 2 and Figure 3). The specification notes that while "most NMHSs
 would not manage infrastructure and software required to support" certain advanced components, systems must still be "
 flexible enough to accommodate national climate monitoring products and other national indices" (Section 4.4.2.3).</p>
 </div>
@@ -6578,11 +6629,11 @@ accountability structures necessary for long-term climate data stewardship.</p>
 <div class="sect3">
 <h4 id="_justification_and_regulatory_basis_17"><a class="anchor" href="#_justification_and_regulatory_basis_17"></a>7.7.2. Justification and Regulatory Basis</h4>
 <div class="paragraph">
-<p>WMO-No. 1131 dedicates Chapter 3 entirely to "CDMS Governance," stating that "one of the steps often overlooked when
+<p>WMO-No. 1131 dedicates Chapter 3 entirely to "CDMS Governance", stating that "one of the steps often overlooked when
 implementing a CDMS is to ensure that the NMHS has established a solid governance framework to protect the integrity of
-the climate record" involving "Policies" and "Governance processes." The specification defines data governance as
-Required (Section 3.2.1), including "controlled access to data and systems," "approval process for new data types,"
-"approval process to change data," and "IT change approvals.".</p>
+the climate record" involving "Policies" and "Governance processes". The specification defines data governance as
+Required (Section 3.2.1), including "controlled access to data and systems", "approval process for new data types",
+"approval process to change data", and "IT change approvals".</p>
 </div>
 <div class="paragraph">
 <p>WMO-No. 1238 requires "Members should ensure that Entities implement and maintain a governance mechanism to oversee the
@@ -6842,8 +6893,8 @@ technical enforcement of the responsibilities defined here.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version v0.2.0<br>
-Last updated 2026-03-06 18:02:11 UTC
+Version v0.3.0<br>
+Last updated 2026-03-30 14:14:34 UTC
 </div>
 </div>
 </body>
