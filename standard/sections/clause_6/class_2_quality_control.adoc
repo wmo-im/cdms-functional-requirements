@@ -75,6 +75,14 @@ The system SHALL support configuration of quality control parameters, including:
 
 |===
 
+[NOTE]
+====
+Thresholds may be either fixed values (e.g. absolute physical limits) or dynamically derived (e.g. based on
+climatological statistics such as percentiles). Implementations should ensure that simple fixed-threshold
+configurations remain straightforward to set up, with advanced options such as seasonally varying or
+statistically derived thresholds available but not required for basic operation.
+====
+
 [[req_qc_execution]]
 ===== Quality Control Execution
 
@@ -86,7 +94,7 @@ The system SHALL support configuration of quality control parameters, including:
 The system SHALL support triggering of quality control processing:
 
 * Automatically upon data ingestion
-* On demand by an authorized user
+* On demand by an authorized user, including reprocessing of previously checked observations
 * As a scheduled or batch process, including reprocessing of previously checked observations
 |===
 
@@ -128,9 +136,10 @@ The system SHALL support triggering of quality control processing:
 |Identifier|/req/quality-control/spatial-checks
 |Statement a|The system SHALL perform spatial consistency checks including:
 
-* Comparison with neighbouring stations
+* Comparison with neighbouring observations using configurable selection criteria, including
+  maximum distance, elevation difference, station type, covariability between stations,
+  and predefined station lists
 * Spatial regression tests
-* Buddy checks using configurable distance and elevation thresholds
 |===
 
 [[req_qc_internal_consistency]]

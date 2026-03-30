@@ -13,7 +13,7 @@ of a Climate Data Management System:
 - **Data Rescue** (Optional): Digitization workflow for historical paper records including imaging and data entry
 - **Metadata Management** (Required): Advanced station and element metadata management including WIGOS compliance,
   complete station history, discovery metadata, and metadata quality validation
-- **User Interface** (Recommended): Interactive visualization, data review, and quality control validation capabilities
+- **User Interface** (Required): Interactive visualization, data review, and quality control validation capabilities
 - **Climate Products** (Recommended): Production and publication of standard climate products and indices
 - **Processing Automation** (Recommended): Scheduled and automated execution of routine data processing workflows
 

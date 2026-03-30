@@ -7,7 +7,7 @@ title System Context Diagram - Climate Data Management System
 
 Person(climatologist, "Climate Scientist", "Reviews and validates climate observations, identifies inhomogeneities")
 Person(datamanager, "Data Manager", "Manages station metadata and data holdings")
-Person(operator, "System Operator", "Configures QC parameters and monitors system health")
+Person(operator, "System Administrator", "Configures QC parameters and monitors system health")
 
 System(cdms, "Climate Data Management System", \
 "Applies quality control, homogenization, and metadata management to climate observations. \
@@ -16,11 +16,11 @@ Performs statistical processing and trend analysis")
 System_Ext(wis2, "WIS 2.0", "Provides climate observations from global networks via message broker")
 System_Ext(dcps, "Data collection and processing system (DCPS)", \
            "Receives and processes upstream data sources, including real-time and non-real-time observations.")
-System(archive, "National and International Long-term Archive(s)", "Preservation storage for climate datasets")
-System(cds, "Climate Data Store", "Public data discovery and distribution portal")
+System_Ext(archive, "National and International Long-term Archive(s)", "Preservation storage for climate datasets")
+System_Ext(cds, "Climate Data Store", "Public data discovery and distribution portal")
 System_Ext(idms, "Identity Management", "User authentication and authorization")
 System_Ext(monitoring, "Operations Monitoring", "System health and performance monitoring")
-System(data_rescue, "Data rescue","Imaging and keying of historical records")
+System_Ext(data_rescue, "Data rescue","Imaging and keying of historical records")
 
 Rel(dcps, cdms, "Submits real-time and non-real-time data")
 Rel(cdms, archive, "Archives QC'd datasets")
@@ -31,6 +31,8 @@ Rel(operator, cdms, "Configures rules")
 Rel_R(cdms, idms, "Authenticates users")
 Rel_L(cdms, monitoring, "Sends metrics & logs")
 Rel_U(data_rescue, cdms, "Submits imaged and keyed data")
-BiRel(cdms, wis2, "Subscribes to observations; Publishes climate data for international exchange")
+
+Rel_U(wis2, cdms, "Delivers subscribed observations")
+Rel_U(cdms, wis2, "Publishes climate data for international exchange")
 
 @enduml

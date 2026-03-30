@@ -5,16 +5,20 @@
 
 ==== Purpose and Relationship to WMO-No. 1131
 
-This document serves as a companion specification to the _Climate Data Management System Specifications_
-(WMO-No. 1131, 2025 Edition), published by the World Meteorological Organization (WMO). WMO-No. 1131 provides a
-foundational framework for Climate Data Management Systems (CDMS), detailing essential components, governance
-principles, and operational guidelines using classifications of "Required," "Recommended," or "Optional."
+This document defines the minimal functional and non-functional requirements to support Members in establishing
+climate data management systems or assessing the compliance of existing systems with the _Climate Data Management
+System Specifications_ (WMO-No. 1131, 2025 Edition).
 
-This specification translates the framework described in WMO-No. 1131 into concrete functional and non-functional
-requirements. The functional and non-functional requirements form a subset of the full specification
-defined in WMO-No. 1131, focussing on those elements essential for the management of observational data from stations,
-including the management of the station, sensor and provenance metadata. The functional requirements are expressed as
-requirements classes following the OGC Modular Specification approach.
+WMO-No. 1131 provides a comprehensive framework for Climate Data Management Systems (CDMS), describing key
+components, governance principles, and operational practices using the classifications "Required", "Recommended",
+and "Optional". However, Members may require more concrete technical requirements to support implementation.
+
+This document translates the framework outlined in WMO-No. 1131 into a set of concrete functional and non-functional
+requirements. These requirements represent a subset of the full specifications in WMO-No. 1131 and serve as a
+practical and technical specification, focusing on capabilities essential for managing observational data from
+stations, including station, sensor, and provenance metadata.
+
+The functional requirements are expressed as requirements classes following the OGC Modular Specification approach.
 
 This specification aims to:
 
@@ -89,7 +93,7 @@ xref:c4_level_1[xrefstyle=short] illustrates the system context for a Climate Da
 the CDMS boundary, and its interactions with external systems. The diagram identifies key integration points including:
 
 - **Data sources**: The national Data Collection and Processing System (DCPS), and WIS 2.0 Global Services (via national WIS2 Node).
-- **Users**: Climate scientists, data managers, and system operators
+- **Users**: Climate scientists, data managers, and system administrators
 - **Downstream systems**: Long-term archives, climate data stores, and climate analysis platforms
 - **Support systems**: Identity management and operations monitoring
 
@@ -119,7 +123,7 @@ include::../../figures/c4_level_2.puml[]
 
 **Key Containers:**
 
-- **User Interface**: Provides interactive capabilities for climate scientists, data managers, and system operators to
+- **User Interface**: Provides interactive capabilities for climate scientists, data managers, and system administrators to
 review quality-controlled data, validate observations, manage station metadata, configure system parameters, and
 monitor system operations. This may be implemented as a web application, desktop application, or a combination of both.
 

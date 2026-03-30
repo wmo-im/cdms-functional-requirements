@@ -15,8 +15,8 @@ data validation, and metadata management workflows that depend on expert human j
 
 ==== Justification and Regulatory Basis
 
-WMO-No. 1131 emphasizes that CDMSs must support diverse user roles including "climate scientists, data managers,
-system operators and data entry operators" (Figure 2 and Figure 3). The specification notes that while "most NMHSs
+WMO-No. 1131 emphasizes that CDMSs must support diverse user roles including, _inter alia_, "climate scientists, data managers,
+system administrators, and data entry operators" (Figure 2 and Figure 3). The specification notes that while "most NMHSs
 would not manage infrastructure and software required to support" certain advanced components, systems must still be "
 flexible enough to accommodate national climate monitoring products and other national indices" (Section 4.4.2.3).
 

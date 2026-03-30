@@ -50,6 +50,13 @@ or publicly accessible). Publicly accessible APIs should apply appropriate authe
 limiting in accordance with /req/data-api/auth.
 ====
 
+[NOTE]
+====
+Implementations are encouraged to provide API documentation in OpenAPI (formerly Swagger) format,
+which enables interactive documentation and client code generation. OpenAPI specifications should be
+made available at a well-known endpoint (e.g. /api or /openapi.json).
+====
+
 [[req_api_standards]]
 ===== Standards Compliance
 

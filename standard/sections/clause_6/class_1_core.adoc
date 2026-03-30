@@ -14,6 +14,8 @@ support for long-term data stewardship.
 
 ==== Justification and Regulatory Basis
 WMO-No. 1131 identifies Core Data Management as a Required component across all CDMS implementations.
+WMO-No. 1131 further requires support for observations from across all Earth system domains, necessitating
+that a CDMS handle data from both fixed-position stations and mobile platforms.
 
 The Manual on High-quality Global Data Management Framework for Climate (WMO-No. 1238) requires Members to
 "ensure that Entities establish and document data management capabilities and practices for their climate data"
@@ -37,7 +39,7 @@ system domains and disciplines. The data model SHALL include:
 * Observation value/result and associated units
 * Quality flag status
 * Observation timestamp, including time zone support
-* Geographic location of the observation
+* Geographic location of the observation (derived from station metadata for fixed stations; stored per-observation for mobile platforms)
 * Provenance metadata
 |===
 
@@ -59,10 +61,10 @@ definition.
 
 [NOTE]
 ====
-This specification focuses primarily on fixed-position stations. Observations from mobile platforms
-(ships, buoys, radiosondes, aircraft) may be ingested and archived, but specific requirements for
-real-time tracking or operational processing of mobile platforms are outside the scope of this
-specification.
+Support for observations from across the Earth system domains is a core requirement of this specification.
+This includes both fixed-position stations and mobile platforms (ships, buoys, radiosondes, aircraft).
+For fixed stations, geographic location is derived from station metadata. For mobile platforms, geographic
+location must be stored with each individual observation.
 ====
 
 ===== Reference data
@@ -102,17 +104,13 @@ specification.
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/core/metadata-storage
-|Statement a|The system SHALL provide persistent storage for station and sensor metadata as specified in
+|Statement a|
+|A a|The system SHALL provide persistent storage for station and sensor metadata as specified in
 /req/metadata-management/wigos.
+|B a|The system SHALL support extensibility mechanisms to store metadata fields not covered by
+the WIGOS Metadata Standard, including national identifiers, legacy identifiers from predecessor
+networks, and other organisation-specific metadata attributes.
 |===
-
-[NOTE]
-====
-The WIGOS Metadata Standard provides the core schema for station and sensor metadata. Implementations
-SHOULD support extensibility mechanisms (such as additional key-value attributes) to accommodate
-national identifiers, legacy identifiers from predecessor networks, and other metadata fields not
-covered by the WIGOS standard.
-====
 
 [[req_core_metadata_retrieval]]
 ===== Station and Sensor Metadata Retrieval
