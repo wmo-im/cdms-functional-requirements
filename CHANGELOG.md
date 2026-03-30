@@ -48,7 +48,7 @@ Buddy checks removed. Replaced with a more general neighbouring observation chec
 
 Closes #55 - Explicit BUFR formats
 BUFR clarified as a single binary format supporting hourly observations, daily summaries (including DAYCLI report types), and monthly summaries. FM-12 SYNOP and FM-71 CLIMAT named explicitly as TAC alphanumeric formats (WMO-No. 306, Volume I.1). BUFR export
-confirmed as a SHALL requirement per WMO-No. 1131 §8.3.1.1. IWXXM excluded - falls under ICAO jurisdiction.
+confirmed as a SHALL requirement per WMO-No. 1131 §8.3.1.1. 
 
 Closes #56 - Explicit list of supported formats
 Covered by #55.
