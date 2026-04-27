@@ -43,7 +43,7 @@ and Processing Systems (DCPS), and subsequently to various downstream applicatio
 
 - WIS 2.0 nodes for international data exchange
 - Operational meteorological systems (Numerical Weather Prediction, data assimilation, forecasting systems)
-- Climate Data Management Systems for quality control, homogenization, and archival
+- Climate Data Management Systems for quality control and long-term climate data management
 - Regional Climate Centres for regional climate monitoring and services
 - Long-term preservation archives and public-facing data portals
 
