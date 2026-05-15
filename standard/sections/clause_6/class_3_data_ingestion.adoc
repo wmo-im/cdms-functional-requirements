@@ -177,24 +177,31 @@ documentation.
 
 |B a|Validation failures SHALL result in:
 
-* Rejection at file level as a minimum; record-level rejection SHALL be applied where the format
-  supports it; element-level rejection SHOULD be applied where the format supports it
+* Rejection at file level as a minimum; record-level rejection SHALL be applied where the format supports it
 * Generation of detailed error reports identifying specific validation failures
 * Logging of validation errors for system monitoring and diagnostics
 |===
 
+[cols="1,4"]
+|===
+2+^|**Recommendation {counter:rec-id}**
+|Identifier|/rec/data-ingestion/validation
+|A a|Element-level rejection SHOULD be applied where the format supports it, in preference to
+record-level rejection.
+|B a|Values that fail the plausibility check SHOULD be stored with a Wrong or invalid quality
+flag rather than silently discarded. Retaining such values provides evidence of systemic errors
+in observing or communication systems and supports later investigation.
+|===
+
 [NOTE]
 ====
-The value range plausibility check in Statement A is a lightweight gate applied at ingestion time
-to catch obviously erroneous values (e.g., temperature of 9999°C) before data enters storage. It
-is not a substitute for the full quality control checks defined in /req/quality-control, which are
-applied after ingestion using complete station metadata, climatological context, and inter-element
-relationships. Data that passes ingestion validation but fails full QC will be stored with
-appropriate quality flags rather than rejected at the ingestion boundary.
-
-Values that fail the plausibility check SHOULD be stored with a Wrong or invalid quality flag rather
-than silently discarded. Retaining such values provides evidence of systemic errors in observing or
-communication systems and supports later investigation.
+The value range plausibility check in Statement A of /req/data-ingestion/validation is a lightweight
+gate applied at ingestion time to catch obviously erroneous values (e.g., temperature of 9999°C)
+before data enters storage. It is not a substitute for the full quality control checks defined in
+/req/quality-control, which are applied after ingestion using complete station metadata,
+climatological context, and inter-element relationships. Data that passes ingestion validation but
+fails full QC will be stored with appropriate quality flags rather than rejected at the ingestion
+boundary.
 ====
 
 [[req_ingest_standardisation]]
