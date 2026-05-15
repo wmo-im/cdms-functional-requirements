@@ -93,10 +93,39 @@ Automated collection sources should be configurable without system restart. The 
 * Statistics on collection success/failure rates per source
 * Data volume metrics (records/observations collected per time period)
 * Latency metrics (time between observation and ingestion)
-* Alert generation when expected data does not arrive within defined time windows
 * Collection log export for auditing and troubleshooting
 
 |===
+
+[[req_ingest_data_completeness]]
+===== Data Completeness Monitoring
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-ingestion/completeness
+|Statement a|The system SHALL support monitoring of data completeness to ensure that all intended
+observations are received:
+
+* Definition and management of expected data: which stations and elements are expected to report,
+  at what frequency, and within what time window
+* Detection and reporting of missing or late observations against defined expectations
+* Timely alerting when expected observations fail to arrive within the defined window, to enable
+  corrective action before data becomes unrecoverable
+* Completeness statistics by station, element, and time period
+* Distinction between data that was not received and data that was received but failed validation
+
+|===
+
+[NOTE]
+====
+Data completeness monitoring is a distinct concern from collection monitoring
+(/req/data-ingestion/collection-monitoring), which tracks the technical status of ingestion
+pipelines (connection success, retry counts, latency). Data completeness monitoring tracks the
+observation record itself — whether all expected measurements are present and accounted for.
+NMHSs collecting from numerous stations and communication paths must be able to identify and
+respond to gaps quickly, before the window for corrective action closes.
+====
 
 [[req_ingest_acquisition]]
 ===== Manual Data Acquisition
