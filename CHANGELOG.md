@@ -60,6 +60,22 @@ Justification restructured with correct WMO-No. 1238 section citations. Height/d
 
 /req/climate-products/statistics removed and relocated to /req/climate-computation/statistics in the new Basic Climate Computation class. Dependency updated to include /req/climate-computation.
 
+### Figures
+
+C4 Level 1: CDMS description updated — "homogenization" removed; now reads "quality control, metadata management, and statistical processing."
+
+C4 Level 2: Data Processing Engine description updated to reference "basic climate computation"; relation label changed from "Triggers homogenization" to "Triggers statistical processing."
+
+C4 Level 3: "Homogenization Service" renamed to "Climate Computation Service" with broadened description covering derived meteorological variables, summary statistics, and homogenised series. Scheduler description updated accordingly.
+
+### Clause 2 (Conformance)
+
+"Homogenization (Recommended)" replaced with "Basic Climate Computation (Required)" in the conformance class list.
+
+### Spelling
+
+"homogenization" corrected to "homogenisation" (British spelling, consistent with WMO style) throughout: clause 1, clause 2, class 14 (usability), class 17 (data governance), and all C4 figures.
+
 ### Clause 7 - Class 13 (Security)
 
 Custom role definition downgraded to SHOULD recommendation. Personal data list expanded.
