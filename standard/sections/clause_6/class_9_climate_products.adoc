@@ -71,6 +71,33 @@ WMO guidelines (WMO-No. 1203), including:
 * Ability to compute and store normals for multiple reference periods simultaneously
 |===
 
+[[req_climate_products_wmo_products]]
+===== WMO Standard Observation Products
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/climate-products/wmo-products
+|Statement a|The system SHALL support generation of the following WMO standard observation products from quality-controlled observation series:
+
+* **World Weather Records (WWR)**: compilation of long-period station records in accordance with WMO-No. 1186, comprising monthly means, extremes, and totals for each observed element over the submission period
+* **CLIMAT messages** (FM 71): monthly climatological summaries for submission via WIS 2.0 or other designated exchange mechanisms
+* **DAYCLI messages**: daily temperature and precipitation values for submission via WIS 2.0, including required quality flag status and siting classification metadata
+
+|===
+
+[NOTE]
+====
+WWR, CLIMAT, and DAYCLI are all classified as Required in WMO-No. 1131 (Sections 4.4.1.5,
+4.4.1.3, and 4.4.1.4 respectively). This requirement covers the *generation* of these products
+from quality-controlled observation series held in the CDMS. Ingestion of incoming CLIMAT and
+DAYCLI messages from external sources is addressed in /req/data-ingestion/formats.
+
+For DAYCLI, WMO-No. 1131 (Section 4.4.1.4) specifies that the generated messages must include
+siting classification, measurement quality classification, temperature computation method, and
+quality control flags for each daily value.
+====
+
 [[rec_climate_products_indices]]
 ===== Climate Indices
 

@@ -228,7 +228,24 @@ The system SHALL normalize ingested data from all supported formats into a commo
 * Conversion algorithm and factors used
 * Target standard units as specified in WIGOS metadata standards
 
+|C a|The system SHALL support computation of basic derived meteorological variables where source
+data do not provide them directly, including at minimum:
+
+* Mean sea level pressure derived from station-level pressure, temperature, and station elevation
+* Dewpoint temperature derived from dry-bulb temperature and wet-bulb temperature or relative humidity
+* Relative humidity derived from dry-bulb and wet-bulb temperatures or dewpoint temperature
+
+Derived values SHALL be recorded with provenance indicating the source variables and the
+computation method applied.
+
 |===
+
+[NOTE]
+====
+Basic derived variables are classified as Required in WMO-No. 1131 (Section 4.5.1.2).
+Computation formulae are specified in the Guide to Meteorological Instruments and Methods
+of Observation (WMO-No. 8).
+====
 
 [NOTE]
 ====
