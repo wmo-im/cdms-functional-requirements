@@ -12,7 +12,7 @@
 ==== Overview
 
 The Observations Quality Control requirements class defines requirements to ensure observation data meets quality
-standards for long-term environmental records through systematic automated checks that detect erroneous, suspicious,
+standards for long-term environmental records through systematic quality checks that detect erroneous, suspicious,
 or inconsistent values while maintaining complete audit trails of all quality control decisions. Quality control is
 essential for establishing trustworthy observational records suitable for long-term trend analysis and monitoring.
 
@@ -22,13 +22,13 @@ WMO-No. 1131 classifies Observations Quality Control as Required (Section 5.3), 
 checked for accuracy, and that a record is maintained of what checks were performed,
 the outcome of the checks and when the checks took place."
 
-WMO-No. 1238 mandates that "Entities apply quality control to all climate datasets under their management and record
-the result of that quality control in the metadata" (3.3.2.1).
+WMO-No. 1238 requires Entities to apply quality control to all climate datasets under their management and record
+the results in the associated metadata (Section 3.3.2).
 
 [NOTE]
 ====
 The  __Guidelines on Surface Station Data Quality Control and Quality Assurance for Climate Applications__
-(WMO-No. 1269) provide specific methodologies referenced in both documents.
+(WMO-No. 1269) provide specific methodologies referenced in both of the above documents.
 ====
 
 ==== Requirements
@@ -48,6 +48,7 @@ The system SHALL maintain quality flags and:
 * Preserve quality control history and audit trail
 * Allow manual override with justification
 * Record which specific quality control check(s) triggered each flag and the reason for failure
+* Retain flagged records; flagged observations SHALL NOT be deleted
 
 |===
 
@@ -91,12 +92,19 @@ statistically derived thresholds available but not required for basic operation.
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/quality-control/execution
 |Statement a|
-The system SHALL support triggering of quality control processing:
+The system SHALL support quality control processing initiated in multiple ways:
 
 * Automatically upon data ingestion
 * On demand by an authorized user, including reprocessing of previously checked observations
 * As a scheduled or batch process, including reprocessing of previously checked observations
 |===
+
+[NOTE]
+====
+A series of standard checks is defined in the following sections. Not all checks are applicable to all
+variables or observation frequencies; for instance, rate of change and spike checks are not relevant to
+the quality control of daily accumulated rainfall.
+====
 
 [[req_qc_range_checks]]
 ===== Range Checks
@@ -107,7 +115,7 @@ The system SHALL support triggering of quality control processing:
 |Identifier|/req/quality-control/range-checks
 |Statement a|The system SHALL perform range validation checks, including:
 
-* Gross error limits (physically impossible values)
+* Gross error limits (physically impossible values); WMO defines element-specific gross error limits which should be used as the basis for these checks where available
 * Climatological based range checks
 * Sensor-based range checks (measurements within observable range for sensor)
 * Configurable thresholds per element and station
@@ -142,6 +150,13 @@ The system SHALL support triggering of quality control processing:
 * Spatial regression tests
 |===
 
+[NOTE]
+====
+Where no neighbouring stations exist within a practicable distance — as is the case for many island and
+remote stations — spatial consistency checks cannot be applied. The maximum distance threshold used for
+neighbour selection should be configurable to reflect regional station density.
+====
+
 [[req_qc_internal_consistency]]
 ===== Internal Consistency Checks
 
@@ -164,7 +179,7 @@ guidance on element-specific checks.
 ====
 Some internal consistency checks may also be applied within Data Collection and Processing Systems
 (DCPS) during real-time processing. The CDMS applies these checks in the context of quality assurance
-for long-term observational records, where access to full station metadata and the complete observation
-history allows for more thorough validation than is typically possible in real-time operational systems.
+for long-term observational records, where access to the observation history allows for more thorough
+validation than is typically possible in real-time operational systems.
 ====
 

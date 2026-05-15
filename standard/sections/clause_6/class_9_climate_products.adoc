@@ -80,8 +80,7 @@ WMO guidelines (WMO-No. 1203), including:
 |Identifier|/rec/climate-products/indices
 |Statement a|The system SHOULD support computation of standard climate indices, including:
 
-* Temperature and precipitation extremes indices as defined by the Expert Team on Climate Change
-  Detection and Indices (ETCCDI)
+* Temperature and precipitation extremes indices for climate change monitoring
 * Standardised Precipitation Index (SPI) and related drought indices
 * User-configurable index definitions to accommodate national or regional requirements
 |===

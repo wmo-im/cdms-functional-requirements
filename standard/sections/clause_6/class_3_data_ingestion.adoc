@@ -16,6 +16,14 @@ fields, radar composites). Data ingestion serves as the entry point for observat
 record, requiring careful handling to preserve data integrity through validation and normalization while maintaining
 complete provenance of source data characteristics.
 
+[NOTE]
+====
+This requirements class covers ingestion via automated electronic data streams and manual file upload.
+Data entry via keyboard transcription of historical paper records is addressed in /req/data-rescue.
+A CDMS may serve both operational climate product generation and the long-term climate archive;
+the ingestion requirements in this class apply in both contexts.
+====
+
 ==== Justification and Regulatory Basis
 
 WMO-No. 1131 identifies Data Ingest as a Required capability (Section 5.1.1), stating systems must handle
@@ -38,13 +46,13 @@ following the standards specified in the Manual on Codes (WMO-No. 306)" (3.2.2.1
 |Statement a|
 |A a|The system SHALL support the following data collection triggers:
 
-* **Scheduled polling**: Configurable polling of external data sources at defined intervals
+* **Scheduled polling**: Configurable polling of external data sources at defined intervals (e.g., automated weather station (AWS) networks)
 * **Real-time subscription**: Subscription to message brokers (e.g., MQTT) for event-driven data collection
 * **File system monitoring**: Automatic detection and ingestion of new files in monitored directories
 
 |B a|The system SHALL support the following data transfer protocols:
 
-* FTP and SFTP
+* FTP and SFTP (plain FTP should only be used within secure internal networks; SFTP or FTPS is required for internet-facing transfers)
 * HTTP/HTTPS
 * MQTT (for WIS 2.0 message broker integration)
 * RESTful API calls to external observation systems with authentication management
@@ -61,7 +69,7 @@ following the standards specified in the Manual on Codes (WMO-No. 306)" (3.2.2.1
 
 * Retry logic with configurable retry count and backoff intervals
 * Detection of duplicate data from multiple collection attempts
-* Graceful handling of temporarily unavailable sources
+* Graceful handling of temporarily unavailable sources (e.g., retry with configurable backoff, log the failure, and resume automatically when the source becomes available)
 * Alert generation on persistent collection failures
 * Automatic recovery and resumption after system restart
 
@@ -99,7 +107,7 @@ Automated collection sources should be configurable without system restart. The 
 |Identifier|/req/data-ingestion/manual-acquisition
 |Statement a|The system SHALL support manual data submission including:
 
-* Web-based file upload interface with drag-and-drop support
+* Web-based file upload interface, with drag-and-drop support recommended
 * Batch upload of multiple files
 * Upload of compressed archives (ZIP, TAR.GZ)
 * Manual submission via API with authentication
@@ -119,7 +127,7 @@ Automated collection sources should be configurable without system restart. The 
 |Statement a|The system SHALL support the ingestion of observational data in the following formats:
 
 * **CSV and delimited text files**: With configurable field mapping, delimiter specification (comma, tab, semicolon, pipe), header row handling, and support for common date/time formats
-* **BUFR**: WMO standard binary format (WMO-No. 306, Volume I.2), supporting ingestion of hourly observations, daily summaries (including DAYCLI report types), and monthly summaries
+* **BUFR**: WMO standard binary format (WMO-No. 306, Volume I.2), supporting ingestion of hourly observations, daily summaries, and monthly summaries (including CLIMAT and DAYCLI report types)
 * **WMO text-based formats and code forms**: Including FM-12 SYNOP and FM-71 CLIMAT, and other code forms as specified in WMO Manual on Codes (WMO-No. 306, Volume I.1)
 
 |===
@@ -169,9 +177,8 @@ documentation.
 
 |B a|Validation failures SHALL result in:
 
-* Rejection at the finest possible granularity: individual elements where the format supports it,
-  individual records where element-level rejection is not possible, or the entire file only where
-  record-level rejection is not feasible
+* Rejection at file level as a minimum; record-level rejection SHALL be applied where the format
+  supports it; element-level rejection SHOULD be applied where the format supports it
 * Generation of detailed error reports identifying specific validation failures
 * Logging of validation errors for system monitoring and diagnostics
 |===
@@ -184,15 +191,19 @@ is not a substitute for the full quality control checks defined in /req/quality-
 applied after ingestion using complete station metadata, climatological context, and inter-element
 relationships. Data that passes ingestion validation but fails full QC will be stored with
 appropriate quality flags rather than rejected at the ingestion boundary.
+
+Values that fail the plausibility check SHOULD be stored with a Wrong or invalid quality flag rather
+than silently discarded. Retaining such values provides evidence of systemic errors in observing or
+communication systems and supports later investigation.
 ====
 
-[[req_ingest_normalisation]]
-===== Data Normalisation
+[[req_ingest_standardisation]]
+===== Data Standardisation
 
 [cols="1,4"]
 |===
 2+^|**Requirement {counter:req-id}**
-|Identifier|/req/data-ingestion/normalization
+|Identifier|/req/data-ingestion/standardisation
 |Statement a|
 |A a|
 The system SHALL normalize ingested data from all supported formats into a common internal representation that includes:
@@ -214,7 +225,7 @@ The system SHALL normalize ingested data from all supported formats into a commo
 
 [NOTE]
 ====
-The normalization approach described here — converting all ingested data to a common internal
+The standardisation approach described here — converting all ingested data to a common internal
 representation — is one valid architectural pattern. Implementations that store data in source formats
 with format-specific adapters for API access are also conformant, provided that equivalent provenance
 and retrieval capabilities are met.
@@ -244,6 +255,7 @@ The system SHALL detect and handle duplicate observations based on:
 
 * Flag duplicate records for review
 * Apply configurable duplicate resolution strategies (keep first, keep last, manual review)
+* Document which duplicate resolution strategy is configured and applied
 * Log duplicate detection events
 * Preserve information about all duplicate instances in provenance metadata
 

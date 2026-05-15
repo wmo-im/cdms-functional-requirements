@@ -5,7 +5,7 @@ LAYOUT_WITH_LEGEND()
 
 title System Context Diagram - Climate Data Management System
 
-Person(climatologist, "Climate Scientist", "Reviews and validates climate observations, identifies inhomogeneities")
+Person(climatologist, "Climate Scientist", "Reviews and validates climate observations, identifies inhomogeneities, generates derived climate products")
 Person(datamanager, "Data Manager", "Manages station metadata and data holdings")
 Person(operator, "System Administrator", "Configures QC parameters and monitors system health")
 

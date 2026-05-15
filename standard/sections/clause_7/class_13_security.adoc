@@ -65,8 +65,14 @@ a standards-based federated identity layer suitable for both web and API access.
 * Enforces data access policies for embargoed or sensitive datasets
 * Applies the principle of least privilege: users are granted the minimum permissions
   necessary for their role
-* Allows system administrators to define and manage custom roles and their associated
-  permissions
+|===
+
+[cols="1,4"]
+|===
+2+^|**Recommendation {counter:rec-id}**
+|Identifier|/rec/security/authorization
+|Statement a|The system SHOULD allow system administrators to define and manage custom roles and
+their associated permissions, in addition to the pre-defined roles required above.
 |===
 
 [NOTE]
@@ -147,8 +153,8 @@ networks may be subject to bilateral sharing agreements or national security con
 The applicable data protection regulations will vary by jurisdiction. Implementers
 should assess which regulations apply to their deployment (e.g., national privacy laws,
 regional frameworks) and configure the system accordingly. The primary personal data
-held by a CDMS is typically contact information for station operators and data
-submitters rather than observation data itself.
+held by a CDMS is typically contact information for station operators, data submitters, data monitors,
+quality control operators, and data extraction users, rather than observation data itself.
 ====
 
 ===== Provenance Security

@@ -37,11 +37,19 @@ The system SHALL provide a RESTful API that:
 
 * Uses HTTP/HTTPS protocols
 * Implements standard HTTP methods (GET, POST, PUT, DELETE) where appropriate
-* Returns data in standard formats (JSON, XML, CSV, NetCDF)
+* Returns data in standard formats (JSON, CSV, NetCDF)
 * Provides comprehensive API documentation
 * Supports content negotiation based on Accept headers
 
 |===
+
+[NOTE]
+====
+The HTTP PATCH method is not listed as a requirement. Observational records in a CDMS are treated as
+immutable once ingested; corrections are applied by creating new versioned records with audit trails
+rather than partially updating existing ones. Implementations that require partial resource updates
+for non-observational resources (e.g., metadata records) may support PATCH at their discretion.
+====
 
 [NOTE]
 ====
@@ -69,6 +77,9 @@ made available at a well-known endpoint (e.g. /api or /openapi.json).
 * OGC API - Environmental Data Retrieval (EDR)
 * OGC API - Features
 * OGC SensorThings API
+
+|B a|The system SHOULD support XML as a response format, following a defined schema or profile, where
+required for integration with legacy systems or national and regional networks.
 |===
 
 [NOTE]
@@ -169,6 +180,14 @@ The system SHALL implement API versioning to:
 * Temporal reference system (UTC or clearly specified)
 * Spatial reference system (coordinate system, datum)
 |===
+
+[NOTE]
+====
+The documentation required in Statement B covers implementation-specific choices (e.g., which NetCDF
+profile or JSON schema is used, how quality flags are encoded) that are not fully determined by the
+format standard itself. Machine-readable schemas and format definitions should be made available at a
+well-known endpoint referenced in the API documentation.
+====
 
 [NOTE]
 ====

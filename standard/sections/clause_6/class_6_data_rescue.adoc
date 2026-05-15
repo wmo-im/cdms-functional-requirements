@@ -40,7 +40,7 @@ identifying and preserving all data, records and climate archives that are at ri
 The system SHOULD support document imaging workflows including:
 
 * Storage of scanned images with persistent identifiers
-* Association of images with source document metadata (archive, collection, date range)
+* Association of images with source document metadata (archive, collection, box number, date range)
 * Support for multiple image formats (JPEG, TIFF, PDF)
 * Image quality metadata (resolution, color depth, scan date)
 * Linkage between images and digitized observations
@@ -82,7 +82,7 @@ The system SHOULD provide a data entry interface for manual keying that:
 |Identifier|/req/data-rescue/quality-control
 |Statement a|The system SHALL apply quality control to rescued data including:
 
-* Comparison between double-key entries to identify transcription errors
+* Where double-key entry is used, comparison between entries to identify transcription errors
 * Range and consistency checks appropriate to historical observation practices
 * Verification against original images when discrepancies are detected
 * Flagging of uncertain or illegible values
@@ -92,9 +92,10 @@ The system SHOULD provide a data entry interface for manual keying that:
 
 [NOTE]
 ====
-Once digitized observations have passed data rescue quality assurance, they SHALL be submitted for
-ingestion through the same processing pipeline as contemporary observations, including the full suite
-of quality control checks defined in /req/quality-control.
+Digitized observations shall be processed through the same quality control pipeline as contemporary
+observations (/req/quality-control). The sequencing of digitisation, provisional storage, and quality
+assurance is an implementation decision; what is required is that rescued data does not enter the
+operational observational record without passing through the full QC pipeline.
 ====
 
 [[req_data_rescue_provenance]]
@@ -110,7 +111,7 @@ The system SHALL record data rescue provenance including:
 * Source document identification and archive location
 * Image identifier and scan metadata
 * Data entry operator(s) and keying date(s)
-* Keying method (single-key, double-key, automated OCR)
+* Keying method used (e.g., single-key, double-key); automated OCR is outside the scope of this specification (see Overview NOTE)
 * Quality assurance verification status
 * Known limitations or uncertainties in rescued data
 |===

@@ -5,7 +5,7 @@
 
 ==== Purpose and Relationship to WMO-No. 1131
 
-This document defines the minimal functional and non-functional requirements to support Members in establishing
+This document defines the minimum functional and non-functional requirements to support Members in establishing
 climate data management systems or assessing the compliance of existing systems with the _Climate Data Management
 System Specifications_ (WMO-No. 1131, 2025 Edition).
 
@@ -22,8 +22,7 @@ The functional requirements are expressed as requirements classes following the 
 
 This specification aims to:
 
-* **Assist Developers and Integrators**: Provide practical, testable requirements and detailed technical considerations
-for the design, development, and integration of robust and compliant CDMS components and systems.
+* **Assist Developers and Integrators**: Provide practical, testable requirements for the design, development, and integration of robust and compliant CDMS components and systems.
 * **Empower Users and Assessors**: Establish a comprehensive set of conformance criteria and common understanding to
 objectively assess the capabilities and compliance of existing, or proposed, CDMS implementations with the essential
 functionalities described in WMO-No. 1131.

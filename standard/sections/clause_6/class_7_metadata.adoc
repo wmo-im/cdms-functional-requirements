@@ -15,6 +15,14 @@ of observable elements, dataset-level discovery and lineage metadata, dataset qu
 constraints, and acquisition provenance. Comprehensive metadata is essential for establishing the context
 and trustworthiness of observational records.
 
+[NOTE]
+====
+Many of the concepts used in this requirements class — including dataset lineage, data quality,
+access constraints, and feature cataloguing — are in common use in geographic information management.
+Readers familiar with the ISO 19115 family of standards will recognise these concepts. ISO standards
+are not freely available and are not requirements of this specification.
+====
+
 ==== Justification and Regulatory Basis
 
 WMO-No. 1131 classifies Climate Metadata management as Required (Section 4.3 and 5.5), encompassing
@@ -25,9 +33,11 @@ WMO-No. 1238 requires Entities to create and maintain three types of metadata: d
 metadata, defined as "information documenting the origin, processing history, and all modifications
 to a dataset throughout its lifecycle."
 
-For findability and discovery (3.2.1.1), Entities SHALL assign globally unique and persistent
-identifiers to data and metadata (a), describe data with WIS-conformant metadata (b), and ensure
-data and metadata are registered in the WMO Information System Global Discovery Catalogue (c). For
+For findability and discovery (Section 3.2.1.1), Entities SHALL:
+(a) assign globally unique and persistent identifiers to data and metadata;
+(b) describe data with WIS-conformant metadata; and
+(c) ensure data and metadata are registered in the WMO Information System Global Discovery Catalogue.
+For
 reusability (3.2.3), Entities SHALL include a usage licence with recommended data published through
 WIS (3.2.3.2), and any licence for core data SHALL be compatible with the WMO Unified Data Policy
 (3.2.3.3).
@@ -48,11 +58,7 @@ indicators to all records (3.3.2.2), SHOULD update metadata with assessed qualit
 the quality control process (3.3.2.3), and SHALL record any homogenisation or reprocessing in
 provenance metadata with links to processing documentation (3.3.2.5).
 
-The ISO 19115 family of standards (ISO 19115-1, ISO 19115-2, ISO 19157, ISO 19110) provides widely
-recognised concepts for geographic dataset metadata, including lineage, data quality, constraints,
-maintenance, and feature cataloguing. These concepts inform the requirements in this class; however,
-as ISO standards are not freely available, they are referenced informatively rather than as normative
-dependencies. Freely available standards are used as normative references throughout, including the
+All normative requirements in this class reference freely available standards, including the
 WMO WIGOS Metadata Standard (WMO-No. 1192), WCMP2, W3C PROV-O (provenance), and the CF Conventions
 for Climate and Forecast Metadata.
 
@@ -149,9 +155,12 @@ concept is also described in the data model NOTE in /req/core/data-model; the fe
 requirement here provides the normative basis for maintaining that element dictionary as a
 managed, queryable catalogue separate from the individual observation records.
 
-The concept of a formal element catalogue is informed by ISO 19110 (Feature Cataloguing) and the
-Observable Property concept in OGC Observations and Measurements. Those standards are referenced
-informatively; the normative vocabulary references are WMO BUFR code tables
+For sensors where height or depth varies with each observation — such as upper air soundings, soil
+temperature profiles, and measurements from mobile platforms — height or depth shall be recorded
+per observation rather than as a fixed element catalogue property.
+
+The normative vocabulary references are
+WMO BUFR code tables
 (https://library.wmo.int/records/item/35713-manual-on-codes-volume-i-1) and the CF standard name
 table (https://cfconventions.org/standard-names.html), both of which are freely available.
 ====
@@ -166,7 +175,7 @@ table (https://cfconventions.org/standard-names.html), both of which are freely 
 |A a|The system SHALL maintain dataset-level discovery metadata records compliant with the WMO Core
 Metadata Profile version 2 (WCMP2). Each record SHALL include all mandatory WCMP2 properties:
 
-* A unique record identifier following the URN pattern `urn:wmo:md:{centre-id}:{local-identifier}`
+* A unique record identifier following the URN pattern `urn:wmo:md:{centre-id}:{local-identifier}` (e.g., `urn:wmo:md:br-inmet:daycli`)
 * Resource title and free-text description
 * Spatial extent (bounding box in WGS84) and temporal extent
 * Earth system discipline classification using the WIS2 Topic Hierarchy vocabulary
@@ -184,11 +193,12 @@ including:
 ** Ingestion and format normalisation
 ** Quality control procedures and the version or configuration applied
 ** Homogenisation adjustments, where applicable
+** Disaggregation or infilling, where applicable
 ** Statistical aggregation or derived product computation, where applicable
 * For each processing stage: date, description, responsible party, and software or method reference
 
-|C a|The system SHALL support submission and update of WCMP2 records to the WIS2 Global Discovery
-Catalogue (GDC), either directly or via a configured WIS2 Node.
+|C a|The system SHALL produce WCMP2-compliant discovery metadata records and SHALL support their
+publication via a configured WIS2 Node or equivalent discovery metadata pipeline.
 |===
 
 [NOTE]
@@ -201,8 +211,11 @@ documenting the detailed processing provenance of datasets for scientific interp
 fitness-for-purpose assessment. The PROV Data Model defines the core concepts of Entity (the dataset
 or observation series), Activity (a processing step), and Agent (the responsible party or software).
 
-Discovery metadata records are dataset-level descriptions and are distinct from the station and sensor
-metadata described in /req/metadata-management/wigos.
+Discovery metadata records (WCMP2) are dataset-level descriptions that make data findable in WIS2 —
+they describe _what_ data exists and _where_ to access it. They are entirely distinct from station
+and sensor metadata (/req/metadata-management/wigos), which describe the observing platform and
+instruments that produced the data. Confusing these two metadata types is a common source of
+implementation errors.
 
 Two levels of provenance/lineage are maintained in a CDMS: (1) observation-level provenance
 (/req/core/provenance-storage, /req/core/provenance-immutability) records the complete immutable
@@ -217,9 +230,6 @@ Export formats are addressed in /req/metadata-management/export.
 For datasets classified as `recommended` under the WMO data policy, at least one access link with
 associated licence information is required by WCMP2.
 
-The concepts of lineage statement, process step, and source data used in Statement B above are
-informed by the ISO 19115 family (ISO 19115-1 LI_Lineage, ISO 19115-2 LE_ProcessStep); however,
-those standards are not freely available and are not normative dependencies of this specification.
 ====
 
 [[req_metadata_data_quality]]
@@ -257,9 +267,6 @@ or entered manually by data managers to document known issues or provide additio
 Dataset quality reporting (Statement B) covers the generation and export of reports drawing on
 both sources.
 
-The structure and terminology used here (completeness, temporal quality, thematic accuracy,
-conformance result) are informed by ISO 19157 (Data Quality), which is referenced informatively.
-ISO 19157 is not freely available and is not a normative dependency of this specification.
 ====
 
 [[rec_metadata_maintenance]]
@@ -299,14 +306,15 @@ specified in WCMP2, including:
 
 [NOTE]
 ====
+The constraints in this requirement apply at dataset or network level, not to individual observations.
+
 Constraint metadata must be enforced through the access control mechanisms defined in
 /req/security/authorization. Embargo periods and redistribution restrictions recorded here
 should be applied consistently across all data access interfaces, including the API
 (/req/data-api) and any export functions.
 
-The legal and security constraint concepts used here are informed by ISO 19115-1
-(MD_LegalConstraints, MD_SecurityConstraints), referenced informatively. The normative basis
-is WMO-No. 1238 data policy requirements and the WCMP2 `wmo:dataPolicy` property.
+The normative basis for these constraints is WMO-No. 1238 data policy requirements and the WCMP2
+`wmo:dataPolicy` property.
 ====
 
 [[req_metadata_export]]
@@ -369,7 +377,14 @@ when published.
 
 * Generating unique persistent identifiers (DOIs or equivalents) for datasets
 * Providing recommended citation text for datasets
-* Recording data usage and access patterns for impact assessment
 * Supporting dataset versioning with clear version identifiers
 * Maintaining links between derived products and source datasets
+|===
+
+[cols="1,4"]
+|===
+2+^|Recommendation {counter:rec-id}
+|Identifier|/rec/metadata-management/citation
+|Statement a|The system SHOULD record data usage and access patterns to support impact assessment
+and reporting on dataset uptake.
 |===

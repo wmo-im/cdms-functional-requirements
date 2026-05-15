@@ -65,6 +65,10 @@ Support for observations from across the Earth system domains is a core requirem
 This includes both fixed-position stations and mobile platforms (ships, buoys, radiosondes, aircraft).
 For fixed stations, geographic location is derived from station metadata. For mobile platforms, geographic
 location must be stored with each individual observation.
+
+"Earth system domains" encompasses the atmospheric, terrestrial, hydrological, cryospheric, and oceanic
+environments from which in-situ point observations relevant to climate are collected. This specification
+is not limited to atmospheric observations.
 ====
 
 ===== Reference data
