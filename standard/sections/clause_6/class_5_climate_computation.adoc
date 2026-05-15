@@ -1,0 +1,138 @@
+=== Requirements Class: Basic Climate Computation
+
+[cols="1,4"]
+|===
+|Requirements class|/req/climate-computation
+|Target type|Software system
+|Dependency|/req/core, /req/quality-control
+|===
+
+==== Overview
+
+Support the computation of derived meteorological variables, statistical aggregates, and homogenised
+series from quality-controlled observational data. These computed values form the foundation for
+climate products and long-term climate analysis. This requirements class corresponds to the
+"Derived observation data" category in WMO-No. 1131 (Section 4.5.1).
+
+==== Justification and Regulatory Basis
+
+WMO-No. 1131 Section 4.5.1 recognises derived observation data as a core category of CDMS output,
+covering basic derived variables (Section 4.5.1.2, Required), statistical aggregations
+(Section 5.3, Required), and homogenised data (Section 4.5.1.3, Recommended). The computation
+of standard aggregates and derived parameters is identified as a fundamental CDMS function,
+providing the consistent, quality-assured inputs on which climate products and long-term trend
+analysis depend.
+
+WMO-No. 1238 requires that "Entities record any homogenisation or reprocessing carried out on
+the data as part of the provenance metadata" (3.3.2.5). Computation formulae for basic derived
+meteorological variables are specified in the Guide to Meteorological Instruments and Methods
+of Observation (WMO-No. 8).
+
+==== Requirements
+
+[[req_computation_derived_variables]]
+===== Derived Meteorological Variables
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/climate-computation/derived-variables
+|Statement a|
+|A a|The system SHALL compute basic derived meteorological variables from quality-controlled
+observations where source data do not provide them directly, including at minimum:
+
+* Mean sea level pressure derived from station-level pressure, temperature, and station elevation
+* Dewpoint temperature derived from dry-bulb temperature and wet-bulb temperature or relative humidity
+* Relative humidity derived from dry-bulb and wet-bulb temperatures or dewpoint temperature
+
+|B a|Derived values SHALL be stored with provenance metadata recording the source variables used
+and the computation method applied.
+|===
+
+[NOTE]
+====
+Basic derived variables are classified as Required in WMO-No. 1131 (Section 4.5.1.2).
+Computation formulae are specified in the Guide to Meteorological Instruments and Methods
+of Observation (WMO-No. 8).
+====
+
+[[req_computation_statistics]]
+===== Summary Statistics
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/climate-computation/statistics
+|A a|The system SHALL support computation and storage of standard summary statistics from
+quality-controlled observations, including:
+
+* Daily summary values: minimum, maximum, mean, and accumulated totals for each observed element
+* Monthly and annual aggregations of daily summary values
+* Configurable aggregation periods and functions
+
+|B a|All computed statistics SHALL be stored as derived observations that:
+
+* Reference the source observations used in their computation
+* Record the computation method, the quality flag thresholds applied, and the proportion of valid source data used
+* Are clearly distinguished from raw observations in all data access interfaces
+|===
+
+[NOTE]
+====
+Rigorous statistical aggregation requires careful handling of data gaps, quality flags, and defined
+computation periods (which may not align with calendar day boundaries). Statistics computed from series
+with significant data gaps should be flagged accordingly. Implementations should apply documented
+minimum data completeness thresholds before producing summary values.
+====
+
+[[rec_computation_homogenisation_detection]]
+===== Homogenisation: Break Point Detection
+
+[cols="1,4"]
+|===
+2+^|**Recommendation {counter:rec-id}**
+|Identifier|/rec/climate-computation/homogenisation-detection
+|Statement a|The system SHOULD implement statistical methods for detecting inhomogeneities in
+long-term observation series, supporting:
+
+* Relative homogenisation using reference series from neighbouring stations
+* Absolute homogenisation methods where appropriate
+* Detection of multiple break points in a single series
+* Configurable significance levels for break point detection
+
+|===
+
+[[rec_computation_homogenisation_adjustment]]
+===== Homogenisation: Adjustment Calculation
+
+[cols="1,4"]
+|===
+2+^|**Recommendation {counter:rec-id}**
+|Identifier|/rec/climate-computation/homogenisation-adjustment
+|Statement a|The system SHOULD calculate adjustments for detected inhomogeneities:
+
+* Compute adjustment factors based on the magnitude of detected breaks
+* Apply adjustments that preserve long-term means and variability characteristics
+* Support different adjustment methods (additive, multiplicative, or hybrid)
+* Validate adjusted series for statistical consistency
+
+|===
+
+[NOTE]
+====
+These homogenisation recommendations apply to all observable elements where sufficient station
+density and record length exist to support homogenisation. While temperature is the most commonly
+homogenised element, the recommendations apply equally to precipitation, pressure, wind, and other
+elements where applicable.
+
+Homogenisation methods are most reliably applied to monthly data. Application to daily or sub-daily
+data is possible but introduces greater uncertainty; implementations should document the temporal
+resolution to which homogenisation has been applied.
+
+Implementations may satisfy these requirements either by integrating homogenisation algorithms
+directly within the CDMS or by providing well-defined interfaces for data exchange with specialist
+third-party homogenisation tools, provided that the provenance documentation requirements of
+/req/core/provenance-storage are met.
+
+Data homogenisation is classified as Recommended in WMO-No. 1131 (Section 4.5.1.3).
+====

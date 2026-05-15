@@ -186,12 +186,7 @@ The system SHALL implement API versioning to:
 The documentation required in Statement B covers implementation-specific choices (e.g., which NetCDF
 profile or JSON schema is used, how quality flags are encoded) that are not fully determined by the
 format standard itself. Machine-readable schemas and format definitions should be made available at a
-well-known endpoint referenced in the API documentation.
-====
-
-[NOTE]
-====
-For high-frequency or real-time data feeds, including full format documentation with every export
-response may be impractical. In such cases, it is sufficient to make the format definition and schema
-documentation available via a persistent, well-known endpoint referenced in the API documentation.
+well-known endpoint referenced in the API documentation. For high-frequency or real-time data feeds,
+it is sufficient to make the format documentation available at this endpoint rather than including it
+inline with every export response.
 ====

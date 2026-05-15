@@ -167,7 +167,7 @@ The system SHALL store provenance metadata for all observation data documenting 
 * Quality control processing history (quality control procedures applied, flags assigned, timestamps)
 * Manual interventions (edits, corrections, deletions with operator identification and justification)
 * Derived data lineage (source observations, algorithms, parameters used in derivation)
-* Homogenisation adjustments (break points detected, adjustment factors applied, reference series used)
+* Homogenisation provenance: break points detected with dates and statistical confidence levels; adjustment factors applied to each segment; reference series used; statistical significance of detected breaks; correspondence with known station changes; homogenised values stored as derived observations with both original and adjusted series retained
 * Data rescue provenance (source document reference, image identifier, keying method, verification status)
 
 |===

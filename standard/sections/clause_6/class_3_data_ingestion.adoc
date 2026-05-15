@@ -228,35 +228,19 @@ The system SHALL normalize ingested data from all supported formats into a commo
 * Conversion algorithm and factors used
 * Target standard units as specified in WIGOS metadata standards
 
-|C a|The system SHALL support computation of basic derived meteorological variables where source
-data do not provide them directly, including at minimum:
-
-* Mean sea level pressure derived from station-level pressure, temperature, and station elevation
-* Dewpoint temperature derived from dry-bulb temperature and wet-bulb temperature or relative humidity
-* Relative humidity derived from dry-bulb and wet-bulb temperatures or dewpoint temperature
-
-Derived values SHALL be recorded with provenance indicating the source variables and the
-computation method applied.
-
 |===
 
 [NOTE]
 ====
-Basic derived variables are classified as Required in WMO-No. 1131 (Section 4.5.1.2).
-Computation formulae are specified in the Guide to Meteorological Instruments and Methods
-of Observation (WMO-No. 8).
+WMO BUFR parameter codes do not cover all observable elements. Implementations should
+document the controlled vocabulary used for element codes and provide mappings for any elements not
+covered by the BUFR code tables.
 ====
 
 [NOTE]
 ====
-The standardisation approach described here — converting all ingested data to a common internal
-representation — is one valid architectural pattern. Implementations that store data in source formats
-with format-specific adapters for API access are also conformant, provided that equivalent provenance
-and retrieval capabilities are met.
-
-Note that WMO BUFR parameter codes do not cover all observable elements. Implementations should
-document the controlled vocabulary used for element codes and provide mappings for any elements not
-covered by the BUFR code tables.
+Computation of derived meteorological variables and summary statistics from quality-controlled
+observations is addressed in /req/climate-computation.
 ====
 
 [[req_ingest_duplicate_detection]]
@@ -308,13 +292,3 @@ be reserved for cases where values differ between instances.
 * Character encoding declaration in all text-based exports
 |===
 
-===== Calculation of derived parameters
-
-[NOTE]
-====
-Requirements for the calculation of derived parameters are addressed in the Climate Products
-requirements class: aggregated summary statistics (daily minima/maxima, monthly totals, period means)
-and climate normals in /req/climate-products/statistics and /req/climate-products/normals; indices
-such as SPI and CLIMDEX in /rec/climate-products/indices. Scheduling and automation of these
-computations is addressed in /req/automation.
-====

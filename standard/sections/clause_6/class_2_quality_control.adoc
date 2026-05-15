@@ -33,6 +33,17 @@ The  __Guidelines on Surface Station Data Quality Control and Quality Assurance 
 
 ==== Requirements
 
+[[req_qc_observation_retention]]
+===== Observation Retention
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/quality-control/observation-retention
+|Statement a|The system SHALL retain all observation records regardless of quality flag status.
+Observations that fail quality control checks SHALL remain in the system with their assigned
+quality flags and the complete record of checks applied.
+|===
 
 [[req_qc_flag_management]]
 ===== Quality Flag Management
@@ -48,7 +59,6 @@ The system SHALL maintain quality flags and:
 * Preserve quality control history and audit trail
 * Allow manual override with justification
 * Record which specific quality control check(s) triggered each flag and the reason for failure
-* Retain flagged records; flagged observations SHALL NOT be deleted
 
 |===
 
