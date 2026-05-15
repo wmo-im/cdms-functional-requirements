@@ -71,7 +71,7 @@ System component and its specific responsibilities.
 **The following are IN SCOPE:**
 
 - Quality control procedures specific to climate data requirements with emphasis on long-term consistency
-- Detection and correction of inhomogeneities in climate time series (homogenization)
+- Detection and correction of inhomogeneities in climate time series (homogenisation)
 - Climate data rescue, including digitization of historical paper records
 - Station metadata management with emphasis on long-term consistency and provenance
 - Archival and preservation of climate datasets with appropriate documentation
@@ -136,7 +136,7 @@ Data Rescue Service. Handles multiple data formats and protocols, performing ini
 
 - **Data Processing Engine**: Applies quality control algorithms to climate observations including range checks,
   temporal consistency checks, spatial consistency checks, and climatological validation. Also performs statistical
-  analysis to detect and adjust for non-climatic discontinuities in observation time series (homogenization),
+  analysis to detect and adjust for non-climatic discontinuities in observation time series (homogenisation),
   producing both adjusted data and comprehensive documentation of the process.
 
 - **Metadata Management**: Maintains comprehensive station and element metadata including location information,
@@ -161,10 +161,10 @@ Data Rescue Service. Handles multiple data formats and protocols, performing ini
 
 - **Data Store**: Persistent storage for climate observations with their associated quality flags and
   processing history, station and element metadata (including units, codes, and controlled vocabularies),
-  quality control rules and thresholds, system configuration, homogenization parameters, and data lineage
+  quality control rules and thresholds, system configuration, homogenisation parameters, and data lineage
   information. Maintains historical records of all metadata changes to support long-term climate analysis.
 
-- **File Storage**: Manages climate-standard file formats (such as NetCDF-CF), quality control reports, homogenization
+- **File Storage**: Manages climate-standard file formats (such as NetCDF-CF), quality control reports, homogenisation
   analysis outputs, digitized document images, and archived datasets. Supports versioning and long-term preservation
   requirements.
 

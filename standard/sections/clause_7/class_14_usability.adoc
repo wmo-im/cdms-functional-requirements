@@ -74,7 +74,7 @@ interface should consider the accessibility recommendations in /rec/usability/ac
 |Identifier|/req/usability/notifications
 |A a|The system SHALL provide notifications for:
 
-* Completion of long-running operations (ingestion, QC processing, homogenization)
+* Completion of long-running operations (ingestion, QC processing, statistical computation)
 * Critical quality control failures requiring manual review
 * System maintenance schedules
 * Data embargo or access restriction changes

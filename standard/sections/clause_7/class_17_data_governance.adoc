@@ -57,7 +57,7 @@ information" (Definitions), requiring formalized governance structures.
 * Timeliness metrics (delay between observation time and system receipt)
 * Quality control statistics (pass/fail rates per check type)
 * Manual intervention frequency and types
-* Homogenization status and adjustment statistics
+* Homogenisation status and adjustment statistics
 * Overall fitness-for-purpose assessments
 
 |B a|Quality metadata SHALL be:
