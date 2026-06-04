@@ -1,15 +1,51 @@
 == References
 
-The following documents are referred to in this specification:
+=== Normative references
 
-//- WMO-No. 1131 (2025 Edition): Climate Data Management System Specifications
-//- ISO 19156:2023: Geographic information — Observations, Measurements and Samples
-//- OGC 17-069r4: OGC API - Features - Part 1: Core
-//- OGC 19-086r6: OGC API - Environmental Data Retrieval Standard
-//- WMO Technical Regulations, Volume I - General Meteorological Standards and Recommended Practices
-//- WMO-No. 8: Guide to Instruments and Methods of Observation
-//- CF Conventions: Climate and Forecast Metadata Conventions
+The following documents are referred to in the text in such a way that some or all of their content
+constitutes requirements of this document.
 
+==== WMO Publications
 
+* WMO-No. 8: _Guide to Meteorological Instruments and Methods of Observation_. World Meteorological Organization, Geneva.
+* WMO-No. 49: _WMO Technical Regulations_, Volume I: General Meteorological Standards and Recommended Practices. World Meteorological Organization, Geneva.
+* WMO-No. 306: _Manual on Codes_, Volume I.1 (Alphanumeric data representation) and Volume I.2 (Binary codes, including BUFR). World Meteorological Organization, Geneva.
+* WMO-No. 488: _Guide to the Global Observing System_. World Meteorological Organization, Geneva.
+* WMO-No. 1060: _Manual on the WMO Information System_, Volume II: Approved WIS Technical Specifications (including the WMO Core Metadata Profile version 2, WCMP2). World Meteorological Organization, Geneva.
+* WMO-No. 1131: _Climate Data Management System Specifications_ (2025 Edition). World Meteorological Organization, Geneva.
+* WMO-No. 1160: _Manual on the WMO Integrated Global Observing System_. World Meteorological Organization, Geneva.
+* WMO-No. 1186: _World Weather Records_. World Meteorological Organization, Geneva.
+* WMO-No. 1192: _WIGOS Metadata Standard_. World Meteorological Organization, Geneva.
+* WMO-No. 1203: _WMO Guidelines on the Calculation of Climate Normals_. World Meteorological Organization, Geneva.
+* WMO-No. 1238: _Manual on High-quality Global Data Management Framework for Climate_. World Meteorological Organization, Geneva.
+* WMO-No. 1269: _Guidelines on Surface Station Data Quality Control and Quality Assurance for Climate Applications_. World Meteorological Organization, Geneva.
 
-<To follow>
+==== IETF
+
+* RFC 2119: Bradner, S. (1997): _Key words for use in RFCs to Indicate Requirement Levels_. Internet Engineering Task Force. https://www.rfc-editor.org/rfc/rfc2119
+* RFC 4180: Shafranovich, Y. (2005): _Common Format and MIME Type for Comma-Separated Values (CSV) Files_. Internet Engineering Task Force. https://www.rfc-editor.org/rfc/rfc4180
+
+==== W3C
+
+* PROV-DM: Moreau, L., and P. Missier (eds.) (2013): _PROV-DM: The PROV Data Model_. W3C Recommendation, 30 April 2013. https://www.w3.org/TR/prov-dm/
+* PROV-O: Lebo, T., et al. (eds.) (2013): _PROV-O: The PROV Ontology_. W3C Recommendation, 30 April 2013. https://www.w3.org/TR/prov-o/
+
+==== CF Conventions
+
+* Hassell, D., et al.: _NetCDF Climate and Forecast (CF) Metadata Conventions_. https://cfconventions.org/
+
+==== OGC
+
+* OGC 15-078r6: _OGC SensorThings API Part 1: Sensing_. Open Geospatial Consortium.
+* OGC 17-069r4: _OGC API — Features — Part 1: Core_. Open Geospatial Consortium.
+* OGC 19-086r6: _OGC API — Environmental Data Retrieval Standard_. Open Geospatial Consortium.
+* OGC 20-004r1: _OGC API — Records — Part 1: Core_. Open Geospatial Consortium.
+
+=== Informative references
+
+The following documents are cited for context and guidance. They do not form part of the normative
+requirements of this specification.
+
+* WMO-No. 49: _WMO Technical Regulations_, Volume I — cited in WMO-No. 1238 in relation to observations metadata standards.
+* WMO-No. 1182: _Guidelines on Good Practices for Data Rescue_. World Meteorological Organization, Geneva.
+* ISO 19115 family: _Geographic information — Metadata_. International Organization for Standardization. Readers familiar with ISO 19115 will recognise concepts used in this specification; ISO standards are not freely available and are not normative requirements of this document.

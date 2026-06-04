@@ -12,7 +12,7 @@
 The Data Ingestion requirements class defines requirements for the reliable ingestion of observational data
 from diverse sources and formats. This requirements class is restricted to observational (in-situ) data from
 stations and does not cover the ingestion of gridded or raster data products (e.g., satellite imagery, reanalysis
-fields, radar composites). Data ingestion serves as the entry point for observations into the observational
+fields, radar composites). Data ingestion serves as the entry point for observations into the CDMS or climate
 record, requiring careful handling to preserve data integrity through validation and normalization while maintaining
 complete provenance of source data characteristics.
 
@@ -31,7 +31,7 @@ WMO-No. 1131 identifies Data Ingest as a Required capability (Section 5.1.1), st
 automated self-recovery and transformation." This specification restricts the scope of data ingestion to
 observational (in-situ) data formats; raster and gridded data ingestion is outside the scope of this specification.
 
-WMO-No. 1238 requires Members ensure "Entities encode data, and associated metadata, intended for international exchange
+WMO-No. 1238 requires that Members ensure "Entities encode data, and associated metadata, intended for international exchange
 following the standards specified in the Manual on Codes (WMO-No. 306)" (3.2.2.1).
 
 ==== Requirements
@@ -142,6 +142,7 @@ respond to gaps quickly, before the window for corrective action closes.
 * Manual submission via API with authentication
 * Upload progress indication for large files
 * Validation feedback during or immediately after upload
+* Error notification with informative detail in the event of upload failure
 * Confirmation of successful ingestion with record counts
 
 |===

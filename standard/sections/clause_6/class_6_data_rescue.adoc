@@ -68,8 +68,10 @@ The system SHOULD provide a data entry interface for manual keying that:
 * Displays source images alongside data entry forms
 * Supports configurable data entry templates based on historical form layouts
 * Provides real-time validation of entered values
+* Alerts the operator to gross errors that may result from keying mistakes, with the option to re-key the affected values
 * Tracks data entry operator and timestamp
 * Supports both single-key and double-key entry workflows for quality assurance
+* Supports drag-and-drop interaction for assigning images to entry forms, particularly where the volume of historical forms is large
 
 |===
 

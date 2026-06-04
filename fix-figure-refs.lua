@@ -50,7 +50,7 @@ local TOC_XML = table.concat({
   '    <w:p>',
   '      <w:r>',
   '        <w:fldChar w:fldCharType="begin" w:dirty="true"/>',
-  '        <w:instrText xml:space="preserve">TOC \\o &quot;1-3&quot; \\h \\z \\u</w:instrText>',
+  '        <w:instrText xml:space="preserve">TOC \\o &quot;1-2&quot; \\h \\z \\u</w:instrText>',
   '        <w:fldChar w:fldCharType="separate"/>',
   '        <w:fldChar w:fldCharType="end"/>',
   '      </w:r>',

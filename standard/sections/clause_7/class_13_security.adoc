@@ -62,7 +62,7 @@ a standards-based federated identity layer suitable for both web and API access.
 * Separates privileges across user roles including at minimum: read-only users, data
   entry operators, quality control analysts, and system administrators
 * Is configurable to restrict data access at station or network level
-* Enforces data access policies for embargoed or sensitive datasets
+* Enforces data access policies, especially for embargoed or sensitive datasets
 * Applies the principle of least privilege: users are granted the minimum permissions
   necessary for their role
 |===
@@ -112,7 +112,7 @@ networks may be subject to bilateral sharing agreements or national security con
 * All data export operations including user, timestamp, and data selection criteria
 |B a|Audit logs SHALL:
 
-* Be tamper-evident or stored in write-once media
+* Be tamper-proof or stored in write-once media
 * Be retained in accordance with the organisation's data retention policy
 * Be searchable and exportable for security incident investigation
 * Include sufficient detail to reconstruct the sequence of events

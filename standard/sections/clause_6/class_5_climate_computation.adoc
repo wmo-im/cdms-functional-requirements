@@ -126,8 +126,8 @@ homogenised element, the recommendations apply equally to precipitation, pressur
 elements where applicable.
 
 Homogenisation methods are most reliably applied to monthly data. Application to daily or sub-daily
-data is possible but introduces greater uncertainty; implementations should document the temporal
-resolution to which homogenisation has been applied.
+data is possible, and important for the assessment of some extremes, but introduces greater uncertainty;
+implementations should document the temporal resolution to which homogenisation has been applied.
 
 Implementations may satisfy these requirements either by integrating homogenisation algorithms
 directly within the CDMS or by providing well-defined interfaces for data exchange with specialist

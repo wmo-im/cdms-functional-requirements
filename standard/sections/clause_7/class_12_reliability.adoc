@@ -116,7 +116,7 @@ be reproducible without significant effort.
 Backup storage volumes grow with retention period. Implementers should balance
 retention requirements against available storage, using incremental backup strategies
 and compression to manage costs. WMO-No. 1238 requires permanent retention of original
-and irreproducible climate records (3.4.1.4); backup policies should reflect this for
+and irreproducible climate records and their metadata (3.4.1.4); backup policies should reflect this for
 long-term archival.
 ====
 

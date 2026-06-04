@@ -15,6 +15,10 @@ The Observations Quality Control requirements class defines requirements to ensu
 standards for long-term environmental records through systematic quality checks that detect erroneous, suspicious,
 or inconsistent values while maintaining complete audit trails of all quality control decisions. Quality control is
 essential for establishing trustworthy observational records suitable for long-term trend analysis and monitoring.
+The results of quality control processing may also help identify systemic error patterns in the observations
+that imply the need for remedial training or other actions (see /req/data-governance/stewardship),
+and/or may inform design changes to the quality control algorithms if too few errors are detected
+or too many values are flagged as suspect.
 
 ==== Justification and Regulatory Basis
 
@@ -65,8 +69,9 @@ The system SHALL maintain quality flags and:
 [NOTE]
 ====
 Implementers are encouraged to adopt a published flagging convention to facilitate data exchange and
-interoperability. WMO-No. 1269 provides guidance on quality flag definitions applicable to long-term
-observational data.
+interoperability. The _Guide to the Global Observing System_ (WMO-No. 488) defines basic quality control
+flag categories, and WMO-No. 1269 provides further guidance on quality flag definitions applicable to
+long-term observational data.
 ====
 
 [[req_qc_configuration]]
@@ -89,7 +94,7 @@ The system SHALL support configuration of quality control parameters, including:
 [NOTE]
 ====
 Thresholds may be either fixed values (e.g. absolute physical limits) or dynamically derived (e.g. based on
-climatological statistics such as percentiles). Implementations should ensure that simple fixed-threshold
+climatological statistics such as percentiles or standard deviations). Implementations should ensure that simple fixed-threshold
 configurations remain straightforward to set up, with advanced options such as seasonally varying or
 statistically derived thresholds available but not required for basic operation.
 ====
@@ -125,11 +130,18 @@ the quality control of daily accumulated rainfall.
 |Identifier|/req/quality-control/range-checks
 |Statement a|The system SHALL perform range validation checks, including:
 
-* Gross error limits (physically impossible values); WMO defines element-specific gross error limits which should be used as the basis for these checks where available
-* Climatological based range checks
+* Gross error limits (physically impossible values, e.g. wind direction greater than 360 degrees or temperature greater than 80°C)
+* Climatologically-based range checks
 * Sensor-based range checks (measurements within observable range for sensor)
 * Configurable thresholds per element and station
 |===
+
+[NOTE]
+====
+Element-specific gross error limits are defined in the _Guide to the Global Observing System_ (WMO-No. 488)
+and the _Guide to Meteorological Instruments and Methods of Observation_ (WMO-No. 8) and should be used
+as the basis for gross error limit checks where available.
+====
 
 [[req_qc_temporal_consistency]]
 ===== Temporal Consistency Checks

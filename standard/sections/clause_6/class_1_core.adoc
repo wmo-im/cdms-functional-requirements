@@ -45,11 +45,6 @@ system domains and disciplines. The data model SHALL include:
 
 [NOTE]
 ====
-A draft data model <link to wccdm-obs>
-====
-
-[NOTE]
-====
 The definition of an observed element requires careful consideration of all dimensions that distinguish
 one measurement from another, including: measurement type (e.g. temperature, pressure), sensor height or
 depth, aggregation duration, statistical function (instantaneous, mean, maximum, minimum), and unit of
@@ -70,10 +65,6 @@ location must be stored with each individual observation.
 environments from which in-situ point observations relevant to climate are collected. This specification
 is not limited to atmospheric observations.
 ====
-
-===== Reference data
-
-- To follow
 
 [[req_core_storage]]
 ===== Observation Storage

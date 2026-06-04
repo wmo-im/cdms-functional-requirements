@@ -102,7 +102,7 @@ supporting informed data selection by users. See also /req/metadata-management/d
 |Statement a|The system SHALL define and support data stewardship roles including:
 
 * Data custodian responsibilities for dataset maintenance
-* Data quality manager authority for quality control decisions
+* Data quality manager authority for quality control processes, including initiating investigations to resolve identified data quality issues (e.g. systematic errors or dataflow problems)
 * Data access coordinator for managing access requests and policies
 * System administrator separation from data stewardship roles
 * Clear escalation paths for data governance issues

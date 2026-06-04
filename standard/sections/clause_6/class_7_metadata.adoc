@@ -53,9 +53,9 @@ observations follow the provisions for collection, management, and publication o
 metadata as specified in WMO-No. 1160.
 
 Section 3.3.2 establishes quality assurance metadata requirements: Entities SHALL apply quality
-control to all datasets and record results in metadata (3.3.2.1), SHALL assign quality flags or
-indicators to all records (3.3.2.2), SHOULD update metadata with assessed quality at each stage of
-the quality control process (3.3.2.3), and SHALL record any homogenisation or reprocessing in
+control to all datasets and record results in metadata (3.3.2.1); SHALL assign quality flags or
+indicators to all records (3.3.2.2); SHOULD update metadata with assessed quality at each stage of
+the quality control process (3.3.2.3); and SHALL record any homogenisation or reprocessing in
 provenance metadata with links to processing documentation (3.3.2.5).
 
 All normative requirements in this class reference freely available standards, including the
@@ -176,7 +176,7 @@ table (https://cfconventions.org/standard-names.html), both of which are freely 
 Metadata Profile version 2 (WCMP2). Each record SHALL include all mandatory WCMP2 properties:
 
 * A unique record identifier following the URN pattern `urn:wmo:md:{centre-id}:{local-identifier}` (e.g., `urn:wmo:md:br-inmet:daycli`)
-* Resource title and free-text description
+* Resource or dataset title and free-text description
 * Spatial extent (bounding box in WGS84) and temporal extent
 * Earth system discipline classification using the WIS2 Topic Hierarchy vocabulary
   (`properties.themes`)
@@ -191,14 +191,12 @@ including:
 * Source data references: originating station networks, instruments, and observation periods
 * A record for each significant processing stage applied to the dataset, covering at minimum:
 ** Ingestion and format normalisation
-** Quality control procedures and the version or configuration applied
-** Homogenisation adjustments, where applicable
+** Quality control procedures and the version or configuration applied (more than one record may be required where the dataset undergoes multiple stages of quality control, e.g. automated checks followed by manual or expert-system review)
+** Homogenisation and other adjustments, where applicable
 ** Disaggregation or infilling, where applicable
 ** Statistical aggregation or derived product computation, where applicable
 * For each processing stage: date, description, responsible party, and software or method reference
 
-|C a|The system SHALL produce WCMP2-compliant discovery metadata records and SHALL support their
-publication via a configured WIS2 Node or equivalent discovery metadata pipeline.
 |===
 
 [NOTE]
@@ -219,7 +217,7 @@ implementation errors.
 
 Two levels of provenance/lineage are maintained in a CDMS: (1) observation-level provenance
 (/req/core/provenance-storage, /req/core/provenance-immutability) records the complete immutable
-history of each individual observation — ingestion, QC flags, corrections, and data rescue events;
+history of each individual observation — measurement method and instrumentation, ingestion, QC flags, corrections, and data rescue events;
 (2) dataset-level lineage (this requirement, Statement B) summarises the processing history of a
 collection of observations as a whole, supporting discovery and fitness-for-purpose assessment.
 Dataset-level lineage is a descriptive summary; it is not a substitute for the immutable
@@ -231,6 +229,16 @@ For datasets classified as `recommended` under the WMO data policy, at least one
 associated licence information is required by WCMP2.
 
 ====
+
+[[rec_metadata_gdc_submission]]
+[cols="1,4"]
+|===
+2+^|Recommendation {counter:rec-id}
+|Identifier|/rec/metadata-management/gdc-submission
+|Statement a|The system SHOULD support publication of WCMP2-compliant discovery metadata records
+to the WMO Global Discovery Catalogue via a configured WIS2 Node or equivalent discovery metadata
+pipeline.
+|===
 
 [[req_metadata_data_quality]]
 ===== Dataset Quality Reporting
@@ -259,8 +267,9 @@ associated licence information is required by WCMP2.
 ====
 Dataset-level quality reporting is distinct from per-observation quality flags managed by
 /req/quality-control. Quality flags on individual observations provide the source data for computing
-dataset-level quality metrics. These aggregated metrics support fitness-for-purpose assessment and
-inform users about the suitability of a dataset for specific applications.
+dataset-level quality metrics. These aggregated metrics support fitness-for-purpose assessment, inform users about the
+suitability of a dataset for specific applications, and should help inform observation providers
+about any systemic errors or patterns of errors within the dataset.
 
 Dataset quality metrics may be derived automatically from per-observation quality control results,
 or entered manually by data managers to document known issues or provide additional context.
@@ -292,16 +301,21 @@ both sources.
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/metadata-management/constraints
-|Statement a|The system SHALL record data access and use constraints for each dataset, consistent
-with WMO data policy requirements as defined in WMO-No. 1238 and the `wmo:dataPolicy` property
-specified in WCMP2, including:
+|Statement a|The system SHALL record data access and use constraints for each dataset, including:
 
-* WMO data policy classification (core or recommended), consistent with
-  /req/metadata-management/discovery
 * Legal access constraints: any restrictions on who may access the data
 * Use constraints: conditions on redistribution or derivative use
 * Security classification where applicable (e.g., national security requirements)
 * Embargo periods: dates before which data may not be published externally
+|===
+
+[cols="1,4"]
+|===
+2+^|Recommendation {counter:rec-id}
+|Identifier|/rec/metadata-management/constraints
+|Statement a|The system SHOULD record the WMO data policy classification (core or recommended) for
+each dataset, consistent with the `wmo:dataPolicy` property specified in WCMP2 and WMO data policy
+requirements defined in WMO-No. 1238.
 |===
 
 [NOTE]
@@ -312,9 +326,6 @@ Constraint metadata must be enforced through the access control mechanisms defin
 /req/security/authorization. Embargo periods and redistribution restrictions recorded here
 should be applied consistently across all data access interfaces, including the API
 (/req/data-api) and any export functions.
-
-The normative basis for these constraints is WMO-No. 1238 data policy requirements and the WCMP2
-`wmo:dataPolicy` property.
 ====
 
 [[req_metadata_export]]
@@ -356,7 +367,7 @@ when published.
 * Required field completeness per WIGOS standards
 * Coordinate system validity and range checks
 * Temporal consistency (effective dates do not overlap)
-* Referential integrity (stations referenced by observations exist)
+* Referential integrity (stations referenced by observations exist and are correct)
 * Controlled vocabulary compliance for classification fields
 
 |B a|generate validation reports identifying:
