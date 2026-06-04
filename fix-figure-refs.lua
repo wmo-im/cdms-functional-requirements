@@ -62,6 +62,44 @@ local TOC_XML = table.concat({
 local TOC_BLOCK = pandoc.RawBlock("openxml", TOC_XML)
 
 -- ---------------------------------------------------------------------------
+-- Note-block filter: convert Div.note → styled paragraphs
+-- ---------------------------------------------------------------------------
+-- DocBook <note> → pandoc Div[note] { Div[title]{}, Para... }
+-- Render as a "Note" custom paragraph style (defined in custom-reference.docx)
+-- with a bold "NOTE" label prepended to the first paragraph.
+
+function Div(div)
+  if not div.classes:includes("note") then return nil end
+
+  local content = {}
+  for _, block in ipairs(div.content) do
+    -- drop the empty title div that DocBook inserts
+    if block.t == "Div" and block.classes:includes("title") then
+      -- skip
+    else
+      table.insert(content, block)
+    end
+  end
+
+  -- Prepend bold "NOTE — " to the first paragraph
+  if #content > 0 and (content[1].t == "Para" or content[1].t == "Plain") then
+    local prefix = {
+      pandoc.Strong({ pandoc.Str("NOTE") }),
+      pandoc.Str(" \u{2014} "),
+    }
+    for _, inline in ipairs(content[1].content) do
+      table.insert(prefix, inline)
+    end
+    content[1].content = prefix
+  else
+    -- No paragraph to prepend to; insert a standalone label
+    table.insert(content, 1, pandoc.Para({ pandoc.Strong({ pandoc.Str("NOTE") }) }))
+  end
+
+  return pandoc.Div(content, pandoc.Attr("", {}, { ["custom-style"] = "Note" }))
+end
+
+-- ---------------------------------------------------------------------------
 -- Main filter (Pandoc-level for two-pass access to the whole document)
 -- ---------------------------------------------------------------------------
 
