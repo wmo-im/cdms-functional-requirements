@@ -45,25 +45,23 @@ system domains and disciplines. The data model SHALL include:
 
 [NOTE]
 ====
-The definition of an observed element requires careful consideration of all dimensions that distinguish
-one measurement from another, including: measurement type (e.g. temperature, pressure), sensor height or
-depth, aggregation duration, statistical function (instantaneous, mean, maximum, minimum), and unit of
-measure. Systems should ensure that element definitions are sufficiently granular to avoid accidental
-overwriting of observations from different sensors or measurement configurations. Source data provenance
-(e.g. transmission format or network) should be recorded separately rather than embedded in the element
-definition.
+The scope of this specification is not limited to atmospheric observations; it covers in-situ point
+observations from across the Earth system domains.
 ====
+
+.Observation conceptual model
+[plantuml, observation_model, svg, align=center]
+----
+include::../../figures/observation_model.puml[]
+----
 
 [NOTE]
 ====
-Support for observations from across the Earth system domains is a core requirement of this specification.
-This includes both fixed-position stations and mobile platforms (ships, buoys, radiosondes, aircraft).
-For fixed stations, geographic location is derived from station metadata. For mobile platforms, geographic
-location must be stored with each individual observation.
-
-"Earth system domains" encompasses the atmospheric, terrestrial, hydrological, cryospheric, and oceanic
-environments from which in-situ point observations relevant to climate are collected. This specification
-is not limited to atmospheric observations.
+The model is consistent with the WMO Core Climate Data Model – Observations (WCCDM-OBS, FM 251),
+proposed to INFCOM-3 and still under experimental status
+(JSON schema: https://schemas.wmo.int/wccdm-obs/2024/wccdm-obs.json).
+WCCDM-OBS is not a normative reference of this specification; further alignment is anticipated
+as the model progresses towards formal adoption.
 ====
 
 [[req_core_storage]]

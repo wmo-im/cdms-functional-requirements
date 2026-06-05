@@ -164,8 +164,8 @@ respond to gaps quickly, before the window for corrective action closes.
 
 [NOTE]
 ====
-Implementations should document which BUFR report types and WMO code forms are supported.
-The Manual on Codes (WMO-No. 306) defines the complete set of applicable report types and code forms.
+Supported BUFR report types and WMO code forms should be documented. The Manual on Codes
+(WMO-No. 306) defines the complete set of applicable report types and code forms.
 ====
 
 [[rec_ingest_formats]]
@@ -182,10 +182,10 @@ The Manual on Codes (WMO-No. 306) defines the complete set of applicable report 
 
 [NOTE]
 ====
-For JSON, XML, and NetCDF formats, implementations should adopt or reference a specific schema or
-profile rather than providing generic format support, as the absence of a defined structure makes
-generic readers impractical. Support for additional historical or legacy formats may be required based
-on data rescue activities and national archive requirements; these should be documented in conformance
+For JSON, XML, and NetCDF formats, a specific schema or profile should be adopted or referenced
+rather than providing generic format support, as the absence of a defined structure makes generic
+readers impractical. Support for additional historical or legacy formats may be required based on
+data rescue activities and national archive requirements; these should be documented in conformance
 documentation.
 ====
 
@@ -262,16 +262,11 @@ The system SHALL normalize ingested data from all supported formats into a commo
 
 [NOTE]
 ====
-WMO BUFR parameter codes do not cover all observable elements. Implementations should
-document the controlled vocabulary used for element codes and provide mappings for any elements not
-covered by the BUFR code tables.
+WMO BUFR parameter codes do not cover all observable elements. The controlled vocabulary used for
+element codes should be documented, with mappings provided for any elements not covered by the
+BUFR code tables.
 ====
 
-[NOTE]
-====
-Computation of derived meteorological variables and summary statistics from quality-controlled
-observations is addressed in /req/climate-computation.
-====
 
 [[req_ingest_duplicate_detection]]
 ===== Duplicate Detection

@@ -136,7 +136,6 @@ requiring a separate acquisition metadata record.
 
 * A unique element identifier and human-readable name
 * Measurement class (e.g., temperature, precipitation, pressure, wind speed)
-* Observation height or depth relative to the surface
 * Accumulation or averaging duration
 * Unit of measure
 * Statistical function (instantaneous, mean, maximum, minimum, accumulated total, etc.)
@@ -144,26 +143,6 @@ requiring a separate acquisition metadata record.
 * Associated controlled vocabulary reference: a WMO BUFR parameter code (from the freely available
   WMO code tables) or a CF standard name (from the freely available CF Conventions) where applicable
 |===
-
-[NOTE]
-====
-The combination of measurement class, observation height/depth, duration, unit, and statistical function
-constitutes the unique identity of an observable element. Two observations that differ in any of these
-properties represent distinct elements and must be stored and described separately. This ensures
-unambiguous interpretation of stored values across stations and datasets. The element identity
-concept is also described in the data model NOTE in /req/core/data-model; the feature catalogue
-requirement here provides the normative basis for maintaining that element dictionary as a
-managed, queryable catalogue separate from the individual observation records.
-
-For sensors where height or depth varies with each observation — such as upper air soundings, soil
-temperature profiles, and measurements from mobile platforms — height or depth shall be recorded
-per observation rather than as a fixed element catalogue property.
-
-The normative vocabulary references are
-WMO BUFR code tables
-(https://library.wmo.int/records/item/35713-manual-on-codes-volume-i-1) and the CF standard name
-table (https://cfconventions.org/standard-names.html), both of which are freely available.
-====
 
 [[req_metadata_discovery]]
 ===== Discovery Metadata
@@ -350,8 +329,7 @@ should be applied consistently across all data access interfaces, including the 
 [NOTE]
 ====
 A simplified second version of the WIGOS Metadata Representation (WMDR) is under development.
-Implementations should monitor progress and plan for compatibility with the updated version
-when published.
+Further alignment with the updated version is anticipated when published.
 ====
 
 [[req_metadata_quality]]

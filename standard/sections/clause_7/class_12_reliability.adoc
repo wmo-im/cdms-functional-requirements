@@ -101,21 +101,21 @@ See also /req/data-ingestion/validation.
 * Point-in-time recovery capability to restore the system to a known-good prior state
 * Documented and regularly tested recovery procedures
 * Verification of backup integrity through periodic restore testing
+* Backup data stored in a non-proprietary, documented format to ensure recoverability
+  independent of specific software versions or vendor systems
 |===
 
 [NOTE]
 ====
 RTO defines the maximum acceptable time to restore operations following a failure.
-RPO defines the maximum acceptable data loss measured in time. Implementers should
-define targets appropriate to their national context — for a national CDMS, a pragmatic
-RPO will often be longer than for a real-time operational system, since historical
-observation data is typically re-ingestible from source systems. The critical concern
-is protecting processed outputs (QC flags, homogenisation adjustments) that may not
-be reproducible without significant effort.
+RPO defines the maximum acceptable data loss measured in time. Targets should be defined
+appropriate to the operational context — for a national CDMS, a pragmatic RPO will often be
+longer than for a real-time operational system, since historical observation data is typically
+re-ingestible from source systems. The critical concern is protecting processed outputs (QC flags,
+homogenisation adjustments) that may not be reproducible without significant effort.
 
-Backup storage volumes grow with retention period. Implementers should balance
-retention requirements against available storage, using incremental backup strategies
-and compression to manage costs. WMO-No. 1238 requires permanent retention of original
+Backup storage volumes grow with retention period. Retention requirements should be balanced
+against available storage, using incremental backup strategies and compression to manage costs. WMO-No. 1238 requires permanent retention of original
 and irreproducible climate records and their metadata (3.4.1.4); backup policies should reflect this for
 long-term archival.
 ====

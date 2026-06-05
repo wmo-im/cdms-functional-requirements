@@ -69,6 +69,7 @@ quality-controlled observations, including:
 * Daily summary values: minimum, maximum, mean, and accumulated totals for each observed element
 * Monthly and annual aggregations of daily summary values
 * Configurable aggregation periods and functions
+* Return period estimation for extreme value series (e.g., 10-year, 50-year, 100-year return levels)
 
 |B a|All computed statistics SHALL be stored as derived observations that:
 
@@ -80,9 +81,8 @@ quality-controlled observations, including:
 [NOTE]
 ====
 Rigorous statistical aggregation requires careful handling of data gaps, quality flags, and defined
-computation periods (which may not align with calendar day boundaries). Statistics computed from series
-with significant data gaps should be flagged accordingly. Implementations should apply documented
-minimum data completeness thresholds before producing summary values.
+computation periods (which may not align with calendar day boundaries). Statistics computed from series with significant data gaps should be flagged accordingly. Documented
+minimum data completeness thresholds should be applied before producing summary values.
 ====
 
 [[rec_computation_homogenisation_detection]]
@@ -127,7 +127,7 @@ elements where applicable.
 
 Homogenisation methods are most reliably applied to monthly data. Application to daily or sub-daily
 data is possible, and important for the assessment of some extremes, but introduces greater uncertainty;
-implementations should document the temporal resolution to which homogenisation has been applied.
+the temporal resolution to which homogenisation has been applied should be documented.
 
 Implementations may satisfy these requirements either by integrating homogenisation algorithms
 directly within the CDMS or by providing well-defined interfaces for data exchange with specialist

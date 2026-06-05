@@ -66,13 +66,15 @@ The system SHALL maintain quality flags and:
 
 |===
 
-[NOTE]
-====
-Implementers are encouraged to adopt a published flagging convention to facilitate data exchange and
-interoperability. The _Guide to the Global Observing System_ (WMO-No. 488) defines basic quality control
-flag categories, and WMO-No. 1269 provides further guidance on quality flag definitions applicable to
-long-term observational data.
-====
+[[rec_qc_flagging_convention]]
+[cols="1,4"]
+|===
+2+^|Recommendation {counter:rec-id}
+|Identifier|/rec/quality-control/flagging-convention
+|Statement a|The system SHOULD adopt a published quality control flagging convention to facilitate
+data exchange and interoperability. Applicable references include the _Guide to the Global Observing
+System_ (WMO-No. 488), WMO-No. 1269, and the _Guide to Climatological Practices_ (WMO-No. 100).
+|===
 
 [[req_qc_configuration]]
 ===== Quality Control Configuration Management
@@ -94,9 +96,9 @@ The system SHALL support configuration of quality control parameters, including:
 [NOTE]
 ====
 Thresholds may be either fixed values (e.g. absolute physical limits) or dynamically derived (e.g. based on
-climatological statistics such as percentiles or standard deviations). Implementations should ensure that simple fixed-threshold
-configurations remain straightforward to set up, with advanced options such as seasonally varying or
-statistically derived thresholds available but not required for basic operation.
+climatological statistics such as percentiles or standard deviations). Simple fixed-threshold configurations should remain straightforward to set up; advanced options such
+as seasonally varying or statistically derived thresholds are available but not required for basic
+operation.
 ====
 
 [[req_qc_execution]]
@@ -197,11 +199,4 @@ and precipitation-weather code agreement. WMO-No. 1269 provides comprehensive
 guidance on element-specific checks.
 ====
 
-[NOTE]
-====
-Some internal consistency checks may also be applied within Data Collection and Processing Systems
-(DCPS) during real-time processing. The CDMS applies these checks in the context of quality assurance
-for long-term observational records, where access to the observation history allows for more thorough
-validation than is typically possible in real-time operational systems.
-====
 

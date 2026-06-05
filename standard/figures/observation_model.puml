@@ -1,0 +1,61 @@
+@startuml observation_model
+!theme plain
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowFontSize 9
+skinparam ArrowColor #555555
+skinparam ClassFontSize 11
+skinparam ClassBorderColor #666666
+skinparam ClassBackgroundColor white
+skinparam nodesep 30
+skinparam ranksep 50
+
+hide empty members
+hide circle
+
+' ── Central entity ────────────────────────────────────────────────────────────
+
+class "**Observation**" as OBS #B8D4E8
+
+' ── Top ───────────────────────────────────────────────────────────────────────
+
+class "Provenance Record\n(W3C PROV)" as PROV
+class "Dataset Collection\n(WCMP2)" as COLL
+
+' ── Left (stacked vertically) ─────────────────────────────────────────────────
+
+class "Observable Element" as ELEM
+class "Observing Facility\n(WMDR)" as FACILITY
+
+' ── Right (stacked vertically) ────────────────────────────────────────────────
+
+class "Result" as RESULT
+class "Quality Flag" as QFLAG
+
+' ── Bottom ────────────────────────────────────────────────────────────────────
+
+class "Geometry" as GEO
+class "Equipment\n(WMDR)" as EQUIP
+class "Temporal Constraints" as TIME
+
+' ── Force vertical stacking on left and right sides ───────────────────────────
+
+ELEM -[hidden]down- FACILITY
+RESULT -[hidden]down- QFLAG
+EQUIP -[hidden]right- GEO
+GEO -[hidden]right- TIME
+
+' ── Relationships ─────────────────────────────────────────────────────────────
+
+OBS -up-> PROV      : hasProvenance
+OBS -up-> COLL      : isMemberOf
+OBS -left-> ELEM    : hasObservedProperty
+OBS -left-> FACILITY : hostedBy
+OBS -right-> RESULT  : hasResult
+OBS -right-> QFLAG   : hasQuality
+OBS -down-> EQUIP    : observedBy
+OBS -down-> GEO      : hasGeometry
+OBS -down-> TIME     : hasTemporalConstraints
+
+@enduml

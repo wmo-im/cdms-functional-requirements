@@ -53,17 +53,20 @@ for non-observational resources (e.g., metadata records) may support PATCH at th
 
 [NOTE]
 ====
-Implementations should document the intended access scope of the API (e.g., internal/LAN access only,
-or publicly accessible). Publicly accessible APIs should apply appropriate authentication and rate
-limiting in accordance with /req/data-api/auth.
+The intended access scope of the API (e.g., internal/LAN access only, or publicly accessible) should
+be documented. Publicly accessible APIs should apply appropriate authentication and rate limiting in
+accordance with /req/data-api/auth.
 ====
 
-[NOTE]
-====
-Implementations are encouraged to provide API documentation in OpenAPI (formerly Swagger) format,
-which enables interactive documentation and client code generation. OpenAPI specifications should be
-made available at a well-known endpoint (e.g. /api or /openapi.json).
-====
+[[rec_api_openapi]]
+[cols="1,4"]
+|===
+2+^|Recommendation {counter:rec-id}
+|Identifier|/rec/data-api/openapi
+|Statement a|API documentation SHOULD be provided in OpenAPI format, enabling interactive
+documentation and client code generation. OpenAPI specifications should be made available at a
+well-known endpoint (e.g. `/api` or `/openapi.json`).
+|===
 
 [[req_api_standards]]
 ===== Standards Compliance
