@@ -103,9 +103,9 @@ The system SHALL support API queries with the following parameters:
 [NOTE]
 ====
 On-demand statistical aggregation by the API (e.g., computing daily means from raw observations at
-query time) is not recommended. Rigorous statistics require careful handling of data gaps, quality
-flags, and defined computation periods. Pre-computed official statistics should be stored as standard
-derived observations and served through the same query interface.
+query time) introduces risks around data gaps, quality flags, and defined computation periods.
+Pre-computed official statistics should be stored as standard derived observations
+(/req/climate-computation/statistics) and served through the same query interface.
 ====
 
 [[req_api_auth]]

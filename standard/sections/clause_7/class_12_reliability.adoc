@@ -69,12 +69,6 @@ expected checksums or hash values, detecting silent corruption caused by storage
 media failures or software defects. Results should be logged and administrators
 alerted on any detected inconsistency.
 
-Referential integrity should be enforced as a system invariant. However, implementations
-receiving data from operational feeds (e.g., GTS, WIS 2.0) may encounter observations
-for stations not yet registered in the metadata repository. In such cases, implementations
-may auto-create a minimal station record pending metadata completion, rather than
-rejecting the observation. This exception should be logged and flagged for follow-up.
-See also /req/data-ingestion/validation.
 ====
 
 ===== Backup and Recovery

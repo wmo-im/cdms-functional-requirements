@@ -137,7 +137,7 @@ mean, maximum, minimum, accumulated total), and unit of measure
 +
 [NOTE]
 ====
-Two measurements that differ in any of these properties constitute distinct elements and shall be stored
+Two measurements that differ in any of these properties constitute distinct elements and are stored
 and described separately to ensure unambiguous interpretation across stations and datasets. Source data
 provenance (e.g. transmission format or originating network) is recorded separately rather than embedded
 in the element definition.

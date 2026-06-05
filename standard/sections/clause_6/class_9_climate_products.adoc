@@ -49,14 +49,12 @@ WMO guidelines (WMO-No. 1203), including:
 
 [NOTE]
 ====
-WWR, CLIMAT, and DAYCLI are all classified as Required in WMO-No. 1131 (Sections 4.4.1.5,
-4.4.1.3, and 4.4.1.4 respectively). This requirement covers the *generation* of these products
-from quality-controlled observation series held in the CDMS. Ingestion of incoming CLIMAT and
-DAYCLI messages from external sources is addressed in /req/data-ingestion/formats.
+This requirement covers the generation of these products from quality-controlled observation
+series held in the CDMS. Ingestion of incoming CLIMAT and DAYCLI messages from external sources
+is addressed in /req/data-ingestion/formats.
 
-For DAYCLI, WMO-No. 1131 (Section 4.4.1.4) specifies that the generated messages must include
-siting classification, measurement quality classification, temperature computation method, and
-quality control flags for each daily value.
+For DAYCLI, generated messages must include siting classification, measurement quality
+classification, temperature computation method, and quality control flags for each daily value.
 ====
 
 [[rec_climate_products_indices]]

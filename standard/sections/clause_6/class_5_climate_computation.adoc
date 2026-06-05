@@ -115,10 +115,4 @@ Homogenization methods are most reliably applied to monthly data. Application to
 data is possible, and important for the assessment of some extremes, but introduces greater uncertainty;
 the temporal resolution to which homogenization has been applied should be documented.
 
-Implementations may satisfy these requirements either by integrating homogenization algorithms
-directly within the CDMS or by providing well-defined interfaces for data exchange with specialist
-third-party homogenization tools, provided that the provenance documentation requirements of
-/req/core/provenance-storage are met.
-
-Data homogenization is classified as Recommended in WMO-No. 1131 (Section 4.5.1.3).
 ====

@@ -80,10 +80,10 @@ The system SHOULD provide a data entry interface for manual keying that:
 
 [NOTE]
 ====
-Digitized observations shall be processed through the same quality control pipeline as contemporary
+Digitized observations are processed through the same quality control pipeline as contemporary
 observations (/req/quality-control). The sequencing of digitization, provisional storage, and quality
-assurance is an implementation decision; what is required is that rescued data does not enter the
-operational observational record without passing through the full QC pipeline.
+assurance is an implementation decision; rescued data does not enter the operational observational
+record without passing through the full QC pipeline.
 ====
 
 [[req_data_rescue_provenance]]
