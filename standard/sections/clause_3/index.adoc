@@ -48,4 +48,4 @@ requirements of this specification.
 
 * WMO-No. 49: _WMO Technical Regulations_, Volume I — cited in WMO-No. 1238 in relation to observations metadata standards.
 * WMO-No. 1182: _Guidelines on Good Practices for Data Rescue_. World Meteorological Organization, Geneva.
-* ISO 19115 family: _Geographic information — Metadata_. International Organization for Standardization. Readers familiar with ISO 19115 will recognise concepts used in this specification; ISO standards are not freely available and are not normative requirements of this document.
+* ISO 19115 family: _Geographic information — Metadata_. International Organization for Standardization. Readers familiar with ISO 19115 will recognize concepts used in this specification; ISO standards are not freely available and are not normative requirements of this document.

@@ -24,16 +24,6 @@ A CDMS may serve both operational climate product generation and the long-term c
 the ingestion requirements in this class apply in both contexts.
 ====
 
-==== Justification and Regulatory Basis
-
-WMO-No. 1131 identifies Data Ingest as a Required capability (Section 5.1.1), stating systems must handle
-"WMO messages, vector, raster array, ASCII and other formats" with "business rules, status logging,
-automated self-recovery and transformation." This specification restricts the scope of data ingestion to
-observational (in-situ) data formats; raster and gridded data ingestion is outside the scope of this specification.
-
-WMO-No. 1238 requires that Members ensure "Entities encode data, and associated metadata, intended for international exchange
-following the standards specified in the Manual on Codes (WMO-No. 306)" (3.2.2.1).
-
 ==== Requirements
 
 [[req_ingest_automated_collection]]
@@ -234,13 +224,13 @@ fails full QC will be stored with appropriate quality flags rather than rejected
 boundary.
 ====
 
-[[req_ingest_standardisation]]
-===== Data Standardisation
+[[req_ingest_standardization]]
+===== Data Standardization
 
 [cols="1,4"]
 |===
 2+^|**Requirement {counter:req-id}**
-|Identifier|/req/data-ingestion/standardisation
+|Identifier|/req/data-ingestion/standardization
 |Statement a|
 |A a|
 The system SHALL normalize ingested data from all supported formats into a common internal representation that includes:

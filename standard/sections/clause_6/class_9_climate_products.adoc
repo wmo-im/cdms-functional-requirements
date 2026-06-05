@@ -14,18 +14,6 @@ series, including climate normals, standard WMO observation products, and climat
 class draws on the summary statistics computed by /req/climate-computation. Derived products must be clearly
 distinguished from raw observations with full documentation of their derivation and data lineage.
 
-==== Justification and Regulatory Basis
-
-WMO-No. 1131 classifies Climate Products as Recommended (Section 6.1), covering the production of
-climate normals, standard WMO observation products, and climate indices from quality-controlled
-observational records.
-
-WMO-No. 1238 requires that Members ensure the production of standard climate products and that these are
-made available through appropriate services. The computation of WMO Climate Normals is governed by the
-WMO Guidelines on the Calculation of Climate Normals (WMO-No. 1203), which prescribes standard 30-year
-averaging periods. Climate normals and indices support national and international reporting obligations,
-including contributions to the Global Climate Observing System (GCOS).
-
 ==== Requirements
 
 [[req_climate_products_normals]]
@@ -81,7 +69,7 @@ quality control flags for each daily value.
 |Statement a|The system SHOULD support computation of standard climate indices, including:
 
 * Temperature and precipitation extremes indices for climate change monitoring
-* Standardised Precipitation Index (SPI) and related drought indices
+* Standardized Precipitation Index (SPI) and related drought indices
 * User-configurable index definitions to accommodate national or regional requirements
 |===
 

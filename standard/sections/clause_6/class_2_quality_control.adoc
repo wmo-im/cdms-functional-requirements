@@ -20,21 +20,6 @@ that imply the need for remedial training or other actions (see /req/data-govern
 and/or may inform design changes to the quality control algorithms if too few errors are detected
 or too many values are flagged as suspect.
 
-==== Justification and Regulatory Basis
-
-WMO-No. 1131 classifies Observations Quality Control as Required (Section 5.3), emphasizing that "all data have been
-checked for accuracy, and that a record is maintained of what checks were performed,
-the outcome of the checks and when the checks took place."
-
-WMO-No. 1238 requires Entities to apply quality control to all climate datasets under their management and record
-the results in the associated metadata (Section 3.3.2).
-
-[NOTE]
-====
-The  __Guidelines on Surface Station Data Quality Control and Quality Assurance for Climate Applications__
-(WMO-No. 1269) provide specific methodologies referenced in both of the above documents.
-====
-
 ==== Requirements
 
 [[req_qc_observation_retention]]

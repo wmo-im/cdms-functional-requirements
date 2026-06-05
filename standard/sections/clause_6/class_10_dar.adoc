@@ -17,19 +17,6 @@ Information System standards, supporting spatial and temporal queries, and provi
 mechanisms for data access registration (DAR) and citation. Discovery capabilities are
 essential for making climate data findable and accessible to diverse user communities.
 
-==== Justification and Regulatory Basis
-
-WMO-No. 1131 Section 8.2 identifies Data Discovery as a Required component, including
-discovery metadata catalogue (8.2.1.1), observations metadata catalogue (8.2.1.2), and
-data provenance metadata catalogue (8.2.1.3). Section 7.1.4 further requires "integrated
-search of climate data" including search of discovery metadata (7.1.4.3, Required) and
-data provenance metadata (7.1.4.4, Required). WMO-No. 1238 mandates that "data, and
-associated metadata, are registered in the WMO Information System Global Discovery
-Catalogue" (3.2.1.1c) and requires "Members shall ensure that Entities describe data
-with metadata, in conformance with the WIS metadata standard" (3.2.1.1b). The framework
-principle that datasets shall be made "findable by potential users" (3.2.1.1) requires
-robust discovery and cataloguing capabilities.
-
 ==== Requirements
 
 [[req_data-discovery_catalogue-service]]

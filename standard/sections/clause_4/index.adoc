@@ -19,7 +19,7 @@ change in observation practice
 +
 [NOTE]
 ====
-Break points are identified during the homogenisation process. Each break point separates segments of
+Break points are identified during the homogenization process. Each break point separates segments of
 a time series within which different adjustment factors may be applied.
 ====
 
@@ -67,11 +67,11 @@ Derived observation::
 an observation value computed by the system from one or more source observations by means of a documented
 formula, aggregation, or statistical procedure, as distinct from a value directly reported by a measuring
 instrument. Examples include computed meteorological variables (e.g. mean sea level pressure derived from
-station pressure), statistical aggregates (e.g. daily maximum temperature), and homogenised values
+station pressure), statistical aggregates (e.g. daily maximum temperature), and homogenized values
 
 Discovery metadata::
 dataset-level metadata records that make data findable in a discovery catalogue, describing what data
-exists, where it can be accessed, its spatial and temporal extent, responsible organisation, and data
+exists, where it can be accessed, its spatial and temporal extent, responsible organization, and data
 policy classification
 +
 [NOTE]
@@ -91,12 +91,12 @@ point observations relevant to climate are collected
 
 Fitness-for-purpose::
 an assessment of whether a dataset meets the quality and completeness requirements of a particular
-intended application or use case, summarising quality metrics — including completeness, temporal
+intended application or use case, summarizing quality metrics — including completeness, temporal
 continuity, quality control flag distribution, and known systematic issues — in terms of suitability
 for defined use cases such as climatological trend analysis, climate normals computation, or extreme
 event studies
 
-Homogenisation::
+Homogenization::
 the process of detecting and correcting non-climatic discontinuities in long-term observation time series
 caused by changes in station location, instrumentation, observation practices, or surrounding environment,
 in order to produce a temporally consistent series suitable for climate trend analysis. Results in an
@@ -120,18 +120,18 @@ composite, and forecast data products. The scope of this specification is restri
 observations.
 ====
 
-Normalisation::
+Normalization::
 the process of transforming observational data from diverse source formats, encodings, and unit systems
 into a common internal representation, resolving differences in format conventions, units of measure,
 coordinate systems, timestamp formats, and character encodings
 +
 [NOTE]
 ====
-Not to be confused with statistical normalisation, which scales data to a standard range or distribution.
+Not to be confused with statistical normalization, which scales data to a standard range or distribution.
 ====
 
 Observable element::
-a uniquely defined measurable quantity characterised by its measurement class (e.g. temperature,
+a uniquely defined measurable quantity characterized by its measurement class (e.g. temperature,
 precipitation, pressure), accumulation or averaging duration, statistical function (instantaneous,
 mean, maximum, minimum, accumulated total), and unit of measure
 +
@@ -147,7 +147,7 @@ Provenance metadata::
 information documenting the origin, processing history, and all modifications applied to an observation
 or dataset throughout its lifecycle, from initial acquisition through archival and distribution. For
 individual observations, provenance includes source identification, ingestion details, quality control
-decisions, manual corrections, homogenisation adjustments, and data rescue workflows. Adapted from
+decisions, manual corrections, homogenization adjustments, and data rescue workflows. Adapted from
 WMO-No. 1238
 
 Quality flag::

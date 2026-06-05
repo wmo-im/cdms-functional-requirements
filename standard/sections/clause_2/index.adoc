@@ -9,7 +9,7 @@ of a Climate Data Management System:
 - **Quality Control** (Required): Climate-specific QC procedures including range, temporal, spatial, and climatological checks
 - **Data Ingestion** (Required): Multi-format data import, validation, and normalization
 - **Data API** (Required): Standards-based data query, retrieval, and distribution interfaces
-- **Basic Climate Computation** (Required): Computation of derived meteorological variables, summary statistics, and homogenised series from quality-controlled observations
+- **Basic Climate Computation** (Required): Computation of derived meteorological variables, summary statistics, and homogenized series from quality-controlled observations
 - **Data Rescue** (Optional): Digitization workflow for historical paper records including imaging and data entry
 - **Metadata Management** (Required): Advanced station and element metadata management including WIGOS compliance,
   complete station history, discovery metadata, and metadata quality validation

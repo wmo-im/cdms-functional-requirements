@@ -9,7 +9,7 @@ System_Boundary(cdms, "Climate Data Management System") {
     Component(webapp, "Climate Data Portal", "Web Application", "Web UI for data review, QC validation, and metadata management")
     Component(api, "Data API Gateway", "API Service", "REST API for data ingestion, query, and distribution")
     Component(qcengine, "QC Processing Engine", "Processing Service", "Applies quality control algorithms to climate observations")
-    Component(computation, "Climate Computation Service", "Statistical Processing Service", "Computes derived meteorological variables, summary statistics, and homogenised series")
+    Component(computation, "Climate Computation Service", "Statistical Processing Service", "Computes derived meteorological variables, summary statistics, and homogenized series")
     Component(metadata, "Metadata Management Service", "API Service", "Manages station metadata, instruments, and data lineage")
     Component(ingest, "Data Ingestion Service", "Integration Service", "Processes incoming data from multiple sources and formats")
 

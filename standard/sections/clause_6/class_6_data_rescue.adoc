@@ -13,20 +13,6 @@ Facilitate the recovery of historical observations from non-digital sources, ens
 integrated into the observational records with complete provenance and appropriate quality control. Data rescue
 extends the temporal coverage of observational records, essential for understanding long-term variability and change.
 
-==== Justification and Regulatory Basis
-
-WMO-No. 1131 classifies Data Rescue capabilities as Recommended (Section 5.2), covering "imaging and digitization,
-monitoring, and data entry."
-
-WMO-No. 1238 requires Members ensure "Entities develop a data rescue strategy" including "systematic" preservation
-activities, digitization plans, and resource mobilization (3.5.3.1).
-
-[NOTE]
-====
-The Guidelines on Good Practices for Data Rescue (WMO-No. 1182) emphasizes that data rescue is "the ongoing process of
-identifying and preserving all data, records and climate archives that are at risk of being lost."
-====
-
 ==== Requirements
 
 [[rec_data_rescue_imaging]]
@@ -95,7 +81,7 @@ The system SHOULD provide a data entry interface for manual keying that:
 [NOTE]
 ====
 Digitized observations shall be processed through the same quality control pipeline as contemporary
-observations (/req/quality-control). The sequencing of digitisation, provisional storage, and quality
+observations (/req/quality-control). The sequencing of digitization, provisional storage, and quality
 assurance is an implementation decision; what is required is that rescued data does not enter the
 operational observational record without passing through the full QC pipeline.
 ====
@@ -113,7 +99,7 @@ The system SHALL record data rescue provenance including:
 * Source document identification and archive location
 * Image identifier and scan metadata
 * Data entry operator(s) and keying date(s)
-* Keying method used (e.g., single-key, double-key); automated OCR is outside the scope of this specification (see Overview NOTE)
+* Keying method used (e.g., single-key, double-key); automated OCR is outside the scope of this specification
 * Quality assurance verification status
 * Known limitations or uncertainties in rescued data
 |===

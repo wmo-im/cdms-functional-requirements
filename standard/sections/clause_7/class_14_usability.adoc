@@ -13,17 +13,6 @@ Ensure the system is accessible, intuitive, and efficient for climate scientists
 with varying levels of technical expertise. Usability directly impacts the effectiveness of quality control,
 data validation, and metadata management workflows that depend on expert human judgment.
 
-==== Justification and Regulatory Basis
-
-WMO-No. 1131 emphasizes that CDMSs must support diverse user roles including, _inter alia_, "climate scientists, data managers,
-system administrators, and data entry operators" (Figure 2 and Figure 3). The specification notes that while "most NMHSs
-would not manage infrastructure and software required to support" certain advanced components, systems must still be "
-flexible enough to accommodate national climate monitoring products and other national indices" (Section 4.4.2.3).
-
-WMO-No. 1238 recognizes the need for "climate scientists to review and validate climate observations, identify
-inhomogeneities" (Figure 2), which requires effective user interfaces. The Competencies requirements (3.6) acknowledge
-that staff need appropriate training, implying systems should support learnable, efficient workflows.
-
 ==== Requirements
 
 ===== User Interface Design
@@ -44,7 +33,7 @@ that staff need appropriate training, implying systems should support learnable,
 
 [NOTE]
 ====
-A web-based user interface is the recommended approach as it maximises accessibility
+A web-based user interface is the recommended approach as it maximizes accessibility
 across platforms, reduces client-side deployment complexity, and facilitates integration
 with web-based identity management systems. Web-based interfaces should apply the accessibility recommendations in /rec/usability/accessibility.
 ====

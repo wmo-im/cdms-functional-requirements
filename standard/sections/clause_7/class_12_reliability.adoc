@@ -13,17 +13,6 @@ Ensure the system operates dependably with minimal unplanned downtime, maintains
 and recovers gracefully from failures. Reliability is essential for climate data, which serves as an irreplaceable
 scientific resource requiring protection for future generations.
 
-==== Justification and Regulatory Basis
-
-WMO-No. 1131 states that "the most important stakeholders for climate data are future generations, and the reason to
-implement and manage CDMSs now is to protect the integrity of climate data for their future use" (Section 2.3).
-The specification's core theme is to "ensure that the data are securely and transparently managed" (Section 2.3).
-
-WMO-No. 1238 mandates that "Members shall ensure that Entities develop and maintain a business continuity plan to
-mitigate risks associated with disruption of operations" (3.4.1.1) and requires "routine backup, and procedures for
-timely restoration of their databases" (3.4.1.2). The requirement to "retain their original and irreproducible climate
-records, and associated metadata, permanently" (3.4.1.4) establishes reliability as a foundational requirement.
-
 ==== Requirements
 
 ===== System Availability
@@ -37,7 +26,7 @@ records, and associated metadata, permanently" (3.4.1.4) establishes reliability
 * Define and publish availability targets for data retrieval and ingestion services
 * Monitor system availability and report against defined targets
 * Communicate scheduled maintenance windows to users in advance
-* Minimise scheduled maintenance downtime through rolling update or equivalent procedures
+* Minimize scheduled maintenance downtime through rolling update or equivalent procedures
 * Notify administrators promptly of unplanned outages with sufficient detail for diagnosis
 |===
 
@@ -59,7 +48,8 @@ Note that availability targets govern day-to-day operations; disaster recovery o
 |Identifier|/req/reliability/data-integrity
 |Statement a|The system SHALL ensure data integrity through:
 
-* ACID-compliant transactions for all data create, update, and delete operations
+* Atomicity of write operations: observation records are written completely or not at all, with no partial writes persisted to storage
+* Durability of committed records: data written successfully persists across system failures and restarts
 * Referential integrity constraints preventing orphaned observations (observations without valid station references)
 * Checksums or cryptographic hash verification for file-based data transfers
 * Write-ahead logging or equivalent mechanisms to prevent data loss during system failures
@@ -112,7 +102,7 @@ RPO defines the maximum acceptable data loss measured in time. Targets should be
 appropriate to the operational context — for a national CDMS, a pragmatic RPO will often be
 longer than for a real-time operational system, since historical observation data is typically
 re-ingestible from source systems. The critical concern is protecting processed outputs (QC flags,
-homogenisation adjustments) that may not be reproducible without significant effort.
+homogenization adjustments) that may not be reproducible without significant effort.
 
 Backup storage volumes grow with retention period. Retention requirements should be balanced
 against available storage, using incremental backup strategies and compression to manage costs. WMO-No. 1238 requires permanent retention of original

@@ -13,15 +13,6 @@ Support the scheduled and automated execution of routine data processing workflo
 consistent processing without continuous manual intervention. Automation covers quality control processing,
 statistical product computation, data publication, and system maintenance tasks.
 
-==== Justification and Regulatory Basis
-
-WMO-No. 1131 classifies Processing Automation as Recommended, emphasizing that routine data processing
-should be performed systematically and consistently without requiring manual intervention for each cycle.
-
-WMO-No. 1238 requires timely generation of climate products and systematic data processing (2.2.1). The
-framework principle requiring "comprehensive records of all modifications and processing" (3.3.1.1) implies
-that automated processing must be fully logged and auditable.
-
 ==== Requirements
 
 [[req_automation_scheduling]]

@@ -11,25 +11,19 @@ System Specifications_ (WMO-No. 1131, 2025 Edition).
 
 WMO-No. 1131 provides a comprehensive framework for Climate Data Management Systems (CDMS), describing key
 components, governance principles, and operational practices using the classifications "Required", "Recommended",
-and "Optional". However, Members may require more concrete technical requirements to support implementation.
+and "Optional". The high-level nature of those classifications makes it difficult in practice to assess objectively
+whether a given system meets the standard. This document translates the WMO-No. 1131 framework into a set of
+concrete requirements against which a CDMS can be assessed.
 
-This document translates the framework outlined in WMO-No. 1131 into a set of concrete functional and non-functional
-requirements. These requirements represent a subset of the full specifications in WMO-No. 1131 and serve as a
-practical and technical specification, focusing on capabilities essential for managing observational data from
-stations, including station, sensor, and provenance metadata.
+This document is primarily intended as: a tool to help WMO Members assess whether an existing or proposed CDMS
+meets the minimum capabilities described in WMO-No. 1131; and a reference to help developers understand the
+minimum capabilities expected of a conformant system. It is not a detailed technical specification or
+implementation guide — specific architectural and technology choices remain the responsibility of the
+implementing organization.
 
-The functional requirements are expressed as requirements classes following the OGC Modular Specification approach.
-
-This specification aims to:
-
-* **Assist Developers and Integrators**: Provide practical, testable requirements for the design, development, and integration of robust and compliant CDMS components and systems.
-* **Empower Users and Assessors**: Establish a comprehensive set of conformance criteria and common understanding to
-objectively assess the capabilities and compliance of existing, or proposed, CDMS implementations with the essential
-functionalities described in WMO-No. 1131.
-* **Enable Interoperability**: Define standardized interfaces, data formats, and protocols to facilitate integration
-between CDMS implementations and external systems within the climate data ecosystem.
-
-This specification is __not intended__ as a list of requirements that WMO Members SHALL or SHOULD follow.
+The functional requirements are expressed as requirements classes following the OGC Modular Specification
+approach. This specification does not place new mandatory obligations on WMO Members, and is not intended
+as a list of requirements that Members SHALL or SHOULD follow.
 
 ==== System Context and Boundaries
 
@@ -71,7 +65,7 @@ System component and its specific responsibilities.
 **The following are IN SCOPE:**
 
 - Quality control procedures specific to climate data requirements with emphasis on long-term consistency
-- Detection and correction of inhomogeneities in climate time series (homogenisation)
+- Detection and correction of inhomogeneities in climate time series (homogenization)
 - Climate data rescue, including digitization of historical paper records
 - Station metadata management with emphasis on long-term consistency and provenance
 - Archival and preservation of climate datasets with appropriate documentation
@@ -136,7 +130,7 @@ Data Rescue Service. Handles multiple data formats and protocols, performing ini
 
 - **Data Processing Engine**: Applies quality control algorithms to climate observations including range checks,
   temporal consistency checks, spatial consistency checks, and climatological validation. Also performs statistical
-  analysis to detect and adjust for non-climatic discontinuities in observation time series (homogenisation),
+  analysis to detect and adjust for non-climatic discontinuities in observation time series (homogenization),
   producing both adjusted data and comprehensive documentation of the process.
 
 - **Metadata Management**: Maintains comprehensive station and element metadata including location information,
@@ -161,10 +155,10 @@ Data Rescue Service. Handles multiple data formats and protocols, performing ini
 
 - **Data Store**: Persistent storage for climate observations with their associated quality flags and
   processing history, station and element metadata (including units, codes, and controlled vocabularies),
-  quality control rules and thresholds, system configuration, homogenisation parameters, and data lineage
+  quality control rules and thresholds, system configuration, homogenization parameters, and data lineage
   information. Maintains historical records of all metadata changes to support long-term climate analysis.
 
-- **File Storage**: Manages climate-standard file formats (such as NetCDF-CF), quality control reports, homogenisation
+- **File Storage**: Manages climate-standard file formats (such as NetCDF-CF), quality control reports, homogenization
   analysis outputs, digitized document images, and archived datasets. Supports versioning and long-term preservation
   requirements.
 
@@ -207,6 +201,6 @@ functional duties but also operates effectively, securely, and sustainably in va
 used throughout the document, references to related standards and specifications, and any other relevant supporting
 material that aids in the understanding and application of these specifications.
 
-Each requirement within the functional and non-functional sections is designed to be clear, measurable, and
-directly applicable, serving as a valuable reference for both system development and compliance assessment
+Each requirement within the functional and non-functional sections is designed to be clear, assessable, and
+directly applicable, serving as a valuable reference for both system development and conformance assessment
 activities in the context of WMO-No. 1131.

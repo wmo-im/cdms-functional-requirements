@@ -13,18 +13,6 @@ Protect climate data assets, ensure appropriate access controls, maintain confid
 provide comprehensive audit trails of security-relevant events. Security safeguards the integrity and trustworthiness
 of the climate record while enabling appropriate access for legitimate users.
 
-==== Justification and Regulatory Basis
-
-WMO-No. 1131 requires "controlled access to data and systems" as a Required governance component (Section 3.2.1.1),
-specifying that "staff who have write access to data stored within a database only be able to change data under
-software control" with comprehensive audit trails. The specification mandates "each successful change to observations
-data be audited to ensure that the change, the details of the operator who made the change and the time of the change
-have all been recorded" (Section 3.2.1.1).
-
-WMO-No. 1238 requires "Members shall ensure Entities implement rigorous authorization processes for modification or
-deletion of data or metadata" (3.4.4.1) and mandates "regularly review systems for the physical- and cyber-security of
-the climate record" (3.4.4.2).
-
 ==== Requirements
 
 ===== Authentication
@@ -47,7 +35,7 @@ the climate record" (3.4.4.2).
 ====
 Standard authentication protocols include OpenID Connect, OAuth 2.0, SAML 2.0, and LDAP,
 among others. The choice of protocol should reflect the identity management infrastructure
-in use within the deploying organisation. OpenID Connect is widely adopted and provides
+in use within the deploying organization. OpenID Connect is widely adopted and provides
 a standards-based federated identity layer suitable for both web and API access.
 ====
 
@@ -113,7 +101,7 @@ networks may be subject to bilateral sharing agreements or national security con
 |B a|Audit logs SHALL:
 
 * Be tamper-proof or stored in write-once media
-* Be retained in accordance with the organisation's data retention policy
+* Be retained in accordance with the organization's data retention policy
 * Be searchable and exportable for security incident investigation
 * Include sufficient detail to reconstruct the sequence of events
 |===
@@ -140,11 +128,11 @@ networks may be subject to bilateral sharing agreements or national security con
 |Identifier|/req/security/data-privacy
 |A a|The system SHALL protect personal information by:
 
-* Minimising collection and storage of personally identifiable information (PII) to
+* Minimizing collection and storage of personally identifiable information (PII) to
   what is operationally necessary
-* Providing mechanisms to redact or anonymise personal information where required
+* Providing mechanisms to redact or anonymize personal information where required
 * Supporting compliance with applicable data protection regulations as determined by
-  the deploying organisation
+  the deploying organization
 * Documenting data retention policies for any personal data held by the system
 |===
 

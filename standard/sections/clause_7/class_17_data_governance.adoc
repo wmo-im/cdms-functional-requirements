@@ -14,20 +14,6 @@ and compliance with organizational and regulatory requirements. Data governance 
 accountability structures necessary for long-term climate data stewardship.
 
 
-==== Justification and Regulatory Basis
-
-WMO-No. 1131 dedicates Chapter 3 entirely to "CDMS Governance", stating that "one of the steps often overlooked when
-implementing a CDMS is to ensure that the NMHS has established a solid governance framework to protect the integrity of
-the climate record" involving "Policies" and "Governance processes". The specification defines data governance as
-Required (Section 3.2.1), including "controlled access to data and systems", "approval process for new data types",
-"approval process to change data", and "IT change approvals".
-
-WMO-No. 1238 requires "Members should ensure that Entities implement and maintain a governance mechanism to oversee the
-various governance elements, coordinated by a governance body" (3.5.1.1) and mandates policies covering commitments,
-sustainability, intellectual property, and data delivery (Section 3.1 of WMO-No. 1131). The framework emphasizes that
-"data stewardship assigns to an entity rights and responsibilities for acquiring and managing climate data and
-information" (Definitions), requiring formalized governance structures.
-
 ==== Requirements
 
 ===== Data Lifecycle Management
@@ -57,7 +43,7 @@ information" (Definitions), requiring formalized governance structures.
 * Timeliness metrics (delay between observation time and system receipt)
 * Quality control statistics (pass/fail rates per check type)
 * Manual intervention frequency and types
-* Homogenisation status and adjustment statistics
+* Homogenization status and adjustment statistics
 * Overall fitness-for-purpose assessments
 
 |B a|Quality metadata SHALL be:
@@ -72,7 +58,7 @@ information" (Definitions), requiring formalized governance structures.
 Fitness-for-purpose refers to an assessment of whether a dataset meets the quality
 requirements of a particular application. For example, a dataset with frequent short
 gaps may be suitable for climatological trend analysis but unsuitable for computing
-climate normals. Fitness-for-purpose assessments summarise quality metrics (completeness,
+climate normals. Fitness-for-purpose assessments summarize quality metrics (completeness,
 temporal continuity, QC flag distribution) in terms of suitability for defined use cases,
 supporting informed data selection by users. See also /req/metadata-management/data-quality.
 ====
@@ -110,11 +96,11 @@ supporting informed data selection by users. See also /req/metadata-management/d
 
 [NOTE]
 ====
-Data stewardship roles define the organisational responsibilities for data management
+Data stewardship roles define the organizational responsibilities for data management
 and are distinct from the technical access control roles defined in /req/security/authorization.
 In practice, stewardship roles map to RBAC roles: for example, the data quality manager
 role is associated with permissions to override quality control flags and approve
-homogenisation adjustments. The RBAC configuration in the security class provides the
+homogenization adjustments. The RBAC configuration in the security class provides the
 technical enforcement of the responsibilities defined here.
 ====
 
