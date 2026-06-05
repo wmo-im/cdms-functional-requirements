@@ -82,6 +82,71 @@ Custom role definition downgraded to SHOULD recommendation. Personal data list e
 
 ---
 
+### Post-meeting editorial changes (4 June 2026 teleconference)
+
+#### Clause 1 (Scope)
+
+Purpose statement rewritten to explicitly frame the document as an assessment tool and minimum standard, not a detailed technical specification or implementation guide. Statement added that the document does not place new mandatory obligations on WMO Members. "compliance" corrected to "conformance" in the opening paragraph. "measurable" corrected to "assessable" in the document structure section.
+
+#### Clause 4 (Terms and Definitions)
+
+NOTEs reduced throughout: cross-references to requirement identifiers removed; short explanatory content folded into definitions. "Earth system domains" term added. "Observable element" definition updated: height/depth removed from the element identity (height/depth is always an observation-level attribute, not an element attribute). Homogenization and related terms updated to -ize/-ization spelling per WMO Style Guide.
+
+#### Clause 5 (Conventions)
+
+Stale editorial comment removed. Recommendation URI example updated to `/rec/climate-computation/homogenization-detection`.
+
+#### Clause 6 - Class 1 (Core)
+
+New observation conceptual model figure added (`observation_model.puml`), showing the hub-and-spoke relationship between an Observation and its associated entities (Observable Element, Observing Facility, Equipment, Result, Quality Flag, Geometry, Temporal Constraints, Provenance Record, Dataset Collection). NOTE added referencing WCCDM-OBS (FM 251, experimental) as a consistent model proposed to INFCOM-3.
+
+#### Clause 6 - Class 2 (Quality Control)
+
+New recommendation `/rec/quality-control/flagging-convention` added (promoted from NOTE): adoption of a published QC flagging convention to facilitate data exchange. _Guide to Climatological Practices_ (WMO-No. 100) added as a reference for quality flag examples.
+
+#### Clause 6 - Class 4 (Data API)
+
+New recommendation `/rec/data-api/openapi` added (promoted from NOTE): API documentation in OpenAPI format.
+
+#### Clause 6 - Class 5 (Basic Climate Computation)
+
+Return period estimation added as an explicit example in `/req/climate-computation/statistics`.
+
+#### Clause 6 - Class 7 (Metadata Management)
+
+`/req/metadata-management/feature-catalogue`: height/depth removed from the element catalogue, consistent with the updated observable element definition in Clause 4.
+
+`/req/metadata-management/discovery`: Statement C (GDC publication) removed from the requirement; replaced by new recommendation `/rec/metadata-management/gdc-submission`. Statement A simplified: JSON property name annotations removed; URN pattern replaced with "globally unique persistent identifier". Statement B (dataset lineage) restructured for clarity; parenthetical implementation guidance removed.
+
+`/req/metadata-management/constraints` split: operational constraints (legal access, use, security, embargo) remain SHALL; WMO data policy classification moved to new recommendation `/rec/metadata-management/constraints`.
+
+Discovery metadata NOTE reduced from five paragraphs to three sentences.
+
+#### Clause 6 - Class 9 (Climate Products)
+
+WMO-No. 1131 classification references removed from NOTEs (justification content). Generation/ingestion distinction retained.
+
+#### Clause 7 - Class 12 (Reliability)
+
+ACID compliance reframed as outcome-based requirements: atomicity of write operations and durability of committed records. Non-proprietary backup format requirement added to `/req/reliability/backup-recovery`. Implementation detail paragraphs removed from NOTEs.
+
+#### Document-wide editorial changes
+
+- Justification and Regulatory Basis sections removed from all 17 requirement classes following reviewer feedback that the regulatory basis was contested and the sections added length without value.
+- "Implementers should / Implementations are encouraged to" phrasing removed throughout; normative cases promoted to `/rec/` blocks; informative cases rephrased as neutral prose.
+- SHALL/SHOULD/MAY removed from all NOTE blocks (these carry no normative weight in informative text).
+- Spelling updated to WMO Style Guide: -ize/-ization throughout (organize, normalize, homogenize, standardize, digitize, etc.). Exceptions retained: analyse, catalyse, paralyse.
+- Multi-paragraph NOTE blocks reviewed and trimmed; purely explanatory, redundant, and cross-reference-only paragraphs removed.
+
+#### Word output formatting
+
+- Note paragraph style added to `custom-reference.docx`: left border, light background, bold "NOTE —" label.
+- Table borders added to `Table` style in `custom-reference.docx`.
+- Heading 4 updated: 12pt space before, 6pt space after, tab stop at 1 inch.
+- Page breaks before Heading 1 added.
+
+---
+
 ## [v0.3.0] - 2021-05-26
 
 ### Document-level / Architecture
