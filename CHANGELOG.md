@@ -1,6 +1,6 @@
 # Change Log
 
-## [v0.4.0] - 2026-05-15
+## [v0.4.0] - 2026-06-05
 
 ### Document-level / Architecture
 
