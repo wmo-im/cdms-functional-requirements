@@ -1,0 +1,148 @@
+[appendix]
+== Requirements Summary
+
+This annex provides a consolidated reference list of all normative requirements and recommendations defined in this specification, grouped by requirements class.
+
+=== Functional Requirements
+
+[cols="3,1,4",options="header"]
+|===
+|Identifier|Type|Requirements Class
+
+|/req/core/data-model|Requirement|Core Data Management
+|/req/core/observation-storage|Requirement|Core Data Management
+|/req/core/observation-retrieval|Requirement|Core Data Management
+|/req/core/metadata-storage|Requirement|Core Data Management
+|/req/core/metadata-retrieval|Requirement|Core Data Management
+|/req/core/metadata-versioning|Requirement|Core Data Management
+|/req/core/provenance-storage|Requirement|Core Data Management
+|/req/core/provenance-retrieval|Requirement|Core Data Management
+|/req/core/provenance-immutability|Requirement|Core Data Management
+|/req/core/batch-processing|Requirement|Core Data Management
+|/req/core/timezone|Requirement|Core Data Management
+|/req/quality-control/observation-retention|Requirement|Observations Quality Control
+|/req/quality-control/flags|Requirement|Observations Quality Control
+|/req/quality-control/configuration|Requirement|Observations Quality Control
+|/req/quality-control/execution|Requirement|Observations Quality Control
+|/req/quality-control/range-checks|Requirement|Observations Quality Control
+|/req/quality-control/temporal-checks|Requirement|Observations Quality Control
+|/req/quality-control/spatial-checks|Requirement|Observations Quality Control
+|/req/quality-control/internal-consistency|Requirement|Observations Quality Control
+|/rec/quality-control/flagging-convention|Recommendation|Observations Quality Control
+|/req/data-ingestion/automated-collection|Requirement|Data Ingestion
+|/req/data-ingestion/collection-monitoring|Requirement|Data Ingestion
+|/req/data-ingestion/completeness|Requirement|Data Ingestion
+|/req/data-ingestion/manual-acquisition|Requirement|Data Ingestion
+|/req/data-ingestion/formats|Requirement|Data Ingestion
+|/req/data-ingestion/validation|Requirement|Data Ingestion
+|/req/data-ingestion/standardization|Requirement|Data Ingestion
+|/req/data-ingestion/duplicate-detection|Requirement|Data Ingestion
+|/req/data-ingestion/character-encoding|Requirement|Data Ingestion
+|/rec/data-ingestion/formats|Recommendation|Data Ingestion
+|/rec/data-ingestion/validation|Recommendation|Data Ingestion
+|/req/data-api/rest|Requirement|Data API
+|/req/data-api/query|Requirement|Data API
+|/req/data-api/auth|Requirement|Data API
+|/req/data-api/versioning|Requirement|Data API
+|/req/data-api/integration|Requirement|Data API
+|/req/data-api/data-formats|Requirement|Data API
+|/rec/data-api/openapi|Recommendation|Data API
+|/rec/data-api/standards|Recommendation|Data API
+|/req/climate-computation/derived-variables|Requirement|Basic Climate Computation
+|/req/climate-computation/statistics|Requirement|Basic Climate Computation
+|/rec/climate-computation/homogenization-detection|Recommendation|Basic Climate Computation
+|/rec/climate-computation/homogenization-adjustment|Recommendation|Basic Climate Computation
+|/rec/data-rescue/imaging|Recommendation|Data Rescue
+|/rec/data-rescue/data-entry|Recommendation|Data Rescue
+|/req/data-rescue/quality-control|Requirement|Data Rescue
+|/req/data-rescue/provenance|Requirement|Data Rescue
+|/req/metadata-management/wigos|Requirement|Metadata Management
+|/req/metadata-management/history|Requirement|Metadata Management
+|/req/metadata-management/feature-catalogue|Requirement|Metadata Management
+|/req/metadata-management/discovery|Requirement|Metadata Management
+|/req/metadata-management/data-quality|Requirement|Metadata Management
+|/req/metadata-management/constraints|Requirement|Metadata Management
+|/req/metadata-management/export|Requirement|Metadata Management
+|/req/metadata-management/validation|Requirement|Metadata Management
+|/req/metadata-management/citation|Requirement|Metadata Management
+|/rec/metadata-management/gdc-submission|Recommendation|Metadata Management
+|/rec/metadata-management/maintenance|Recommendation|Metadata Management
+|/rec/metadata-management/constraints|Recommendation|Metadata Management
+|/rec/metadata-management/citation|Recommendation|Metadata Management
+|/req/user-interface/visualization|Requirement|User Interface
+|/req/user-interface/tabular|Requirement|User Interface
+|/req/user-interface/search|Requirement|User Interface
+|/req/user-interface/data-entry|Requirement|User Interface
+|/req/climate-products/normals|Requirement|Climate Products
+|/req/climate-products/wmo-products|Requirement|Climate Products
+|/req/climate-products/management|Requirement|Climate Products
+|/rec/climate-products/indices|Recommendation|Climate Products
+|/req/automation/scheduling|Requirement|Processing Automation
+|/req/automation/workflows|Requirement|Processing Automation
+|/req/automation/monitoring|Requirement|Processing Automation
+|/req/automation/audit|Requirement|Processing Automation
+|===
+
+=== Non-functional Requirements
+
+[cols="3,1,4",options="header"]
+|===
+|Identifier|Type|Requirements Class
+
+|/req/performance/response-time|Requirement|Performance
+|/req/performance/capacity|Requirement|Performance
+|/rec/performance/scalability|Recommendation|Performance
+|/req/reliability/availability|Requirement|Reliability and Availability
+|/req/reliability/data-integrity|Requirement|Reliability and Availability
+|/req/reliability/backup-recovery|Requirement|Reliability and Availability
+|/req/reliability/fault-tolerance|Requirement|Reliability and Availability
+|/req/reliability/retrieval-validation|Requirement|Reliability and Availability
+|/rec/reliability/disaster-recovery|Recommendation|Reliability and Availability
+|/req/security/authentication|Requirement|Security
+|/req/security/authorization|Requirement|Security
+|/req/security/encryption|Requirement|Security
+|/req/security/audit-logging|Requirement|Security
+|/req/security/vulnerability-management|Requirement|Security
+|/req/security/data-privacy|Requirement|Security
+|/req/security/provenance-security|Requirement|Security
+|/rec/security/authorization|Recommendation|Security
+|/req/usability/ui-design|Requirement|Usability
+|/req/usability/notifications|Requirement|Usability
+|/rec/usability/accessibility|Recommendation|Usability
+|/req/maintainability/configuration|Requirement|Maintainability
+|/req/maintainability/logging|Requirement|Maintainability
+|/req/maintainability/health-monitoring|Requirement|Maintainability
+|/req/maintainability/api-compatibility|Requirement|Maintainability
+|/req/maintainability/schema-evolution|Requirement|Maintainability
+|/req/maintainability/documentation|Requirement|Maintainability
+|/req/interoperability/standards|Requirement|Interoperability
+|/req/interoperability/api|Requirement|Interoperability
+|/req/data-governance/lifecycle|Requirement|Data Governance
+|/req/data-governance/quality-metadata|Requirement|Data Governance
+|/req/data-governance/access-policies|Requirement|Data Governance
+|/req/data-governance/stewardship|Requirement|Data Governance
+|===
+
+[appendix]
+== Acknowledgements
+
+This specification was developed under an informal working group of the Expert Team on Information
+Management (ET-IM), operating under the Standing Committee on Information Management and Technology
+(SC-IMT) of the Commission for Observation, Infrastructure and Information Systems (INFCOM) of the
+World Meteorological Organization (WMO). The work was carried out in close collaboration with the
+Services Commission (SERCOM), bringing together CDMS developers and climate domain experts to ensure
+the requirements are both technically sound and operationally grounded.
+
+The following individuals contributed to the development and review of this specification:
+
+*Chair:* Ian Edwards (myAcorn, UK)
+
+*Members and contributors:* Etna Cervantes (MCH, Mexico), Marcellin Habimana (Climsoft, Kenya),
+Charlotte McBride (South African Weather Service), Patrick Munyoki (Climsoft, Kenya), Ge Peng (USA),
+Xavier Perrot (Météo-France International), Dwayne Scott (Belize Meteorological Service / SURFACE CDMS),
+Denis Stuber (Météo-France), Peter Thorne (Maynooth University, Ireland), William Wright (Australia),
+Liu Yiming (China Meteorological Administration)
+
+*WMO Secretariat:* David Berry, Washington Otieno
+
+The editorial team gratefully acknowledges all reviewers who submitted comments on earlier drafts of this specification.
