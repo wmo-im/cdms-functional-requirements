@@ -12,27 +12,27 @@
 ==== Overview
 
 The Observations Quality Control requirements class defines requirements to ensure observation data meets quality
-standards for long-term environmental records through systematic automated checks that detect erroneous, suspicious,
+standards for long-term environmental records through systematic quality checks that detect erroneous, suspicious,
 or inconsistent values while maintaining complete audit trails of all quality control decisions. Quality control is
 essential for establishing trustworthy observational records suitable for long-term trend analysis and monitoring.
-
-==== Justification and Regulatory Basis
-
-WMO-No. 1131 classifies Observations Quality Control as Required (Section 5.3), emphasizing that "all data have been
-checked for accuracy, and that a record is maintained of what checks were performed,
-the outcome of the checks and when the checks took place."
-
-WMO-No. 1238 mandates that "Entities apply quality control to all climate datasets under their management and record
-the result of that quality control in the metadata" (3.3.2.1).
-
-[NOTE]
-====
-The  __Guidelines on Surface Station Data Quality Control and Quality Assurance for Climate Applications__
-(WMO-No. 1269) provide specific methodologies referenced in both documents.
-====
+The results of quality control processing may also help identify systemic error patterns in the observations
+that imply the need for remedial training or other actions (see /req/data-governance/stewardship),
+and/or may inform design changes to the quality control algorithms if too few errors are detected
+or too many values are flagged as suspect.
 
 ==== Requirements
 
+[[req_qc_observation_retention]]
+===== Observation Retention
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/quality-control/observation-retention
+|Statement a|The system SHALL retain all observation records regardless of quality flag status.
+Observations that fail quality control checks SHALL remain in the system with their assigned
+quality flags and the complete record of checks applied.
+|===
 
 [[req_qc_flag_management]]
 ===== Quality Flag Management
@@ -51,12 +51,15 @@ The system SHALL maintain quality flags and:
 
 |===
 
-[NOTE]
-====
-Implementers are encouraged to adopt a published flagging convention to facilitate data exchange and
-interoperability. WMO-No. 1269 provides guidance on quality flag definitions applicable to long-term
-observational data.
-====
+[[rec_qc_flagging_convention]]
+[cols="1,4"]
+|===
+2+^|Recommendation {counter:rec-id}
+|Identifier|/rec/quality-control/flagging-convention
+|Statement a|The system SHOULD adopt a published quality control flagging convention to facilitate
+data exchange and interoperability. Applicable references include the _Guide to the Global Observing
+System_ (WMO-No. 488), WMO-No. 1269, and the _Guide to Climatological Practices_ (WMO-No. 100).
+|===
 
 [[req_qc_configuration]]
 ===== Quality Control Configuration Management
@@ -78,9 +81,9 @@ The system SHALL support configuration of quality control parameters, including:
 [NOTE]
 ====
 Thresholds may be either fixed values (e.g. absolute physical limits) or dynamically derived (e.g. based on
-climatological statistics such as percentiles). Implementations should ensure that simple fixed-threshold
-configurations remain straightforward to set up, with advanced options such as seasonally varying or
-statistically derived thresholds available but not required for basic operation.
+climatological statistics such as percentiles or standard deviations). Simple fixed-threshold configurations should remain straightforward to set up; advanced options such
+as seasonally varying or statistically derived thresholds are available but not required for basic
+operation.
 ====
 
 [[req_qc_execution]]
@@ -91,12 +94,19 @@ statistically derived thresholds available but not required for basic operation.
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/quality-control/execution
 |Statement a|
-The system SHALL support triggering of quality control processing:
+The system SHALL support quality control processing initiated in multiple ways:
 
 * Automatically upon data ingestion
 * On demand by an authorized user, including reprocessing of previously checked observations
 * As a scheduled or batch process, including reprocessing of previously checked observations
 |===
+
+[NOTE]
+====
+A series of standard checks is defined in the following sections. Not all checks are applicable to all
+variables or observation frequencies; for instance, rate of change and spike checks are not relevant to
+the quality control of daily accumulated rainfall.
+====
 
 [[req_qc_range_checks]]
 ===== Range Checks
@@ -107,11 +117,18 @@ The system SHALL support triggering of quality control processing:
 |Identifier|/req/quality-control/range-checks
 |Statement a|The system SHALL perform range validation checks, including:
 
-* Gross error limits (physically impossible values)
-* Climatological based range checks
+* Gross error limits (physically impossible values, e.g. wind direction greater than 360 degrees or temperature greater than 80°C)
+* Climatologically-based range checks
 * Sensor-based range checks (measurements within observable range for sensor)
 * Configurable thresholds per element and station
 |===
+
+[NOTE]
+====
+Element-specific gross error limits are defined in the _Guide to the Global Observing System_ (WMO-No. 488)
+and the _Guide to Meteorological Instruments and Methods of Observation_ (WMO-No. 8) and should be used
+as the basis for gross error limit checks where available.
+====
 
 [[req_qc_temporal_consistency]]
 ===== Temporal Consistency Checks
@@ -142,6 +159,13 @@ The system SHALL support triggering of quality control processing:
 * Spatial regression tests
 |===
 
+[NOTE]
+====
+Where no neighbouring stations exist within a practicable distance — as is the case for many island and
+remote stations — spatial consistency checks cannot be applied. The maximum distance threshold used for
+neighbour selection should be configurable to reflect regional station density.
+====
+
 [[req_qc_internal_consistency]]
 ===== Internal Consistency Checks
 
@@ -160,11 +184,4 @@ and precipitation-weather code agreement. WMO-No. 1269 provides comprehensive
 guidance on element-specific checks.
 ====
 
-[NOTE]
-====
-Some internal consistency checks may also be applied within Data Collection and Processing Systems
-(DCPS) during real-time processing. The CDMS applies these checks in the context of quality assurance
-for long-term observational records, where access to full station metadata and the complete observation
-history allows for more thorough validation than is typically possible in real-time operational systems.
-====
 

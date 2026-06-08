@@ -29,11 +29,7 @@ Recommendations are identified by a URI fragment that includes the Recommendatio
 the specific requirement.
 
 * **Format:** `/rec/[recommendation-class-name]/[recommendation-id]`
-* **Example:** `/rec/homogenisation/detection`
-
-====
-DB comment: need to check the syntax.
-====
+* **Example:** `/rec/climate-computation/homogenization-detection`
 
 === Use of IETF RFC 2119 Keywords
 

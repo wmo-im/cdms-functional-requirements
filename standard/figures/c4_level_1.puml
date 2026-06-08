@@ -5,13 +5,13 @@ LAYOUT_WITH_LEGEND()
 
 title System Context Diagram - Climate Data Management System
 
-Person(climatologist, "Climate Scientist", "Reviews and validates climate observations, identifies inhomogeneities")
+Person(climatologist, "Climate Scientist", "Reviews and validates climate observations, identifies inhomogeneities, generates derived climate products")
 Person(datamanager, "Data Manager", "Manages station metadata and data holdings")
 Person(operator, "System Administrator", "Configures QC parameters and monitors system health")
 
 System(cdms, "Climate Data Management System", \
-"Applies quality control, homogenization, and metadata management to climate observations. \
-Performs statistical processing and trend analysis")
+"Applies quality control, metadata management, and statistical processing to climate observations. \
+Produces derived climate products and long-term climate data.")
 
 System_Ext(wis2, "WIS 2.0", "Provides climate observations from global networks via message broker")
 System_Ext(dcps, "Data collection and processing system (DCPS)", \

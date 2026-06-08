@@ -12,17 +12,6 @@ The Core requirements class defines the requirements for basic observation stora
 capabilities. This provides the foundational data management capabilities for a Climate Data Management System and
 support for long-term data stewardship.
 
-==== Justification and Regulatory Basis
-WMO-No. 1131 identifies Core Data Management as a Required component across all CDMS implementations.
-WMO-No. 1131 further requires support for observations from across all Earth system domains, necessitating
-that a CDMS handle data from both fixed-position stations and mobile platforms.
-
-The Manual on High-quality Global Data Management Framework for Climate (WMO-No. 1238) requires Members to
-"ensure that Entities establish and document data management capabilities and practices for their climate data"
-(3.1.1). The framework's principles mandate "preservation and management of all data and metadata that are used for,
-or may potentially be useful for, climate studies" (1.1.1(3)). Core capabilities support the FAIR data principles
-requiring data to be Findable, Accessible, Interoperable and Reusable (3.2).
-
 ==== Requirements
 
 [[req_core_data_model]]
@@ -43,33 +32,20 @@ system domains and disciplines. The data model SHALL include:
 * Provenance metadata
 |===
 
-[NOTE]
-====
-A draft data model <link to wccdm-obs>
-====
+.Observation conceptual model
+[plantuml, observation_model, svg, align=center]
+----
+include::../../figures/observation_model.puml[]
+----
 
 [NOTE]
 ====
-The definition of an observed element requires careful consideration of all dimensions that distinguish
-one measurement from another, including: measurement type (e.g. temperature, pressure), sensor height or
-depth, aggregation duration, statistical function (instantaneous, mean, maximum, minimum), and unit of
-measure. Systems should ensure that element definitions are sufficiently granular to avoid accidental
-overwriting of observations from different sensors or measurement configurations. Source data provenance
-(e.g. transmission format or network) should be recorded separately rather than embedded in the element
-definition.
+The model is consistent with the WMO Core Climate Data Model – Observations (WCCDM-OBS, FM 251),
+proposed to INFCOM-3 and still under experimental status
+(JSON schema: https://schemas.wmo.int/wccdm-obs/2024/wccdm-obs.json).
+WCCDM-OBS is not a normative reference of this specification; further alignment is anticipated
+as the model progresses towards formal adoption.
 ====
-
-[NOTE]
-====
-Support for observations from across the Earth system domains is a core requirement of this specification.
-This includes both fixed-position stations and mobile platforms (ships, buoys, radiosondes, aircraft).
-For fixed stations, geographic location is derived from station metadata. For mobile platforms, geographic
-location must be stored with each individual observation.
-====
-
-===== Reference data
-
-- To follow
 
 [[req_core_storage]]
 ===== Observation Storage
@@ -109,7 +85,7 @@ location must be stored with each individual observation.
 /req/metadata-management/wigos.
 |B a|The system SHALL support extensibility mechanisms to store metadata fields not covered by
 the WIGOS Metadata Standard, including national identifiers, legacy identifiers from predecessor
-networks, and other organisation-specific metadata attributes.
+networks, and other organization-specific metadata attributes.
 |===
 
 [[req_core_metadata_retrieval]]
@@ -163,7 +139,7 @@ The system SHALL store provenance metadata for all observation data documenting 
 * Quality control processing history (quality control procedures applied, flags assigned, timestamps)
 * Manual interventions (edits, corrections, deletions with operator identification and justification)
 * Derived data lineage (source observations, algorithms, parameters used in derivation)
-* Homogenisation adjustments (break points detected, adjustment factors applied, reference series used)
+* Homogenization provenance: break points detected with dates and statistical confidence levels; adjustment factors applied to each segment; reference series used; statistical significance of detected breaks; correspondence with known station changes; homogenized values stored as derived observations with both original and adjusted series retained
 * Data rescue provenance (source document reference, image identifier, keying method, verification status)
 
 |===

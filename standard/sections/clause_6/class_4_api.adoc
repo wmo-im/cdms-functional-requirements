@@ -13,16 +13,6 @@ Provide standardized programmatic access to climate observation data and metadat
 external systems and supporting diverse user communities through well-documented APIs. Standard APIs facilitate
 integration with WIS 2.0, Regional Climate Centres, and international archives.
 
-==== Justification and Regulatory Basis
-
-WMO-No. 1131 classifies Climate Data Delivery Services as Required (Chapter 8), emphasizing "open spatial standards"
-and "WMO formats" for data exchange.
-
-WMO-No. 1238 requires that "data, and associated metadata, are registered in the WMO Information System Global
-Discovery Catalogue" (3.2.1.1c) and that systems support "API interoperability" using standards like OGC API family
-(Features, Records, Environmental Data Retreival, Processes). The framework principle that "datasets designated to be
-exchanged internationally through the WMO Information System" (1.1.1(4)) requires standardized API access.
-
 ==== Requirements
 
 [[req_api_restful]]
@@ -37,7 +27,7 @@ The system SHALL provide a RESTful API that:
 
 * Uses HTTP/HTTPS protocols
 * Implements standard HTTP methods (GET, POST, PUT, DELETE) where appropriate
-* Returns data in standard formats (JSON, XML, CSV, NetCDF)
+* Returns data in standard formats (JSON, CSV, NetCDF)
 * Provides comprehensive API documentation
 * Supports content negotiation based on Accept headers
 
@@ -45,17 +35,28 @@ The system SHALL provide a RESTful API that:
 
 [NOTE]
 ====
-Implementations should document the intended access scope of the API (e.g., internal/LAN access only,
-or publicly accessible). Publicly accessible APIs should apply appropriate authentication and rate
-limiting in accordance with /req/data-api/auth.
+The HTTP PATCH method is not listed as a requirement. Observational records in a CDMS are treated as
+immutable once ingested; corrections are applied by creating new versioned records with audit trails
+rather than partially updating existing ones. Implementations that require partial resource updates
+for non-observational resources (e.g., metadata records) may support PATCH at their discretion.
 ====
 
 [NOTE]
 ====
-Implementations are encouraged to provide API documentation in OpenAPI (formerly Swagger) format,
-which enables interactive documentation and client code generation. OpenAPI specifications should be
-made available at a well-known endpoint (e.g. /api or /openapi.json).
+The intended access scope of the API (e.g., internal/LAN access only, or publicly accessible) should
+be documented. Publicly accessible APIs should apply appropriate authentication and rate limiting in
+accordance with /req/data-api/auth.
 ====
+
+[[rec_api_openapi]]
+[cols="1,4"]
+|===
+2+^|Recommendation {counter:rec-id}
+|Identifier|/rec/data-api/openapi
+|Statement a|API documentation SHOULD be provided in OpenAPI format, enabling interactive
+documentation and client code generation. OpenAPI specifications should be made available at a
+well-known endpoint (e.g. `/api` or `/openapi.json`).
+|===
 
 [[req_api_standards]]
 ===== Standards Compliance
@@ -69,6 +70,9 @@ made available at a well-known endpoint (e.g. /api or /openapi.json).
 * OGC API - Environmental Data Retrieval (EDR)
 * OGC API - Features
 * OGC SensorThings API
+
+|B a|The system SHOULD support XML as a response format, following a defined schema or profile, where
+required for integration with legacy systems or national and regional networks.
 |===
 
 [NOTE]
@@ -99,9 +103,9 @@ The system SHALL support API queries with the following parameters:
 [NOTE]
 ====
 On-demand statistical aggregation by the API (e.g., computing daily means from raw observations at
-query time) is not recommended. Rigorous statistics require careful handling of data gaps, quality
-flags, and defined computation periods. Pre-computed official statistics should be stored as standard
-derived observations and served through the same query interface.
+query time) introduces risks around data gaps, quality flags, and defined computation periods.
+Pre-computed official statistics should be stored as standard derived observations
+(/req/climate-computation/statistics) and served through the same query interface.
 ====
 
 [[req_api_auth]]
@@ -172,7 +176,10 @@ The system SHALL implement API versioning to:
 
 [NOTE]
 ====
-For high-frequency or real-time data feeds, including full format documentation with every export
-response may be impractical. In such cases, it is sufficient to make the format definition and schema
-documentation available via a persistent, well-known endpoint referenced in the API documentation.
+The documentation required in Statement B covers implementation-specific choices (e.g., which NetCDF
+profile or JSON schema is used, how quality flags are encoded) that are not fully determined by the
+format standard itself. Machine-readable schemas and format definitions should be made available at a
+well-known endpoint referenced in the API documentation. For high-frequency or real-time data feeds,
+it is sufficient to make the format documentation available at this endpoint rather than including it
+inline with every export response.
 ====

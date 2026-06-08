@@ -9,14 +9,14 @@ System_Boundary(cdms, "Climate Data Management System") {
     Component(webapp, "Climate Data Portal", "Web Application", "Web UI for data review, QC validation, and metadata management")
     Component(api, "Data API Gateway", "API Service", "REST API for data ingestion, query, and distribution")
     Component(qcengine, "QC Processing Engine", "Processing Service", "Applies quality control algorithms to climate observations")
-    Component(homogenization, "Homogenization Service", "Statistical Processing Service", "Detects and adjusts for inhomogeneities in climate series")
+    Component(computation, "Climate Computation Service", "Statistical Processing Service", "Computes derived meteorological variables, summary statistics, and homogenized series")
     Component(metadata, "Metadata Management Service", "API Service", "Manages station metadata, instruments, and data lineage")
     Component(ingest, "Data Ingestion Service", "Integration Service", "Processes incoming data from multiple sources and formats")
 
     Component(auth, "Authentication Module", "Security Component", "Handles user authentication and authorization")
     Component(query, "Query Engine", "Data Access Component", "Optimized query processing for climate time series")
     Component(export, "Data Export Service", "Data Transformation Service", "Generates climate data products in multiple formats")
-    Component(scheduler, "Job Scheduler", "Workflow Component", "Schedules periodic QC and homogenization tasks")
+    Component(scheduler, "Job Scheduler", "Workflow Component", "Schedules periodic QC and computation tasks")
     Component(notifier, "Notification Service", "Messaging Component", "Sends alerts and reports to users")
     Component(audit, "Audit Logger", "Logging Component", "Tracks all data modifications and user actions")
 
@@ -52,7 +52,7 @@ Rel(nationalobs, ingest, "Uploads data", "HTTPS")
 Rel(ingest, queue, "Queues jobs", "Message protocol")
 
 Rel(queue, qcengine, "Triggers QC", "Message protocol")
-Rel(queue, homogenization, "Triggers homogenization", "Message protocol")
+Rel(queue, computation, "Triggers climate computation", "Message protocol")
 Rel(scheduler, queue, "Schedules tasks", "Message protocol")
 
 Rel(qcengine, obsdb, "Read/write observations", "SQL")
@@ -61,9 +61,9 @@ Rel(qcengine, cache, "Cache access", "Cache protocol")
 Rel(qcengine, notifier, "Send alerts", "Internal call")
 Rel(qcengine, audit, "Log changes", "Internal call")
 
-Rel(homogenization, obsdb, "Read time series", "SQL")
-Rel(homogenization, objectstore, "Store results", "Object storage API")
-Rel(homogenization, audit, "Log processing", "Internal call")
+Rel(computation, obsdb, "Read time series", "SQL")
+Rel(computation, objectstore, "Store results", "Object storage API")
+Rel(computation, audit, "Log processing", "Internal call")
 
 Rel(query, obsdb, "Query data", "SQL")
 Rel(query, cache, "Cache results", "Cache protocol")
@@ -75,7 +75,7 @@ Rel(metadata, archivedb, "Track lineage", "SQL")
 Rel(metadata, audit, "Log changes", "Internal call")
 
 Rel(api, cds, "Publish products", "Standard API")
-Rel(homogenization, archive, "Archive datasets", "Standard protocol")
+Rel(computation, archive, "Archive datasets", "Standard protocol")
 
 Rel(audit, metadb, "Store audit logs", "SQL")
 Rel(notifier, climatologist, "Send alerts", "Email/SMS")

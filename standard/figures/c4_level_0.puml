@@ -16,7 +16,7 @@ Boundary(field, "Field Observation Layer") {
 ' National Processing Infrastructure
 Boundary(national, "National Segment") {
     System_Ext(dcps, "Data Collection and Processing System", "Real-time data processing and quality control")
-    System(cdms, "Climate Data Management System", "Quality control, homogenization, and long-term climate data management")
+    System(cdms, "Climate Data Management System", "Quality control and long-term climate data management")
     System_Ext(ops, "Operational Systems", "NWP, data assimilation, forecasting, and nowcasting services")
 }
 

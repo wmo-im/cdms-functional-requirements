@@ -10,7 +10,7 @@ include::./class_3_data_ingestion.adoc[]
 
 include::./class_4_api.adoc[]
 
-include::./class_5_homogenisation.adoc[]
+include::./class_5_climate_computation.adoc[]
 
 include::./class_6_data_rescue.adoc[]
 

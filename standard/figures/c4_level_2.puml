@@ -14,7 +14,7 @@ System_Boundary(cdms, "Climate Data Management System") {
     Container(userinterface, "User Interface", "Application", "Interactive interface for data review, QC validation, and metadata management")
     Container(api, "Data API", "API Service", "API for data ingestion, query, and distribution")
     Container(processing, "Data Processing Engine", "Processing Service", \
-        "Applies quality control algorithms and homogenisation adjustments to climate observations")
+        "Applies quality control algorithms and basic climate computation to climate observations")
     Container(metadata, "Metadata Management", "Service", "Manages station metadata, instruments, and data lineage")
     Container(ingest, "Data Ingestion", "Service", "Processes incoming data from multiple sources and formats")
     Container(datarescue, "Data Rescue Service", "Service", "Manages digitization workflow, imaging, and keying of historical paper records")
@@ -49,7 +49,7 @@ BiRel(dcps, ingest, "Uploads / fetches data")
 Rel(ingest, processing, "Sends for processing")
 
 
-Rel(userinterface, processing, "Triggers homogenization")
+Rel(userinterface, processing, "Triggers statistical processing")
 BiRel_R(metadata, processing,  "Fetches / uses metadata. Updates metadata")
 BiRel_L(metadata, ingest,  "Fetches / uses metadata. Updates metadata")
 

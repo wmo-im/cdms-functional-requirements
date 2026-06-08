@@ -13,19 +13,6 @@ Ensure the system can be updated, configured, and troubleshot efficiently with m
 Maintainability is critical for long-term sustainability, as climate data systems must operate reliably over
 multiple decades with evolving technologies and requirements.
 
-==== Justification and Regulatory Basis
-
-WMO-No. 1131 emphasizes that "one of the steps often overlooked when implementing a CDMS is to ensure that the NMHS
-has established a solid governance framework to protect the integrity of the climate record" (Section 3), including
-"processes that ensure adherence to CDMS-related policies" and comprehensive documentation requirements (Section 3.2.2.5).
-The specification requires "effective IT security and monitoring" (Section 5.2.3) and "managed change" as Required
-governance (Section 3.2.2.2), noting that "uncontrolled change can result in chaos for users" including
-"data corruptions or even data loss."
-
-WMO-No. 1238 mandates "Members shall ensure that Entities communicate work involving changes to the data management
-system and associated software to affected stakeholders in a timely fashion" (3.3.3.3) and requires comprehensive
-documentation of "data management processes, including details of roles and responsibilities" (3.3.3.1).
-
 ==== Requirements
 
 ===== Configuration Management

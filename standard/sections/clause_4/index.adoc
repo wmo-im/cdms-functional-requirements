@@ -2,24 +2,156 @@
 
 For the purposes of this document, the terms and definitions given in WMO-No. 1131 and the following apply:
 
-<To Follow>
+Availability::
+proportion of time a system or service is operational and accessible to users, typically expressed as a
+percentage over a defined measurement period
++
+[NOTE]
+====
+In this specification, availability refers to data retrieval and ingestion services. Not to be confused
+with data availability, which refers to the presence or absence of observation records in the archive.
+====
 
-// **Climate Data Management System (CDMS)**: A system designed for the quality control, homogenization,
-// archival, and distribution of long-term climate observations with emphasis on temporal consistency and data provenance.
+Break point::
+a point in time at which a statistically significant discontinuity is detected in a climate observation
+time series, attributable to a non-climatic cause such as station relocation, instrument change, or
+change in observation practice
++
+[NOTE]
+====
+Break points are identified during the homogenization process. Each break point separates segments of
+a time series within which different adjustment factors may be applied.
+====
 
-// **Homogenization**: The process of detecting and adjusting for non-climatic discontinuities in
-// climate time series caused by changes in instrumentation, observation practices, station location, or surrounding environment.
+Climate normals::
+standard reference values representing the average state of a climate variable over a defined reference
+period, computed in accordance with WMO guidelines (WMO-No. 1203). Standard reference periods are
+30 consecutive years (currently 1991–2020)
 
-// **Data Rescue**: The process of recovering historical climate data from non-digital sources (primarily paper records) through
-// digitization, transcription, and quality assurance procedures.
+Data Collection and Processing System (DCPS)::
+a national system responsible for the real-time collection, initial validation, and transmission of
+observational data from field sensors and observing networks to downstream data management systems
++
+[NOTE]
+====
+The DCPS typically applies real-time quality checks appropriate for operational meteorology. The primary
+integration point addressed by this specification is the delivery of data from the DCPS to the Climate
+Data Management System for long-term quality assurance and archival. The internal operation of the DCPS
+is outside the scope of this specification.
+====
 
-// **Quality Control (QC)**: Systematic procedures to detect and flag erroneous, suspicious, or inconsistent observations
-// to ensure data fitness for climate analysis.
+Data lineage::
+a summary record of the processing history of a dataset as a whole, documenting the sequence of
+operations applied from source data through to the current published state, structured following the
+W3C PROV Data Model. Distinct from observation-level provenance metadata, which records the immutable
+processing history of individual observations
 
-// **Metadata**: Data about data, including information on station location, instrumentation, observation methods,
-// data provenance, and processing history.
+Data rescue::
+the process of recovering historical climate observations from non-digital sources — primarily paper
+records, registers, and ledgers — by transcribing the data into machine-readable form, with appropriate
+quality assurance, and integrating the rescued observations into the observational record with complete
+provenance
++
+[NOTE]
+====
+Automated digitization via optical character recognition (OCR) is outside the scope of this specification.
+====
 
-// **Data Lineage**: Documentation of the complete history and transformations applied to climate data from initial
-// observation through archival.
+Data stewardship::
+the assignment to an entity of defined rights and responsibilities for acquiring, managing, maintaining,
+and ensuring the long-term accessibility and integrity of climate data, encompassing quality assurance,
+lifecycle management, access control, and accountability for the ongoing fitness of the data record.
+Adapted from WMO-No. 1238
 
-//  Additional terms are defined in <<appendix>>.
+Derived observation::
+an observation value computed by the system from one or more source observations by means of a documented
+formula, aggregation, or statistical procedure, as distinct from a value directly reported by a measuring
+instrument. Examples include computed meteorological variables (e.g. mean sea level pressure derived from
+station pressure), statistical aggregates (e.g. daily maximum temperature), and homogenized values
+
+Discovery metadata::
+dataset-level metadata records that make data findable in a discovery catalogue, describing what data
+exists, where it can be accessed, its spatial and temporal extent, responsible organization, and data
+policy classification
++
+[NOTE]
+====
+Distinct from station and sensor metadata, which describe the observing platform and instruments that
+produced the data.
+====
+
+Double-key entry::
+a data entry quality assurance procedure in which two operators independently transcribe the same source
+document, after which the two transcriptions are compared automatically and any discrepancies are flagged
+for resolution before the values are accepted into the observational record
+
+Earth system domains::
+the atmospheric, terrestrial, hydrological, cryospheric, and oceanic environments from which in-situ
+point observations relevant to climate are collected
+
+Fitness-for-purpose::
+an assessment of whether a dataset meets the quality and completeness requirements of a particular
+intended application or use case, summarizing quality metrics — including completeness, temporal
+continuity, quality control flag distribution, and known systematic issues — in terms of suitability
+for defined use cases such as climatological trend analysis, climate normals computation, or extreme
+event studies
+
+Homogenization::
+the process of detecting and correcting non-climatic discontinuities in long-term observation time series
+caused by changes in station location, instrumentation, observation practices, or surrounding environment,
+in order to produce a temporally consistent series suitable for climate trend analysis. Results in an
+adjusted series stored alongside the original, unadjusted series with full provenance documentation
+
+Inhomogeneity::
+a discontinuity or step-change in a climate time series attributable to non-climatic factors such as
+station relocation, instrument replacement, changes in observation practices, or changes to the station
+environment, rather than to actual changes in the observed climate variable
+
+In-situ point observation::
+an observation obtained by direct measurement at a specific geographic location, representing conditions
+at that point in space
++
+[NOTE]
+====
+Encompasses measurements from fixed stations, where geographic location is derived from station metadata,
+and from mobile platforms such as ships, buoys, radiosondes, and aircraft, where geographic location is
+stored with each individual observation. Excludes gridded, raster, reanalysis, satellite-derived, radar
+composite, and forecast data products. The scope of this specification is restricted to in-situ point
+observations.
+====
+
+Normalization::
+the process of transforming observational data from diverse source formats, encodings, and unit systems
+into a common internal representation, resolving differences in format conventions, units of measure,
+coordinate systems, timestamp formats, and character encodings
++
+[NOTE]
+====
+Not to be confused with statistical normalization, which scales data to a standard range or distribution.
+====
+
+Observable element::
+a uniquely defined measurable quantity characterized by its measurement class (e.g. temperature,
+precipitation, pressure), accumulation or averaging duration, statistical function (instantaneous,
+mean, maximum, minimum, accumulated total), and unit of measure
++
+[NOTE]
+====
+Two measurements that differ in any of these properties constitute distinct elements and are stored
+and described separately to ensure unambiguous interpretation across stations and datasets. Source data
+provenance (e.g. transmission format or originating network) is recorded separately rather than embedded
+in the element definition.
+====
+
+Provenance metadata::
+information documenting the origin, processing history, and all modifications applied to an observation
+or dataset throughout its lifecycle, from initial acquisition through archival and distribution. For
+individual observations, provenance includes source identification, ingestion details, quality control
+decisions, manual corrections, homogenization adjustments, and data rescue workflows. Adapted from
+WMO-No. 1238
+
+Quality flag::
+a coded indicator attached to an observation record documenting the outcome of one or more quality
+control checks applied to that observation, recording whether a value is accepted, suspect, or rejected,
+and indicating the specific check that assigned the flag and the level at which it was applied
+(automatic, manual, or final)

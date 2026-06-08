@@ -8,7 +8,7 @@
 :lang: en
 :toc:
 :toc-placement!:
-:toclevels: 3
+:toclevels: 2
 :sectanchors:
 :sectnumlevels: 4
 :pdf-page-mode: outline
@@ -52,4 +52,6 @@ include::sections/clause_5/index.adoc[]
 include::sections/clause_6/index.adoc[]
 
 include::sections/clause_7/index.adoc[]
+
+include::sections/annex/index.adoc[]
 

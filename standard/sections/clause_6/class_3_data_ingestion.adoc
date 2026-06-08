@@ -12,19 +12,17 @@
 The Data Ingestion requirements class defines requirements for the reliable ingestion of observational data
 from diverse sources and formats. This requirements class is restricted to observational (in-situ) data from
 stations and does not cover the ingestion of gridded or raster data products (e.g., satellite imagery, reanalysis
-fields, radar composites). Data ingestion serves as the entry point for observations into the observational
+fields, radar composites). Data ingestion serves as the entry point for observations into the CDMS or climate
 record, requiring careful handling to preserve data integrity through validation and normalization while maintaining
 complete provenance of source data characteristics.
 
-==== Justification and Regulatory Basis
-
-WMO-No. 1131 identifies Data Ingest as a Required capability (Section 5.1.1), stating systems must handle
-"WMO messages, vector, raster array, ASCII and other formats" with "business rules, status logging,
-automated self-recovery and transformation." This specification restricts the scope of data ingestion to
-observational (in-situ) data formats; raster and gridded data ingestion is outside the scope of this specification.
-
-WMO-No. 1238 requires Members ensure "Entities encode data, and associated metadata, intended for international exchange
-following the standards specified in the Manual on Codes (WMO-No. 306)" (3.2.2.1).
+[NOTE]
+====
+This requirements class covers ingestion via automated electronic data streams and manual file upload.
+Data entry via keyboard transcription of historical paper records is addressed in /req/data-rescue.
+A CDMS may serve both operational climate product generation and the long-term climate archive;
+the ingestion requirements in this class apply in both contexts.
+====
 
 ==== Requirements
 
@@ -38,13 +36,13 @@ following the standards specified in the Manual on Codes (WMO-No. 306)" (3.2.2.1
 |Statement a|
 |A a|The system SHALL support the following data collection triggers:
 
-* **Scheduled polling**: Configurable polling of external data sources at defined intervals
+* **Scheduled polling**: Configurable polling of external data sources at defined intervals (e.g., automated weather station (AWS) networks)
 * **Real-time subscription**: Subscription to message brokers (e.g., MQTT) for event-driven data collection
 * **File system monitoring**: Automatic detection and ingestion of new files in monitored directories
 
 |B a|The system SHALL support the following data transfer protocols:
 
-* FTP and SFTP
+* FTP and SFTP (plain FTP should only be used within secure internal networks; SFTP or FTPS is required for internet-facing transfers)
 * HTTP/HTTPS
 * MQTT (for WIS 2.0 message broker integration)
 * RESTful API calls to external observation systems with authentication management
@@ -61,7 +59,7 @@ following the standards specified in the Manual on Codes (WMO-No. 306)" (3.2.2.1
 
 * Retry logic with configurable retry count and backoff intervals
 * Detection of duplicate data from multiple collection attempts
-* Graceful handling of temporarily unavailable sources
+* Graceful handling of temporarily unavailable sources (e.g., retry with configurable backoff, log the failure, and resume automatically when the source becomes available)
 * Alert generation on persistent collection failures
 * Automatic recovery and resumption after system restart
 
@@ -85,10 +83,39 @@ Automated collection sources should be configurable without system restart. The 
 * Statistics on collection success/failure rates per source
 * Data volume metrics (records/observations collected per time period)
 * Latency metrics (time between observation and ingestion)
-* Alert generation when expected data does not arrive within defined time windows
 * Collection log export for auditing and troubleshooting
 
 |===
+
+[[req_ingest_data_completeness]]
+===== Data Completeness Monitoring
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/data-ingestion/completeness
+|Statement a|The system SHALL support monitoring of data completeness to ensure that all intended
+observations are received:
+
+* Definition and management of expected data: which stations and elements are expected to report,
+  at what frequency, and within what time window
+* Detection and reporting of missing or late observations against defined expectations
+* Timely alerting when expected observations fail to arrive within the defined window, to enable
+  corrective action before data becomes unrecoverable
+* Completeness statistics by station, element, and time period
+* Distinction between data that was not received and data that was received but failed validation
+
+|===
+
+[NOTE]
+====
+Data completeness monitoring is a distinct concern from collection monitoring
+(/req/data-ingestion/collection-monitoring), which tracks the technical status of ingestion
+pipelines (connection success, retry counts, latency). Data completeness monitoring tracks the
+observation record itself — whether all expected measurements are present and accounted for.
+NMHSs collecting from numerous stations and communication paths must be able to identify and
+respond to gaps quickly, before the window for corrective action closes.
+====
 
 [[req_ingest_acquisition]]
 ===== Manual Data Acquisition
@@ -99,12 +126,13 @@ Automated collection sources should be configurable without system restart. The 
 |Identifier|/req/data-ingestion/manual-acquisition
 |Statement a|The system SHALL support manual data submission including:
 
-* Web-based file upload interface with drag-and-drop support
+* Web-based file upload interface, with drag-and-drop support recommended
 * Batch upload of multiple files
 * Upload of compressed archives (ZIP, TAR.GZ)
 * Manual submission via API with authentication
 * Upload progress indication for large files
 * Validation feedback during or immediately after upload
+* Error notification with informative detail in the event of upload failure
 * Confirmation of successful ingestion with record counts
 
 |===
@@ -119,15 +147,15 @@ Automated collection sources should be configurable without system restart. The 
 |Statement a|The system SHALL support the ingestion of observational data in the following formats:
 
 * **CSV and delimited text files**: With configurable field mapping, delimiter specification (comma, tab, semicolon, pipe), header row handling, and support for common date/time formats
-* **BUFR**: WMO standard binary format (WMO-No. 306, Volume I.2), supporting ingestion of hourly observations, daily summaries (including DAYCLI report types), and monthly summaries
+* **BUFR**: WMO standard binary format (WMO-No. 306, Volume I.2), supporting ingestion of hourly observations, daily summaries, and monthly summaries (including CLIMAT and DAYCLI report types)
 * **WMO text-based formats and code forms**: Including FM-12 SYNOP and FM-71 CLIMAT, and other code forms as specified in WMO Manual on Codes (WMO-No. 306, Volume I.1)
 
 |===
 
 [NOTE]
 ====
-Implementations should document which BUFR report types and WMO code forms are supported.
-The Manual on Codes (WMO-No. 306) defines the complete set of applicable report types and code forms.
+Supported BUFR report types and WMO code forms should be documented. The Manual on Codes
+(WMO-No. 306) defines the complete set of applicable report types and code forms.
 ====
 
 [[rec_ingest_formats]]
@@ -144,10 +172,10 @@ The Manual on Codes (WMO-No. 306) defines the complete set of applicable report 
 
 [NOTE]
 ====
-For JSON, XML, and NetCDF formats, implementations should adopt or reference a specific schema or
-profile rather than providing generic format support, as the absence of a defined structure makes
-generic readers impractical. Support for additional historical or legacy formats may be required based
-on data rescue activities and national archive requirements; these should be documented in conformance
+For JSON, XML, and NetCDF formats, a specific schema or profile should be adopted or referenced
+rather than providing generic format support, as the absence of a defined structure makes generic
+readers impractical. Support for additional historical or legacy formats may be required based on
+data rescue activities and national archive requirements; these should be documented in conformance
 documentation.
 ====
 
@@ -169,30 +197,40 @@ documentation.
 
 |B a|Validation failures SHALL result in:
 
-* Rejection at the finest possible granularity: individual elements where the format supports it,
-  individual records where element-level rejection is not possible, or the entire file only where
-  record-level rejection is not feasible
+* Rejection at file level as a minimum; record-level rejection SHALL be applied where the format supports it
 * Generation of detailed error reports identifying specific validation failures
 * Logging of validation errors for system monitoring and diagnostics
 |===
 
+[cols="1,4"]
+|===
+2+^|**Recommendation {counter:rec-id}**
+|Identifier|/rec/data-ingestion/validation
+|A a|Element-level rejection SHOULD be applied where the format supports it, in preference to
+record-level rejection.
+|B a|Values that fail the plausibility check SHOULD be stored with a Wrong or invalid quality
+flag rather than silently discarded. Retaining such values provides evidence of systemic errors
+in observing or communication systems and supports later investigation.
+|===
+
 [NOTE]
 ====
-The value range plausibility check in Statement A is a lightweight gate applied at ingestion time
-to catch obviously erroneous values (e.g., temperature of 9999°C) before data enters storage. It
-is not a substitute for the full quality control checks defined in /req/quality-control, which are
-applied after ingestion using complete station metadata, climatological context, and inter-element
-relationships. Data that passes ingestion validation but fails full QC will be stored with
-appropriate quality flags rather than rejected at the ingestion boundary.
+The value range plausibility check in Statement A of /req/data-ingestion/validation is a lightweight
+gate applied at ingestion time to catch obviously erroneous values (e.g., temperature of 9999°C)
+before data enters storage. It is not a substitute for the full quality control checks defined in
+/req/quality-control, which are applied after ingestion using complete station metadata,
+climatological context, and inter-element relationships. Data that passes ingestion validation but
+fails full QC will be stored with appropriate quality flags rather than rejected at the ingestion
+boundary.
 ====
 
-[[req_ingest_normalisation]]
-===== Data Normalisation
+[[req_ingest_standardization]]
+===== Data Standardization
 
 [cols="1,4"]
 |===
 2+^|**Requirement {counter:req-id}**
-|Identifier|/req/data-ingestion/normalization
+|Identifier|/req/data-ingestion/standardization
 |Statement a|
 |A a|
 The system SHALL normalize ingested data from all supported formats into a common internal representation that includes:
@@ -214,15 +252,11 @@ The system SHALL normalize ingested data from all supported formats into a commo
 
 [NOTE]
 ====
-The normalization approach described here — converting all ingested data to a common internal
-representation — is one valid architectural pattern. Implementations that store data in source formats
-with format-specific adapters for API access are also conformant, provided that equivalent provenance
-and retrieval capabilities are met.
-
-Note that WMO BUFR parameter codes do not cover all observable elements. Implementations should
-document the controlled vocabulary used for element codes and provide mappings for any elements not
-covered by the BUFR code tables.
+WMO BUFR parameter codes do not cover all observable elements. The controlled vocabulary used for
+element codes should be documented, with mappings provided for any elements not covered by the
+BUFR code tables.
 ====
+
 
 [[req_ingest_duplicate_detection]]
 ===== Duplicate Detection
@@ -244,6 +278,7 @@ The system SHALL detect and handle duplicate observations based on:
 
 * Flag duplicate records for review
 * Apply configurable duplicate resolution strategies (keep first, keep last, manual review)
+* Document which duplicate resolution strategy is configured and applied
 * Log duplicate detection events
 * Preserve information about all duplicate instances in provenance metadata
 
@@ -272,13 +307,3 @@ be reserved for cases where values differ between instances.
 * Character encoding declaration in all text-based exports
 |===
 
-===== Calculation of derived parameters
-
-[NOTE]
-====
-Requirements for the calculation of derived parameters are addressed in the Climate Products
-requirements class: aggregated summary statistics (daily minima/maxima, monthly totals, period means)
-and climate normals in /req/climate-products/statistics and /req/climate-products/normals; indices
-such as SPI and CLIMDEX in /rec/climate-products/indices. Scheduling and automation of these
-computations is addressed in /req/automation.
-====
