@@ -22,8 +22,8 @@ implementation guide — specific architectural and technology choices remain th
 implementing organization.
 
 The functional requirements are expressed as requirements classes following the OGC Modular Specification
-approach. This specification does not place new mandatory obligations on WMO Members, and is not intended
-as a list of requirements that Members SHALL or SHOULD follow.
+approach. While this document does not place new regulatory obligations on WMO Members, the normative verbs (SHALL
+and SHOULD) define the criteria a system must meet to be considered conformant with the respective classes.
 
 ==== System Context and Boundaries
 

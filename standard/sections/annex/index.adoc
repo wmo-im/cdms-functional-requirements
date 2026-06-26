@@ -135,9 +135,9 @@ the requirements are both technically sound and operationally grounded.
 
 The following individuals contributed to the development and review of this specification:
 
-*Chair:* Ian Edwards (myAcorn, UK)
+*Chair:* Ian Edwards (e3s.uk, UK)
 
-*Members and contributors:* Etna Cervantes (MCH, Mexico), Marcellin Habimana (Climsoft, Kenya),
+*Members and contributors:* Etna Cervantes (MCH, Mexico), Marcellin Habimana (Climsoft, Kenya), Jörg Klausen (Switzerland),
 Charlotte McBride (South African Weather Service), Patrick Munyoki (Climsoft, Kenya), Ge Peng (USA),
 Xavier Perrot (Météo-France International), Dwayne Scott (Belize Meteorological Service / SURFACE CDMS),
 Denis Stuber (Météo-France), Peter Thorne (Maynooth University, Ireland), William Wright (Australia),
