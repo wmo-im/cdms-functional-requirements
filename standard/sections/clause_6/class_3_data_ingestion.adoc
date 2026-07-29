@@ -202,6 +202,7 @@ documentation.
 * Logging of validation errors for system monitoring and diagnostics
 |===
 
+[[rec_ingest_format_validation]]
 [cols="1,4"]
 |===
 2+^|**Recommendation {counter:rec-id}**
@@ -299,7 +300,7 @@ be reserved for cases where values differ between instances.
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/data-ingestion/character-encoding
-|A a|The system SHALL handle international character sets:
+|Statement a|The system SHALL handle international character sets:
 
 * UTF-8 as default character encoding for all text data
 * Support for legacy encodings (ASCII, ISO-8859-1) during data ingestion

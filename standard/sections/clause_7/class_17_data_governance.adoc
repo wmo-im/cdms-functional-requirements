@@ -16,6 +16,7 @@ accountability structures necessary for long-term climate data stewardship.
 
 ==== Requirements
 
+[[req_data_governance_lifecycle]]
 ===== Data Lifecycle Management
 
 [cols="1,4"]
@@ -31,13 +32,15 @@ accountability structures necessary for long-term climate data stewardship.
 * Migration paths for data format updates or schema changes
 |===
 
+[[req_data_governance_quality_metadata]]
 ===== Data Quality Metadata
 
 [cols="1,4"]
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/data-governance/quality-metadata
-|Statement a|The system SHALL maintain data quality metadata including:
+|Statement a|
+|A a|The system SHALL maintain data quality metadata including:
 
 * Completeness metrics (percentage of expected observations received)
 * Timeliness metrics (delay between observation time and system receipt)
@@ -63,6 +66,7 @@ temporal continuity, QC flag distribution) in terms of suitability for defined u
 supporting informed data selection by users. See also /req/metadata-management/data-quality.
 ====
 
+[[req_data_governance_access_policies]]
 ===== Data Access Policies
 
 [cols="1,4"]
@@ -79,6 +83,7 @@ supporting informed data selection by users. See also /req/metadata-management/d
 |===
 
 
+[[req_data_governance_stewardship]]
 ===== Data Stewardship Roles
 
 [cols="1,4"]

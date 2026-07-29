@@ -15,13 +15,14 @@ international archives, and the WIS 2.0 infrastructure.
 
 ==== Requirements
 
+[[req_interoperability_standards]]
 ===== Standards Compliance
 
 [cols="1,4"]
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/interoperability/standards
-|A a|The system SHALL comply with relevant international standards:
+|Statement a|The system SHALL comply with relevant international standards:
 
 * WMO WIGOS Metadata Standard for station metadata
 * WMO Manual on Codes (WMO-No. 306) for BUFR and code form support
@@ -32,13 +33,14 @@ international archives, and the WIS 2.0 infrastructure.
 
 
 
+[[req_interoperability_api]]
 ===== API Interoperability
 
 [cols="1,4"]
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/interoperability/api
-|A a|The system API SHALL support interoperability through:
+|Statement a|The system API SHALL support interoperability through:
 
 * Content negotiation using standard HTTP Accept headers
 * Standard HTTP status codes with appropriate semantics

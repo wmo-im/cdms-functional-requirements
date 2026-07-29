@@ -15,6 +15,7 @@ data volumes increase and user communities expand over decades of operation.
 
 ==== Requirements
 
+[[req_performance_response_time]]
 ===== Query Response Performance
 
 [cols="1,4"]
@@ -38,6 +39,7 @@ specifications and reviewed as data volumes and user communities grow. Users sho
 informed of long-running queries through progress indication rather than silent waits.
 ====
 
+[[req_performance_capacity]]
 ===== Data Volume Capacity
 
 [cols="1,4"]
@@ -54,6 +56,7 @@ informed of long-running queries through progress indication rather than silent 
   targets appropriate to the data delivery schedule of each source
 |===
 
+[[rec_performance_scalability]]
 ===== Scalability
 
 [cols="1,4"]

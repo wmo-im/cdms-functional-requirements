@@ -58,7 +58,7 @@ documentation and client code generation. OpenAPI specifications should be made 
 well-known endpoint (e.g. `/api` or `/openapi.json`).
 |===
 
-[[req_api_standards]]
+[[rec_api_standards]]
 ===== Standards Compliance
 
 [cols="1,4"]
@@ -115,7 +115,7 @@ Pre-computed official statistics should be stored as standard derived observatio
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/data-api/auth
-|Statement|Authentication and authorization SHALL comply with /req/security/authentication and /req/security/authorization
+|Statement a|Authentication and authorization SHALL comply with /req/security/authentication and /req/security/authorization
 |===
 
 [[req_api_versioning]]

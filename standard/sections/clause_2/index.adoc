@@ -3,19 +3,21 @@
 This specification defines the following conformance classes corresponding to the functional capabilities
 of a Climate Data Management System:
 
-- **Core Data Management** (Required): Foundational observation storage and retrieval, provenance metadata management,
+- **Core** (Required): Foundational observation storage and retrieval, provenance metadata management,
   and basic station and sensor metadata storage. This class provides the data management foundation on which all other
   conformance classes depend.
-- **Quality Control** (Required): Climate-specific QC procedures including range, temporal, spatial, and climatological checks
+- **Observations Quality Control** (Required): Climate-specific QC procedures including range, temporal, spatial, and climatological checks
 - **Data Ingestion** (Required): Multi-format data import, validation, and normalization
 - **Data API** (Required): Standards-based data query, retrieval, and distribution interfaces
-- **Basic Climate Computation** (Required): Computation of derived meteorological variables, summary statistics, and homogenized series from quality-controlled observations
+- **Basic Climate Computation** (Required): Computation of derived meteorological variables and summary
+  statistics from quality-controlled observations. Homogenization support is recommended but not required
+  for conformance to this class.
 - **Data Rescue** (Optional): Digitization workflow for historical paper records including imaging and data entry
 - **Metadata Management** (Required): Advanced station and element metadata management including WIGOS compliance,
   complete station history, discovery metadata, and metadata quality validation
 - **User Interface** (Required): Interactive visualization, data review, and quality control validation capabilities
 - **Climate Products** (Recommended): Production and publication of standard climate products and indices
-- **Processing Automation** (Recommended): Scheduled and automated execution of routine data processing workflows
+- **Processing Automation and Scheduling** (Recommended): Scheduled and automated execution of routine data processing workflows
 
 
 [NOTE]
@@ -26,3 +28,229 @@ Required classes must be implemented for a system to be considered
 conformant. Recommended classes should be implemented where operationally feasible. Optional classes
 may be implemented based on specific organizational needs.
 ====
+
+Non-functional requirements classes (Performance and Scalability, Reliability and Availability, Security,
+Usability, Maintainability, Interoperability, Data Governance) are Required.
+
+=== Conformance class definitions
+
+Each conformance class corresponds to one requirements class defined in Clause 6 (Functional
+Requirements) or Clause 7 (Non-functional Requirements), identified by the URI conventions defined in
+Clause 5 (e.g. `/req/core` → `/conf/core`). Recommendations (`/rec/` items) that appear within a class do
+not affect that class's conformance status, whether the class is Required, Recommended, or Optional; see
+<<abstract-test-suite>> for how Recommendations are treated in testing.
+
+[[conf_core]]
+==== Conformance Class: Core
+
+[cols="1,4"]
+|===
+|Conformance class|/conf/core
+|Target type|Software system
+|Requirements class|/req/core
+|Dependency|None
+|Classification|Required
+|===
+
+[[conf_quality-control]]
+==== Conformance Class: Observations Quality Control
+
+[cols="1,4"]
+|===
+|Conformance class|/conf/quality-control
+|Target type|Software system
+|Requirements class|/req/quality-control
+|Dependency|/conf/core
+|Classification|Required
+|===
+
+[[conf_data-ingestion]]
+==== Conformance Class: Data Ingestion
+
+[cols="1,4"]
+|===
+|Conformance class|/conf/data-ingestion
+|Target type|Software system
+|Requirements class|/req/data-ingestion
+|Dependency|/conf/core
+|Classification|Required
+|===
+
+[[conf_data-api]]
+==== Conformance Class: Data API
+
+[cols="1,4"]
+|===
+|Conformance class|/conf/data-api
+|Target type|Software system
+|Requirements class|/req/data-api
+|Dependency|/conf/core, /conf/security
+|Classification|Required
+|===
+
+[[conf_climate-computation]]
+==== Conformance Class: Basic Climate Computation
+
+[cols="1,4"]
+|===
+|Conformance class|/conf/climate-computation
+|Target type|Software system
+|Requirements class|/req/climate-computation
+|Dependency|/conf/core, /conf/quality-control
+|Classification|Required
+|===
+
+[[conf_data-rescue]]
+==== Conformance Class: Data Rescue
+
+[cols="1,4"]
+|===
+|Conformance class|/conf/data-rescue
+|Target type|Software system
+|Requirements class|/req/data-rescue
+|Dependency|/conf/core, /conf/data-ingestion
+|Classification|Optional
+|===
+
+[[conf_metadata-management]]
+==== Conformance Class: Metadata Management
+
+[cols="1,4"]
+|===
+|Conformance class|/conf/metadata-management
+|Target type|Software system
+|Requirements class|/req/metadata-management
+|Dependency|/conf/core, /conf/security
+|Classification|Required
+|===
+
+[[conf_user-interface]]
+==== Conformance Class: User Interface
+
+[cols="1,4"]
+|===
+|Conformance class|/conf/user-interface
+|Target type|Software system
+|Requirements class|/req/user-interface
+|Dependency|/conf/core
+|Classification|Required
+|===
+
+[[conf_climate-products]]
+==== Conformance Class: Climate Products
+
+[cols="1,4"]
+|===
+|Conformance class|/conf/climate-products
+|Target type|Software system
+|Requirements class|/req/climate-products
+|Dependency|/conf/core, /conf/quality-control, /conf/climate-computation
+|Classification|Recommended
+|===
+
+[[conf_automation]]
+==== Conformance Class: Processing Automation and Scheduling
+
+[cols="1,4"]
+|===
+|Conformance class|/conf/automation
+|Target type|Software system
+|Requirements class|/req/automation
+|Dependency|/conf/core
+|Classification|Recommended
+|===
+
+[[conf_performance]]
+==== Conformance Class: Performance and Scalability
+
+[cols="1,4"]
+|===
+|Conformance class|/conf/performance
+|Target type|Software system
+|Requirements class|/req/performance
+|Dependency|/conf/core
+|Classification|Required
+|===
+
+[[conf_reliability]]
+==== Conformance Class: Reliability and Availability
+
+[cols="1,4"]
+|===
+|Conformance class|/conf/reliability
+|Target type|Software system
+|Requirements class|/req/reliability
+|Dependency|/conf/core
+|Classification|Required
+|===
+
+[[conf_security]]
+==== Conformance Class: Security
+
+[cols="1,4"]
+|===
+|Conformance class|/conf/security
+|Target type|Software system
+|Requirements class|/req/security
+|Dependency|/conf/core
+|Classification|Required
+|===
+
+[[conf_usability]]
+==== Conformance Class: Usability
+
+[cols="1,4"]
+|===
+|Conformance class|/conf/usability
+|Target type|Software system
+|Requirements class|/req/usability
+|Dependency|/conf/core
+|Classification|Required
+|===
+
+[[conf_maintainability]]
+==== Conformance Class: Maintainability
+
+[cols="1,4"]
+|===
+|Conformance class|/conf/maintainability
+|Target type|Software system
+|Requirements class|/req/maintainability
+|Dependency|/conf/core
+|Classification|Required
+|===
+
+[[conf_interoperability]]
+==== Conformance Class: Interoperability
+
+[cols="1,4"]
+|===
+|Conformance class|/conf/interoperability
+|Target type|Software system
+|Requirements class|/req/interoperability
+|Dependency|/conf/core, /conf/data-api
+|Classification|Required
+|===
+
+[[conf_data-governance]]
+==== Conformance Class: Data Governance
+
+[cols="1,4"]
+|===
+|Conformance class|/conf/data-governance
+|Target type|Software system
+|Requirements class|/req/data-governance
+|Dependency|/conf/core
+|Classification|Required
+|===
+
+A conformance claim for a dependent class requires a conformance claim for every class it depends on,
+transitively (per each class's Dependency row above). For example, a claim for `/conf/climate-products`
+requires claims for `/conf/climate-computation`, `/conf/quality-control`, and `/conf/core`.
+
+Two functional classes — Data API and Metadata Management — depend on the non-functional Security class.
+Where a requirements class depends on a class from a different part of this specification (functional or
+non-functional), a conformance claim for the dependent class SHALL include a conformance claim for the
+class it depends on. This applies the same transitive-dependency rule uniformly, regardless of which part
+of the specification the dependency crosses into: a system cannot claim conformance to `/conf/data-api`
+or `/conf/metadata-management` without also claiming conformance to `/conf/security`.

@@ -15,13 +15,14 @@ multiple decades with evolving technologies and requirements.
 
 ==== Requirements
 
+[[req_maintainability_configuration]]
 ===== Configuration Management
 
 [cols="1,4"]
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/maintainability/configuration
-|A a|The system SHALL support configuration management with:
+|Statement a|The system SHALL support configuration management with:
 
 * Externalized configuration files separate from application code
 * Hot-reload capability for quality control threshold updates without system restart
@@ -30,13 +31,14 @@ multiple decades with evolving technologies and requirements.
 * Documentation of all configurable parameters with valid value ranges
 |===
 
+[[req_maintainability_logging]]
 ===== Logging and Diagnostics
 
 [cols="1,4"]
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/maintainability/logging
-|A a|The system SHALL provide logging and diagnostic capabilities:
+|Statement a|The system SHALL provide logging and diagnostic capabilities:
 
 * Configurable log levels (ERROR, WARN, INFO, DEBUG) per component
 * Structured logging with timestamps, component identification, and correlation IDs
@@ -45,13 +47,14 @@ multiple decades with evolving technologies and requirements.
 * Performance metrics logging (response times, throughput, resource utilization)
 |===
 
+[[req_maintainability_health_monitoring]]
 ===== Health Monitoring
 
 [cols="1,4"]
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/maintainability/health-monitoring
-|A a|The system SHALL expose health monitoring endpoints providing:
+|Statement a|The system SHALL expose health monitoring endpoints providing:
 
 * Overall system health status (healthy, degraded, unhealthy)
 * Component-level health status for all major system components
@@ -61,13 +64,14 @@ multiple decades with evolving technologies and requirements.
   environment
 |===
 
+[[req_maintainability_api_compatibility]]
 ===== API Backward Compatibility
 
 [cols="1,4"]
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/maintainability/api-compatibility
-|A a|The system SHALL maintain API stability through:
+|Statement a|The system SHALL maintain API stability through:
 
 * Semantic versioning of API endpoints
 * A defined and published deprecation policy specifying the support period for deprecated
@@ -77,13 +81,14 @@ multiple decades with evolving technologies and requirements.
 * Ability to run multiple API versions concurrently during transition periods
 |===
 
+[[req_maintainability_schema_evolution]]
 ===== Database Schema Evolution
 
 [cols="1,4"]
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/maintainability/schema-evolution
-|A a|The system SHALL support database schema changes with:
+|Statement a|The system SHALL support database schema changes with:
 
 * Version-controlled schema migration scripts
 * Automated or documented migration procedures
@@ -92,13 +97,14 @@ multiple decades with evolving technologies and requirements.
 * Backward compatibility for schema changes where feasible
 |===
 
+[[req_maintainability_documentation]]
 ===== Documentation
 
 [cols="1,4"]
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/maintainability/documentation
-|A a|The system SHALL provide comprehensive documentation including:
+|Statement a|The system SHALL provide comprehensive documentation including:
 
 * System architecture and component descriptions
 * Installation and deployment procedures

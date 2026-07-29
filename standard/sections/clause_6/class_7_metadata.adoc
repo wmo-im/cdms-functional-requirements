@@ -163,6 +163,7 @@ pipeline.
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/metadata-management/data-quality
+|Statement a|
 |A a|The system SHALL maintain dataset-level quality metadata including:
 
 * Completeness measures: proportion of expected observations present over the dataset period,
@@ -220,6 +221,7 @@ about any systemic errors or patterns of errors within the dataset.
 * Embargo periods: dates before which data may not be published externally
 |===
 
+[[rec_metadata_constraints]]
 [cols="1,4"]
 |===
 2+^|Recommendation {counter:rec-id}
@@ -302,6 +304,7 @@ Further alignment with the updated version is anticipated when published.
 * Maintaining links between derived products and source datasets
 |===
 
+[[rec_metadata_citation]]
 [cols="1,4"]
 |===
 2+^|Recommendation {counter:rec-id}

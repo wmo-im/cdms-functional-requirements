@@ -9,17 +9,16 @@ This annex provides a consolidated reference list of all normative requirements 
 |===
 |Identifier|Type|Requirements Class
 
-|/req/core/data-model|Requirement|Core Data Management
-|/req/core/observation-storage|Requirement|Core Data Management
-|/req/core/observation-retrieval|Requirement|Core Data Management
-|/req/core/metadata-storage|Requirement|Core Data Management
-|/req/core/metadata-retrieval|Requirement|Core Data Management
-|/req/core/metadata-versioning|Requirement|Core Data Management
-|/req/core/provenance-storage|Requirement|Core Data Management
-|/req/core/provenance-retrieval|Requirement|Core Data Management
-|/req/core/provenance-immutability|Requirement|Core Data Management
-|/req/core/batch-processing|Requirement|Core Data Management
-|/req/core/timezone|Requirement|Core Data Management
+|/req/core/data-model|Requirement|Core
+|/req/core/observation-storage|Requirement|Core
+|/req/core/observation-retrieval|Requirement|Core
+|/req/core/metadata-storage|Requirement|Core
+|/req/core/metadata-retrieval|Requirement|Core
+|/req/core/metadata-versioning|Requirement|Core
+|/req/core/provenance-storage|Requirement|Core
+|/req/core/provenance-retrieval|Requirement|Core
+|/req/core/provenance-immutability|Requirement|Core
+|/req/core/batch-processing|Requirement|Core
 |/req/quality-control/observation-retention|Requirement|Observations Quality Control
 |/req/quality-control/flags|Requirement|Observations Quality Control
 |/req/quality-control/configuration|Requirement|Observations Quality Control
@@ -77,10 +76,10 @@ This annex provides a consolidated reference list of all normative requirements 
 |/req/climate-products/wmo-products|Requirement|Climate Products
 |/req/climate-products/management|Requirement|Climate Products
 |/rec/climate-products/indices|Recommendation|Climate Products
-|/req/automation/scheduling|Requirement|Processing Automation
-|/req/automation/workflows|Requirement|Processing Automation
-|/req/automation/monitoring|Requirement|Processing Automation
-|/req/automation/audit|Requirement|Processing Automation
+|/req/automation/scheduling|Requirement|Processing Automation and Scheduling
+|/req/automation/workflows|Requirement|Processing Automation and Scheduling
+|/req/automation/monitoring|Requirement|Processing Automation and Scheduling
+|/req/automation/audit|Requirement|Processing Automation and Scheduling
 |===
 
 === Non-functional Requirements
@@ -89,9 +88,9 @@ This annex provides a consolidated reference list of all normative requirements 
 |===
 |Identifier|Type|Requirements Class
 
-|/req/performance/response-time|Requirement|Performance
-|/req/performance/capacity|Requirement|Performance
-|/rec/performance/scalability|Recommendation|Performance
+|/req/performance/response-time|Requirement|Performance and Scalability
+|/req/performance/capacity|Requirement|Performance and Scalability
+|/rec/performance/scalability|Recommendation|Performance and Scalability
 |/req/reliability/availability|Requirement|Reliability and Availability
 |/req/reliability/data-integrity|Requirement|Reliability and Availability
 |/req/reliability/backup-recovery|Requirement|Reliability and Availability
@@ -146,3 +145,5 @@ Liu Yiming (China Meteorological Administration)
 *WMO Secretariat:* David Berry, Washington Otieno
 
 The editorial team gratefully acknowledges all reviewers who submitted comments on earlier drafts of this specification.
+
+include::./ats.adoc[]
