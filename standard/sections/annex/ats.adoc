@@ -942,10 +942,6 @@ This class depends on /conf/security.
 
 === Conformance Class: Performance and Scalability
 
-The requirements in this class (and the rest of Clause 7, with one exception) have no anchor to
-cross-reference — see FLAG-5 in `ats-work/FLAGS.md`. This does not affect the tests below, which cite
-each requirement by URI only.
-
 [[conf_performance_response_time]]
 ==== /conf/performance/response-time
 
@@ -1404,9 +1400,7 @@ each requirement by URI only.
 
 Recommendations (`/rec/` items) are not tested for conformance (see <<_conformance>>). This register lists
 every Recommendation defined in Clauses 6 and 7 for completeness, grouped by the conformance class it
-appears in. Membership is determined by the `/rec/` Identifier itself, not by anchor name or heading —
-one Recommendation in this list (`/rec/data-api/standards`) is anchored and headed as though it were a
-requirement; see FLAG-7 in `ats-work/FLAGS.md`.
+appears in.
 
 [cols="3,3,1", options="header"]
 |===
