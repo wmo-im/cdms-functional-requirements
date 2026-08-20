@@ -83,3 +83,16 @@ Data entry forms in the context of this requirements class support operational w
 management, manual observation correction, and QC decision recording. Data entry workflows for historical
 data rescue (keying from scanned documents) are specified separately in /req/data-rescue.
 ====
+
+[[rec_ui_provenance]]
+===== Provenance and Processing History Summary
+
+[cols="1,4"]
+|===
+2+^|**Recommendation {counter:rec-id}**
+|Identifier|/rec/user-interface/provenance-summary
+|Statement a|The system SHOULD provide, via the user interface, a human-readable summary
+of the processing history of an observation or derived product, linking to its sources, transformations,
+and quality control or manual decisions, with access to the full machine-readable provenance record
+retrieved via /req/core/provenance-retrieval.
+|===

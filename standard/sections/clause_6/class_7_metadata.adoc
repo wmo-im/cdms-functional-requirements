@@ -124,7 +124,8 @@ Metadata Profile version 2 (WCMP2). Each record SHALL include all mandatory WCMP
 * At least one link to a data access endpoint
 
 |B a|The system SHALL maintain dataset lineage metadata following the W3C PROV Data Model,
-recording the complete processing history of each dataset. Lineage records SHALL cover:
+recording the complete processing history of each dataset. Lineage records SHALL be persistent,
+linked via a stable identifier and cover:
 
 * Source data: originating station networks, instruments, and observation periods
 * Each significant processing stage applied to the dataset, including at minimum:
@@ -133,7 +134,9 @@ recording the complete processing history of each dataset. Lineage records SHALL
 ** Homogenization and other adjustments, where applicable
 ** Disaggregation or infilling, where applicable
 ** Statistical aggregation or derived product computation, where applicable
-* For each processing stage: date, description, responsible party, and software or method reference
+* For each processing stage: date, description, responsible party, a resolvable
+reference to the version of the software or method used, and configuration parameters required to
+reproduce the results
 
 |===
 
@@ -252,7 +255,8 @@ should be applied consistently across all data access interfaces, including the 
 
 * WIGOS Metadata Representation (WMDR) for station and sensor metadata
 * WMO Core Metadata Profile v2 (WCMP2, GeoJSON) for dataset discovery metadata
-* W3C PROV-O or equivalent structured format for dataset lineage and provenance records
+* Documented W3C PROV representation and serialization, or equivalent structured format, for dataset lineage and
+provenance records
 * Dataset quality reports in a documented, structured format (e.g., JSON or XML with
   defined schema) covering completeness, temporal quality, and quality flag distribution
 * Element catalogue in a documented structured format referencing WMO BUFR parameter codes
@@ -278,8 +282,10 @@ Further alignment with the updated version is anticipated when published.
 
 * Required field completeness per WIGOS standards
 * Coordinate system validity and range checks
-* Temporal consistency (effective dates do not overlap)
-* Referential integrity (stations referenced by observations exist and are correct)
+* Temporal consistency (effective dates do not overlap; processing stage dates are consistent with declared ordering)
+* Referential integrity (stations referenced by observations exist and are correct; provenance and lineage records
+reference existing sources, with no orphaned inputs)
+* Resolvability of identifiers referenced in provenance and lineage records
 * Controlled vocabulary compliance for classification fields
 
 |B a|generate validation reports identifying:
