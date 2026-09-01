@@ -151,7 +151,8 @@ as the basis for gross error limit checks where available.
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/quality-control/spatial-checks
-|Statement a|The system SHALL perform spatial consistency checks including:
+|Statement a|The system SHALL perform spatial consistency checks, where suitable neighbouring stations
+exist per configured selection criteria, including:
 
 * Comparison with neighbouring observations using configurable selection criteria, including
   maximum distance, elevation difference, station type, covariability between stations,
@@ -161,9 +162,8 @@ as the basis for gross error limit checks where available.
 
 [NOTE]
 ====
-Where no neighbouring stations exist within a practicable distance — as is the case for many island and
-remote stations — spatial consistency checks cannot be applied. The maximum distance threshold used for
-neighbour selection should be configurable to reflect regional station density.
+The maximum distance threshold used for neighbour selection should be configurable to reflect regional
+station density.
 ====
 
 [[req_qc_internal_consistency]]

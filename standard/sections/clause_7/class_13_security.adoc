@@ -15,6 +15,7 @@ of the climate record while enabling appropriate access for legitimate users.
 
 ==== Requirements
 
+[[req_security_authentication]]
 ===== Authentication
 
 [cols="1,4"]
@@ -39,6 +40,7 @@ in use within the deploying organization. OpenID Connect is widely adopted and p
 a standards-based federated identity layer suitable for both web and API access.
 ====
 
+[[req_security_authorization]]
 ===== Authorization and Access Control
 
 [cols="1,4"]
@@ -55,6 +57,7 @@ a standards-based federated identity layer suitable for both web and API access.
   necessary for their role
 |===
 
+[[rec_security_authorization]]
 [cols="1,4"]
 |===
 2+^|**Recommendation {counter:rec-id}**
@@ -71,6 +74,7 @@ at station or network level are important for national systems where data from c
 networks may be subject to bilateral sharing agreements or national security constraints.
 ====
 
+[[req_security_encryption]]
 ===== Data Encryption
 
 [cols="1,4"]
@@ -84,6 +88,7 @@ networks may be subject to bilateral sharing agreements or national security con
 * Backup files stored on external or off-site media
 |===
 
+[[req_security_audit_logging]]
 ===== Audit Logging
 
 [cols="1,4"]
@@ -106,13 +111,14 @@ networks may be subject to bilateral sharing agreements or national security con
 * Include sufficient detail to reconstruct the sequence of events
 |===
 
+[[req_security_vulnerability_management]]
 ===== Vulnerability Management
 
 [cols="1,4"]
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/security/vulnerability-management
-|A a|The system SHALL support security maintenance through:
+|Statement a|The system SHALL support security maintenance through:
 
 * Regular security updates to address known vulnerabilities
 * Documented process for applying security patches
@@ -120,13 +126,14 @@ networks may be subject to bilateral sharing agreements or national security con
 * Security advisories for known issues affecting the deployment
 |===
 
+[[req_security_data_privacy]]
 ===== Data Privacy
 
 [cols="1,4"]
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/security/data-privacy
-|A a|The system SHALL protect personal information by:
+|Statement a|The system SHALL protect personal information by:
 
 * Minimizing collection and storage of personally identifiable information (PII) to
   what is operationally necessary
@@ -145,13 +152,14 @@ held by a CDMS is typically contact information for station operators, data subm
 quality control operators, and data extraction users, rather than observation data itself.
 ====
 
+[[req_security_provenance_security]]
 ===== Provenance Security
 
 [cols="1,4"]
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/security/provenance-security
-|A a|The system SHALL protect provenance records through:
+|Statement a|The system SHALL protect provenance records through:
 
 * Cryptographic timestamps or equivalent mechanisms to prevent backdating
 * Tamper-evident storage for provenance audit trails

@@ -83,6 +83,8 @@ classification, temperature computation method, and quality control flags for ea
 * Products are versioned, with earlier versions retained and accessible
 * Recomputation following correction of source observations generates a new version without
   overwriting prior versions
+* Each version is linked to its data lineage, including source data and version, processing applied, and the software
+and configuration used
 * Product metadata records the source data period, computation date, and quality constraints applied
 * Products are accessible through the data API defined in /req/data-api
 |===

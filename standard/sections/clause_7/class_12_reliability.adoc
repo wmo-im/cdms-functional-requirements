@@ -15,6 +15,7 @@ scientific resource requiring protection for future generations.
 
 ==== Requirements
 
+[[req_reliability_availability]]
 ===== System Availability
 
 [cols="1,4"]
@@ -40,6 +41,7 @@ Note that availability targets govern day-to-day operations; disaster recovery o
 (RTO/RPO) are addressed separately in /req/reliability/backup-recovery.
 ====
 
+[[req_reliability_data_integrity]]
 ===== Data Integrity
 
 [cols="1,4"]
@@ -71,6 +73,7 @@ alerted on any detected inconsistency.
 
 ====
 
+[[req_reliability_backup_recovery]]
 ===== Backup and Recovery
 
 [cols="1,4"]
@@ -105,6 +108,7 @@ long-term archival.
 ====
 
 
+[[req_reliability_fault_tolerance]]
 ===== Fault Tolerance
 
 [cols="1,4"]
@@ -120,6 +124,7 @@ long-term archival.
 * Automatically retrying failed operations with exponential backoff
 |===
 
+[[req_reliability_retrieval_validation]]
 ===== Data Validation on Retrieval
 
 [cols="1,4"]

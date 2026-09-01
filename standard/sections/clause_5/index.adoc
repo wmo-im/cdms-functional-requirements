@@ -4,14 +4,12 @@ For the purposes of this document, the conventions described in this clause appl
 
 === Identifiers
 
-The normative provisions in this module are denoted by URIs which follow a
-hierarchical structure to ensure unique identification and traceability.
+The normative provisions in this Standard are denoted by the URI:
 
-The base URI for this specification is:
-`http://spec.wmo.int/spec/[spec-name]/[version]/[module-name]`
+`http://wis.wmo.int/spec/cdms/1`
 
-All requirements that appear in this document are denoted by **partial URIs** which are relative
-to this base.
+All requirements, recommendations, and conformance tests that appear in this document are denoted by
+**partial URIs** which are relative to this base.
 
 The structure for partial URIs is defined as follows:
 
@@ -30,6 +28,16 @@ the specific requirement.
 
 * **Format:** `/rec/[recommendation-class-name]/[recommendation-id]`
 * **Example:** `/rec/climate-computation/homogenization-detection`
+
+==== Conformance URIs
+
+Conformance classes and their abstract tests are identified by URI fragments that mirror the corresponding
+Requirements Class and requirement identifiers.
+
+* **Conformance class format:** `/conf/[requirements-class-name]`
+* **Conformance class example:** `/conf/quality-control`
+* **Abstract test format:** `/conf/[requirements-class-name]/[test-id]`
+* **Abstract test example:** `/conf/quality-control/range-checks`
 
 === Use of IETF RFC 2119 Keywords
 
@@ -54,7 +62,7 @@ The following typographical conventions are used throughout this document to dis
 * **`Monospace Text`**: Used for source code examples, file names, directory names, machine-readable data structures
 (e.g., JSON keys, XML tags), URIs, and literal text that appears in a program or command line.
 * **_Italics_**: Used for titles of documents, variable placeholders within code or URI templates, and for emphasis.
-* **[Bracketed] Text**: Used for placeholders in this template (e.g., `[spec-name]`, `[module-name]`) that must be
-replaced with specific content during implementation.
+* **[Bracketed] Text**: Used for placeholders in URI format patterns (e.g., `[requirements-class-name]`,
+`[requirement-id]`) that are replaced with specific content when forming an actual partial URI.
 * **[NOTE], [TIP], [IMPORTANT]**: Used to highlight informative text blocks that provide context, advice, or warnings
 that are **not** part of the normative requirements.

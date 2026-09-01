@@ -131,14 +131,16 @@ The system SHALL maintain temporal versioning of all station and sensor metadata
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/core/provenance-storage
 |Statement a|
-The system SHALL store provenance metadata for all observation data documenting the complete data lineage including:
+The system SHALL store complete observation-level provenance metadata for all observation data documenting the complete
+data lineage including:
 
 * Original data source identification (network, station, transmission method)
 * Acquisition timestamp (when data entered the system)
 * Ingestion processing details (format conversion, unit normalization, coordinate transformation)
 * Quality control processing history (quality control procedures applied, flags assigned, timestamps)
 * Manual interventions (edits, corrections, deletions with operator identification and justification)
-* Derived data lineage (source observations, algorithms, parameters used in derivation)
+* Derived data lineage (source observations, algorithms or method identifier and version,
+software identifier and version, parameters used in derivation)
 * Homogenization provenance: break points detected with dates and statistical confidence levels; adjustment factors applied to each segment; reference series used; statistical significance of detected breaks; correspondence with known station changes; homogenized values stored as derived observations with both original and adjusted series retained
 * Data rescue provenance (source document reference, image identifier, keying method, verification status)
 
@@ -156,7 +158,7 @@ The system SHALL store provenance metadata for all observation data documenting 
 * Complete processing history for any observation or set of observations
 * Identification of all transformations applied to data from acquisition to current state
 * Audit trail queries by operator, time period, or processing type
-* Traceability from derived products back to original source observations
+* Backward traceability from a derived observation, dataset or product to its original source observations and processing events
 * Export of provenance information in machine-readable format (e.g., W3C PROV-O, ISO 19115 lineage)
 |===
 
@@ -168,11 +170,29 @@ The system SHALL store provenance metadata for all observation data documenting 
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/core/provenance-immutability
 |Statement a|
-The system SHALL ensure provenance records are immutable such that:
+The system SHALL ensure provenance records follow an append-only model such that:
 
 * Provenance entries cannot be modified or deleted after creation
+* An erroneous provenance entry can be corrected by appending a new entry that corrects or supersedes
+the erroneous entry, recording the reason for and timestamp of the correction
+* The original provenance entry is preserved and remains retrievable alongside the corrected entry
 * Original (raw) observation values are preserved even when corrections are applied
-* A complete audit trail exists for all data modifications
+* A complete audit trail exists for all data modifications, including corrections applied to the provenance itself
+|===
+
+[[req_core_prov_automation]]
+===== Provenance Metadata Automation
+
+[cols="1,4"]
+|===
+2+^|**Requirement {counter:req-id}**
+|Identifier|/req/core/provenance-automation
+|Statement a|
+* The system SHALL automatically generate and link provenance records when data ingestion, quality control, derivation,
+homogenization, or other material processing activities occur.
+* The records SHALL identify the relevant inputs, outputs, processing activity, timestamp, responsible system or agent,
+and applicable method, software, configuration and version.
+* Any manually added or amended provenance information SHALL be clearly identified and attributed.
 |===
 
 [[req_core_batch_processing]]

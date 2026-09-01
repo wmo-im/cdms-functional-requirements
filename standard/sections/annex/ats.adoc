@@ -1,0 +1,1427 @@
+[appendix]
+[[abstract-test-suite]]
+== Abstract Test Suite
+
+This annex defines one abstract test per requirement (`/req/` item) in Clause 6 (Functional
+Requirements) and Clause 7 (Non-functional Requirements), grouped by conformance class as defined in
+<<_conformance>>. A system claims conformance to a named conformance class by satisfying all abstract
+tests within that class. Conformance is self-declared; this specification does not define a certification
+body or third-party accreditation process. Recommendations (`/rec/` items) are not tested for
+conformance; they are listed for completeness in the Recommendations register at the end of this annex.
+
+Each abstract test is identified by a `/conf/{class}/{test-id}` URI mirroring the requirement's
+`/req/{class}/{id}` URI. A requirement with lettered parts (A, B, …) is verified by a single test whose
+Test method has one numbered step per lettered part, in the order the parts appear in the requirement. A
+requirement expressed as an unlettered Statement with a supporting bullet list is verified by a single
+test whose Test method covers every bullet, consolidated into fewer steps where several bullets describe
+facets of one observable behaviour.
+
+Test method steps are implementation-neutral: they reference configuration, documentation, or observable
+system behaviour, and assume no specific database, framework, or user-interface technology. A third-party
+assessor with access to the system under test, but not its source code, should be able to execute every
+step. Where a requirement's Note narrows its applicability or clarifies its interpretation, the test
+method reflects that constraint.
+
+Test type is one of:
+
+- **Inspection**: review of system documentation or configuration.
+- **Demonstration**: operating the system and observing its behaviour.
+- **Execution**: exercising the system with an automated test tool. Used only where a requirement is
+  machine-verifiable without assuming implementation technology (e.g. validating an API response or
+  export format against a published schema).
+
+A test may use more than one type across its steps where a requirement genuinely needs both (for example,
+Inspection of documented configuration followed by Demonstration of the resulting behaviour).
+
+=== Conformance Class: Core
+
+[[conf_core_data_model]]
+==== /conf/core/data-model
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/core/data-model
+|Requirement|/req/core/data-model
+|Test purpose|Verify the observation data model captures all fields required by the requirement for both fixed and mobile observing platforms.
+|Test method a|
+1. For a fixed station, identify a stored observation and confirm the record includes: station and sensor identification, observed element/variable, observation value and unit of measure, quality flag status, observation timestamp (including time zone information), geographic location, and provenance metadata.
+2. For a mobile platform with no fixed coordinates, identify a stored observation and confirm its geographic location is recorded per-observation rather than derived solely from station metadata.
+3. Confirm each field identified in steps 1–2 is independently retrievable through the system's query or export interface.
+|Test type|Demonstration
+|===
+
+[[conf_core_observation_storage]]
+==== /conf/core/observation-storage
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/core/observation-storage
+|Requirement|/req/core/observation-storage
+|Test purpose|Verify observation records persist independently of the ingesting session.
+|Test method a|
+1. Ingest a test observation and record an identifier or set of filter criteria sufficient to retrieve it again.
+2. In a subsequent, independent session (following a system restart where one can be arranged with the assessor, or otherwise after an interval agreed with the assessor), retrieve the observation.
+3. Confirm all field values match those originally submitted.
+|Test type|Demonstration
+|===
+
+[[conf_core_obs_retrieval]]
+==== /conf/core/observation-retrieval
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/core/observation-retrieval
+|Requirement|/req/core/observation-retrieval
+|Test purpose|Verify observations can be retrieved filtered by station, spatial extent, time period, element, and quality control status.
+|Test method a|
+1. Retrieve observations filtered by a single station identifier and confirm only that station's observations are returned.
+2. Retrieve observations filtered by a geographic bounding box or polygon and confirm only observations from stations within that extent are returned.
+3. Retrieve observations filtered by a start and end timestamp and confirm only observations within that period are returned.
+4. Retrieve observations filtered by observed element/variable and confirm only observations of that element are returned.
+5. Retrieve observations filtered by quality control status and confirm only observations matching that status are returned.
+|Test type|Demonstration
+|===
+
+[[conf_core_metadata_storage]]
+==== /conf/core/metadata-storage
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/core/metadata-storage
+|Requirement|/req/core/metadata-storage
+|Test purpose|Verify station and sensor metadata is persistently stored, including fields outside the WIGOS Metadata Standard.
+|Test method a|
+1. Confirm station and sensor metadata records satisfying the fields verified under /conf/metadata-management/wigos are persistently stored and retrievable.
+2. Identify a metadata field not defined by the WIGOS Metadata Standard configured in the system (e.g. a national or legacy station identifier, or another organization-specific attribute) and confirm it is stored and retrievable alongside the standard WIGOS fields.
+|Test type|Inspection, Demonstration
+|===
+
+[[conf_core_metadata_retrieval]]
+==== /conf/core/metadata-retrieval
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/core/metadata-retrieval
+|Requirement|/req/core/metadata-retrieval
+|Test purpose|Verify station and sensor metadata can be retrieved filtered by identifier, spatial extent, administrative boundary, classification, element capability, operational status, and temporal validity.
+|Test method a|
+1. Retrieve station metadata filtered by station identifier (WIGOS Station Identifier, national identifier, or legacy identifier) and confirm the matching station(s) are returned.
+2. Retrieve station metadata filtered by geographic extent (bounding box, polygon, or proximity search) and confirm only stations within that extent are returned.
+3. Retrieve station metadata filtered by administrative boundary (country, region, or organization) and confirm only matching stations are returned.
+4. Retrieve station metadata filtered by station classification or network affiliation and confirm only matching stations are returned.
+5. Retrieve station metadata filtered by observed element capability and confirm only stations capable of observing that element are returned.
+6. Retrieve station metadata filtered by operational status (active, historical, planned) and confirm only matching stations are returned.
+7. Retrieve station metadata as valid at a specified past point in time and confirm the returned state reflects that point in time rather than the current state.
+|Test type|Demonstration
+|===
+
+[[conf_core_metadata_versioning]]
+==== /conf/core/metadata-versioning
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/core/metadata-versioning
+|Requirement|/req/core/metadata-versioning
+|Test purpose|Verify station and sensor metadata is temporally versioned without loss of prior states.
+|Test method a|
+1. Change a station or sensor metadata record (e.g. an instrument replacement) and confirm the system records the effective date and time of the change.
+2. Retrieve the metadata record as it existed before the change and confirm the prior state can be reconstructed.
+3. Retrieve the metadata state associated with an observation timestamped before the change and confirm it reflects the state valid at that time, not the current state.
+4. Confirm the prior version remains stored and accessible after the change (not overwritten or destroyed).
+|Test type|Demonstration
+|===
+
+[[conf_core_prov_storage]]
+==== /conf/core/provenance-storage
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/core/provenance-storage
+|Requirement|/req/core/provenance-storage
+|Test purpose|Verify provenance metadata documents the complete data lineage of an observation.
+|Test method a|
+1. Confirm provenance metadata for an observation records the originating data source (network, station, transmission method) and acquisition timestamp.
+2. Confirm provenance metadata records ingestion processing details (e.g. format conversion, unit normalization, coordinate transformation) applied to the observation.
+3. Confirm provenance metadata records the quality control processing history: checks applied, flags assigned, and timestamps.
+4. Confirm provenance metadata for a manually edited, corrected, or deleted record identifies the operator and justification.
+5. For a derived observation, confirm provenance metadata identifies the source observations, algorithm, and parameters used in its derivation.
+6. For a homogenized observation, where the system supports homogenization, confirm provenance metadata records detected break points with dates and statistical confidence, adjustment factors applied, the reference series used, and that both the original and adjusted series are retained.
+7. For an observation sourced through data rescue, where the system supports data rescue, confirm provenance metadata records the source document reference, image identifier, keying method, and verification status.
+|Test type|Inspection, Demonstration
+|===
+
+[[conf_core_prov_retrieval]]
+==== /conf/core/provenance-retrieval
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/core/provenance-retrieval
+|Requirement|/req/core/provenance-retrieval
+|Test purpose|Verify provenance metadata can be queried and exported in machine-readable form.
+|Test method a|
+1. Retrieve the complete processing history for a given observation and confirm it identifies every transformation applied from acquisition to its current state.
+2. Query the audit trail filtered by operator, time period, or processing type and confirm matching entries are returned.
+3. Starting from a derived product, trace the provenance chain back to its original source observation(s).
+4. Export provenance information for an observation and confirm it is provided in a machine-readable format (e.g. W3C PROV-O or ISO 19115 lineage).
+|Test type|Demonstration, Execution
+|===
+
+[[conf_core_prov_immutability]]
+==== /conf/core/provenance-immutability
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/core/provenance-immutability
+|Requirement|/req/core/provenance-immutability
+|Test purpose|Verify provenance records cannot be altered or deleted, and that original observation values are preserved through correction.
+|Test method a|
+1. Attempt to modify or delete an existing provenance entry through the system's normal interfaces and confirm this is not possible.
+2. Apply a correction to an observation value and confirm the original (raw) value remains preserved and retrievable alongside the corrected value.
+3. Confirm a complete, unbroken audit trail exists documenting the correction.
+|Test type|Demonstration
+|===
+
+[[conf_core_batch_processing]]
+==== /conf/core/batch-processing
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/core/batch-processing
+|Requirement|/req/core/batch-processing
+|Test purpose|Verify the system supports bulk metadata updates, batch quality control changes, and bulk data export with progress control.
+|Test method a|
+1. Perform a bulk station metadata update via file upload and confirm all intended records are updated.
+2. Perform a batch quality control flag modification with a supplied justification and confirm the justification is recorded against the affected records.
+3. Perform a bulk data export for multiple stations and a defined time range and confirm the export completes and covers the requested scope.
+4. Confirm progress indication is provided during a long-running batch operation.
+5. Cancel or pause a long-running batch operation and confirm the system responds without corrupting data already processed.
+|Test type|Demonstration
+|===
+
+=== Conformance Class: Observations Quality Control
+
+[[conf_qc_observation_retention]]
+==== /conf/quality-control/observation-retention
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/quality-control/observation-retention
+|Requirement|/req/quality-control/observation-retention
+|Test purpose|Verify observations that fail quality control checks remain in the system rather than being deleted or hidden.
+|Test method a|
+1. Identify or create an observation that fails a quality control check, and confirm it remains present and retrievable after quality control processing.
+2. Confirm the observation's assigned quality flag(s) and the record of which checks were applied are retrievable alongside the observation.
+|Test type|Demonstration
+|===
+
+[[conf_qc_flag_management]]
+==== /conf/quality-control/flags
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/quality-control/flags
+|Requirement|/req/quality-control/flags
+|Test purpose|Verify quality flags support multiple QC levels, preserve history, and allow justified manual override.
+|Test method a|
+1. Confirm the system supports at least automatic, manual, and final quality control levels for an observation's quality flag.
+2. Confirm the quality control history and audit trail for an observation is preserved and retrievable.
+3. Manually override a quality flag with a supplied justification and confirm the justification is recorded.
+4. For a flagged observation, confirm the system records which specific check(s) triggered the flag and the reason for failure.
+|Test type|Demonstration
+|===
+
+[[conf_qc_configuration]]
+==== /conf/quality-control/configuration
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/quality-control/configuration
+|Requirement|/req/quality-control/configuration
+|Test purpose|Verify quality control parameters are configurable per station/element, support seasonal variation, can be enabled/disabled selectively, and are version controlled.
+|Test method a|
+1. Configure a quality control threshold specific to a station and element and confirm it is applied only to matching observations.
+2. Where seasonally varying thresholds are supported, configure one and confirm it is applied according to the observation's season.
+3. Disable an individual check for a specific station or element and confirm it is no longer applied to matching observations while continuing to apply to others.
+4. Change a quality control configuration and confirm the prior configuration version, with its effective date, remains recorded and retrievable.
+|Test type|Inspection, Demonstration
+|===
+
+[[conf_qc_execution]]
+==== /conf/quality-control/execution
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/quality-control/execution
+|Requirement|/req/quality-control/execution
+|Test purpose|Verify quality control can be triggered automatically on ingestion, on demand, and as a scheduled or batch process, including reprocessing.
+|Test method a|
+1. Ingest a new observation and confirm quality control is executed automatically without manual intervention.
+2. As an authorized user, trigger quality control on demand for a previously checked observation and confirm it is reprocessed.
+3. Configure and trigger a scheduled or batch quality control run covering previously checked observations and confirm reprocessing occurs.
+|Test type|Demonstration
+|===
+
+[[conf_qc_range_checks]]
+==== /conf/quality-control/range-checks
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/quality-control/range-checks
+|Requirement|/req/quality-control/range-checks
+|Test purpose|Verify range validation checks detect gross errors, climatologically implausible values, and sensor-range violations, with configurable thresholds.
+|Test method a|
+1. Submit an observation value outside the physically possible (gross error) limit for its element and confirm it is flagged.
+2. Submit an observation value outside the climatologically-based expected range for its element, station, and season and confirm it is flagged.
+3. Submit an observation value outside the configured sensor's observable range and confirm it is flagged.
+4. Confirm range thresholds are configurable per element and per station.
+|Test type|Demonstration
+|===
+
+[[conf_qc_temporal_consistency]]
+==== /conf/quality-control/temporal-checks
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/quality-control/temporal-checks
+|Requirement|/req/quality-control/temporal-checks
+|Test purpose|Verify temporal consistency checks detect flatlines, implausible rates of change, and spikes.
+|Test method a|
+1. Submit a sequence of identical consecutive values for an element/station and confirm the flatline check flags the repetition.
+2. Submit a sequence with an implausible rate of change between consecutive observations and confirm the rate-of-change check flags it.
+3. Submit a sequence containing an anomalous rapid change followed by a rapid reversal and confirm the spike check flags it.
+|Test type|Demonstration
+|===
+
+[[conf_qc_spatial_consistency]]
+==== /conf/quality-control/spatial-checks
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/quality-control/spatial-checks
+|Requirement|/req/quality-control/spatial-checks
+|Test purpose|Verify spatial consistency checks are applied where suitable neighbouring stations exist, and are not treated as a conformance failure where they do not.
+|Test method a|
+1. For a station with configured neighbouring stations meeting the selection criteria (maximum distance, elevation difference, station type, covariability, or predefined list), submit an observation inconsistent with contemporaneous neighbouring observations and confirm the spatial consistency check flags it.
+2. Confirm a spatial regression test is applied where neighbouring stations meeting the selection criteria exist.
+3. For a station with no neighbouring stations meeting the configured selection criteria (e.g. an island or remote station), confirm the system does not require a spatial consistency check to be applied and this is not treated as a check failure.
+|Test type|Demonstration
+|===
+
+[[conf_qc_internal_consistency]]
+==== /conf/quality-control/internal-consistency
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/quality-control/internal-consistency
+|Requirement|/req/quality-control/internal-consistency
+|Test purpose|Verify internal consistency checks validate physical relationships between simultaneously observed elements per WMO-No. 1269.
+|Test method a|
+1. Submit simultaneous observations of two or more physically related elements (e.g. minimum, average, and maximum temperature) that violate the expected physical relationship, and confirm the internal consistency check flags them.
+2. Confirm, by documentation or configuration inspection, that the checks applied reference the element-specific relationships specified in WMO-No. 1269.
+|Test type|Demonstration, Inspection
+|===
+
+=== Conformance Class: Data Ingestion
+
+[[conf_ingest_automated_collection]]
+==== /conf/data-ingestion/automated-collection
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/data-ingestion/automated-collection
+|Requirement|/req/data-ingestion/automated-collection
+|Test purpose|Verify automated data collection supports the required triggers, transfer protocols, per-source configuration tracking, and resilient failure handling.
+|Test method a|
+1. Confirm the system supports at least one configurable scheduled-polling trigger, one event-driven/subscription-based trigger, and file system monitoring for automated collection.
+2. Confirm the system supports data transfer via SFTP or FTPS (or plain FTP restricted to secure internal networks only) and HTTP/HTTPS, and that MQTT and/or authenticated RESTful API collection is available for at least one configured source.
+3. For a configured automated collection source, confirm the system maintains its schedule/subscription configuration, connection credentials (stored securely, not retrievable in plain text), last successful collection timestamp, collection attempt history, and error logs for failed attempts.
+4. Simulate a source becoming temporarily unavailable and confirm the system retries with configurable backoff, logs the failure, and resumes automatically once the source becomes available; confirm an alert is generated after persistent failures; confirm collection resumes automatically after a system restart.
+|Test type|Inspection, Demonstration
+|===
+
+[[conf_ingest_collection_monitoring]]
+==== /conf/data-ingestion/collection-monitoring
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/data-ingestion/collection-monitoring
+|Requirement|/req/data-ingestion/collection-monitoring
+|Test purpose|Verify monitoring capabilities exist for the status, performance, and auditability of automated data collection.
+|Test method a|
+1. Confirm a dashboard or equivalent view shows the status of all configured collection sources.
+2. Confirm statistics on collection success/failure rates per source, and data volume metrics per time period, are available.
+3. Confirm latency metrics (time between observation and ingestion) are available.
+4. Export the collection log and confirm it is suitable for auditing and troubleshooting.
+|Test type|Inspection, Demonstration
+|===
+
+[[conf_ingest_data_completeness]]
+==== /conf/data-ingestion/completeness
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/data-ingestion/completeness
+|Requirement|/req/data-ingestion/completeness
+|Test purpose|Verify the system monitors and reports on data completeness against defined expectations, distinct from ingestion pipeline status.
+|Test method a|
+1. Confirm expected data (stations, elements, expected frequency, reporting window) can be defined and managed.
+2. Withhold an expected observation and confirm the system detects and reports it as missing or late against the defined expectation, with an alert generated within the defined time window.
+3. Confirm completeness statistics are available by station, element, and time period.
+4. Confirm the system distinguishes between data not received and data received but failing validation.
+|Test type|Demonstration
+|===
+
+[[conf_ingest_acquisition]]
+==== /conf/data-ingestion/manual-acquisition
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/data-ingestion/manual-acquisition
+|Requirement|/req/data-ingestion/manual-acquisition
+|Test purpose|Verify manual data submission is supported via web upload, batch upload, compressed archives, and authenticated API, with appropriate feedback.
+|Test method a|
+1. Submit a file via the web-based upload interface and confirm successful ingestion.
+2. Submit a batch of multiple files in one operation, and separately a compressed archive (ZIP or TAR.GZ), and confirm all contents are processed.
+3. Submit data via the API with authentication and confirm successful ingestion.
+4. Confirm upload progress indication is shown for a large file, and that validation feedback is provided during or immediately after upload.
+5. Submit an invalid file and confirm an informative error notification is returned; submit a valid file and confirm successful ingestion is confirmed with a record count.
+|Test type|Demonstration
+|===
+
+[[conf_ingest_formats]]
+==== /conf/data-ingestion/formats
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/data-ingestion/formats
+|Requirement|/req/data-ingestion/formats
+|Test purpose|Verify ingestion of observational data in CSV/delimited text, BUFR, and WMO text-based code forms.
+|Test method a|
+1. Ingest a CSV/delimited text file using a configurable field mapping, delimiter, header row handling, and a supported date/time format, and confirm successful ingestion.
+2. Ingest a BUFR-encoded message (hourly observation, daily summary, or monthly summary, including CLIMAT/DAYCLI report types) and confirm successful ingestion.
+3. Ingest a WMO text-based code form (e.g. FM-12 SYNOP or FM-71 CLIMAT) and confirm successful ingestion.
+|Test type|Demonstration, Execution
+|===
+
+[[conf_ingest_format_validation]]
+==== /conf/data-ingestion/validation
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/data-ingestion/validation
+|Requirement|/req/data-ingestion/validation
+|Test purpose|Verify ingested data is validated for format, completeness, type, referential integrity, and plausibility, and that validation failures are rejected, reported, and logged.
+|Test method a|
+1. Submit data containing a format error, a missing required field, an incorrect data type, a reference to a non-existent station, and an implausible value, and confirm each is detected by validation.
+2. Submit an invalid file and confirm it is rejected at least at file level (or at record level where the format supports it), that a detailed error report identifying the specific validation failures is generated, and that the validation error is logged.
+|Test type|Demonstration, Execution
+|===
+
+[[conf_ingest_standardization]]
+==== /conf/data-ingestion/standardization
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/data-ingestion/standardization
+|Requirement|/req/data-ingestion/standardization
+|Test purpose|Verify ingested data from all supported formats is normalized into a common internal representation, with unit conversions traceable in provenance.
+|Test method a|
+1. Ingest data from two different supported source formats and confirm both are normalized into the same internal representation (standardized unit, UTC timestamp, station identifier, element code, source format identifier, and ingestion metadata).
+2. Ingest a value requiring unit conversion and confirm the converted value uses the target standard unit, while the original value, unit, and the conversion algorithm/factors used are preserved in provenance metadata.
+|Test type|Demonstration
+|===
+
+[[conf_ingest_duplicate_detection]]
+==== /conf/data-ingestion/duplicate-detection
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/data-ingestion/duplicate-detection
+|Requirement|/req/data-ingestion/duplicate-detection
+|Test purpose|Verify duplicate observations are detected and handled according to a documented, configurable resolution strategy.
+|Test method a|
+1. Submit two observations sharing the same station, sensor (where applicable), timestamp, and element, and confirm the system detects them as duplicates.
+2. Confirm the duplicate is flagged for review (or automatically suppressed where values are identical, per the documented resolution strategy), that the configured resolution strategy is documented, that the detection event is logged, and that information about all duplicate instances is preserved in provenance metadata.
+|Test type|Demonstration
+|===
+
+[[conf_ingest_character_set]]
+==== /conf/data-ingestion/character-encoding
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/data-ingestion/character-encoding
+|Requirement|/req/data-ingestion/character-encoding
+|Test purpose|Verify the system correctly handles UTF-8, legacy character encodings, and non-Latin scripts, and declares encoding on export.
+|Test method a|
+1. Ingest text-based data encoded in UTF-8 and confirm it is correctly interpreted as the default encoding.
+2. Ingest text-based data encoded in a supported legacy encoding (ASCII or ISO-8859-1) and confirm it is correctly interpreted.
+3. Ingest station or metadata names containing diacritics or non-Latin scripts and confirm they are stored and displayed correctly.
+4. Export text-based data and confirm the character encoding is declared in the export.
+|Test type|Demonstration
+|===
+
+=== Conformance Class: Data API
+
+This class depends on /conf/security; /conf/data-api/auth below
+verifies that dependency is honoured rather than re-testing the security requirements themselves.
+
+[[conf_api_restful]]
+==== /conf/data-api/rest
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/data-api/rest
+|Requirement|/req/data-api/rest
+|Test purpose|Verify the API is RESTful over HTTP/HTTPS, returns standard formats, is documented, and supports content negotiation.
+|Test method a|
+1. Issue an HTTP/HTTPS request to the API using a standard method (e.g. GET) and confirm a successful response.
+2. Request data in at least JSON, CSV, and NetCDF and confirm each is returned in the requested format.
+3. Confirm API documentation is published and accessible.
+4. Issue requests with different Accept headers and confirm the API returns the corresponding format via content negotiation.
+|Test type|Demonstration, Execution
+|===
+
+[[conf_api_capabilities]]
+==== /conf/data-api/query
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/data-api/query
+|Requirement|/req/data-api/query
+|Test purpose|Verify the API supports query by spatial extent, temporal extent, station, element, QC status, and aggregation level.
+|Test method a|
+1. Query the API filtered by spatial extent (bounding box, point, or polygon) and confirm only matching results are returned.
+2. Query filtered by temporal extent and confirm only matching results are returned.
+3. Query filtered by one or more station identifiers, and separately by observed element/variable, and confirm only matching results are returned in each case.
+4. Query filtered by quality control status and confirm only matching results are returned.
+5. Query for raw observations and, separately, for pre-computed official statistics where available, and confirm the requested aggregation level is honoured.
+|Test type|Execution
+|===
+
+[[conf_api_auth]]
+==== /conf/data-api/auth
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/data-api/auth
+|Requirement|/req/data-api/auth
+|Test purpose|Verify API access is governed by the system's authentication and authorization mechanisms.
+|Test method a|
+1. Confirm API access is subject to the authentication mechanism verified under /conf/security/authentication.
+2. Confirm API access is subject to the role-based access control verified under /conf/security/authorization.
+|Test type|Demonstration
+|===
+
+[[conf_api_versioning]]
+==== /conf/data-api/versioning
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/data-api/versioning
+|Requirement|/req/data-api/versioning
+|Test purpose|Verify the API is versioned, backward-compatible, and supports concurrent versions with migration guidance.
+|Test method a|
+1. Confirm the API version is clearly indicated in the endpoint path or response headers.
+2. Confirm existing clients using a previous API version continue to function, or that a documented migration path exists.
+3. Confirm migration guidance is published for deprecated API versions.
+4. Where multiple API versions are supported, confirm they can be accessed concurrently.
+|Test type|Inspection, Demonstration
+|===
+
+[[conf_api_integration]]
+==== /conf/data-api/integration
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/data-api/integration
+|Requirement|/req/data-api/integration
+|Test purpose|Verify integration mechanisms exist for WIS 2.0 messaging, webhooks, file-based exchange, and message queues.
+|Test method a|
+1. Confirm the system supports subscription to and/or publication on a WIS 2.0 message broker.
+2. Confirm webhook notifications are available for data availability or quality control events.
+3. Confirm file-based integration via watched directories or object storage is supported.
+4. Confirm message queue integration for asynchronous processing is supported.
+|Test type|Inspection, Demonstration
+|===
+
+[[conf_api_format_interoperability]]
+==== /conf/data-api/data-formats
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/data-api/data-formats
+|Requirement|/req/data-api/data-formats
+|Test purpose|Verify data is exported in interoperable, documented formats.
+|Test method a|
+1. Export observation data in NetCDF (CF conventions, discrete sampling geometry), CSV (RFC 4180 compliant), JSON, GeoJSON, and BUFR (including CLIMAT and DAYCLI message types where applicable) and confirm each export is produced.
+2. For each exported format, confirm accompanying documentation describes the data structure/schema, units of measure, quality flag definitions, temporal reference system, and spatial reference system.
+|Test type|Execution, Inspection
+|===
+
+=== Conformance Class: Basic Climate Computation
+
+[[conf_computation_derived_variables]]
+==== /conf/climate-computation/derived-variables
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/climate-computation/derived-variables
+|Requirement|/req/climate-computation/derived-variables
+|Test purpose|Verify basic derived meteorological variables are computed where not provided directly, with provenance of the source variables and method.
+|Test method a|
+1. Provide source observations lacking a directly reported derived variable (e.g. station-level pressure, temperature, and elevation without mean sea level pressure; or dry/wet-bulb temperature without dewpoint or relative humidity) and confirm the system computes the applicable derived variable(s).
+2. Confirm each computed derived value is stored with provenance metadata identifying the source variables used and the computation method applied.
+|Test type|Demonstration
+|===
+
+[[conf_computation_statistics]]
+==== /conf/climate-computation/statistics
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/climate-computation/statistics
+|Requirement|/req/climate-computation/statistics
+|Test purpose|Verify summary statistics are computed, aggregated, and stored as traceable derived observations distinguished from raw data.
+|Test method a|
+1. Compute daily minimum, maximum, mean, and accumulated total values for an observed element from quality-controlled observations, and confirm monthly and annual aggregations of the daily values are produced.
+2. Confirm aggregation periods and functions are configurable, and that return period estimation (e.g. 10-year, 50-year, 100-year) is available for an extreme value series.
+3. Confirm a computed statistic is stored as a derived observation referencing its source observations, recording the computation method, quality flag thresholds applied, and proportion of valid source data used, and is clearly distinguished from raw observations in data access interfaces.
+|Test type|Demonstration, Execution
+|===
+
+=== Conformance Class: Data Rescue
+
+Optional class (see <<_conformance>>) — the tests below apply only where a conformance claim is made for
+this class.
+
+[[conf_data_rescue_qc]]
+==== /conf/data-rescue/quality-control
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/data-rescue/quality-control
+|Requirement|/req/data-rescue/quality-control
+|Test purpose|Verify quality control appropriate to historical records is applied to rescued (digitized) data, with verification against source images and documented QA decisions.
+|Test method a|
+1. For data entered via double-key entry, confirm the system compares the two entries and identifies transcription discrepancies.
+2. Confirm range and consistency checks appropriate to historical observation practices are applied to rescued data.
+3. For a detected discrepancy, confirm the original source image can be consulted for verification.
+4. Confirm uncertain or illegible values can be flagged, and that data rescue quality assurance decisions are documented.
+|Test type|Demonstration
+|===
+
+[[conf_data_rescue_provenance]]
+==== /conf/data-rescue/provenance
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/data-rescue/provenance
+|Requirement|/req/data-rescue/provenance
+|Test purpose|Verify data rescue provenance is recorded, covering source document, imaging, keying, and quality assurance.
+|Test method a|
+1. For a rescued observation, confirm provenance metadata records the source document identification and archive location, and the image identifier and scan metadata.
+2. Confirm provenance metadata records the data entry operator(s), keying date(s), and keying method used.
+3. Confirm provenance metadata records the quality assurance verification status and any known limitations or uncertainties in the rescued data.
+|Test type|Demonstration
+|===
+
+=== Conformance Class: Metadata Management
+
+This class depends on /conf/security.
+
+[[conf_metadata_wigos_compliance]]
+==== /conf/metadata-management/wigos
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/metadata-management/wigos
+|Requirement|/req/metadata-management/wigos
+|Test purpose|Verify station and sensor metadata supports the WIGOS Metadata Standard fields, with extensibility for fields outside that standard.
+|Test method a|
+1. Confirm station and sensor metadata records support the WIGOS Metadata Standard (WMO-No. 1192) fields: station identification, name/description/alternative names, geographic location, administrative information, station classification, sensor/instrument inventory, measurement configuration, siting/exposure description, operating schedule, and responsible party/contact.
+2. Confirm a metadata field outside the WIGOS Metadata Standard (e.g. a national or legacy identifier, or another organization-specific attribute) can be stored and retrieved.
+|Test type|Inspection, Demonstration
+|===
+
+[[conf_metadata_history]]
+==== /conf/metadata-management/history
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/metadata-management/history
+|Requirement|/req/metadata-management/history
+|Test purpose|Verify a complete, dated station history is maintained.
+|Test method a|
+1. Confirm the system records a station relocation (old and new coordinates), an instrument change (make, model, installation date), and a change to observation practice or measurement height as station history entries.
+2. Confirm the system records changes to the surrounding environment affecting exposure, periods of station closure or data gaps, and network affiliation changes.
+3. For a station history entry, confirm it records the effective date and time, a description of the change, the reason where known, the responsible party, and supporting documentation references.
+|Test type|Inspection, Demonstration
+|===
+
+[[conf_metadata_feature_catalogue]]
+==== /conf/metadata-management/feature-catalogue
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/metadata-management/feature-catalogue
+|Requirement|/req/metadata-management/feature-catalogue
+|Test purpose|Verify a catalogue of observable elements is maintained with the required descriptive fields.
+|Test method a|
+1. Retrieve the element catalogue and confirm each element has a unique identifier and human-readable name.
+2. Confirm each catalogued element records its measurement class, accumulation/averaging duration, unit of measure, and statistical function.
+3. Confirm each catalogued element records its applicable value range and resolution, and a controlled vocabulary reference (WMO BUFR parameter code or CF standard name) where applicable.
+|Test type|Inspection
+|===
+
+[[conf_metadata_discovery]]
+==== /conf/metadata-management/discovery
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/metadata-management/discovery
+|Requirement|/req/metadata-management/discovery
+|Test purpose|Verify dataset-level discovery metadata is WCMP2-compliant and dataset lineage metadata follows the W3C PROV Data Model.
+|Test method a|
+1. Retrieve a dataset-level discovery metadata record and confirm it includes a globally unique persistent identifier, title and description, spatial extent (WGS84 bounding box) and temporal extent, Earth system discipline classification (WIS2 Topic Hierarchy), responsible organization and contact role, WMO data policy classification, and at least one data access link.
+2. Confirm the dataset's lineage metadata records the originating station networks, instruments, and observation periods, and, for each significant processing stage (ingestion, quality control, homogenization where applicable, disaggregation/infilling where applicable, statistical aggregation), the date, description, responsible party, and software or method reference.
+|Test type|Inspection, Execution
+|===
+
+[[conf_metadata_data_quality]]
+==== /conf/metadata-management/data-quality
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/metadata-management/data-quality
+|Requirement|/req/metadata-management/data-quality
+|Test purpose|Verify dataset-level quality metadata and quality reports are maintained.
+|Test method a|
+1. Retrieve dataset-level quality metadata and confirm it includes completeness measures (covering both missing and duplicate/spurious records), temporal quality (gaps and overlaps), thematic accuracy drawing on quality control results, and an overall conformance result against defined quality thresholds.
+2. Generate a dataset quality report and confirm it summarizes completeness by station, element, and time period, identifies temporal gaps, and reports the distribution of quality control flag statuses.
+|Test type|Inspection, Execution
+|===
+
+[[conf_metadata_constraints]]
+==== /conf/metadata-management/constraints
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/metadata-management/constraints
+|Requirement|/req/metadata-management/constraints
+|Test purpose|Verify data access and use constraints are recorded per dataset.
+|Test method a|
+1. Confirm a dataset's access and use constraints record legal access restrictions and use/redistribution conditions.
+2. Confirm security classification, where applicable, and embargo periods (dates before which data may not be published externally) are recorded.
+|Test type|Inspection
+|===
+
+[[conf_metadata_export]]
+==== /conf/metadata-management/export
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/metadata-management/export
+|Requirement|/req/metadata-management/export
+|Test purpose|Verify metadata can be exported in the required standard formats.
+|Test method a|
+1. Export station and sensor metadata in WIGOS Metadata Representation (WMDR) format.
+2. Export dataset discovery metadata in WMO Core Metadata Profile v2 (WCMP2, GeoJSON).
+3. Export dataset lineage/provenance records in W3C PROV-O or an equivalent structured format.
+4. Export a dataset quality report and the element catalogue, each in a documented structured format.
+|Test type|Execution
+|===
+
+[[conf_metadata_quality]]
+==== /conf/metadata-management/validation
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/metadata-management/validation
+|Requirement|/req/metadata-management/validation
+|Test purpose|Verify metadata is validated for completeness, coordinate validity, temporal consistency, referential integrity, and controlled vocabulary compliance, with reporting.
+|Test method a|
+1. Submit metadata with a missing required field, an invalid coordinate, overlapping effective dates, a reference to a non-existent station, and a non-compliant classification value, and confirm each is detected by validation.
+2. Generate a metadata validation report and confirm it identifies missing required metadata, quality issues or inconsistencies, and recommendations for improvement.
+|Test type|Demonstration, Execution
+|===
+
+[[conf_metadata_citation]]
+==== /conf/metadata-management/citation
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/metadata-management/citation
+|Requirement|/req/metadata-management/citation
+|Test purpose|Verify datasets support persistent identification, citation text, versioning, and derived-product linkage.
+|Test method a|
+1. Confirm a dataset has a generated persistent identifier (DOI or equivalent) and that recommended citation text is provided.
+2. Confirm dataset versions are clearly identified.
+3. Confirm links are maintained between a derived product and its source dataset(s).
+|Test type|Inspection, Demonstration
+|===
+
+=== Conformance Class: User Interface
+
+[[conf_ui_visualization]]
+==== /conf/user-interface/visualization
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/user-interface/visualization
+|Requirement|/req/user-interface/visualization
+|Test purpose|Verify the system provides interactive visualization of observations, comparisons, station maps, and exportable graphics.
+|Test method a|
+1. Display a time series plot of observation values over a configurable time range.
+2. Confirm original and quality-controlled or homogenized values can be displayed simultaneously for comparison.
+3. Display a station location map with filtering and selection capability.
+4. Export a visualization in a common image format (PNG, SVG, or PDF).
+5. Interactively explore quality control flags and metadata from within the visualization.
+|Test type|Demonstration
+|===
+
+[[conf_ui_tabular]]
+==== /conf/user-interface/tabular
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/user-interface/tabular
+|Requirement|/req/user-interface/tabular
+|Test purpose|Verify observations can be displayed, sorted, filtered, paginated, compared, and exported in tabular form.
+|Test method a|
+1. Display observations in tabular format with configurable columns (timestamp, station, element, value, unit, quality flag).
+2. Sort and filter the table by any displayed column, and confirm pagination is provided for a large result set.
+3. Display data from multiple stations or elements simultaneously for comparison.
+4. Export the displayed tabular data in CSV or an equivalent flat-file format.
+|Test type|Demonstration
+|===
+
+[[conf_ui_search]]
+==== /conf/user-interface/search
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/user-interface/search
+|Requirement|/req/user-interface/search
+|Test purpose|Verify integrated search supports the required filters, contextual results, navigation, and download.
+|Test method a|
+1. Search filtered by station identifier, station name, geographic area, element, time period, and quality control status.
+2. Confirm search results present sufficient context (station name, location, data coverage) to identify relevant records.
+3. Navigate from a search result to a detailed observation view and to station metadata.
+4. Download the search results.
+|Test type|Demonstration
+|===
+
+[[conf_ui_data_entry]]
+==== /conf/user-interface/data-entry
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/user-interface/data-entry
+|Requirement|/req/user-interface/data-entry
+|Test purpose|Verify form-based interfaces support manual observation entry/correction, metadata management, and QC decision recording with audit trail.
+|Test method a|
+1. Manually enter or correct an observation value and confirm real-time validation feedback is provided.
+2. Create and edit a station or sensor metadata record through the form-based interface.
+3. Review and resolve a quality control flag or alert through the interface.
+4. Assign a quality control decision and confirm the operator identification is recorded in the audit trail.
+|Test type|Demonstration
+|===
+
+=== Conformance Class: Climate Products
+
+[[conf_climate_products_normals]]
+==== /conf/climate-products/normals
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/climate-products/normals
+|Requirement|/req/climate-products/normals
+|Test purpose|Verify climate normals are computed over standard 30-year periods, with the reference period recorded and multiple periods supported concurrently.
+|Test method a|
+1. Compute and store climate normals using a standard 30-year averaging period as defined by WMO, and confirm monthly and annual normals are produced for an observed element.
+2. Confirm the reference period is recorded for each set of normals.
+3. Compute and store normals for a second, different reference period concurrently and confirm both remain accessible.
+|Test type|Demonstration, Execution
+|===
+
+[[conf_climate_products_wmo_products]]
+==== /conf/climate-products/wmo-products
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/climate-products/wmo-products
+|Requirement|/req/climate-products/wmo-products
+|Test purpose|Verify generation of World Weather Records, CLIMAT, and DAYCLI products from quality-controlled observation series.
+|Test method a|
+1. Generate a World Weather Records compilation (monthly means, extremes, and totals per element over the submission period) in accordance with WMO-No. 1186.
+2. Generate a CLIMAT message (FM 71) monthly climatological summary suitable for submission via WIS 2.0.
+3. Generate a DAYCLI message including required quality flag status and siting classification metadata, suitable for submission via WIS 2.0.
+|Test type|Execution
+|===
+
+[[conf_climate_products_management]]
+==== /conf/climate-products/management
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/climate-products/management
+|Requirement|/req/climate-products/management
+|Test purpose|Verify climate products are versioned, traceable, and accessible through the data API.
+|Test method a|
+1. Generate a climate product, then correct a source observation and trigger recomputation, and confirm a new version is created without overwriting the earlier version.
+2. Confirm the product's metadata records the source data period, computation date, and quality constraints applied.
+3. Retrieve the product through the data API verified under /conf/data-api.
+|Test type|Demonstration, Execution
+|===
+
+=== Conformance Class: Processing Automation and Scheduling
+
+[[conf_automation_scheduling]]
+==== /conf/automation/scheduling
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/automation/scheduling
+|Requirement|/req/automation/scheduling
+|Test purpose|Verify routine processing tasks can be scheduled by time or event, with configurable scope, and enabled/disabled without reconfiguration.
+|Test method a|
+1. Configure a time-based schedule (e.g. daily) for a routine processing task and confirm it executes at the scheduled time.
+2. Configure an event-triggered schedule (e.g. automatic quality control following ingestion) and confirm it executes upon the triggering event.
+3. Confirm the processing scope (station, element, time period) is configurable per schedule.
+4. Disable a schedule without modifying its configuration and confirm it no longer executes; re-enable it and confirm it resumes.
+|Test type|Demonstration
+|===
+
+[[conf_automation_workflows]]
+==== /conf/automation/workflows
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/automation/workflows
+|Requirement|/req/automation/workflows
+|Test purpose|Verify multi-step processing workflows chain dependent steps, halt and notify on failure, support manual re-execution, and allow parallelism where applicable.
+|Test method a|
+1. Define a multi-step workflow chaining dependent processing steps (e.g. quality control → summary statistics → publication) in sequence and confirm they execute in order.
+2. Introduce a failure in an upstream step and confirm downstream steps are halted and operators are notified.
+3. Manually re-execute a failed or incomplete workflow step and confirm it completes.
+4. Where independent processing tasks are supported, confirm they can execute in parallel.
+|Test type|Demonstration
+|===
+
+[[conf_automation_monitoring]]
+==== /conf/automation/monitoring
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/automation/monitoring
+|Requirement|/req/automation/monitoring
+|Test purpose|Verify monitoring and alerting is available for automated processing, with operator control to cancel or re-trigger tasks.
+|Test method a|
+1. Confirm status visibility (running, completed, failed) is available for automated processing tasks.
+2. Configure an alert (email or equivalent) for task failure or exceeding expected duration and confirm it triggers under that condition.
+3. Confirm a summary view of processing status across all scheduled tasks is available.
+4. Cancel a running task, and separately manually re-trigger a task, and confirm the system responds correctly in each case.
+|Test type|Demonstration
+|===
+
+[[conf_automation_audit]]
+==== /conf/automation/audit
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/automation/audit
+|Requirement|/req/automation/audit
+|Test purpose|Verify an audit log records the configuration, timing, scope, and outcome of every automated processing execution.
+|Test method a|
+1. Execute an automated processing task and confirm the audit log records the task identifier, type, and configuration at the time of execution, plus start time, end time, and completion status.
+2. Confirm the audit log records the input data scope (stations, elements, time period processed) and the count of records processed, updated, flagged, or rejected.
+3. Confirm any errors or warnings generated during processing are recorded in the audit log.
+|Test type|Demonstration, Inspection
+|===
+
+=== Conformance Class: Performance and Scalability
+
+[[conf_performance_response_time]]
+==== /conf/performance/response-time
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/performance/response-time
+|Requirement|/req/performance/response-time
+|Test purpose|Verify documented response time targets exist, are monitored, and are maintained under expected concurrent load.
+|Test method a|
+1. Confirm documented response time targets exist for common query operations (single-station data retrieval, multi-station spatial queries, and metadata lookups).
+2. Confirm the system monitors query response times against the defined targets.
+3. Generate concurrent user load within the documented expected range and confirm the system remains responsive without degradation of correctness or data integrity.
+|Test type|Inspection, Execution
+|===
+
+[[conf_performance_capacity]]
+==== /conf/performance/capacity
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/performance/capacity
+|Requirement|/req/performance/capacity
+|Test purpose|Verify the system supports multi-decade data volumes, accommodates growth, and meets ingestion latency targets.
+|Test method a|
+1. Confirm the system supports storage and retrieval of observational records spanning multiple decades across all managed station networks, by inspection of documented capacity/retention or demonstration against an existing long-record dataset.
+2. Confirm documentation describes how the system accommodates data volume growth over its operational lifetime without requiring re-architecture of core data storage.
+3. Confirm ingestion of observations from a configured source completes within the documented latency target appropriate to that source's delivery schedule.
+|Test type|Inspection, Demonstration
+|===
+
+=== Conformance Class: Reliability and Availability
+
+[[conf_reliability_availability]]
+==== /conf/reliability/availability
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/reliability/availability
+|Requirement|/req/reliability/availability
+|Test purpose|Verify availability targets are defined, monitored, and communicated, and that unplanned outages are promptly notified.
+|Test method a|
+1. Confirm documented, published availability targets exist separately for data retrieval and data ingestion services.
+2. Confirm the system monitors availability and reports against the defined targets.
+3. Confirm scheduled maintenance windows are communicated to users in advance, and that a mechanism exists to minimize scheduled maintenance downtime (e.g. a rolling update procedure).
+4. Review a record of an unplanned outage (or a simulated one) and confirm administrators were notified promptly with sufficient diagnostic detail.
+|Test type|Inspection, Demonstration
+|===
+
+[[conf_reliability_data_integrity]]
+==== /conf/reliability/data-integrity
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/reliability/data-integrity
+|Requirement|/req/reliability/data-integrity
+|Test purpose|Verify data integrity is protected through atomic, durable writes, referential integrity, transfer checksums, and periodic corruption checks.
+|Test method a|
+1. Confirm write operations are atomic — by design documentation review, or by demonstration where a controlled interruption can be simulated — such that an interrupted write does not persist a partial record.
+2. Confirm committed records persist across a simulated system failure or restart.
+3. Attempt to create an observation referencing a non-existent station and confirm it is rejected by referential integrity constraints.
+4. Confirm checksums or cryptographic hash verification are applied to file-based data transfers.
+5. Confirm a write-ahead-logging or equivalent durability mechanism is documented, and that periodic integrity checks are performed with results logged and administrators alerted on any detected inconsistency.
+|Test type|Inspection, Demonstration
+|===
+
+[[conf_reliability_backup_recovery]]
+==== /conf/reliability/backup-recovery
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/reliability/backup-recovery
+|Requirement|/req/reliability/backup-recovery
+|Test purpose|Verify backup and recovery capabilities meet documented RTO/RPO, support point-in-time recovery, and use a non-proprietary format.
+|Test method a|
+1. Confirm automated regular backups are configured for observation data, metadata, and system configuration.
+2. Confirm a documented Recovery Time Objective (RTO) and Recovery Point Objective (RPO) exist, appropriate to the operational context.
+3. Confirm point-in-time recovery capability exists to restore the system to a known-good prior state.
+4. Confirm documented recovery procedures exist and have been regularly tested, and that backup integrity is verified through periodic restore testing.
+5. Confirm backup data is stored in a non-proprietary, documented format independent of specific software versions or vendor systems.
+|Test type|Inspection, Demonstration
+|===
+
+[[conf_reliability_fault_tolerance]]
+==== /conf/reliability/fault-tolerance
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/reliability/fault-tolerance
+|Requirement|/req/reliability/fault-tolerance
+|Test purpose|Verify the system degrades gracefully under partial failure, with meaningful errors, logging, and automatic retry.
+|Test method a|
+1. Simulate write-path unavailability and confirm read requests continue to be served.
+2. Simulate temporary processing unavailability and confirm ingestion requests are queued rather than lost.
+3. Trigger an error condition and confirm a meaningful, non-generic error message is returned, and that the error is logged with sufficient diagnostic detail.
+4. Confirm failed operations are automatically retried with exponential backoff.
+|Test type|Demonstration
+|===
+
+[[conf_reliability_retrieval_validation]]
+==== /conf/reliability/retrieval-validation
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/reliability/retrieval-validation
+|Requirement|/req/reliability/retrieval-validation
+|Test purpose|Verify data integrity is validated on retrieval, with corruption detection, alternative backup access, and audit logging.
+|Test method a|
+1. Retrieve a file-based dataset and confirm the system verifies its checksum.
+2. Simulate corrupted stored data and confirm the system detects and reports the corruption to administrators.
+3. Confirm alternative access to a backup copy is available when primary data is corrupted.
+4. Confirm audit logs record data integrity violations.
+|Test type|Demonstration
+|===
+
+=== Conformance Class: Security
+
+[[conf_security_authentication]]
+==== /conf/security/authentication
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/security/authentication
+|Requirement|/req/security/authentication
+|Test purpose|Verify authentication supports standards-based identity integration, strong local credentials, MFA for privileged accounts, lockout, and session timeout.
+|Test method a|
+1. Confirm the system supports integration with an institutional or enterprise identity management system using a standard authentication protocol (e.g. OpenID Connect, OAuth 2.0, SAML 2.0, or LDAP).
+2. Confirm strong credential policies (e.g. minimum complexity, expiry) are enforced for locally managed accounts.
+3. Confirm multi-factor authentication is available for administrative and privileged accounts.
+4. Attempt repeated failed authentication against a test account and confirm it is locked out.
+5. Confirm sessions are managed securely with automatic timeout after inactivity.
+|Test type|Inspection, Demonstration
+|===
+
+[[conf_security_authorization]]
+==== /conf/security/authorization
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/security/authorization
+|Requirement|/req/security/authorization
+|Test purpose|Verify role-based access control separates privileges, supports station/network-level restriction, enforces access to sensitive data, and applies least privilege.
+|Test method a|
+1. Confirm role-based access control separates privileges across at least: read-only users, data entry operators, quality control analysts, and system administrators.
+2. Confirm data access can be restricted at station or network level for a given role.
+3. Confirm access to an embargoed or sensitive dataset is enforced according to configured policy.
+4. Confirm users are granted only the minimum permissions necessary for their assigned role.
+|Test type|Demonstration
+|===
+
+[[conf_security_encryption]]
+==== /conf/security/encryption
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/security/encryption
+|Requirement|/req/security/encryption
+|Test purpose|Verify data in transit, sensitive data at rest, and off-site backups are encrypted.
+|Test method a|
+1. Confirm data in transit is encrypted using a current industry-standard transport security protocol.
+2. Confirm sensitive data at rest (user credentials, API keys, personal information) is encrypted.
+3. Confirm backup files stored on external or off-site media are encrypted.
+|Test type|Inspection
+|===
+
+[[conf_security_audit_logging]]
+==== /conf/security/audit-logging
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/security/audit-logging
+|Requirement|/req/security/audit-logging
+|Test purpose|Verify audit logs comprehensively and tamper-resistantly record security-relevant events.
+|Test method a|
+1. Confirm the audit log records authentication attempts (successful and failed), data/metadata modifications with user identification, administrative operations, and quality control flag overrides with justification.
+2. Confirm data export operations are logged with user, timestamp, and selection criteria.
+3. Confirm audit logs are tamper-proof or stored in write-once media, retained per the organization's retention policy, and searchable/exportable.
+4. Confirm log entries include sufficient detail to reconstruct the sequence of events for a security incident investigation.
+|Test type|Inspection, Demonstration
+|===
+
+[[conf_security_vulnerability_management]]
+==== /conf/security/vulnerability-management
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/security/vulnerability-management
+|Requirement|/req/security/vulnerability-management
+|Test purpose|Verify a documented process exists for applying security updates, scanning for vulnerabilities, and publishing advisories.
+|Test method a|
+1. Confirm a documented process exists for applying security patches and regular security updates.
+2. Confirm vulnerability scanning capability exists, or that the system supports external security assessment tooling.
+3. Confirm security advisories are published for known issues affecting the deployment.
+|Test type|Inspection
+|===
+
+[[conf_security_data_privacy]]
+==== /conf/security/data-privacy
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/security/data-privacy
+|Requirement|/req/security/data-privacy
+|Test purpose|Verify personal information is minimized, protected, and governed by a documented retention policy.
+|Test method a|
+1. Confirm personally identifiable information (PII) collection and storage is limited to what is operationally necessary.
+2. Confirm mechanisms exist to redact or anonymize personal information where required.
+3. Confirm documented data retention policies exist for any personal data held by the system.
+|Test type|Inspection
+|===
+
+[[conf_security_provenance_security]]
+==== /conf/security/provenance-security
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/security/provenance-security
+|Requirement|/req/security/provenance-security
+|Test purpose|Verify provenance records are protected against backdating and tampering.
+|Test method a|
+1. Confirm provenance records are cryptographically timestamped, or that an equivalent mechanism preventing backdating is in place.
+2. Confirm provenance audit trails are stored in a tamper-evident manner.
+|Test type|Inspection
+|===
+
+=== Conformance Class: Usability
+
+[[conf_usability_ui_design]]
+==== /conf/usability/ui-design
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/usability/ui-design
+|Requirement|/req/usability/ui-design
+|Test purpose|Verify the user interface provides consistent navigation, clear terminology, contextual help, and clear validation feedback.
+|Test method a|
+1. Confirm navigation patterns are consistent across all functions of the user interface, and that labels and terminology are clear, unambiguous, and aligned with climate science conventions.
+2. Confirm contextual help or documentation is accessible from relevant screens, and that keyboard navigation is supported.
+3. Confirm required fields and validation requirements are indicated clearly before submission.
+4. Trigger a form validation error and confirm the message is meaningful and includes guidance on corrective action.
+|Test type|Demonstration
+|===
+
+[[conf_usability_notifications]]
+==== /conf/usability/notifications
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/usability/notifications
+|Requirement|/req/usability/notifications
+|Test purpose|Verify notifications are provided for operation completion, critical QC failures, maintenance, and access changes, with configurable delivery.
+|Test method a|
+1. Complete a long-running operation (ingestion, quality control processing, or statistical computation) and confirm a completion notification is provided.
+2. Trigger a critical quality control failure requiring manual review and confirm a notification is generated.
+3. Confirm notifications are provided for system maintenance schedules and for data embargo or access restriction changes.
+4. Confirm the notification delivery method (e.g. email, in-application alert) is configurable.
+|Test type|Demonstration
+|===
+
+=== Conformance Class: Maintainability
+
+[[conf_maintainability_configuration]]
+==== /conf/maintainability/configuration
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/maintainability/configuration
+|Requirement|/req/maintainability/configuration
+|Test purpose|Verify configuration is externalized, hot-reloadable where applicable, version controlled, validated, and documented.
+|Test method a|
+1. Confirm configuration is externalized from application code (e.g. configuration files or a configuration service).
+2. Change a quality control threshold and confirm it can be hot-reloaded without a system restart.
+3. Confirm configuration changes are version controlled with rollback capability.
+4. Submit an invalid configuration and confirm it is rejected by validation before activation.
+5. Confirm all configurable parameters are documented with valid value ranges.
+|Test type|Inspection, Demonstration
+|===
+
+[[conf_maintainability_logging]]
+==== /conf/maintainability/logging
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/maintainability/logging
+|Requirement|/req/maintainability/logging
+|Test purpose|Verify logging is configurable, structured, retained, centralizable, and includes performance metrics.
+|Test method a|
+1. Confirm log levels (ERROR, WARN, INFO, DEBUG) are configurable per component.
+2. Confirm log entries are structured with timestamps, component identification, and correlation IDs.
+3. Confirm log rotation and retention policies are configured, and that centralized logging is supported for distributed deployments.
+4. Confirm performance metrics (response times, throughput, resource utilization) are logged.
+|Test type|Inspection
+|===
+
+[[conf_maintainability_health_monitoring]]
+==== /conf/maintainability/health-monitoring
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/maintainability/health-monitoring
+|Requirement|/req/maintainability/health-monitoring
+|Test purpose|Verify health monitoring endpoints expose overall and component-level status, KPIs, and resource utilization.
+|Test method a|
+1. Query the system's health monitoring endpoint and confirm it reports overall system health status (healthy, degraded, unhealthy) and component-level status for all major components.
+2. Confirm key performance indicators (query response times, ingestion rates, error rates) and resource utilization metrics (CPU, memory, disk, network) are exposed.
+3. Confirm integration with a standard monitoring protocol or tool used within the deployment environment.
+|Test type|Inspection, Execution
+|===
+
+[[conf_maintainability_api_compatibility]]
+==== /conf/maintainability/api-compatibility
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/maintainability/api-compatibility
+|Requirement|/req/maintainability/api-compatibility
+|Test purpose|Verify API stability is maintained through semantic versioning, a published deprecation policy, migration guidance, and concurrent version support.
+|Test method a|
+1. Confirm API endpoints use semantic versioning.
+2. Confirm a defined and published deprecation policy specifies the support period for deprecated versions, and that deprecation notices appear in API documentation and response headers for a deprecated version.
+3. Confirm migration guides are published for breaking changes.
+4. Confirm multiple API versions can run concurrently during a transition period.
+|Test type|Inspection, Demonstration
+|===
+
+[[conf_maintainability_schema_evolution]]
+==== /conf/maintainability/schema-evolution
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/maintainability/schema-evolution
+|Requirement|/req/maintainability/schema-evolution
+|Test purpose|Verify database schema changes are version controlled, testable, reversible, and backward compatible where feasible.
+|Test method a|
+1. Confirm database schema migrations are managed through version-controlled migration scripts, with automated or documented migration procedures.
+2. Confirm schema migrations can be tested in a non-production environment.
+3. Confirm rollback capability exists for a failed migration.
+4. Confirm backward compatibility is maintained for schema changes where feasible.
+|Test type|Inspection
+|===
+
+[[conf_maintainability_documentation]]
+==== /conf/maintainability/documentation
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/maintainability/documentation
+|Requirement|/req/maintainability/documentation
+|Test purpose|Verify comprehensive system documentation exists covering architecture, deployment, configuration, API, troubleshooting, and security.
+|Test method a|
+1. Confirm documentation covers system architecture and component descriptions, and installation/deployment procedures.
+2. Confirm documentation includes a configuration reference with parameter descriptions and examples, and API reference documentation with request/response examples.
+3. Confirm documentation includes troubleshooting guides, backup and recovery procedures, disaster recovery/system switchover procedures, and security hardening guidelines.
+|Test type|Inspection
+|===
+
+=== Conformance Class: Interoperability
+
+[[conf_interoperability_standards]]
+==== /conf/interoperability/standards
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/interoperability/standards
+|Requirement|/req/interoperability/standards
+|Test purpose|Verify compliance with the WIGOS Metadata Standard, WMO Manual on Codes, CF Conventions, and at least one relevant OGC standard.
+|Test method a|
+1. Confirm station metadata complies with the WMO WIGOS Metadata Standard, as verified under /conf/metadata-management/wigos.
+2. Confirm BUFR and WMO code form support complies with the WMO Manual on Codes (WMO-No. 306), as verified under /conf/data-ingestion/formats.
+3. Confirm NetCDF climate data file exports follow CF Conventions, as verified under /conf/data-api/data-formats.
+4. Confirm at least one OGC standard (API - Features, API - EDR, API - Records, or SensorThings API) is implemented for data access or discovery.
+|Test type|Inspection
+|===
+
+[[conf_interoperability_api]]
+==== /conf/interoperability/api
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/interoperability/api
+|Requirement|/req/interoperability/api
+|Test purpose|Verify the API supports content negotiation, standard status codes, CORS, and a machine-readable description.
+|Test method a|
+1. Issue requests with different Accept headers and confirm content negotiation returns the corresponding format.
+2. Confirm the API returns standard HTTP status codes with appropriate semantics for success and error conditions.
+3. Confirm Cross-Origin Resource Sharing (CORS) is supported for web-based clients.
+4. Confirm an OpenAPI (Swagger) specification or equivalent machine-readable API description is published.
+|Test type|Execution, Inspection
+|===
+
+=== Conformance Class: Data Governance
+
+[[conf_data_governance_lifecycle]]
+==== /conf/data-governance/lifecycle
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/data-governance/lifecycle
+|Requirement|/req/data-governance/lifecycle
+|Test purpose|Verify data lifecycle management supports configurable retention, archival, approved deletion with tombstoning, and format migration.
+|Test method a|
+1. Confirm data retention policies are configurable per dataset type or network, and that automated archival of historical data to long-term storage is supported.
+2. Confirm permanent data deletion requires an approval workflow.
+3. Delete a record through the approved workflow and confirm a tombstone record is retained documenting what was deleted and why.
+4. Confirm a migration path exists for data format updates or schema changes.
+|Test type|Inspection, Demonstration
+|===
+
+[[conf_data_governance_quality_metadata]]
+==== /conf/data-governance/quality-metadata
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/data-governance/quality-metadata
+|Requirement|/req/data-governance/quality-metadata
+|Test purpose|Verify data quality metadata is comprehensive, queryable, exportable, and kept automatically up to date.
+|Test method a|
+1. Confirm data quality metadata records completeness metrics, timeliness metrics, quality control statistics (pass/fail rates per check type), manual intervention frequency, homogenization status where applicable, and an overall fitness-for-purpose assessment.
+2. Confirm data quality metadata is queryable alongside observation data and exportable in a machine-readable format.
+3. Change the underlying data quality (e.g. by flagging additional observations) and confirm the quality metadata updates automatically to reflect the change.
+|Test type|Inspection, Demonstration, Execution
+|===
+
+[[conf_data_governance_access_policies]]
+==== /conf/data-governance/access-policies
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/data-governance/access-policies
+|Requirement|/req/data-governance/access-policies
+|Test purpose|Verify data access policies (classification, embargo, licensing, sharing agreements) are recorded and automatically enforced.
+|Test method a|
+1. Confirm datasets are classified as public, restricted, or confidential, and that license and attribution requirements are recorded and presented for data usage.
+2. Confirm embargo periods for recently collected data are enforced where configured.
+3. Confirm data sharing agreements and restrictions can be configured per network or organization.
+4. Confirm access restrictions are automatically enforced based on user roles, as verified under /conf/security/authorization.
+|Test type|Inspection, Demonstration
+|===
+
+[[conf_data_governance_stewardship]]
+==== /conf/data-governance/stewardship
+
+[cols="1,4"]
+|===
+|Abstract test|/conf/data-governance/stewardship
+|Requirement|/req/data-governance/stewardship
+|Test purpose|Verify data stewardship roles are defined and separated, with clear escalation paths.
+|Test method a|
+1. Confirm the system defines and supports a data custodian role with dataset maintenance responsibilities.
+2. Confirm the system defines a data quality manager role with authority over quality control processes, including initiating investigations into identified data quality issues.
+3. Confirm the system defines a data access coordinator role for managing access requests and policies, and that the system administrator role is separated from data stewardship roles.
+4. Confirm a clear escalation path exists for data governance issues.
+|Test type|Inspection
+|===
+
+=== Recommendations register
+
+Recommendations (`/rec/` items) are not tested for conformance (see <<_conformance>>). This register lists
+every Recommendation defined in Clauses 6 and 7 for completeness, grouped by the conformance class it
+appears in.
+
+[cols="3,3,1", options="header"]
+|===
+|Recommendation|Conformance class it appears in|Testable for conformance
+
+|/rec/quality-control/flagging-convention|/conf/quality-control|No
+|/rec/data-ingestion/formats|/conf/data-ingestion|No
+|/rec/data-ingestion/validation|/conf/data-ingestion|No
+|/rec/data-api/openapi|/conf/data-api|No
+|/rec/data-api/standards|/conf/data-api|No
+|/rec/climate-computation/homogenization-detection|/conf/climate-computation|No
+|/rec/climate-computation/homogenization-adjustment|/conf/climate-computation|No
+|/rec/data-rescue/imaging|/conf/data-rescue|No
+|/rec/data-rescue/data-entry|/conf/data-rescue|No
+|/rec/metadata-management/gdc-submission|/conf/metadata-management|No
+|/rec/metadata-management/maintenance|/conf/metadata-management|No
+|/rec/metadata-management/constraints|/conf/metadata-management|No
+|/rec/metadata-management/citation|/conf/metadata-management|No
+|/rec/climate-products/indices|/conf/climate-products|No
+|/rec/performance/scalability|/conf/performance|No
+|/rec/reliability/disaster-recovery|/conf/reliability|No
+|/rec/security/authorization|/conf/security|No
+|/rec/usability/accessibility|/conf/usability|No
+|===

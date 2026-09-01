@@ -15,13 +15,14 @@ data validation, and metadata management workflows that depend on expert human j
 
 ==== Requirements
 
+[[req_usability_ui_design]]
 ===== User Interface Design
 
 [cols="1,4"]
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/usability/ui-design
-|A a|The system user interface SHALL:
+|Statement a|The system user interface SHALL:
 
 * Provide consistent navigation patterns across all functions
 * Use clear, unambiguous labels and terminology aligned with climate science conventions
@@ -38,13 +39,14 @@ across platforms, reduces client-side deployment complexity, and facilitates int
 with web-based identity management systems. Web-based interfaces should apply the accessibility recommendations in /rec/usability/accessibility.
 ====
 
+[[rec_usability_accessibility]]
 ===== Accessibility
 
 [cols="1,4"]
 |===
 2+^|**Recommendation {counter:rec-id}**
 |Identifier|/rec/usability/accessibility
-|A a|The system user interface SHOULD conform to:
+|Statement a|The system user interface SHOULD conform to:
 
 * Web Content Accessibility Guidelines (WCAG) 2.1 Level AA where applicable
 * Support for screen readers and assistive technologies
@@ -54,13 +56,14 @@ with web-based identity management systems. Web-based interfaces should apply th
 |===
 
 
+[[req_usability_notifications]]
 ===== User Feedback and Notifications
 
 [cols="1,4"]
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/usability/notifications
-|A a|The system SHALL provide notifications for:
+|Statement a|The system SHALL provide notifications for:
 
 * Completion of long-running operations (ingestion, QC processing, statistical computation)
 * Critical quality control failures requiring manual review
