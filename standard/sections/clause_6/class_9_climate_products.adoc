@@ -24,7 +24,7 @@ distinguished from raw observations with full documentation of their derivation 
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/climate-products/normals
 |Statement a|The system SHALL support computation and storage of climate normals in accordance with
-WMO guidelines (WMO-No. 1203), including:
+_WMO Guidelines on the Calculation of Climate Normals_ (WMO-No. 1203), including:
 
 * Standard 30-year averaging periods as defined by WMO
 * Monthly and annual normals for each observed element
@@ -41,9 +41,12 @@ WMO guidelines (WMO-No. 1203), including:
 |Identifier|/req/climate-products/wmo-products
 |Statement a|The system SHALL support generation of the following WMO standard observation products from quality-controlled observation series:
 
-* **World Weather Records (WWR)**: compilation of long-period station records in accordance with WMO-No. 1186, comprising monthly means, extremes, and totals for each observed element over the submission period
+* **World Weather Records (WWR)**: compilation of long-period station records in accordance with the _Guidelines for the
+Submission of the World Weather Records 2011+_ (WMO-No. 1186), comprising monthly means, extremes, and totals for each
+observed element over the submission period
 * **CLIMAT messages** (FM 71): monthly climatological summaries for submission via WIS 2.0 or other designated exchange mechanisms
-* **DAYCLI messages**: daily temperature and precipitation values for submission via WIS 2.0, including required quality flag status and siting classification metadata
+* **DAYCLI messages**: daily temperature and precipitation values for submission via WIS 2.0, including required quality
+flag status and siting classification metadata
 
 |===
 

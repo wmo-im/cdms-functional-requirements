@@ -1,51 +1,21 @@
 == References
 
-=== Normative references
-
 The following documents are referred to in the text in such a way that some or all of their content
 constitutes requirements of this document.
 
-==== WMO Publications
-
-* WMO-No. 8: _Guide to Meteorological Instruments and Methods of Observation_. World Meteorological Organization, Geneva.
-* WMO-No. 49: _WMO Technical Regulations_, Volume I: General Meteorological Standards and Recommended Practices. World Meteorological Organization, Geneva.
-* WMO-No. 306: _Manual on Codes_, Volume I.1 (Alphanumeric data representation) and Volume I.2 (Binary codes, including BUFR). World Meteorological Organization, Geneva.
-* WMO-No. 488: _Guide to the Global Observing System_. World Meteorological Organization, Geneva.
-* WMO-No. 1060: _Manual on the WMO Information System_, Volume II: Approved WIS Technical Specifications (including the WMO Core Metadata Profile version 2, WCMP2). World Meteorological Organization, Geneva.
-* WMO-No. 1131: _Climate Data Management System Specifications_ (2025 Edition). World Meteorological Organization, Geneva.
-* WMO-No. 1160: _Manual on the WMO Integrated Global Observing System_. World Meteorological Organization, Geneva.
-* WMO-No. 1186: _World Weather Records_. World Meteorological Organization, Geneva.
-* WMO-No. 1192: _WIGOS Metadata Standard_. World Meteorological Organization, Geneva.
-* WMO-No. 1203: _WMO Guidelines on the Calculation of Climate Normals_. World Meteorological Organization, Geneva.
-* WMO-No. 1238: _Manual on High-quality Global Data Management Framework for Climate_. World Meteorological Organization, Geneva.
-* WMO-No. 1269: _Guidelines on Surface Station Data Quality Control and Quality Assurance for Climate Applications_. World Meteorological Organization, Geneva.
-
-==== IETF
-
-* RFC 2119: Bradner, S. (1997): _Key words for use in RFCs to Indicate Requirement Levels_. Internet Engineering Task Force. https://www.rfc-editor.org/rfc/rfc2119
-* RFC 4180: Shafranovich, Y. (2005): _Common Format and MIME Type for Comma-Separated Values (CSV) Files_. Internet Engineering Task Force. https://www.rfc-editor.org/rfc/rfc4180
-
-==== W3C
-
-* PROV-DM: Moreau, L., and P. Missier (eds.) (2013): _PROV-DM: The PROV Data Model_. W3C Recommendation, 30 April 2013. https://www.w3.org/TR/prov-dm/
-* PROV-O: Lebo, T., et al. (eds.) (2013): _PROV-O: The PROV Ontology_. W3C Recommendation, 30 April 2013. https://www.w3.org/TR/prov-o/
-
-==== CF Conventions
-
-* Hassell, D., et al.: _NetCDF Climate and Forecast (CF) Metadata Conventions_. https://cfconventions.org/
-
-==== OGC
-
-* OGC 15-078r6: _OGC SensorThings API Part 1: Sensing_. Open Geospatial Consortium.
-* OGC 17-069r4: _OGC API — Features — Part 1: Core_. Open Geospatial Consortium.
-* OGC 19-086r6: _OGC API — Environmental Data Retrieval Standard_. Open Geospatial Consortium.
-* OGC 20-004r1: _OGC API — Records — Part 1: Core_. Open Geospatial Consortium.
-
-=== Informative references
-
-The following documents are cited for context and guidance. They do not form part of the normative
-requirements of this specification.
-
-* WMO-No. 49: _WMO Technical Regulations_, Volume I — cited in WMO-No. 1238 in relation to observations metadata standards.
-* WMO-No. 1182: _Guidelines on Good Practices for Data Rescue_. World Meteorological Organization, Geneva.
-* ISO 19115 family: _Geographic information — Metadata_. International Organization for Standardization. Readers familiar with ISO 19115 will recognize concepts used in this specification; ISO standards are not freely available and are not normative requirements of this document.
+* WMO: _Manual on Codes, Volume I.1, Part A – Alphanumeric Codes_. WMO-No. 306, World Meteorological Organization, Geneva.
+* WMO: _Manual on Codes, Volume I.2, Part B – Binary Codes and Part C – Common Features to Binary and Alphanumeric Codes_. WMO-No. 306, World Meteorological Organization, Geneva.
+* WMO: _Guidelines for the Submission of the World Weather Records 2011+_. WMO-No. 1186, World Meteorological Organization, Geneva.
+* WMO: _WIGOS Metadata Standard_. WMO-No. 1192, World Meteorological Organization, Geneva.
+* WMO: _WMO Guidelines on the Calculation of Climate Normals_. WMO-No. 1203, World Meteorological Organization, Geneva.
+* WMO: _Manual on High-quality Global Data Management Framework for Climate_. WMO-No. 1238, World Meteorological Organization, Geneva.
+* WMO: _Guidelines on Surface Station Data Quality Control and Quality Assurance for Climate Applications_. WMO-No. 1269, World Meteorological Organization, Geneva.
+* S. Bradner, IETF RFC 2119: _Key words for use in RFCs to Indicate Requirement Levels_. RFC Publisher (1997). https://www.rfc-editor.org/rfc/rfc2119
+* Y. Shafranovich, IETF RFC 4180: _Common Format and MIME Type for Comma-Separated Values (CSV) Files_. RFC Publisher (2005). https://www.rfc-editor.org/rfc/rfc4180
+* L. Moreau and P. Missier (eds.): _PROV-DM: The PROV Data Model_. W3C Recommendation, 30 April 2013. https://www.w3.org/TR/prov-dm/
+* T. Lebo, et al. (eds.): PROV-O: _The PROV Ontology. W3C Recommendation_, 30 April 2013. https://www.w3.org/TR/prov-o/
+* _NetCDF Climate and Forecast (CF) Metadata Conventions_. https://cfconventions.org/
+* OGC: OGC 15-078r6: _OGC SensorThings API Part 1: Sensing_. Open Geospatial Consortium.
+* OGC: OGC 17-069r4: _OGC API — Features — Part 1: Core_. Open Geospatial Consortium.
+* OGC: OGC 19-086r6: _OGC API — Environmental Data Retrieval Standard_. Open Geospatial Consortium.
+* OGC: OGC 20-004r1: _OGC API — Records — Part 1: Core_. Open Geospatial Consortium.

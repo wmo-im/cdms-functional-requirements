@@ -146,16 +146,19 @@ respond to gaps quickly, before the window for corrective action closes.
 |Identifier|/req/data-ingestion/formats
 |Statement a|The system SHALL support the ingestion of observational data in the following formats:
 
-* **CSV and delimited text files**: With configurable field mapping, delimiter specification (comma, tab, semicolon, pipe), header row handling, and support for common date/time formats
-* **BUFR**: WMO standard binary format (WMO-No. 306, Volume I.2), supporting ingestion of hourly observations, daily summaries, and monthly summaries (including CLIMAT and DAYCLI report types)
-* **WMO text-based formats and code forms**: Including FM-12 SYNOP and FM-71 CLIMAT, and other code forms as specified in WMO Manual on Codes (WMO-No. 306, Volume I.1)
+* **CSV and delimited text files**: With configurable field mapping, delimiter specification (comma, tab, semicolon,
+pipe), header row handling, and support for common date/time formats
+* **BUFR**: WMO standard binary format (_Manual on Codes_ (WMO-No. 306), Volume I.2), supporting ingestion of hourly
+observations, daily summaries, and monthly summaries (including CLIMAT and DAYCLI report types)
+* **WMO text-based formats and code forms**: Including FM-12 SYNOP and FM-71 CLIMAT, and other code forms as specified
+in the _Manual on Codes_ (WMO-No. 306), Volume I.1.
 
 |===
 
 [NOTE]
 ====
-Supported BUFR report types and WMO code forms should be documented. The Manual on Codes
-(WMO-No. 306) defines the complete set of applicable report types and code forms.
+Supported BUFR report types and WMO code forms should be documented. The _Manual on Codes_
+(WMO-No. 306), Volumes I.1 and I.2, define the complete set of applicable report types and code forms.
 ====
 
 [[rec_ingest_formats]]

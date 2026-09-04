@@ -57,9 +57,15 @@ The system SHALL maintain quality flags and:
 2+^|Recommendation {counter:rec-id}
 |Identifier|/rec/quality-control/flagging-convention
 |Statement a|The system SHOULD adopt a published quality control flagging convention to facilitate
-data exchange and interoperability. Applicable references include the _Guide to the Global Observing
-System_ (WMO-No. 488), WMO-No. 1269, and the _Guide to Climatological Practices_ (WMO-No. 100).
+data exchange and interoperability.
 |===
+
+[NOTE]
+====
+See the _Guide to the Global Observing System_ (WMO-No. 488), _Guidelines on Surface Station Data Quality Control and
+Quality Assurance for Climate Applications_ (WMO-No. 1269), and the _Guide to Climatological Practices_ (WMO-No. 100)
+for example flagging conventions.
+====
 
 [[req_qc_configuration]]
 ===== Quality Control Configuration Management
@@ -173,15 +179,17 @@ station density.
 |===
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/quality-control/internal-consistency
-|Statement a|The system SHALL perform internal consistency checks to validate physical relationships between simultaneously observed elements as specified in WMO-No. 1269.
+|Statement a|The system SHALL perform internal consistency checks to validate physical relationships between
+simultaneously observed elements as specified in the _Guidelines on Surface Station Data Quality Control and Quality
+Assurance for Climate Applications_ (WMO-No. 1269).
 |===
 
 [NOTE]
 ====
 Examples of internal consistency checks include validation of temperature relationships
 (T~min~ {leq} T~avg~ {leq} T~max~), humidity constraints, pressure consistency,
-and precipitation-weather code agreement. WMO-No. 1269 provides comprehensive
-guidance on element-specific checks.
+and precipitation-weather code agreement. The _Guidelines on Surface Station Data Quality Control and Quality
+Assurance for Climate Applications_ (WMO-No. 1269) provides comprehensive guidance on element-specific checks.
 ====
 
 

@@ -24,9 +24,9 @@ international archives, and the WIS 2.0 infrastructure.
 |Identifier|/req/interoperability/standards
 |Statement a|The system SHALL comply with relevant international standards:
 
-* WMO WIGOS Metadata Standard for station metadata
-* WMO Manual on Codes (WMO-No. 306) for BUFR and code form support
-* CF Conventions for NetCDF climate data files
+* _WIGOS Metadata Standard_ (WMO-No. 1192) for station metadata
+* _Manual on Codes_ (WMO-No. 306),Volumes I.1 and I.2, for BUFR and code form support
+* Climate and Forecast (CF) Conventions for NetCDF climate data files
 * OGC standards (API - Features, API - EDR, API - Records, or SensorThings API) for
   data access and discovery APIs
 |===

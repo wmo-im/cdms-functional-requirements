@@ -23,7 +23,7 @@ of a Climate Data Management System:
 [NOTE]
 ====
 The classification of conformance classes as Requirement, Recommendation and Permission aligns with the
-Required, Recommended and Optional classifications respectively from WMO-No. 1131.
+Required, Recommended and Optional classifications respectively from the _Climate Data Management System Specifications_ (WMO-No. 1131).
 Required classes must be implemented for a system to be considered
 conformant. Recommended classes should be implemented where operationally feasible. Optional classes
 may be implemented based on specific organizational needs.
