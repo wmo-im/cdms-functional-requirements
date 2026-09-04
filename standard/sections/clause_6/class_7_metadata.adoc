@@ -15,13 +15,6 @@ of observable elements, dataset-level discovery and lineage metadata, dataset qu
 constraints, and acquisition provenance. Comprehensive metadata is essential for establishing the context
 and trustworthiness of observational records.
 
-[NOTE]
-====
-Many of the concepts used in this requirements class — including dataset lineage, data quality,
-access constraints, and feature cataloguing — are in common use in geographic information management.
-Readers familiar with the ISO 19115 family of standards will recognize these concepts. ISO standards
-are not freely available and are not requirements of this specification.
-====
 
 ==== Requirements
 
@@ -33,7 +26,7 @@ are not freely available and are not requirements of this specification.
 2+^|**Requirement {counter:req-id}**
 |Identifier|/req/metadata-management/wigos
 |Statement a|
-|A a|The system SHALL support metadata fields as specified in WIGOS Metadata Standard (WMO-No. 1192), including:
+|A a|The system SHALL support metadata fields as specified in the _WIGOS Metadata Standard_ (WMO-No. 1192), including:
 
 * Station identification (WIGOS Station Identifier, national identifiers, historical identifiers)
 * Station name, description, and alternative names
@@ -231,7 +224,7 @@ about any systemic errors or patterns of errors within the dataset.
 |Identifier|/rec/metadata-management/constraints
 |Statement a|The system SHOULD record the WMO data policy classification (core or recommended) for
 each dataset, consistent with the `wmo:dataPolicy` property specified in WCMP2 and WMO data policy
-requirements defined in WMO-No. 1238.
+requirements defined in the _Manual on the High-quality Global Data Management Framework for Climate_ (WMO-No. 1238).
 |===
 
 [NOTE]

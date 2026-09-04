@@ -314,10 +314,13 @@ Inspection of documented configuration followed by Demonstration of the resultin
 |===
 |Abstract test|/conf/quality-control/internal-consistency
 |Requirement|/req/quality-control/internal-consistency
-|Test purpose|Verify internal consistency checks validate physical relationships between simultaneously observed elements per WMO-No. 1269.
+|Test purpose|Verify internal consistency checks validate physical relationships between simultaneously observed elements
+per _Guidelines on Surface Station Data Quality Control and Assurance for Climate Applications_ (WMO-No. 1269).
 |Test method a|
-1. Submit simultaneous observations of two or more physically related elements (e.g. minimum, average, and maximum temperature) that violate the expected physical relationship, and confirm the internal consistency check flags them.
-2. Confirm, by documentation or configuration inspection, that the checks applied reference the element-specific relationships specified in WMO-No. 1269.
+1. Submit simultaneous observations of two or more physically related elements (e.g. minimum, average, and maximum
+temperature) that violate the expected physical relationship, and confirm the internal consistency check flags them.
+2. Confirm, by documentation or configuration inspection, that the checks applied reference the element-specific
+relationships specified in _Guidelines on Surface Station Data Quality Control and Assurance for Climate Applications_ (WMO-No. 1269).
 |Test type|Demonstration, Inspection
 |===
 
@@ -639,7 +642,7 @@ This class depends on /conf/security.
 |Requirement|/req/metadata-management/wigos
 |Test purpose|Verify station and sensor metadata supports the WIGOS Metadata Standard fields, with extensibility for fields outside that standard.
 |Test method a|
-1. Confirm station and sensor metadata records support the WIGOS Metadata Standard (WMO-No. 1192) fields: station identification, name/description/alternative names, geographic location, administrative information, station classification, sensor/instrument inventory, measurement configuration, siting/exposure description, operating schedule, and responsible party/contact.
+1. Confirm station and sensor metadata records support the _WIGOS Metadata Standard_ (WMO-No. 1192) fields: station identification, name/description/alternative names, geographic location, administrative information, station classification, sensor/instrument inventory, measurement configuration, siting/exposure description, operating schedule, and responsible party/contact.
 2. Confirm a metadata field outside the WIGOS Metadata Standard (e.g. a national or legacy identifier, or another organization-specific attribute) can be stored and retrieved.
 |Test type|Inspection, Demonstration
 |===
@@ -854,7 +857,8 @@ This class depends on /conf/security.
 |Requirement|/req/climate-products/wmo-products
 |Test purpose|Verify generation of World Weather Records, CLIMAT, and DAYCLI products from quality-controlled observation series.
 |Test method a|
-1. Generate a World Weather Records compilation (monthly means, extremes, and totals per element over the submission period) in accordance with WMO-No. 1186.
+1. Generate a World Weather Records compilation (monthly means, extremes, and totals per element over the submission
+period) in accordance with the _Guidelines for the Submission of the World Weather Records 2011+_ (WMO-No. 1186).
 2. Generate a CLIMAT message (FM 71) monthly climatological summary suitable for submission via WIS 2.0.
 3. Generate a DAYCLI message including required quality flag status and siting classification metadata, suitable for submission via WIS 2.0.
 |Test type|Execution
@@ -1309,7 +1313,8 @@ This class depends on /conf/security.
 |Test purpose|Verify compliance with the WIGOS Metadata Standard, WMO Manual on Codes, CF Conventions, and at least one relevant OGC standard.
 |Test method a|
 1. Confirm station metadata complies with the WMO WIGOS Metadata Standard, as verified under /conf/metadata-management/wigos.
-2. Confirm BUFR and WMO code form support complies with the WMO Manual on Codes (WMO-No. 306), as verified under /conf/data-ingestion/formats.
+2. Confirm BUFR and WMO code form support complies with the _Manual on Codes_ (WMO-No. 306), Volumes I.1 and I.2, as
+verified under /conf/data-ingestion/formats.
 3. Confirm NetCDF climate data file exports follow CF Conventions, as verified under /conf/data-api/data-formats.
 4. Confirm at least one OGC standard (API - Features, API - EDR, API - Records, or SensorThings API) is implemented for data access or discovery.
 |Test type|Inspection

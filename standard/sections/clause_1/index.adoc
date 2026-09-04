@@ -3,23 +3,24 @@
 
 === Introduction
 
-==== Purpose and Relationship to WMO-No. 1131
+==== Purpose and Relationship to the _Climate Data Management System Specifications_ (WMO-No. 1131)
 
 This document defines the minimum functional and non-functional requirements to support Members in establishing
 climate data management systems or assessing the conformance of existing systems with the _Climate Data Management
-System Specifications_ (WMO-No. 1131, 2025 Edition).
+System Specifications_ (WMO-No. 1131).
 
-WMO-No. 1131 provides a comprehensive framework for Climate Data Management Systems (CDMS), describing key
-components, governance principles, and operational practices using the classifications "Required", "Recommended",
-and "Optional". The high-level nature of those classifications makes it difficult in practice to assess objectively
-whether a given system meets the standard. This document translates the WMO-No. 1131 framework into a set of
-concrete requirements against which a CDMS can be assessed.
+The _Climate Data Management System Specifications_ (WMO-No. 1131) provides a comprehensive framework for Climate Data
+Management Systems (CDMS), describing key components, governance principles, and operational practices using the
+classifications "Required", "Recommended", and "Optional". The high-level nature of those classifications makes it
+difficult in practice to assess objectively whether a given system meets the standard. This document translates the
+_Climate Data Management System Specifications_ (WMO-No. 1131) framework into a set of concrete requirements against
+which a CDMS can be assessed.
 
 This document is primarily intended as: a tool to help WMO Members assess whether an existing or proposed CDMS
-meets the minimum capabilities described in WMO-No. 1131; and a reference to help developers understand the
-minimum capabilities expected of a conformant system. It is not a detailed technical specification or
-implementation guide — specific architectural and technology choices remain the responsibility of the
-implementing organization.
+meets the minimum capabilities described in the _Climate Data Management System Specifications_ (WMO-No. 1131),
+and a reference to help developers understand the minimum capabilities expected of a conformant system. It is not a
+detailed technical specification or implementation guide — specific architectural and technology choices remain the
+responsibility of the implementing organization.
 
 The functional requirements are expressed as requirements classes following the OGC Modular Specification
 approach. While this document does not place new regulatory obligations on WMO Members, the normative verbs (SHALL
@@ -190,7 +191,8 @@ To facilitate clear understanding and practical application, this document is st
 * **<<functional-requirements,Functional Requirements>>**: Details what a CDMS shall do, providing specific,
 granular requirements for core functionalities such as data ingestion and validation, transformation and storage,
 metadata management, quality control, data rescue, processing, and user interface interactions. These requirements
-operationalize the high-level functional components outlined in WMO-No. 1131.
+operationalize the high-level functional components outlined in the _Climate Data Management System Specifications_
+(WMO-No. 1131).
 
 * **<<non-functional-requirements,Non-Functional Requirements>>**: Defines how well a CDMS shall perform, covering
 essential attributes like performance, scalability, reliability, maintainability, usability, interoperability,
@@ -203,4 +205,4 @@ material that aids in the understanding and application of these specifications.
 
 Each requirement within the functional and non-functional sections is designed to be clear, assessable, and
 directly applicable, serving as a valuable reference for both system development and conformance assessment
-activities in the context of WMO-No. 1131.
+activities in the context of the _Climate Data Management System Specifications_ (WMO-No. 1131).

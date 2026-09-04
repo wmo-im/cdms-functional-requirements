@@ -102,7 +102,8 @@ re-ingestible from source systems. The critical concern is protecting processed 
 homogenization adjustments) that may not be reproducible without significant effort.
 
 Backup storage volumes grow with retention period. Retention requirements should be balanced
-against available storage, using incremental backup strategies and compression to manage costs. WMO-No. 1238 requires permanent retention of original
+against available storage, using incremental backup strategies and compression to manage costs. The _Manual on the
+High-quality Global Data Management Framework for Climate_ (WMO-No. 1238) requires permanent retention of original
 and irreproducible climate records and their metadata (3.4.1.4); backup policies should reflect this for
 long-term archival.
 ====

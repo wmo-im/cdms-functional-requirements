@@ -122,6 +122,8 @@ This annex provides a consolidated reference list of all normative requirements 
 |/req/data-governance/stewardship|Requirement|Data Governance
 |===
 
+include::./ats.adoc[]
+
 [appendix]
 == Acknowledgements
 
@@ -145,5 +147,3 @@ Liu Yiming (China Meteorological Administration)
 *WMO Secretariat:* David Berry, Washington Otieno
 
 The editorial team gratefully acknowledges all reviewers who submitted comments on earlier drafts of this specification.
-
-include::./ats.adoc[]
